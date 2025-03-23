@@ -1,0 +1,27 @@
+{
+  "files.exclude": {
+    "node_modules": true,
+    ".pnp": true,
+    "**/.pnp.js": true,
+    ".yarn/install-state.gz": true,
+    "coverage": true,
+    ".next/": true,
+    "out/": true,
+    "build": true,
+    "**/.DS_Store": true,
+    "**/*.pem": true,
+    "**/npm-debug.log*": true,
+    "**/yarn-debug.log*": true,
+    "**/yarn-error.log*": true,
+    "**/.env*.local": true,
+    "**/.vercel": true,
+    "**/*.tsbuildinfo": true,
+    "**/next-env.d.ts": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/package-lock.json": true
+  }
+}
