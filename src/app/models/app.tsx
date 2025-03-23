@@ -19,9 +19,16 @@ interface AppHeader {
   description: string;
   imageUrl: string;
   secondary: AppHeaderSecondary;
+  suffixes: AppHeaderSuffix[] | undefined;
 }
 
 interface AppHeaderSecondary {
+  imageUrl: string;
+  url: string;
+}
+
+interface AppHeaderSuffix {
+  name: string;
   imageUrl: string;
   url: string;
 }
