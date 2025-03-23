@@ -3,6 +3,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+function handleEmptyArray<T>(input: T[] | undefined): T[] | undefined {
+  return input === undefined || input.length == 0 ? undefined : input;
+}
+
+function handleEmptyString(input: string | undefined): string | undefined {
+  return input === undefined || input === "" ? undefined : input.trim();
+}
+
 function buildHeader(config: AppConfig, header: AppHeader) {
   return (
     <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -55,34 +63,89 @@ function buildHero(config: AppConfig, hero: Hero) {
   );
 }
 
-function buildCatalogCategory(config: AppConfig, category: CatalogCategory) {
+function buildCatalogCategoryItem(item: CatalogCategoryItem) {
+  var body: JSX.Element = (
+    <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>{item.title}</p>
+  );
+
+  const url = handleEmptyString(item.url);
+  if (url !== undefined) {
+    body = (
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        {body}
+      </a>
+    );
+  }
+
   return (
-    <a
-      key={`catalog/${category.name}`}
-      href={category.url}
+    <div
+      key={item.name}
       className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-      target="_blank"
-      rel="noopener noreferrer"
     >
-      <h2 className={`mb-3 text-2xl font-semibold`}>
-        {category.title}
-        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-          -&gt;
-        </span>
-      </h2>
-      <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-        {category.description}
-      </p>
-    </a>
+      {body}
+    </div>
   );
 }
 
-function buildCatalog(config: AppConfig, catalog: Catalog) {
+function buildCatalogCategory(category: CatalogCategory) {
+  var body: JSX.Element = (
+    <h2 className={`text-2xl font-semibold`}>{category.title}</h2>
+  );
+
+  const description = handleEmptyString(category.description);
+  if (description !== undefined) {
+    body = (
+      <>
+        {body}
+        <p className={`m-0 mt-3 max-w-[30ch] text-sm opacity-50`}>
+          {category.description}
+        </p>
+      </>
+    );
+  }
+
+  body = (
+    <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
+      {body}
+    </div>
+  );
+
+  const url = handleEmptyString(category.url);
+  if (url !== undefined) {
+    body = (
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        {body}
+      </a>
+    );
+  }
+
+  const items = handleEmptyArray(category.items);
+  if (items !== undefined) {
+    body = (
+      <div className="flex flex-col">
+        {body}
+        {items.map(buildCatalogCategoryItem)}
+      </div>
+    );
+  }
+
+  const alignment = handleEmptyString(category.alignment);
+  var className: string = "";
+  if (alignment === "bottom") {
+    className = "self-end";
+  }
+
+  return (
+    <div key={`catalog/${category.name}`} className={className}>
+      {body}
+    </div>
+  );
+}
+
+function buildCatalog(catalog: Catalog) {
   return (
     <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
-      {catalog.categories.map((category) =>
-        buildCatalogCategory(config, category)
-      )}
+      {catalog.categories.map(buildCatalogCategory)}
     </div>
   );
 }
@@ -96,9 +159,12 @@ export default function Home() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(
-          "https://api.minio.mobilex.kr/seoin/public/app.json"
-        );
+        // Use local app data if debug mode
+        const url =
+          process.env.NODE_ENV === "production"
+            ? "https://api.minio.mobilex.kr/seoin/public/app.json"
+            : "/app.json";
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error(`HTTP Error! status: ${response.status}`);
@@ -123,7 +189,7 @@ export default function Home() {
 
   const header = buildHeader(data.config, data.header);
   const hero = buildHero(data.config, data.hero);
-  const catalog = buildCatalog(data.config, data.catalog);
+  const catalog = buildCatalog(data.catalog);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

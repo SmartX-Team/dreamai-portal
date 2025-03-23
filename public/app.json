@@ -18,8 +18,20 @@
       {
         "name": "aigs",
         "title": "GIST AIGS",
-        "description": "GIST AI대학원 소개",
-        "url": "https://ai.gist.ac.kr/ai/"
+        "description": "",
+        "url": "",
+        "items": [
+          {
+            "name": "K-하이테크 플랫폼 훈련 소개",
+            "title": "K-하이테크 플랫폼 훈련 소개",
+            "url": "https://docs.google.com/presentation/d/146rzZ5-5d43v2MpBe22ItXb2z7hsjz9f/edit?usp=sharing&ouid=103199580949261748179&rtpof=true&sd=true"
+          },
+          {
+            "name": "훈련 신청서",
+            "title": "장비&시설 대여 신청서",
+            "url": "https://forms.gle/q3R6MueK2cgRaJAP9"
+          }
+        ]
       },
       {
         "name": "lms",
@@ -48,7 +60,7 @@
       {
         "name": "k-digital",
         "title": "KDC & KDT",
-        "description": "K-Digital Credit, K-digital Training 신청",
+        "alignment": "bottom",
         "url": "https://www.hrd.go.kr/hrdp/co/pcobo/PCOBO0100P.do?tracseId=AIG20210000313694&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500034745649#undefined"
       }
     ]

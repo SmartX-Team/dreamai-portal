@@ -15,7 +15,7 @@ interface AppConfigMinIO {
 
 interface AppHeader {
   name: string;
-  title: string | null;
+  title: string | undefined;
   description: string;
   imageUrl: string;
   secondary: AppHeaderSecondary;
@@ -38,6 +38,14 @@ interface Catalog {
 interface CatalogCategory {
   name: string;
   title: string;
-  description: string;
-  url: string;
+  description: string | undefined;
+  url: string | undefined;
+  alignment: string | undefined;
+  items: CatalogCategoryItem[] | undefined;
+}
+
+interface CatalogCategoryItem {
+  name: string;
+  title: string;
+  url: string | undefined;
 }
