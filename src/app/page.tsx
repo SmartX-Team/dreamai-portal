@@ -11,21 +11,59 @@ function handleEmptyString(input: string | undefined): string | undefined {
   return input === undefined || input === "" ? undefined : input.trim();
 }
 
+function buildHeaderSuffix(config: AppConfig, suffix: AppHeaderSuffix) {
+  var body: JSX.Element = (
+    <Image
+      src={`${config.minio.baseUrl}/images${suffix.imageUrl}`}
+      alt={suffix.name}
+      className="dark:invert h-12 object-contain"
+      width={256}
+      height={256}
+      priority
+    />
+  );
+
+  const url = handleEmptyString(suffix.url);
+  if (url !== undefined) {
+    body = (
+      <a
+        className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+        href={suffix.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {body}
+      </a>
+    );
+  }
+
+  return (
+    <p
+      key={suffix.name}
+      className="fixed bottom-0 left-0 flex w-full justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none h-32"
+    >
+      {body}
+    </p>
+  );
+}
+
 function buildHeader(config: AppConfig, header: AppHeader) {
+  const suffixes = header.suffixes?.map((suffix) =>
+    buildHeaderSuffix(config, suffix)
+  );
+
   return (
     <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-      <p className="fixed left-0 top-0 flex w-full justify-center lg:static lg:w-auto">
-        &nbsp;
-        <code className="font-mono font-bold">
-          <Image
-            src={`${config.minio.baseUrl}/images${header.imageUrl}`}
-            alt={header.name}
-            className="dark:invert"
-            width={120}
-            height={32}
-            priority
-          />
-        </code>
+      <p className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+        <Image
+          src={`${config.minio.baseUrl}/images${header.imageUrl}`}
+          alt={header.name}
+          className="dark:invert h-12 object-contain"
+          width={64}
+          height={64}
+          priority
+        />
+        {suffixes}
       </p>
       <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
         <a
@@ -37,9 +75,9 @@ function buildHeader(config: AppConfig, header: AppHeader) {
           <Image
             src={`${config.minio.baseUrl}/images${header.secondary.imageUrl}`}
             alt={header.name}
-            className="dark:invert"
-            width={100}
-            height={24}
+            className="dark:invert h-12 object-contain"
+            width={64}
+            height={64}
             priority
           />
         </a>
@@ -50,7 +88,7 @@ function buildHeader(config: AppConfig, header: AppHeader) {
 
 function buildHero(config: AppConfig, hero: Hero) {
   return (
-    <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+    <div className="relative mt-8 mb-6 flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
       <Image
         className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
         src={`${config.minio.baseUrl}/images${hero.imageUrl}`}
