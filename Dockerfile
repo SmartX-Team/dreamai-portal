@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json ./
-RUN npm install --frozen-lockfile --production;
+RUN npm install --frozen-lockfile
 RUN rm -rf ./.next/cache
 
 # Rebuild the source code only when needed
