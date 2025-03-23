@@ -32,12 +32,12 @@ interface Hero {
 }
 
 interface Catalog {
-  categories: CatalogCategory[];
+  categories: (CatalogCategory | undefined)[];
 }
 
 interface CatalogCategory {
-  name: string;
-  title: string;
+  name: string | undefined;
+  title: string | undefined;
   description: string | undefined;
   url: string | undefined;
   alignment: string | undefined;

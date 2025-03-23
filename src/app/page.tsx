@@ -87,10 +87,18 @@ function buildCatalogCategoryItem(item: CatalogCategoryItem) {
   );
 }
 
-function buildCatalogCategory(category: CatalogCategory) {
-  var body: JSX.Element = (
-    <h2 className={`text-2xl font-semibold`}>{category.title}</h2>
-  );
+function buildCatalogCategory(category: CatalogCategory | undefined) {
+  if (category === undefined) {
+    return <div />;
+  }
+
+  const name = handleEmptyString(category.name);
+  const title = handleEmptyString(category.title);
+  if (name === undefined || title === undefined) {
+    return <div />;
+  }
+
+  var body: JSX.Element = <h2 className={`text-2xl font-semibold`}>{title}</h2>;
 
   const description = handleEmptyString(category.description);
   if (description !== undefined) {
@@ -136,7 +144,7 @@ function buildCatalogCategory(category: CatalogCategory) {
   }
 
   return (
-    <div key={`catalog/${category.name}`} className={className}>
+    <div key={`catalog/${name}`} className={className}>
       {body}
     </div>
   );
