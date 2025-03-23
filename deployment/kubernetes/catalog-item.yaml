@@ -1,0 +1,15 @@
+---
+apiVersion: org.ulagbulag.io/v1alpha1
+kind: CatalogItem
+metadata:
+  name: dreamai
+  namespace: vine-dashboard
+  annotations:
+    org.ulagbulag.io/title: Dream-AI
+    org.ulagbulag.io/description: 드림에이아이 포털사이트
+  labels:
+    org.ulagbulag.io/category: ai
+spec:
+  type: Link
+  thumbnailUrl: https://api.minio.mobilex.kr/seoin/public/images/Dream AI_NEW.png
+  url: https://dreamai.kr
