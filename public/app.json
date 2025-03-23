@@ -1,0 +1,56 @@
+{
+  "config": {
+    "minio": { "baseUrl": "https://api.minio.mobilex.kr/seoin/public" }
+  },
+  "header": {
+    "name": "dream-ai",
+    "title": "GIST 꿈꾸는 아이(AI)",
+    "description": "GIST 꿈꾸는 아이(AI)",
+    "imageUrl": "/GIST.png",
+    "secondary": {
+      "imageUrl": "/DREAMAI_LOGO.png",
+      "url": "https://ai.gist.ac.kr/ai/"
+    }
+  },
+  "hero": { "name": "dream-ai", "imageUrl": "/DREAM AI.png" },
+  "catalog": {
+    "categories": [
+      {
+        "name": "aigs",
+        "title": "GIST AIGS",
+        "description": "GIST AI대학원 소개",
+        "url": "https://ai.gist.ac.kr/ai/"
+      },
+      {
+        "name": "lms",
+        "title": "Dream-AI LMS",
+        "description": "GIST AI대학원 X K-디지털 플랫폼 전용 LMS",
+        "url": "https://lms.dreamai.kr"
+      },
+      {
+        "name": "k-digital-infra",
+        "title": "GIST K-Digital",
+        "description": "K-디지털 플랫폼 인프라 활용 신청",
+        "url": "https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+      },
+      {
+        "name": "events",
+        "title": "AI EVENT",
+        "description": "AI 교육 및 행사 현황",
+        "url": "https://ai.gist.ac.kr/ai/"
+      },
+      {
+        "name": "mobilex",
+        "title": "MobileX",
+        "description": "MobileX Platform 활용",
+        "url": "https://mobilex.kr/"
+      },
+      {
+        "name": "k-digital",
+        "title": "KDC & KDT",
+        "description": "K-Digital Credit, K-digital Training 신청",
+        "url": "https://www.hrd.go.kr/hrdp/co/pcobo/PCOBO0100P.do?tracseId=AIG20210000313694&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500034745649#undefined"
+      }
+    ]
+  }
+}
