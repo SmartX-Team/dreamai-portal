@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function handleEmptyArray<T>(input: T[] | undefined): T[] | undefined {
@@ -108,8 +109,9 @@ function buildCatalogCategoryItem(item: CatalogCategoryItem) {
 
   const url = handleEmptyString(item.url);
   if (url !== undefined) {
+    const target = url.startsWith('/') ? '' : '_blank';
     body = (
-      <a href={url} target="_blank" rel="noopener noreferrer">
+      <a href={url} target={target} rel="noopener noreferrer">
         {body}
       </a>
     );
@@ -158,8 +160,9 @@ function buildCatalogCategory(category: CatalogCategory | undefined) {
 
   const url = handleEmptyString(category.url);
   if (url !== undefined) {
+    const target = url.startsWith('/') ? '' : '_blank';
     body = (
-      <a href={url} target="_blank" rel="noopener noreferrer">
+      <a href={url} target={target} rel="noopener noreferrer">
         {body}
       </a>
     );
@@ -200,16 +203,20 @@ export default function Home() {
   const [data, setData] = useState<App | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const path = usePathname();
 
   // Load app data
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        const appUri = path === '/'
+          ? '/app.json'
+          : `${path}.json`;
         // Use local app data if debug mode
         const url =
           process.env.NODE_ENV === "production"
-            ? "https://api.minio.mobilex.kr/seoin/public/app.json"
-            : "/app.json";
+            ? `https://api.minio.mobilex.kr/seoin/public${appUri}`
+            : appUri;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -227,7 +234,7 @@ export default function Home() {
     };
 
     fetchUser();
-  }, []);
+  }, [path]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -56,7 +56,7 @@
         "name": "events",
         "title": "AI EVENT",
         "description": "AI 교육 및 행사 현황",
-        "url": "https://ai.gist.ac.kr/ai/"
+        "url": "/events"
       },
       {
         "name": "mobilex",
