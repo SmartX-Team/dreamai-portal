@@ -1,0 +1,106 @@
+{
+  "config": {
+    "minio": { "baseUrl": "https://api.minio.mobilex.kr/seoin/public" }
+  },
+  "header": {
+    "name": "dream-ai",
+    "title": "GIST 꿈꾸는 아이(AI)",
+    "description": "GIST 꿈꾸는 아이(AI)",
+    "imageUrl": "/images/GIST.png",
+    "secondary": {
+      "imageUrl": "/DREAMAI_LOGO.png",
+      "url": "https://ai.gist.ac.kr/ai/"
+    }
+  },
+  "hero": { "name": "dream-ai", "imageUrl": "/images/HomeHero.png" },
+  "catalog": {
+    "categories": [
+      {
+        "name": "훈련",
+        "title": "훈련",
+        "description": "",
+        "url": "",
+        "items": [
+          {
+            "name": "K-하이테크 플랫폼 훈련 소개",
+            "title": "K-하이테크 플랫폼 훈련 소개",
+            "url": "/training"
+          },
+          {
+            "name": "훈련 신청서",
+            "title": "훈련 신청서",
+            "url": "https://forms.gle/FarjSXwpYdnLgkQn7"
+          }
+        ]
+      },
+      {
+        "name": "콘텐츠",
+        "title": "콘텐츠",
+        "description": "",
+        "url": "",
+        "items": [
+          {
+            "name": "꿈꾸는아이(AI) 콘텐츠",
+            "title": "꿈꾸는아이(AI) 콘텐츠",
+            "url": "/contents"
+          },
+          {
+            "name": "꿈꾸는아이(AI) LMS",
+            "title": "꿈꾸는아이(AI) LMS",
+            "url": "https://lms.dreamai.kr/"
+          }
+        ]
+      },
+      {
+        "name": "꿈꾸는아이(AI) SPACE",
+        "title": "꿈꾸는아이(AI) SPACE",
+        "description": "",
+        "url": "",
+        "items": [
+          {
+            "name": "장비&시설 소개",
+            "title": "장비&시설 소개",
+            "url": "/dream_ai_space"
+          },
+          {
+            "name": "장비&시설 대여 신청서",
+            "title": "장비&시설 대여 신청서",
+            "url": "https://forms.gle/q3R6MueK2cgRaJAP9"
+          }
+        ]
+      },
+      {
+        "name": "MobileX Platform",
+        "title": "MobileX Platform",
+        "description": "",
+        "url": "",
+        "items": [
+          {
+            "name": "MobileX Platform 소개",
+            "title": "MobileX Platform 소개",
+            "url": "https://docs.google.com/presentation/d/1HDYX_ttigk_-4Ku2GmevZSLSNP2h_aZaKtm6qI6A980/edit?usp=sharing"
+          },
+          {
+            "name": "MobileX Platform Page",
+            "title": "MobileX Platform Page",
+            "url": "https://mobilex.kr/"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "title": "",
+        "description": "",
+        "alignment": "bottom",
+        "url": ""
+      },
+      {
+        "name": "Q&A",
+        "title": "Q&A",
+        "description": "",
+        "alignment": "bottom",
+        "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
+      }
+    ]
+  }
+}

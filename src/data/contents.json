@@ -1,0 +1,93 @@
+{
+    "title": "컨텐츠",
+    "breadcrumb": "컨텐츠 > 꿈꾸는아이(AI) 컨텐츠",
+    "heroImageUrl": "/images/gist_k-하이테크_플랫폼로드맵.png",
+    "sections": [
+      {
+        "title": "1. 꿈꾸는아이(AI)",
+        "description": "설명"
+      },
+      {
+        "title": "2. 시작하는아이(AI)",
+        "description": "설명"
+      },
+      {
+        "title": "3. Digital Twin",
+        "description": "설명"
+      },
+      {
+        "title": "4. 인공지능 활용 DX",
+        "description": "설명"
+      },
+      {
+        "title": "꿈꾸는아이(AI) 로드맵",
+        "imageUrl": "/images/꿈꾸는아이_loadmap.png",
+        "descriptionBlocks": [
+          {
+            "number": "01",
+            "highlight": "CNN을 활용한 AI 드론",
+            "highlightColor": "text-light-purple",
+            "text": "CNN 딥러닝 알고리즘을 학습한\nAI 드론 조종을 통해 이미지 인식 훈련",
+            "numberColor": "text-light-purple"
+          },
+          {
+            "number": "02",
+            "highlight": "RL을 활용한 AWS DeepRacer",
+            "highlightColor": "text-navy",
+            "text": "RL 기반의 자율 주행 알고리즘 설계를 통해\n빠르고 정확한 자율 주행 실습",
+            "numberColor": "text-navy"
+          },
+          {
+            "number": "03",
+            "highlight": "SmartX Lab",
+            "highlightColor": "text-sky",
+            "text": "리눅스 기초 학습 후\n라즈베리파이를 활용한 IpT 실습",
+            "numberColor": "text-sky"
+          },
+          {
+            "number": "04",
+            "highlight": "꿈꾸는아이 파이썬 파코세",
+            "highlightColor": "text-mint",
+            "text": "파코세(파이썬 코딩 세상)을 통해\n파이썬 이론부터 실습, 프로젝트까지 수행",
+            "numberColor": "text-mint"
+          }
+        ],
+        "layout": "image-left"
+      },
+      {
+        "title": "시작하는아이(AI) 로드맵",
+        "layout": "image-left",
+        "imageUrl": "/images/시작하는아이_loadmap.png",
+        "descriptionBlocks": [
+          {
+            "number": "01",
+            "numberColor": "text-light-purple",
+            "highlight": "Data-Networking-AI & DX",
+            "highlightColor": "text-light-purple",
+            "text": "Data-Networking-AI & DX, 컨테이너 기반 학습을 통한\nX+AI서비스 창출"
+          },
+          {
+            "number": "02",
+            "numberColor": "text-navy",
+            "highlight": "LLM",
+            "highlightColor": "text-navy",
+            "text": "LLM Theory & Prompt Engineering\nOnly My LLM Service(프로젝트형)"
+          },
+          {
+            "number": "03",
+            "numberColor": "text-sky",
+            "highlight": "생성형AI",
+            "highlightColor": "text-sky",
+            "text": "생성 AI: 글로 만드는 그림\n생성 AI를 활용한 캐릭터 생성"
+          },
+          {
+            "number": "04",
+            "numberColor": "text-mint",
+            "highlight": "Digital Twin & Omniverse",
+            "highlightColor": "text-mint",
+            "text": "Understanding Digital Twin\n꿈꾸는아이(AI) 플랫폼 + Digital Twin"
+          }
+        ]
+      }
+    ]
+  }
