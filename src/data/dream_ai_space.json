@@ -1,157 +1,157 @@
 {
-    "title": "꿈꾸는아이(AI) SPACE",
-    "breadcrumb": "꿈꾸는아이(AI) SPACE > 장비&시설 소개",
-    "sections": [
-      {
-        "title": "꿈꾸는아이(AI) SPACE 2025",
-        "subtitle": "광주과학기술원 AI대학원",
-        "imageUrl": "/images/꿈꾸는아이(AI)_Space2025.png",
-        "colors": "text-space-blue",
-        "spaces": [
-          {
-            "name": "X+AI STUDIO",
-            "imageUrl": "/images/x+ai_studio.png",
-            "features": [
-              "수용 인원 50인",
-              "빔프로젝트 정면 1개, 측면 1개",
-              "무선마이크 2개",
-              "사이드 TV 3대",
-              "MobileX Station 20~30대",
-              "첨단과기로123 AI대학원동(S7) 1층"
-            ],
-            "details": {
-              "title": "MobileX Station (White 20대, Black 10대)",
-              "imageUrl": "/images/",
-              "specs": [
-                {
-                  "type": "White: NUC 11",
-                  "specs": [
-                    "Intel NUC 12 Pro X Kit – NUC12DCMv7",
-                    "CPU: Intel Core i7-12700",
-                    "Samsung DDR4 RAM 64GB",
-                    "Solidigm NVMe 2TB",
-                    "Intel UHD Graphics 770 (3 x 4K displays)",
-                    "10GbE LAN + WiFi6E + Bluetooth v5.2",
-                    "PCIe Gen5-supported",
-                    "Intel vPro-enabled",
-                    "NVIDIA RTX 3070 Eagle GPU"
-                  ]
-                },
-                {
-                  "type": "Black: NUC 11",
-                  "specs": [
-                    "Intel NUC 11 Extreme Kit – NUC22BTMi9",
-                    "OS: Ubuntu 20.04 GUI",
-                    "Processor: 3.3GHz Core i9 (8 cores)",
-                    "RAM: DDR4 64GB",
-                    "Intel UHD Graphics",
-                    "Bluetooth 무선 네트워크",
-                    "NVIDIA RTX 3070 Eagle GPU"
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "name": "TED HALL",
+  "title": "꿈꾸는아이(AI) SPACE",
+  "breadcrumb": "꿈꾸는아이(AI) SPACE > 장비&시설 소개",
+  "sections": [
+    {
+      "title": "꿈꾸는아이(AI) SPACE 2025",
+      "subtitle": "광주과학기술원 AI대학원",
+      "imageUrl": "/images/꿈꾸는아이(AI)_Space2025.png",
+      "colors": "text-space-blue",
+      "spaces": [
+        {
+          "name": "X+AI STUDIO",
+          "imageUrl": "/images/x+ai_studio.png",
+          "features": [
+            "수용 인원 50인",
+            "빔프로젝트 정면 1개, 측면 1개",
+            "무선마이크 2개",
+            "사이드 TV 3대",
+            "MobileX Station 20~30대",
+            "첨단과기로123 AI대학원동(S7) 1층"
+          ],
+          "details": {
+            "title": "MobileX Station (White 20대, Black 10대)",
             "imageUrl": "/images/",
-            "features": [
-              "수용 인원 50인",
-              "빔프로젝트 정면 2개, 측면 1개, 천장마이크 1개",
-              "정면 TV 1대",
-              "첨단과기로123 AI대학원동(S7) 2층"
-            ]
-          },
-          {
-            "name": "SW LAB",
-            "labs": [
+            "specs": [
               {
-                "name": "SW LAB #1",
-                "imageUrl": "/images/",
-                "features": [
-                  "수용 인원 30인",
-                  "빔프로젝트 1대, TV 1대",
-                  "I-MAC 30대",
-                  "첨단과기로123 금호관 202호"
+                "type": "White: NUC 11",
+                "specs": [
+                  "Intel NUC 12 Pro X Kit – NUC12DCMv7",
+                  "CPU: Intel Core i7-12700",
+                  "Samsung DDR4 RAM 64GB",
+                  "Solidigm NVMe 2TB",
+                  "Intel UHD Graphics 770 (3 x 4K displays)",
+                  "10GbE LAN + WiFi6E + Bluetooth v5.2",
+                  "PCIe Gen5-supported",
+                  "Intel vPro-enabled",
+                  "NVIDIA RTX 3070 Eagle GPU"
                 ]
               },
               {
-                "name": "SW LAB #2",
-                "imageUrl": "/images/",
-                "features": [
-                  "수용 인원 30인",
-                  "빔프로젝트 1대, TV 1대",
-                  "Digital Twin Box  30대",
-                  "  • 14Mini workstationPC",
-                  "  • CPU : Intel® Core™ Ultra 7 155H 이상",
-                  "  • NVIDIA® GeForce RTX 4060",
-                  "첨단과기로123 금호관 202호"
+                "type": "Black: NUC 11",
+                "specs": [
+                  "Intel NUC 11 Extreme Kit – NUC22BTMi9",
+                  "OS: Ubuntu 20.04 GUI",
+                  "Processor: 3.3GHz Core i9 (8 cores)",
+                  "RAM: DDR4 64GB",
+                  "Intel UHD Graphics",
+                  "Bluetooth 무선 네트워크",
+                  "NVIDIA RTX 3070 Eagle GPU"
                 ]
               }
-            ]
-          },
-          {
-            "name": "MEDIA STUDIO",
-            "imageGrid": [
-              {
-                "title": "촬영 장비",
-                "imageUrl": "/images/"
-              },
-              {
-                "title": "편집 장비",
-                "imageUrl": "/images/"
-              },
-              {
-                "title": "Multi-view\nMultimedia System",
-                "imageUrl": "/images/"
-              },
-              {
-                "title": "Hyper Spectral Camera",
-                "imageUrl": "/images/"
-              }
-            ],
-            "details": [
-              {
-                "title": "촬영 및 편집 장비",
-                "imageUrl": "/images/"
-              },
-              {
-                "title": "Multi-view Multimedia System",
-                "imageUrl": "/images/"
-              },
-              {
-                "title": "Hyper Spectral Camera",
-                "imageUrl": "/images/",
-                "features": [
-                  "Multi-view 10 Cameras & 6 Microphones System",
-                  "NeRF 알고리즘 개발을 위한 학습데이터 획득 장치",
-                  "대용량의 시각 데이터를 고속으로 계산하여\n효율적인 알고리즘 검증 방법 고안"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "MEETING ROOM",
-            "imageUrl": "/images/",
-            "features": [
-              "수용 인원 8인",
-              "전자 칠판 TV 1대",
-              "첨단과기로123 AI대학원동(S7) 1층"
             ]
           }
-        ],
-        "ppt_imageUrl":[
-          "/images/슬라이드2.PNG",
-          "/images/슬라이드3.PNG",
-          "/images/슬라이드4.PNG",
-          "/images/슬라이드5.PNG",
-          "/images/슬라이드6.PNG",
-          "/images/슬라이드7.PNG",
-          "/images/슬라이드8.PNG",
-          "/images/슬라이드9.PNG",
-          "/images/슬라이드10.PNG",
-          "/images/슬라이드11.PNG"
-        ]
-      }
-    ]
+        },
+        {
+          "name": "TED HALL",
+          "imageUrl": "/images/",
+          "features": [
+            "수용 인원 50인",
+            "빔프로젝트 정면 2개, 측면 1개, 천장마이크 1개",
+            "정면 TV 1대",
+            "첨단과기로123 AI대학원동(S7) 2층"
+          ]
+        },
+        {
+          "name": "SW LAB",
+          "labs": [
+            {
+              "name": "SW LAB #1",
+              "imageUrl": "/images/",
+              "features": [
+                "수용 인원 30인",
+                "빔프로젝트 1대, TV 1대",
+                "I-MAC 30대",
+                "첨단과기로123 금호관 202호"
+              ]
+            },
+            {
+              "name": "SW LAB #2",
+              "imageUrl": "/images/",
+              "features": [
+                "수용 인원 30인",
+                "빔프로젝트 1대, TV 1대",
+                "Digital Twin Box  30대",
+                "  • 14Mini workstationPC",
+                "  • CPU : Intel® Core™ Ultra 7 155H 이상",
+                "  • NVIDIA® GeForce RTX 4060",
+                "첨단과기로123 금호관 202호"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MEDIA STUDIO",
+          "imageGrid": [
+            {
+              "title": "촬영 장비",
+              "imageUrl": "/images/"
+            },
+            {
+              "title": "편집 장비",
+              "imageUrl": "/images/"
+            },
+            {
+              "title": "Multi-view\nMultimedia System",
+              "imageUrl": "/images/"
+            },
+            {
+              "title": "Hyper Spectral Camera",
+              "imageUrl": "/images/"
+            }
+          ],
+          "details": [
+            {
+              "title": "촬영 및 편집 장비",
+              "imageUrl": "/images/"
+            },
+            {
+              "title": "Multi-view Multimedia System",
+              "imageUrl": "/images/"
+            },
+            {
+              "title": "Hyper Spectral Camera",
+              "imageUrl": "/images/",
+              "features": [
+                "Multi-view 10 Cameras & 6 Microphones System",
+                "NeRF 알고리즘 개발을 위한 학습데이터 획득 장치",
+                "대용량의 시각 데이터를 고속으로 계산하여\n효율적인 알고리즘 검증 방법 고안"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MEETING ROOM",
+          "imageUrl": "/images/",
+          "features": [
+            "수용 인원 8인",
+            "전자 칠판 TV 1대",
+            "첨단과기로123 AI대학원동(S7) 1층"
+          ]
+        }
+      ],
+      "ppt_imageUrl": [
+        "/images/슬라이드2.png",
+        "/images/슬라이드3.png",
+        "/images/슬라이드4.png",
+        "/images/슬라이드5.png",
+        "/images/슬라이드6.png",
+        "/images/슬라이드7.png",
+        "/images/슬라이드8.png",
+        "/images/슬라이드9.png",
+        "/images/슬라이드10.png",
+        "/images/슬라이드11.png"
+      ]
+    }
+  ]
 }
