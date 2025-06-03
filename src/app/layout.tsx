@@ -25,6 +25,16 @@ export default function RootLayout({
                 />
               </Link>
 
+              <Link href="https://ai.gist.ac.kr/ai/" target="_blank">
+                <Image
+                  src="/images/AIGS.png"
+                  alt="AIGS"
+                  width={140}
+                  height={40}
+                />
+              </Link>
+            </div>
+            <div className="flex items-center space-x-4">
               <Link href="https://scent.gist.ac.kr/" target="_blank">
                 <Image
                   src="/images/SCENT.png"
@@ -33,19 +43,20 @@ export default function RootLayout({
                   height={40}
                 />
               </Link>
+
+              <Link href="https://www.hrd4u.or.kr/hrd4u" target="_blank">
+                <Image
+                  src="/images/KHP.png"
+                  alt="KHP"
+                  width={160}
+                  height={40}
+                />
+              </Link>
             </div>
-            <Link href="https://ai.gist.ac.kr/ai/" target="_blank">
-              <Image
-                src="/images/DREAMAI_LOGO.png"
-                alt="Dream AI 로고"
-                width={40}
-                height={40}
-              />
-            </Link>
           </div>
         </header>
 
-        <main className="max-w-7xl mx-auto px-6 py-12">{children}</main>
+        <main className="pb-12">{children}</main>
       </body>
     </html>
   );
