@@ -14,48 +14,65 @@
   },
   "hero": {
     "name": "dream-ai",
-    "imageUrl": "/images/HomeHero.jpeg",
+    "imageUrl": "/images/HomeHero.png",
     "url": ""
   },
   "catalog": {
     "categories": [
       {
+        "name": "LMS",
+        "title": "LMS",
+        "imageUrl": "/images/category_lms.png",
+        "url": "https://lms.dreamai.kr",
+        "height": "sm",
+        "margin": false
+      },
+      {
         "name": "Contents",
         "title": "Contents",
-        "imageUrl": "/images/category_contents.jpeg",
-        "url": "/contents"
+        "imageUrl": "/images/category_contents.png",
+        "url": "/contents",
+        "height": "md"
       },
       {
         "name": "Platform",
         "title": "Platform",
-        "imageUrl": "/images/category_platform.jpeg",
+        "imageUrl": "/images/category_platform.png",
         "url": "/dream_ai_space"
       },
       {
         "name": "Training",
         "title": "Training",
-        "imageUrl": "/images/category_training.jpeg",
+        "imageUrl": "/images/category_training.png",
         "url": "/training"
       },
       {
-        "name": "",
-        "title": "",
-        "description": "",
-        "alignment": "bottom",
-        "url": ""
+        "name": "SCENT",
+        "title": "SCENT",
+        "imageUrl": "/images/category_scent.png",
+        "url": "https://scent.gist.ac.kr/"
       },
       {
         "name": "ScaleX",
         "title": "ScaleX",
+        "imageUrl": "/images/category_scalex.png",
         "url": "https://scalex.dreamai.kr"
       },
       {
-        "name": "Q&A",
-        "title": "Q&A",
-        "description": "",
-        "alignment": "bottom",
-        "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
+        "name": "AIGS",
+        "title": "AIGS",
+        "imageUrl": "/images/category_aigs.png",
+        "url": "https://ai.gist.ac.kr/ai/"
       }
     ]
+  }
+,
+  "footer": {
+    "copyright": "© 2025 GIST DreamAI. All rights reserved.",
+    "trailing": [{
+      "name": "Q&A",
+      "title": "Q&A",
+      "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
+    }]
   }
 }
