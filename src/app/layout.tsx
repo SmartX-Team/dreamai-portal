@@ -56,7 +56,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="pb-12">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
