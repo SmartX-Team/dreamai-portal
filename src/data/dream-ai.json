@@ -61,7 +61,7 @@
         "name": "NewSac",
         "title": "NewSac",
         "imageUrl": "/images/category/category_newsac.png",
-        "url": "/",
+        "url": "/newsac",
         "height": "sm"
       }
     ],
