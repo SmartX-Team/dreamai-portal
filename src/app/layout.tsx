@@ -12,15 +12,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="bg-gray-50">
+      <body className="bg-gray-50 min-h-screen">
         <header className="bg-white border-b px-6 py-4 shadow-sm">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-1 items-center space-x-4">
               <Link href="/">
                 <Image
                   src="/images/GIST.png"
                   alt="GIST 로고"
-                  width={50}
+                  width={100}
                   height={50}
                 />
               </Link>

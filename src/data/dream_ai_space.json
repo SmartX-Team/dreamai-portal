@@ -5,12 +5,12 @@
     {
       "title": "꿈꾸는아이(AI) SPACE 2025",
       "subtitle": "광주과학기술원 AI대학원",
-      "imageUrl": "/images/꿈꾸는아이(AI)_Space2025.png",
+      "imageUrl": "/images/space/꿈꾸는아이(AI)_Space2025.png",
       "colors": "text-space-blue",
       "spaces": [
         {
           "name": "X+AI STUDIO",
-          "imageUrl": "/images/x+ai_studio.png",
+          "imageUrl": "/images/space/x+ai_studio.png",
           "features": [
             "수용 인원 50인",
             "빔프로젝트 정면 1개, 측면 1개",
@@ -21,7 +21,7 @@
           ],
           "details": {
             "title": "MobileX Station (White 20대, Black 10대)",
-            "imageUrl": "/images/",
+            "imageUrl": "/images/space/",
             "specs": [
               {
                 "type": "White: NUC 11",
@@ -54,7 +54,7 @@
         },
         {
           "name": "TED HALL",
-          "imageUrl": "/images/",
+          "imageUrl": "/images/space/",
           "features": [
             "수용 인원 50인",
             "빔프로젝트 정면 2개, 측면 1개, 천장마이크 1개",
@@ -67,7 +67,7 @@
           "labs": [
             {
               "name": "SW LAB #1",
-              "imageUrl": "/images/",
+              "imageUrl": "/images/space/",
               "features": [
                 "수용 인원 30인",
                 "빔프로젝트 1대, TV 1대",
@@ -77,7 +77,7 @@
             },
             {
               "name": "SW LAB #2",
-              "imageUrl": "/images/",
+              "imageUrl": "/images/space/",
               "features": [
                 "수용 인원 30인",
                 "빔프로젝트 1대, TV 1대",
@@ -95,33 +95,33 @@
           "imageGrid": [
             {
               "title": "촬영 장비",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             },
             {
               "title": "편집 장비",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             },
             {
               "title": "Multi-view\nMultimedia System",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             },
             {
               "title": "Hyper Spectral Camera",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             }
           ],
           "details": [
             {
               "title": "촬영 및 편집 장비",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             },
             {
               "title": "Multi-view Multimedia System",
-              "imageUrl": "/images/"
+              "imageUrl": "/images/space/"
             },
             {
               "title": "Hyper Spectral Camera",
-              "imageUrl": "/images/",
+              "imageUrl": "/images/space/",
               "features": [
                 "Multi-view 10 Cameras & 6 Microphones System",
                 "NeRF 알고리즘 개발을 위한 학습데이터 획득 장치",
@@ -132,7 +132,7 @@
         },
         {
           "name": "MEETING ROOM",
-          "imageUrl": "/images/",
+          "imageUrl": "/images/space/",
           "features": [
             "수용 인원 8인",
             "전자 칠판 TV 1대",
@@ -141,16 +141,16 @@
         }
       ],
       "ppt_imageUrl": [
-        "/images/슬라이드2.png",
-        "/images/슬라이드3.png",
-        "/images/슬라이드4.png",
-        "/images/슬라이드5.png",
-        "/images/슬라이드6.png",
-        "/images/슬라이드7.png",
-        "/images/슬라이드8.png",
-        "/images/슬라이드9.png",
-        "/images/슬라이드10.png",
-        "/images/슬라이드11.png"
+        "/images/space/슬라이드2.png",
+        "/images/space/슬라이드3.png",
+        "/images/space/슬라이드4.png",
+        "/images/space/슬라이드5.png",
+        "/images/space/슬라이드6.png",
+        "/images/space/슬라이드7.png",
+        "/images/space/슬라이드8.png",
+        "/images/space/슬라이드9.png",
+        "/images/space/슬라이드10.png",
+        "/images/space/슬라이드11.png"
       ]
     }
   ]
