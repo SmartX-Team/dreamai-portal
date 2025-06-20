@@ -25,10 +25,10 @@ function drawPage1() {
       <p className="text-gray-500 mb-4">
         광주과학기술원(GIST) AI대학원은 고등학생들이 인공지능을 쉽고 재미있게
         배울 수 있도록, 총 12개 토픽으로 구성된 50차시 분량의 교육자료를
-        기획·제작하였습니다. 빠르게 발전하는 인공지능을{" "}
+        기획·제작하였습니다.<br /> 빠르게 발전하는 인공지능을{" "}
         <b>Model ZOO & AI Playground</b>라는 콘셉트로 풀어내어, 교사는
         능동적으로 가르치고, 학생은 자연스럽게 이해하며 익힐 수 있도록
-        구성하였습니다. 본 교육자료를 통해 학생들은 다가올 인공지능 사회에서
+        구성하였습니다.<br /> 본 교육자료를 통해 학생들은 다가올 인공지능 사회에서
         자신의 꿈을 구체화할 수 있는 역량을 기르고, 교사에게는 인공지능 교육을
         위한 든든한 길잡이가 되기를 기대합니다.
       </p>
@@ -96,7 +96,7 @@ function drawPage3() {
         height={0}
       />
 
-      <div className="grid grid-cols-3 pt-4 px-4 w-221 items-start gap-x-6">
+      <div className="grid grid-cols-3 pt-4 px-4 max-w-221 items-start gap-x-6">
         {drawCard("zoo", "about:blank")}
         {drawCard("ml", "about:blank")}
         {drawCard("dl", "about:blank")}
