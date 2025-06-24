@@ -1,17 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function drawCard(key: string, href: string) {
+function drawCard(
+  key: string,
+  href_pdf: string,
+  href_exp: string | null = null
+) {
+  let exp = <> </>;
+  if (href_exp !== null) {
+    exp = (
+      <Link href={href_exp} target="_blank">
+        <Image
+          className="mb-2"
+          src="/images/textbook/textbook_button_exp.png"
+          alt={key}
+          width={143}
+          height={1e6}
+        />
+      </Link>
+    );
+  }
+
   return (
-    <Link href={href} target="_blank">
-      <Image
-        className="mb-2"
-        src={`/images/textbook/textbook_button_${key}.png`}
-        alt={key}
-        width={1e6}
-        height={1e6}
-      />
-    </Link>
+    <div className="flex flex-row">
+      <Link href={href_pdf} target="_blank">
+        <Image
+          className="mb-2"
+          src={`/images/textbook/textbook_button_${key}.png`}
+          alt={key}
+          width={400}
+          height={1e6}
+        />
+      </Link>
+      {exp}
+    </div>
   );
 }
 
@@ -25,12 +47,13 @@ function drawPage1() {
       <p className="text-gray-500 mb-4">
         광주과학기술원(GIST) AI대학원은 고등학생들이 인공지능을 쉽고 재미있게
         배울 수 있도록, 총 12개 토픽으로 구성된 50차시 분량의 교육자료를
-        기획·제작하였습니다.<br /> 빠르게 발전하는 인공지능을{" "}
-        <b>Model ZOO & AI Playground</b>라는 콘셉트로 풀어내어, 교사는
-        능동적으로 가르치고, 학생은 자연스럽게 이해하며 익힐 수 있도록
-        구성하였습니다.<br /> 본 교육자료를 통해 학생들은 다가올 인공지능 사회에서
-        자신의 꿈을 구체화할 수 있는 역량을 기르고, 교사에게는 인공지능 교육을
-        위한 든든한 길잡이가 되기를 기대합니다.
+        기획·제작하였습니다.
+        <br /> 빠르게 발전하는 인공지능을 <b>Model ZOO & AI Playground</b>라는
+        콘셉트로 풀어내어, 교사는 능동적으로 가르치고, 학생은 자연스럽게 이해할
+        수 있도록 구성하였습니다.
+        <br /> 본 교육자료를 통해 학생들은 다가올 인공지능 사회에서 자신의 꿈을
+        구체화할 수 있는 역량을 기르고, 교사에게는 인공지능 교육을 위한 든든한
+        길잡이가 되기를 기대합니다.
       </p>
 
       <div className="flex flex-row justify-stretch gap-2">
@@ -48,10 +71,10 @@ function drawPage1() {
             "prologue",
             "https://drive.google.com/file/d/11-XtfF7jLeYZhUt1gijXpNNGFjGJGAAV/view?usp=drive_link"
           )}
-          {drawCard("zoo", "about:blank")}
-          {drawCard("dl", "about:blank")}
-          {drawCard("data", "about:blank")}
-          {drawCard("hyperai", "about:blank")}
+          {drawCard("zoo(2)", "about:blank", "about:blank")}
+          {drawCard("dl", "about:blank", "about:blank")}
+          {drawCard("data", "about:blank", "about:blank")}
+          {drawCard("hyperai", "about:blank", "about:blank")}
           {drawCard("dna", "about:blank")}
           {drawCard("epilogue", "about:blank")}
         </div>
