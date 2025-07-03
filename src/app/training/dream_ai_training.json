@@ -1,0 +1,51 @@
+{
+  "title": "훈련",
+  "email": "문의 메일: kdp@dreamai.kr",
+  "explain": "GIST AI대학원에서는 AI 창의자율 특화교육을 목표로 운영한 다양한 실습 기반 교육 프로그램을 진행합니다. 각 훈련은 학습자의 수준과 교육 목적에 따라서 맞춤 설계되었으며 생성형 AI, 디지털 트윈, 자율주행, LLM 등 최신 기술을 활용한 이론과 실습이 진행되었습니다. 교사 연수부터 학생을 대상으로 한 캠프, 산업 실증형 교육까지 다양한 형태의 훈련을 통해 실질적인 기술 이해와 창의적 문제 해결력을 높이는 데 초점을 맞추고 있습니다.",
+  "sections": [
+    {
+      "title": "훈련 유형",
+      "item": [
+        {
+          "main": "수준별 커리큘럼 구성",
+          "sub": "중고등학생, 일반 성인, 교사 등 대상별 맞춤 콘텐츠 설계"
+        },
+        {
+          "main": "현장 실습 기반 운영",
+          "sub": "MobileX Station, 디지털 트윈 실습, HPC 인프라 활용"
+        },
+        {
+          "main": "기술 연계 실습 프로그램",
+          "sub": "생성형 AI, LLM, 자율주행, DevOps 등 실습 항목 반영"
+        },
+        {
+          "main": "단기 집중 과정 또는 캠프형 운영",
+          "sub": "1일 또는 2일 연수, 방학 캠프 등"
+        }
+      ],
+      "imageUrl": "훈련 유형.png"
+    },
+    {
+      "title": "연도별 진행 내역",
+      "imageUrl": ["2024.png", "2023.png"]
+    },
+    {
+      "title": "꿈꾸는아이(AI) SPACE 2025",
+      "subtitle": "광주과학기술원 AI대학원",
+      "ppt_imageUrl": [
+        "/images/훈련4.PNG",
+        "/images/훈련여백.PNG",
+        "/images/훈련5.PNG",
+        "/images/훈련6.PNG",
+        "/images/훈련여백.PNG",
+        "/images/훈련7.PNG",
+        "/images/훈련여백.PNG",
+        "/images/훈련8.PNG",
+        "/images/훈련여백.PNG",
+        "/images/훈련9.PNG",
+        "/images/훈련여백.PNG",
+        "/images/훈련10.PNG"
+      ]
+    }
+  ]
+}
