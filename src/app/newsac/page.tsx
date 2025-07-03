@@ -1,19 +1,22 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default function NewSacPage() {
-  const videoList = [
-    { title: "", src: "/videos/director.mp4" },
-    { title: "", src: "/videos/prof_kim.mp4" },
-    { title: "", src: "images/digitalsprout/연구원홍보영상.mp4" },
-    { title: "", src: "images/digitalsprout/학부모홍보영상.mp4" },
-    { title: "", src: "/videos/student3.mp4" },
-    { title: "", src: "/videos/student4.mp4" }
-  ];
+  // const videoList = [
+  //   {
+  //     title: "",
+  //     src: "https://youtube.com/shorts/g1f03DBTA_k?si=ZvTBkPi6GiT355MY",
+  //   },
+  //   { title: "", src: "/videos/prof_kim.mp4" },
+  //   { title: "", src: "images/digitalsprout/연구원홍보영상.mp4" },
+  //   { title: "", src: "images/digitalsprout/학부모홍보영상.mp4" },
+  //   { title: "", src: "/videos/student3.mp4" },
+  //   { title: "", src: "/videos/student4.mp4" },
+  // ];
 
   return (
     <main className="px-6 py-10 max-w-6xl mx-auto">
@@ -42,17 +45,21 @@ export default function NewSacPage() {
           기술을 실습과 프로젝트 중심으로 학습하는 고도화 체험형 프로그램입니다.
           디지털 트윈, 생성형 AI, 강화학습 등 최신 기술을 기반으로 이론부터
           실습, 프로젝트, 진로탐색까지 경험할 수 있도록 구성되었습니다. GIST AI
-          인프라 체험, 교수진 멘토링, 스마트시티 설계 활동 등을 통해 실전
-          중심의 교육을 제공합니다.
+          인프라 체험, 교수진 멘토링, 스마트시티 설계 활동 등을 통해 실전 중심의
+          교육을 제공합니다.
         </p>
       </section>
 
       {/* 홍보영상 */}
-      <section className="mb-16">
+      {/* <section className="mb-16">
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-1">
             <span className="text-2xl">🎬</span>
-            <h2 className="text-xl font-bold text-black"> 2025 GIST 꿈꾸는 아이(AI) <span className="text-green-600">디지털 새싹</span> 홍보영상</h2>
+            <h2 className="text-xl font-bold text-black">
+              {" "}
+              2025 GIST 꿈꾸는 아이(AI){" "}
+              <span className="text-green-600">디지털 새싹</span> 홍보영상
+            </h2>
           </div>
           <div className="w-full h-[2px] bg-green-600" />
         </div>
@@ -67,21 +74,44 @@ export default function NewSacPage() {
           }}
           className="w-full"
         >
-          {videoList.map((video, idx) => (
-            <SwiperSlide key={idx} className="flex flex-col items-center">
-              <div className="aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded shadow-md">
-                <video controls className="w-full h-full object-cover">
-                  <source src={video.src} type="video/mp4" />
-                  브라우저가 비디오를 지원하지 않습니다.
-                </video>
-              </div>
-              <p className="mt-2 text-sm font-medium text-center">{video.title}</p>
-            </SwiperSlide>
-          ))}
+          {videoList.map((video, idx) => {
+            let content;
+            if (video.src.startsWith("https://")) {
+              content = (
+                <div className="w-full aspect-video">
+                  <iframe
+                    className="w-full h-full"
+                    src={video.src}
+                    title="캠프 유튜브 영상"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              );
+            } else {
+              content = (
+                <div className="aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded shadow-md">
+                  <video controls className="w-full h-full object-cover">
+                    <source src={video.src} type="video/mp4" />
+                    브라우저가 비디오를 지원하지 않습니다.
+                  </video>
+                </div>
+              );
+            }
+
+            return (
+              <SwiperSlide key={idx} className="flex flex-col items-center">
+                {content}
+                <p className="mt-2 text-sm font-medium text-center">
+                  {video.title}
+                </p>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
 
         <div className="custom-pagination mt-4 flex justify-center" />
-      </section>
+      </section> */}
 
       {/* 🔸 캠프 추억 영상 (유튜브 + mp4) */}
       <section className="mb-16">
@@ -93,11 +123,12 @@ export default function NewSacPage() {
         </div>
         <div className="w-full h-[2px] bg-green-600 mb-2" />
         <p className="text-sm text-gray-500 mb-4 text-left">
-          본 영상은 GIST에서 진행된 중·고등학생 AI 캠프의 현장 모습을 담은 자료입니다.
+          본 영상은 GIST에서 진행된 중·고등학생 AI 캠프의 현장 모습을 담은
+          자료입니다.
         </p>
 
         <div className="grid md:grid-cols-2 gap-4">
-          {/* YouTube Embed */}
+          {/* 영상 1 */}
           <div className="w-full aspect-video">
             <iframe
               className="w-full h-full"
@@ -108,12 +139,15 @@ export default function NewSacPage() {
             ></iframe>
           </div>
 
-          {/* Local MP4 */}
+          {/* 영상 2 */}
           <div className="w-full aspect-video">
-            <video controls className="w-full h-full object-cover">
-              <source src="/images/digitalsprout/중등영재캠프.mp4" type="video/mp4" />
-              브라우저가 비디오를 지원하지 않습니다.
-            </video>
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/ktMNV_0ph80"
+              title="2024년도 중등영재캠프 (광주교육연구정보원 X 광주과학기술원 AI대학원)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </section>

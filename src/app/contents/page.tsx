@@ -3,13 +3,13 @@ import contentData from "@/data/contents.json";
 export default function ContentsPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold mb-2">{contentData.title}</h1>
+      <h1 className="text-5xl font-bold mb-[30px] text-center">
+        {contentData.title}
+      </h1>
 
-      {contentData.breadcrumb && (
-        <p className="text-sm text-gray-500 mb-[150px]">
-          {contentData.breadcrumb}
-        </p>
-      )}
+      <h1 className="text-3xl font-bold mt-[200px] mb-6 pl-4 border-l-4 border-blue-500">
+        {contentData.breadcrumb}
+      </h1>
 
       {contentData.heroImageUrl && (
         <div className="w-full mb-12">
@@ -25,7 +25,9 @@ export default function ContentsPage() {
         .filter((section) => section.layout)
         .map((section, idx) => (
           <section key={idx} className="mb-[150px]">
-            <h2 className="text-xl font-semibold mb-12">{section.title}</h2>
+            <h2 className="text-3xl font-bold mt-[200px] mb-6 pl-4 border-l-4 border-blue-500">
+              {section.title}
+            </h2>
 
             <div className="flex justify-center w-full">
               <div className="grid grid-cols-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1fr)] max-w-6xl w-full items-start gap-14">

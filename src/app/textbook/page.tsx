@@ -1,63 +1,57 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function drawCard(
-  key: string,
-  href_pdf: string,
-  href_exp: string | null = null
-) {
-  let exp = <> </>;
-  if (href_exp !== null) {
-    exp = (
-      <Link href={href_exp} target="_blank">
-        <Image
-          className="mb-2"
-          src="/images/textbook/textbook_button_exp.png"
-          alt={key}
-          width={143}
-          height={1e6}
-        />
-      </Link>
-    );
-  }
+import data from "./contents.json";
 
+function drawCard(item: string) {
   return (
-    <div className="flex flex-row">
-      <Link href={href_pdf} target="_blank">
-        <Image
-          className="mb-2"
-          src={`/images/textbook/textbook_button_${key}.png`}
-          alt={key}
-          width={400}
-          height={1e6}
-        />
-      </Link>
-      {exp}
-    </div>
+    <Link
+      key={item}
+      href={{
+        pathname: "/textbook/content",
+        query: {
+          id: item,
+        },
+      }}
+      target="_blank"
+    >
+      <Image
+        className="mb-2"
+        src={`/images/textbook/textbook_button_${item}.png`}
+        alt={item}
+        width={400}
+        height={1e6}
+      />
+    </Link>
   );
 }
 
 function drawPage1() {
   return (
     <div className="max-w-7xl mx-auto px-6">
-      <h1 className="text-3xl font-bold mb-2">
-        꿈꾸는아이(AI) Textbook Download
-      </h1>
+      <h1 className="text-3xl font-bold mb-2">꿈꾸는아이(AI) Textbook</h1>
 
       <p className="text-gray-500 mb-4">
-        광주과학기술원(GIST) AI대학원은 고등학생들이 인공지능을 쉽고 재미있게
-        배울 수 있도록, 총 12개 토픽으로 구성된 50차시 분량의 교육자료를
-        기획·제작하였습니다.
-        <br /> 빠르게 발전하는 인공지능을 <b>Model ZOO & AI Playground</b>라는
-        콘셉트로 풀어내어, 교사는 능동적으로 가르치고, 학생은 자연스럽게 이해할
-        수 있도록 구성하였습니다.
-        <br /> 본 교육자료를 통해 학생들은 다가올 인공지능 사회에서 자신의 꿈을
-        구체화할 수 있는 역량을 기르고, 교사에게는 인공지능 교육을 위한 든든한
-        길잡이가 되기를 기대합니다.
+        광주광역시교육청의 지원으로 광주과학기술원(GIST) AI대학원은 교육 현장의
+        여러 선생님들과 협력하여 광주 지역 고등학생들이 인공지능 교육을 흥미롭게
+        접할 수 있도록 꿈꾸는 아이(AI) 교육자료를 개발했다. 이 교육자료는
+        급변하는 디지털전환 시대를 살아갈 학생들이 다가오는 인공지능 사회를
+        주도적으로 준비하도록, 글로벌 시각에서 기획된 AI 교육 콘텐츠이다. 꿈꾸는
+        아이(AI)는 &apos;Model ZOO(모델 동물원)&apos; 24차시와 &apos;AI
+        Playground(인공지능 놀이터)&apos; 26차시로 구성된 총 50차시 분량의
+        인공지능 교육자료로, 생성되는 데이터를 이해하여 인공지능에 접목시키는
+        원리를 습득하는 것으로 부터 선별된 AI 모델들을 학습시키고 추론으로
+        검증하기까지를 포함하는 인공지능 전체 과정을 체험적으로 공부하도록
+        준비되었다.
       </p>
 
       <div className="flex flex-row justify-stretch gap-2">
         <div className="flex-5">
+          <h1 className="text-2xl font-bold">
+            Model ZOO: 동물에 비유된 개념으로 흥미롭게 배우는 인공지능 기본 개념
+            및 모델 교육
+          </h1>
+
           <Image
             className=""
             src="/images/textbook/textbook_hero_1.png"
@@ -67,16 +61,7 @@ function drawPage1() {
           />
         </div>
         <div className="flex flex-2 flex-col mt-1">
-          {drawCard(
-            "prologue",
-            "https://drive.google.com/file/d/11-XtfF7jLeYZhUt1gijXpNNGFjGJGAAV/view?usp=drive_link"
-          )}
-          {drawCard("zoo(2)", "about:blank", "about:blank")}
-          {drawCard("dl", "about:blank", "about:blank")}
-          {drawCard("data", "about:blank", "about:blank")}
-          {drawCard("hyperai", "about:blank", "about:blank")}
-          {drawCard("dna", "about:blank")}
-          {drawCard("epilogue", "about:blank")}
+          {data.catalog.find((e) => e.id == "page1")?.items.map(drawCard)}
         </div>
       </div>
     </div>
@@ -88,6 +73,11 @@ function drawPage2() {
     <div className="max-w-7xl mx-auto px-6 pt-6">
       <div className="flex flex-row justify-stretch gap-2">
         <div className="flex-5">
+          <h1 className="text-2xl font-bold">
+            AI Playground: 인공지능 놀이터에서 심화 체험으로 배우는 실증형
+            인공지능 교육
+          </h1>
+
           <Image
             className=""
             src="/images/textbook/textbook_hero_2.png"
@@ -97,11 +87,7 @@ function drawPage2() {
           />
         </div>
         <div className="flex flex-2 flex-col justify-center mt-1 gap-4">
-          {drawCard("ml", "about:blank")}
-          {drawCard("llm", "about:blank")}
-          {drawCard("data_eng", "about:blank")}
-          {drawCard("dt", "about:blank")}
-          {drawCard("genai", "about:blank")}
+          {data.catalog.find((e) => e.id == "page2")?.items.map(drawCard)}
         </div>
       </div>
     </div>
@@ -116,16 +102,11 @@ function drawPage3() {
         src="/images/textbook/textbook_header_3.png"
         alt="AI Playground"
         width={700}
-        height={0}
+        height={1e6}
       />
 
       <div className="grid grid-cols-3 pt-4 px-4 max-w-221 items-start gap-x-6">
-        {drawCard("zoo", "about:blank")}
-        {drawCard("ml", "about:blank")}
-        {drawCard("dl", "about:blank")}
-        {drawCard("dt", "about:blank")}
-        {drawCard("data", "about:blank")}
-        {drawCard("genai", "about:blank")}
+        {data.catalog.find((e) => e.id == "page3")?.items.map(drawCard)}
       </div>
     </div>
   );

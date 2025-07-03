@@ -125,6 +125,16 @@ export default function HomePage() {
             {dreamData.catalog.categoriesRight.map(drawItem)}
           </div>
         </div>
+
+        {/* 아래 아이템 */}
+        <div className="flex flex-col items-center pb-4">
+          <Image
+            src="/images/footer/textbook_info.png"
+            alt="DreamAI 정보"
+            width={800}
+            height={1e6}
+          />
+        </div>
       </section>
 
       <footer className="relative bg-zinc-900 text-zinc-300 text-2xl py-8 w-full">
