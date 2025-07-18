@@ -29,7 +29,16 @@ function drawCard(item: string) {
 function drawPage1() {
   return (
     <div className="max-w-7xl mx-auto px-6">
-      <h1 className="text-3xl font-bold mb-2">꿈꾸는아이(AI) Textbook</h1>
+      <div className="flex flex-row">
+        <Image
+          className="mb-2 mr-2"
+          src="/images/Korea_GJ.png"
+          alt="광주광역시"
+          width={36}
+          height={1e6}
+        />
+        <h1 className="text-3xl font-bold mb-2">꿈꾸는아이(AI) Textbook</h1>
+      </div>
 
       <p className="text-gray-500 mb-4">
         광주광역시교육청의 지원으로 광주과학기술원(GIST) AI대학원은 교육 현장의
