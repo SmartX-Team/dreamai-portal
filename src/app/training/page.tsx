@@ -25,7 +25,7 @@ export default function TrainingPage() {
         </h2>
         {section.imageUrl && (
           <img
-            src={`/images/${section.imageUrl}`}
+            src={section.imageUrl.toString()}
             alt="훈련 유형 이미지"
             className="w-full max-w-5xl object-contain mx-auto mb-16 mt-10"
           />
@@ -50,7 +50,7 @@ export default function TrainingPage() {
           {(yearSection.imageUrl as string[]).map((url, idx) => (
             <div key={idx} className="flex justify-center">
               <img
-                src={`/images/${url}`}
+                src={url}
                 alt={`연도별 내역 ${idx + 1}`}
                 className="w-full max-w-5xl object-contain"
               />

@@ -23,28 +23,28 @@
           "sub": "1일 또는 2일 연수, 방학 캠프 등"
         }
       ],
-      "imageUrl": "훈련 유형.png"
+      "imageUrl": "/images/training/훈련 유형.png"
     },
     {
       "title": "연도별 진행 내역",
-      "imageUrl": ["2024.png", "2023.png"]
+      "imageUrl": ["/images/training/2024.png", "/images/training/2023.png"]
     },
     {
       "title": "꿈꾸는아이(AI) SPACE 2025",
       "subtitle": "광주과학기술원 AI대학원",
       "ppt_imageUrl": [
-        "/images/훈련4.PNG",
-        "/images/훈련여백.PNG",
-        "/images/훈련5.PNG",
-        "/images/훈련6.PNG",
-        "/images/훈련여백.PNG",
-        "/images/훈련7.PNG",
-        "/images/훈련여백.PNG",
-        "/images/훈련8.PNG",
-        "/images/훈련여백.PNG",
-        "/images/훈련9.PNG",
-        "/images/훈련여백.PNG",
-        "/images/훈련10.PNG"
+        "/images/training/훈련4.png",
+        "/images/training/훈련여백.png",
+        "/images/training/훈련5.png",
+        "/images/training/훈련6.png",
+        "/images/training/훈련여백.png",
+        "/images/training/훈련7.png",
+        "/images/training/훈련여백.png",
+        "/images/training/훈련8.png",
+        "/images/training/훈련여백.png",
+        "/images/training/훈련9.png",
+        "/images/training/훈련여백.png",
+        "/images/training/훈련10.png"
       ]
     }
   ]
