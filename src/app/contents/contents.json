@@ -1,95 +1,49 @@
 {
   "title": "꿈꾸는 아이(AI) CONTENT",
-  "breadcrumb": "GIST K-하이테크 플랫폼 로드맵",
   "email": "문의 메일: kdp@dreamai.kr",
-  "explain": "'꿈꾸는 아이(AI) 콘텐츠’는 GIST에서 개발한 AI 교육 콘텐츠와 다양한 실습 주제들을 확인할 수 있습니다. 생성형 AI, LLM, 디지털 트윈, 드론, 자율주행 등과 관련된 주제를 바탕으로, 학습자가 인공지능 기술을 접하고 응용할 수 있도록 구성된 콘텐츠와 로드맵을 확인할 수 있습니다. 실제 강의 영상과 자료는 꿈꾸는아이(AI) LMS 홈페이지에서 확인할 수 있습니다.",
-  "heroImageUrl": "/images/gist_k-하이테크_플랫폼로드맵.png",
+  "titleimg": "/images/contents/main_title.png",
+  "description": "‘꿈꾸는 아이(AI) 콘텐츠’에서는 GIST에서 개발한 AI 교육 콘텐츠와 다양한 실습 주제를 제공합니다.  생성형 AI, LLM, 디지털 트윈, 드론, 자율주행 등과 관련된 주제를 바탕으로, 학습자가 인공지능 기술을 접하고 응용할 수 있도록 구성된 콘텐츠와 로드맵을 확인할 수 있습니다. 실제 강의 영상과 자료는 꿈꾸는아이(AI) LMS 홈페이지에 업로드되어 있습니다.  또한 광주광역시교육청의 지원으로 개발된 ‘꿈꾸는 아이(AI) 교육자료(Textbook)’를 통해 고등학생들이 인공지능을 쉽고 흥미롭게 학습할 수 있도록 지원하고 있으며, Textbook 페이지에서 자세한 내용을 확인할 수 있습니다.",
+
   "sections": [
     {
-      "title": "1. 꿈꾸는아이(AI)",
-      "description": "설명"
+      "id": "roadmap",
+      "title": "CONTENT 훈련 로드맵",
+      "image": "/images/contents/gist_꿈꾸는아이_훈련_로드맵.png"
     },
     {
-      "title": "2. 시작하는아이(AI)",
-      "description": "설명"
-    },
-    {
-      "title": "3. Digital Twin",
-      "description": "설명"
-    },
-    {
-      "title": "4. 인공지능 활용 DX",
-      "description": "설명"
-    },
-    {
-      "title": "꿈꾸는아이(AI) 로드맵",
-      "imageUrl": "/images/꿈꾸는아이_loadmap.png",
-      "descriptionBlocks": [
+      "id": "xai",
+      "title": "CONTENT 내용",
+      "subtitle": "꿈꾸는 아이(AI): X+AI 서비스 실증",
+      "background": "/images/contents/section2_bg.png",
+      "cards": [
         {
-          "number": "01",
-          "highlight": "CNN을 활용한 AI 드론",
-          "highlightColor": "text-light-purple",
-          "text": "CNN 딥러닝 알고리즘을 학습한\nAI 드론 조종을 통해 이미지 인식 훈련",
-          "numberColor": "text-light-purple"
+          "title": "인공지능과 Docker",
+          "image": "/images/contents/docker_card_v1.png",
+          "link": "https://lms.dreamai.kr/"
         },
         {
-          "number": "02",
-          "highlight": "RL을 활용한 AWS DeepRacer",
-          "highlightColor": "text-navy",
-          "text": "RL 기반의 자율 주행 알고리즘 설계를 통해\n빠르고 정확한 자율 주행 실습",
-          "numberColor": "text-navy"
+          "title": "AlphaFold3와 함께하는 꿈꾸는 아이(AI)",
+          "image": "/images/contents/alphafold_card_v1.png",
+          "link": "https://lms.dreamai.kr/"
         },
         {
-          "number": "03",
-          "highlight": "SmartX Lab",
-          "highlightColor": "text-sky",
-          "text": "리눅스 기초 학습 후\n라즈베리파이를 활용한 IpT 실습",
-          "numberColor": "text-sky"
+          "title": "나만의 첫 챗봇 만들기",
+          "image": "/images/contents/chatbot_card_v1.png",
+          "link": "https://lms.dreamai.kr/"
         },
         {
-          "number": "04",
-          "highlight": "꿈꾸는아이 파이썬 파코세",
-          "highlightColor": "text-mint",
-          "text": "파코세(파이썬 코딩 세상)을 통해\n파이썬 이론부터 실습, 프로젝트까지 수행",
-          "numberColor": "text-mint"
-        }
-      ],
-      "layout": "image-left"
-    },
-    {
-      "title": "시작하는아이(AI) 로드맵",
-      "layout": "image-left",
-      "imageUrl": "/images/시작하는아이_loadmap.png",
-      "descriptionBlocks": [
-        {
-          "number": "01",
-          "numberColor": "text-light-purple",
-          "highlight": "Data-Networking-AI & DX",
-          "highlightColor": "text-light-purple",
-          "text": "Data-Networking-AI & DX, 컨테이너 기반 학습을 통한\nX+AI서비스 창출"
-        },
-        {
-          "number": "02",
-          "numberColor": "text-navy",
-          "highlight": "LLM",
-          "highlightColor": "text-navy",
-          "text": "LLM Theory & Prompt Engineering\nOnly My LLM Service(프로젝트형)"
-        },
-        {
-          "number": "03",
-          "numberColor": "text-sky",
-          "highlight": "생성형AI",
-          "highlightColor": "text-sky",
-          "text": "생성 AI: 글로 만드는 그림\n생성 AI를 활용한 캐릭터 생성"
-        },
-        {
-          "number": "04",
-          "numberColor": "text-mint",
-          "highlight": "Digital Twin & Omniverse",
-          "highlightColor": "text-mint",
-          "text": "Understanding Digital Twin\n꿈꾸는아이(AI) 플랫폼 + Digital Twin"
+          "title": "딥러닝 개념 정복 시리즈",
+          "image": "/images/contents/diseries_card_v1.png",
+          "link": "https://lms.dreamai.kr/"
         }
       ]
+    },
+    {
+      "id": "genai",
+      "title": "생성형 AI",
+      "background": "/images/contents/section3_bg.png",
+      "image": "/images/contents/genai_combined_v1.png",
+      "button": { "label": "강의 바로가기", "link": "https://lms.dreamai.kr/" }
     }
   ]
 }
