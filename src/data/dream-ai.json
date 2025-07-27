@@ -76,7 +76,16 @@
         "name": "ScaleX",
         "title": "ScaleX",
         "imageUrl": "/images/category/category_scalex.png",
-        "url": "https://scalex.dreamai.kr"
+        "url": "https://scalex.dreamai.kr",
+        "height": "md",
+        "margin": false
+      },
+      {
+        "name": "Begginer",
+        "title": "Begginer",
+        "imageUrl": "/images/category/category_beginnerai.png",
+        "url": "/beginnerai",
+        "height": "sm"
       },
       {
         "name": "SCENT",
