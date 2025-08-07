@@ -76,13 +76,31 @@
         "name": "ScaleX",
         "title": "ScaleX",
         "imageUrl": "/images/category/category_scalex.png",
-        "url": "https://scalex.dreamai.kr"
+        "url": "https://scalex.dreamai.kr",
+        "height": "md",
+        "margin": false
+      },
+      {
+        "name": "Begginer",
+        "title": "Begginer",
+        "imageUrl": "/images/category/category_beginnerai.png",
+        "url": "/beginnerai",
+        "height": "sm"
       },
       {
         "name": "SCENT",
         "title": "SCENT",
         "imageUrl": "/images/category/category_scent.png",
-        "url": "https://scent.gist.ac.kr/"
+        "url": "https://scent.gist.ac.kr/",
+        "height":"md",
+        "margin": false
+      },
+      {
+        "name": "Dream-AI",
+        "title": "Dream-AI",
+        "imageUrl": "/images/category/category_dreamai.png",
+        "url": "https://www.openhpc.kr/",
+        "height":"sm"
       }
     ]
   },
