@@ -34,11 +34,11 @@ export default function BeginnerAIPage() {
       <div className="p-8 max-w-4xl mx-auto">
         {/* Header */}
         <header className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>a
           <p className="mt-2 text-lg font-medium text-blue-700">
-            "{data.sloganLine1}
+            {data.sloganLine1}
             <br />
-            {data.sloganLine2}"
+            {data.sloganLine2}
           </p>
         </header>
 
