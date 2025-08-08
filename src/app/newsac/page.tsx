@@ -199,7 +199,7 @@ export default function NewSacPage() {
         </ul>
 
         <a
-          href="https://newsac.kosac.re.kr/public/program/thumb/395?programRegionCode=C0505&institutionId=51"
+          href="https://newsac.kosac.re.kr/public/program/thumb/890?keyword=%EA%BF%88%EA%BE%B8%EB%8A%94"
           target="_blank"
           className="inline-block bg-blue-600 text-white text-lg font-semibold px-6 py-3 rounded-lg hover:bg-blue-700"
         >
