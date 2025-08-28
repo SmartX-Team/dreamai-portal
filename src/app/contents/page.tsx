@@ -1,26 +1,49 @@
-import Image from "next/image";
+import type React from "react";
 import data from "./contents.json";
 
-/* 카드 이미지 크기(비율 유지) */
+type RoadmapSection = {
+  id: "roadmap";
+  title: string;
+  image: string;
+};
+
+type Card = {
+  title: string;
+  image: string;
+  link: string;
+};
+
+type XaiSection = {
+  id: "xai";
+  title: string;
+  subtitle?: string;
+  background?: string;
+  cards: Card[];
+};
+
+type GenaiSection = {
+  id: "genai";
+  title: string;
+  background?: string;
+  image: string;
+  button?: { label: string; link: string };
+};
+
+type Section = RoadmapSection | XaiSection | GenaiSection;
+
+/* 카드 기본 크기(비율 유지) */
 const CARD_W = 1120;
 const CARD_H = 286;
 
-/* X+AI 카드 버튼 위치 */
-function buttonRect(_idx: number) {
-  return {
-    left: 650,
-    top: 196,
-    width: 140,
-    height: 44,
-    radius: 12,
-  };
+/* 버튼 위치 (미사용 파라미터 제거) */
+function buttonRect() {
+  return { left: 650, top: 196, width: 140, height: 44, radius: 12 };
 }
 
 /* 카드별 스티커 */
 function CardStickers({ index }: { index: number }) {
   const items: Array<{ src: string; w: number; style: React.CSSProperties }> = [];
 
-  // 1장
   if (index === 0) {
     items.push({
       src: "/images/contents/stk_bubbles_yellow.png",
@@ -28,7 +51,6 @@ function CardStickers({ index }: { index: number }) {
       style: { position: "absolute", top: -26, right: 300 },
     });
   }
-  // 2장
   if (index === 1) {
     items.push({
       src: "/images/contents/stk_star_pink.png",
@@ -41,7 +63,6 @@ function CardStickers({ index }: { index: number }) {
       style: { position: "absolute", top: 18, right: 190 },
     });
   }
-  // 3장
   if (index === 2) {
     items.push({
       src: "/images/contents/stk_clover_green.png",
@@ -54,7 +75,6 @@ function CardStickers({ index }: { index: number }) {
       style: { position: "absolute", top: 36, right: 150 },
     });
   }
-  // 4장
   if (index === 3) {
     items.push({
       src: "/images/contents/stk_bubbles_green.png",
@@ -71,14 +91,11 @@ function CardStickers({ index }: { index: number }) {
           style={{ ...s.style, width: s.w }}
           className="pointer-events-none select-none"
         >
-          <Image
+          <img
             src={s.src}
             alt=""
-            unoptimized
-            width={s.w}
-            height={s.w}
-            className="object-contain w-full h-auto"
-            priority={index === 0}
+            draggable={false}
+            style={{ width: "100%", height: "auto", objectFit: "contain" }}
           />
         </div>
       ))}
@@ -86,7 +103,7 @@ function CardStickers({ index }: { index: number }) {
   );
 }
 
-/* X+AI 카드 */
+/* 카드 */
 function Card({
   img,
   title,
@@ -98,21 +115,20 @@ function Card({
   link: string;
   index: number;
 }) {
-  const btn = buttonRect(index);
+  const btn = buttonRect();
 
   return (
     <div
       className="relative mx-auto"
       style={{ width: CARD_W, aspectRatio: `${CARD_W} / ${CARD_H}` }}
     >
-      {/* 카드 비율 유지 */}
-      <Image
+      {/* 카드 이미지 */}
+      <img
         src={img}
         alt={title}
-        unoptimized
-        fill
-        className="rounded-xl object-contain"
-        priority={index === 0}
+        draggable={false}
+        className="rounded-xl"
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
       />
 
       {/* 버튼 */}
@@ -141,39 +157,30 @@ function Card({
   );
 }
 
-/* 생성형 AI 버튼 위치 */
-const GENAI_BTN = {
-  x: 830,
-  y: 600,
-  w: 140,
-  h: 44,
-  r: 12,
-};
-
-/* 생성형 AI 배경 */
-const GENAI_BG = {
-  width: 1400,
-  offsetY: 150,
-};
+/*  생성형 AI 버튼/배경 */
+const GENAI_BTN = { x: 830, y: 600, w: 140, h: 44, r: 12 };
+const GENAI_BG = { width: 1400, offsetY: 150 };
 
 export default function ContentsPage() {
-  const roadmap = data.sections.find((s) => s.id === "roadmap") as any;
-  const xai = data.sections.find((s) => s.id === "xai") as any;
-  const genai = data.sections.find((s) => s.id === "genai") as any;
+  const sections = data.sections as Section[];
+
+  const roadmap = sections.find(
+    (s): s is RoadmapSection => s.id === "roadmap"
+  );
+  const xai = sections.find((s): s is XaiSection => s.id === "xai");
+  const genai = sections.find((s): s is GenaiSection => s.id === "genai");
 
   return (
     <main className="w-full bg-white">
-      {/* 타이틀/설명 */}
+      {/* ① 타이틀/설명 */}
       <section className="relative max-w-[1200px] mx-auto px-6 pt-16 pb-10">
-        {/* 타이틀 이미지 */}
         <div className="flex justify-center">
-          <Image
+          <img
             src={data.titleimg}
             alt={data.title}
-            width={0}
-            height={0}
-            className="object-contain w-full max-w-[800px] h-auto mb-10"
-            unoptimized
+            draggable={false}
+            className="w-full max-w-[800px] h-auto mb-10"
+            style={{ objectFit: "contain" }}
           />
         </div>
 
@@ -182,13 +189,15 @@ export default function ContentsPage() {
         <p className="text-gray-700">{data.description}</p>
       </section>
 
-      {/* CONTENT 훈련 로드맵 */}
+      {/* ② CONTENT 훈련 로드맵 */}
       {roadmap && (
         <section className="relative py-12">
           <div className="relative max-w-[1200px] mx-auto px-6">
             <div className="flex items-center gap-2 mb-8">
               <span className="inline-block w-2 h-8 bg-sky-700" />
-              <h2 className="text-2xl md:text-3xl font-semibold">{roadmap.title}</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                {roadmap.title}
+              </h2>
             </div>
 
             <div className="flex justify-center">
@@ -196,12 +205,12 @@ export default function ContentsPage() {
                 className="w-full max-w-[1120px] relative rounded-xl"
                 style={{ aspectRatio: "1120/646" }}
               >
-                <Image
+                <img
                   src={roadmap.image}
                   alt="훈련 로드맵"
-                  unoptimized
-                  fill
-                  className="object-contain rounded-xl"
+                  draggable={false}
+                  className="rounded-xl"
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
               </div>
             </div>
@@ -209,18 +218,17 @@ export default function ContentsPage() {
         </section>
       )}
 
-      {/* CONTENT 내용 – X+AI 서비스 실증 */}
+      {/* ③ CONTENT 내용 – X+AI 서비스 실증 */}
       {xai && (
         <section className="relative py-16 pb-24">
           {xai.background && (
             <div className="absolute inset-0 z-0 flex justify-center">
-              <Image
+              <img
                 src={xai.background}
                 alt="xai-bg"
-                unoptimized
-                width={1600}
-                height={900}
-                className="w-[1600px] h-auto object-contain pointer-events-none"
+                draggable={false}
+                className="pointer-events-none"
+                style={{ width: 1600, height: "auto", objectFit: "contain" }}
               />
             </div>
           )}
@@ -231,13 +239,15 @@ export default function ContentsPage() {
               <h2 className="text-2xl md:text-3xl font-semibold">{xai.title}</h2>
             </div>
             {xai.subtitle && (
-              <p className="text-xl md:text-2xl font-semibold mt-4">{xai.subtitle}</p>
+              <p className="text-xl md:text-2xl font-semibold mt-4">
+                {xai.subtitle}
+              </p>
             )}
 
             <div className="mt-8 space-y-12">
-              {xai.cards.map((card: any, idx: number) => (
+              {xai.cards.map((card, idx) => (
                 <Card
-                  key={idx}
+                  key={card.title + idx}
                   img={card.image}
                   title={card.title}
                   link={card.link}
@@ -249,7 +259,7 @@ export default function ContentsPage() {
         </section>
       )}
 
-      {/* 생성형 AI */}
+      {/* ④ 생성형 AI */}
       {genai && (
         <section className="relative pt-24 pb-20">
           {genai.background && (
@@ -257,13 +267,12 @@ export default function ContentsPage() {
               className="absolute inset-0 z-0 flex justify-center pointer-events-none"
               style={{ transform: `translateY(${GENAI_BG.offsetY}px) scale(0.9)` }}
             >
-              <Image
+              <img
                 src={genai.background}
                 alt="genai-bg"
-                unoptimized
-                width={GENAI_BG.width}
-                height={Math.round((GENAI_BG.width * 9) / 16)}
-                className="w-[1400px] max-w-[95vw] h-auto object-contain"
+                draggable={false}
+                className="max-w-[95vw]"
+                style={{ width: GENAI_BG.width, height: "auto", objectFit: "contain" }}
               />
             </div>
           )}
@@ -271,40 +280,40 @@ export default function ContentsPage() {
           <div className="relative z-10 max-w-[1200px] mx-auto px-6">
             <h2 className="text-xl md:text-2xl font-semibold">{genai.title}</h2>
 
-
             <div className="mt-8 flex flex-col items-center">
               <div
                 className="relative w-full max-w-[1160px] rounded-xl"
                 style={{ aspectRatio: "1160/680" }}
               >
-                <Image
+                <img
                   src={genai.image}
                   alt="생성형 AI"
-                  unoptimized
-                  fill
-                  className="object-contain rounded-xl"
+                  draggable={false}
+                  className="rounded-xl"
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
 
-                {/* 생성형 AI 버튼 */}
-                <a
-                  href={genai.button?.link || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="생성형 AI 강의 바로가기"
-                  className="absolute"
-                  style={{
-                    left: GENAI_BTN.x,
-                    top: GENAI_BTN.y,
-                    width: GENAI_BTN.w,
-                    height: GENAI_BTN.h,
-                    borderRadius: GENAI_BTN.r,
-                    transform: "translateX(-50%)",
-                  }}
-                >
-                  <span className="block w-full h-full bg-[#e2664d] text-white font-semibold text-center leading-[44px] hover:brightness-105 transition rounded-xl">
-                    {genai.button?.label || "강의 바로가기"}
-                  </span>
-                </a>
+                {genai.button && (
+                  <a
+                    href={genai.button.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="생성형 AI 강의 바로가기"
+                    className="absolute"
+                    style={{
+                      left: GENAI_BTN.x,
+                      top: GENAI_BTN.y,
+                      width: GENAI_BTN.w,
+                      height: GENAI_BTN.h,
+                      borderRadius: GENAI_BTN.r,
+                      transform: "translateX(-50%)",
+                    }}
+                  >
+                    <span className="block w-full h-full bg-[#e2664d] text-white font-semibold text-center leading-[44px] hover:brightness-105 transition rounded-xl">
+                      {genai.button.label}
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
