@@ -27,12 +27,12 @@
       {
         "id": "dl",
         "hrefPdf": "https://drive.google.com/file/d/1y7eT7Z_Sox9gooXxgTPjIBQWYJr0C-q5/view?usp=drive_link",
-        "hrefExp": "https://colab.research.google.com/drive/1B6cESDWQ06By5ioW8jtrKHekzujVoKp4?usp=drive_link"
+        "hrefExp": "https://colab.research.google.com/drive/1B6cESDWQ06By5ioW8jtrKHekzujVoKp4?usp=sharing"
       },
       {
         "id": "data",
         "hrefPdf": "https://drive.google.com/file/d/15IGo1E231zyZDKL0BEamvFWZ0pOtOgKC/view?usp=drive_link",
-        "hrefExp": "https://colab.research.google.com/drive/16L57eVsB1J5vwFRwqE2PWzOcbXfrj-sR?usp=drive_link"
+        "hrefExp": "https://colab.research.google.com/drive/16L57eVsB1J5vwFRwqE2PWzOcbXfrj-sR?usp=sharing"
       },
       {
         "id": "hyperai",
@@ -40,7 +40,8 @@
       },
       {
         "id": "dna",
-        "hrefPdf": "https://drive.google.com/file/d/1nAkKWB8GvCgpBFXsi8QbVV96-5jg55VZ/view?usp=drive_link"
+        "hrefPdf": "https://drive.google.com/file/d/1nAkKWB8GvCgpBFXsi8QbVV96-5jg55VZ/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/12jkWdbyv7lioaCnE6OKD6j84CTwaJHzo?usp=sharing"
       },
       {
         "id": "epilogue",
@@ -49,11 +50,12 @@
       {
         "id": "ml",
         "hrefPdf": "https://drive.google.com/file/d/1jYXyPdLX-q2osPIwEblTmSlyCe53RO2H/view?usp=drive_link",
-        "hrefExp": "https://colab.research.google.com/drive/1XE9fZC6--TWWZfCxmKSxv7z4W-qMsdp-?usp=drive_link"
+        "hrefExp": "https://colab.research.google.com/drive/1XE9fZC6--TWWZfCxmKSxv7z4W-qMsdp-?usp=sharing"
       },
       {
         "id": "llm",
-        "hrefPdf": "https://drive.google.com/file/d/1Cq8zV-5IMdaiGgR__NfsWU_AQdUG5RgT/view?usp=drive_link"
+        "hrefPdf": "https://drive.google.com/file/d/1Cq8zV-5IMdaiGgR__NfsWU_AQdUG5RgT/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/1MSF5DlvCKADAa__fDBM5Q0-KxPgXYmXU?usp=sharing"
       },
       {
         "id": "data_eng",
