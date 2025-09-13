@@ -126,7 +126,7 @@ export default function TextbookPage() {
     <div className="pt-6">
       {drawPage1()}
       {drawPage2()}
-      {drawPage3()}
+      {/* {drawPage3()} */}
     </div>
   );
 }
