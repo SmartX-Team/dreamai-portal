@@ -1,15 +1,22 @@
 import trainingData from "./dream_ai_training.json";
 
 export default function TrainingPage() {
-  const section = trainingData.sections[0];
-  const yearSection = trainingData.sections[1];
-  const pptSection = trainingData.sections[2];
+  const roadmapSection = trainingData.sections[0];
+  const certificationSection = trainingData.sections[1];
+  const section = trainingData.sections[2];
+  const yearSection = trainingData.sections[3];
+  const pptSection = trainingData.sections[4];
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-5xl font-bold mb-[30px] text-center">
-        {trainingData.title}
-      </h1>
+      <div className="flex justify-center mb-[30px]">
+        <img
+          src={trainingData.titleimg}
+          alt={trainingData.title}
+          className="w-full max-w-[200px] h-auto"
+          style={{ objectFit: "contain" }}
+        />
+      </div>
       <h1 className="text-[18px] text-gray-500 text-right font-semibold mb-4">
         {trainingData.email}
       </h1>
@@ -17,6 +24,32 @@ export default function TrainingPage() {
       <h1 className="text-xl font-bold mb-[100px] max-w-7xl mx-auto text-justify leading-relaxed">
         {trainingData.explain}
       </h1>
+
+      {/* 훈련 로드맵 */}
+      <div className="mb-20">
+        <h2 className="text-3xl font-bold mt-[150px] pl-4 border-l-4 border-blue-500">
+          {roadmapSection.title}
+        </h2>
+        <div className="flex justify-center mb-[30px]">
+          <img
+            src={roadmapSection.imageUrl?.toString()}
+            className="w-full max-w-5xl object-contain mx-auto mb-16 mt-10"
+          />
+        </div>
+      </div>
+
+      {/* 훈련 인증 */}
+      <div className="mb-20">
+        <h2 className="text-3xl font-bold mt-[150px] pl-4 border-l-4 border-blue-500">
+          {certificationSection.title}
+        </h2>
+        <div className="flex justify-center mb-[30px]">
+          <img
+            src={certificationSection.imageUrl?.toString()}
+            className="w-full max-w-5xl object-contain mx-auto mb-16 mt-10"
+          />
+        </div>
+      </div>
 
       {/* 훈련 유형 섹션 */}
       <div className="mb-20">
