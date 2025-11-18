@@ -140,6 +140,7 @@ export default function HomePage() {
       <footer className="relative bg-zinc-900 text-zinc-300 text-2xl py-8 w-full">
         <div className="max-w-screen-xl mx-auto px-4 text-center">
           <div className="leading-none">{dreamData.footer.copyright}</div>
+          <div className="leading-none text-xl"><br></br>{dreamData.footer.businessInfo}</div>
         </div>
         {dreamData.footer.trailing.map((item, idx) => {
           return (
