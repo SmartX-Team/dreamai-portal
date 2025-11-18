@@ -36,7 +36,7 @@ export default function TrainingPage() {
           {checkin.content}
           <div className="mt-4">
           <a
-            href="https://forms.gle/2i7ZaCKuHsDoVbN39"
+            href="https://forms.gle/3Vf4RrBW1WEhNv8e9"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline" >
