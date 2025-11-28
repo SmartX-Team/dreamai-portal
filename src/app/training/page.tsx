@@ -42,6 +42,14 @@ export default function TrainingPage() {
             className="text-blue-600 underline" >
             과정 신청 바로가기
           </a>
+          <br />
+          <a
+            href="https://drive.google.com/drive/folders/1SuZvyfbeNI7bmXlBc0LRJhwUErZlqdg6?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline" >
+            훈련 교안 다운로드
+          </a>
           </div>
         </div>
           <img
