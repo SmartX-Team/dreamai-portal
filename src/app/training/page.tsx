@@ -36,45 +36,10 @@ export default function TrainingPage() {
       <h1 className="text-xl font-bold mb-[100px] max-w-7xl mx-auto text-justify leading-relaxed">
         {trainingData.explain}
       </h1>
-
-<<<<<<< HEAD
-      {/* 훈련 신청*/}
-      <div className="mb-20">
-        <h2 className="text-3xl font-bold mt-[150px] pl-4 border-l-4 border-blue-500">
-          {checkin.title}
-        </h2>
-        <div className="flex justify-cente gap-12 mb-[30px]">
-          <div className="mt-10 whitespace-pre-line leading-relaxed text-xl font-semibold">
-          {checkin.content}
-          <div className="mt-4">
-          <a
-            href="https://forms.gle/3Vf4RrBW1WEhNv8e9"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline" >
-            과정 신청 바로가기
-          </a>
-          <br />
-          <a
-            href="https://drive.google.com/drive/folders/1SuZvyfbeNI7bmXlBc0LRJhwUErZlqdg6?usp=drive_link"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline" >
-            훈련 교안 다운로드
-          </a>
-          </div>
-        </div>
-          <img
-            src={checkin.imageUrl?.toString()}
-            className="w-full max-w-lg object-contain mb-16 mt-10 ml-auto"
-          />
-        </div>
-      </div>
-=======
+      
       {/* 훈련 신청 - 새 컴포넌트로 교체! */}
       <TrainingCheckinSection data={checkin} />
->>>>>>> 1a6c2fc1070bf9a7953223c0212bb6aec9ad1dfc
-
+      
       {/* 훈련 로드맵 */}
       <div className="mb-20">
         <h2 className="text-3xl font-bold mt-[150px] pl-4 border-l-4 border-blue-500">
