@@ -1,11 +1,23 @@
 import trainingData from "./dream_ai_training.json";
+import TrainingCheckinSection from "./TrainingCheckinSection";
+
+// 간단한 타입 정의
+interface Section {
+  title: string;
+  imageUrl?: string | string[];
+  content?: string;
+  subtitle?: string;
+  item?: Array<{ main: string; sub: string }>;
+  ppt_imageUrl?: string[];
+}
 
 export default function TrainingPage() {
-  const roadmapSection = trainingData.sections[0];
-  const certificationSection = trainingData.sections[1];
-  const section = trainingData.sections[2];
-  const yearSection = trainingData.sections[3];
-  const pptSection = trainingData.sections[4];
+  const checkin = trainingData.sections[0] as Section;
+  const roadmapSection = trainingData.sections[1] as Section;
+  const certificationSection = trainingData.sections[2] as Section;
+  const section = trainingData.sections[3] as Section;
+  const yearSection = trainingData.sections[4] as Section;
+  const pptSection = trainingData.sections[5] as Section;
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -25,6 +37,9 @@ export default function TrainingPage() {
         {trainingData.explain}
       </h1>
 
+      {/* 훈련 신청 - 새 컴포넌트로 교체! */}
+      <TrainingCheckinSection data={checkin} />
+      
       {/* 훈련 로드맵 */}
       <div className="mb-20">
         <h2 className="text-3xl font-bold mt-[150px] pl-4 border-l-4 border-blue-500">
@@ -80,7 +95,7 @@ export default function TrainingPage() {
           {yearSection.title}
         </h2>
         <div className="flex flex-col gap-10">
-          {(yearSection.imageUrl as string[]).map((url, idx) => (
+          {Array.isArray(yearSection.imageUrl) && yearSection.imageUrl.map((url, idx) => (
             <div key={idx} className="flex justify-center">
               <img
                 src={url}

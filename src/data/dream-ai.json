@@ -104,14 +104,16 @@
       }
     ]
   },
-  "footer": {
-    "copyright": "© 2020~2025 GIST Dream-AI. All rights reserved.",
-    "trailing": [
-      {
-        "name": "Q&A",
-        "title": "Q&A",
-        "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
-      }
-    ]
-  }
+ "footer": {
+  "copyright": "© 2020~2025 GIST Dream-AI. All rights reserved.",
+  "businessInfo": "사업자등록번호: 410-82-07550 | 대표자: 임기철 | 주소: 광주광역시 북구 첨단과기로 123",
+  "trailing": [
+    {
+      "name": "Q&A",
+      "title": "Q&A",
+      "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
+    }
+  ]
+}
+
 }
