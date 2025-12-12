@@ -201,10 +201,7 @@ export default function ContentsPage() {
             </div>
 
             <div className="flex justify-center">
-              <div
-                className="w-full max-w-[1120px] relative rounded-xl"
-                style={{ aspectRatio: "1120/646" }}
-              >
+              <div className="w-full max-w-[1120px] relative rounded-xl">
                 <img
                   src={roadmap.image}
                   alt="훈련 로드맵"
@@ -219,6 +216,8 @@ export default function ContentsPage() {
       )}
 
       {/* ③ CONTENT 내용 – X+AI 서비스 실증 */}
+      {/*
+      
       {xai && (
         <section className="relative py-16 pb-24">
           {xai.background && (
@@ -258,8 +257,10 @@ export default function ContentsPage() {
           </div>
         </section>
       )}
+*/}
 
       {/* ④ 생성형 AI */}
+{/*
       {genai && (
         <section className="relative pt-24 pb-20">
           {genai.background && (
@@ -319,6 +320,9 @@ export default function ContentsPage() {
           </div>
         </section>
       )}
+ */}     
+
+
     </main>
   );
 }
