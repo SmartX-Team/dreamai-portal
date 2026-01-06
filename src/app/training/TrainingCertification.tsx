@@ -30,44 +30,42 @@ export default function TrainingCertification() {
   const bronzeCourses = {
     체험: [  
       { title: "MobileX Station 기반 AI 서비스 구현 교육", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
-      { title: "Model Zoo1: Python 기반 AI 이해 및 데이터 시각화 실습", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
-      { title: "Model Zoo2: 초거대 AI와 클라우드 인프라 기반 X+AI 융합 서비스 이해", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
+      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
+      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
     ]
   };
 
   const silverCourses = {
     체험: [
-      { title: "MobileX Station 기반 AI 서비스 구현 교육", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
-      { title: "AI Playground1: 수학으로 접근하는 기계학습", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true }
+      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
+      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
     ],
     집중: [
-      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
+      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available:true },
       { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
-      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
+      { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
     ],
   };
 
   const goldCourses = {
     체험: [
-      { title: "MobileX Station 기반 AI 서비스 구현 교육", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
-      { title: "AI Playground1: 수학으로 접근하는 기계학습", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true }
+      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
+      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
     ],
     집중: [
-      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
+      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available:true },
       { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
-      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
-      { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
-      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
-      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
     ],
     심화: [
-      { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
-      { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
-      { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
+      { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
     ],
   };
 
