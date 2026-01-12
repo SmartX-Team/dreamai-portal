@@ -97,13 +97,13 @@ const pptSection = trainingData.sections[5] as Section;
           </h2>
         </div>
     
-      <div className="flex flex-col gap-0 ">
+      <div className="flex flex-col gap-64 ">
       {pptSection.ppt_imageUrl.map((url, idx) => (
         <div key={idx} className="flex justify-center ">
           <img
             src={url}
             alt={`PPT Slide ${idx + 1}`}
-            className="w-full h-auto object-contain rounded-0 "
+            className="w-full h-auto object-contain rounded-xl "
           />
         </div>
       ))}
