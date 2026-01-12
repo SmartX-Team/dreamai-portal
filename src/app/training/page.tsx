@@ -18,7 +18,7 @@ const checkin = trainingData.sections[0] as Section;
 const yearSection = trainingData.sections[4] as Section
 // const certificationSection = trainingData.sections[2] as Section;
 // const section = trainingData.sections[3] as Section;
-// const pptSection = trainingData.sections[5] as Section;
+const pptSection = trainingData.sections[5] as Section;
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -69,7 +69,7 @@ const yearSection = trainingData.sections[4] as Section
       </div>*/}
 
     {/* 연도별 진행 내역 */}
-      {/* border, shadow 제거 */}
+      {/* border, shadow 제거*/} 
       <div className="mb-20 bg-white rounded-3xl p-8 md:p-12 ]">
         <h2 className="text-3xl font-bold mb-10 pb-4 border-b border-gray-200 text-gray-900">
           {yearSection.title}
@@ -88,32 +88,28 @@ const yearSection = trainingData.sections[4] as Section
         </div>
       </div>
 
-      {/* PPT 이미지 시퀀스 섹션 
+      {/* 꿈꾸는 아이 Training ~ 2025 내역 */}
       {pptSection.ppt_imageUrl && pptSection.ppt_imageUrl.length > 0 && (
-        <div>
-          <div className="mt-[200px] mb-8">
-            <h2 className="text-2xl font-bold mt-[200px] mb-2 ">
+        <div className="mb-20 bg-white rounded-3xl p-8 md:p-12">
+          <div className="mb-10 pb-4 border-b border-gray-200">
+          <h2 className="text-3xl font-bold mb-2 text-gray-900">
               {pptSection.title}
-            </h2>
-            <h3 className="text-lg text-gray-600 mb-8">
-              {pptSection.subtitle}
-            </h3>
-          </div>
-
-          <div className="flex flex-col">
-            {pptSection.ppt_imageUrl.map((url, idx) => (
-              <div key={idx} className="flex justify-center">
-                <img
-                  src={url}
-                  alt={`PPT Slide ${idx + 1}`}
-                  className="w-full max-w-5xl object-contain"
-                />
-              </div>
-            ))}
-          </div>
+          </h2>
         </div>
-      )}
-      */}
+    
+      <div className="flex flex-col gap-0 ">
+      {pptSection.ppt_imageUrl.map((url, idx) => (
+        <div key={idx} className="flex justify-center ">
+          <img
+            src={url}
+            alt={`PPT Slide ${idx + 1}`}
+            className="w-full h-auto object-contain rounded-0 "
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+)} 
     </div>
   );
 }

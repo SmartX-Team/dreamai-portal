@@ -260,7 +260,7 @@ export default function TrainingCoursesSection() {
             return (
               <div
                 key={course.id}
-                className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out flex flex-col group"
+                className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out flex flex-col group"
               >
                 <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
                   {course.imageUrl ? (
@@ -289,12 +289,12 @@ export default function TrainingCoursesSection() {
                   
                   <div className="absolute top-3 left-3 flex gap-2">
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 shadow-sm ${style.text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${style.text}`}
                     >
                       {course.category}
                     </span>
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 shadow-sm ${style.text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${style.text}`}
                     >
                       {course.level}
                     </span>
@@ -346,7 +346,7 @@ export default function TrainingCoursesSection() {
 
         {selectedCourse && mounted && createPortal(
           <div
-            className="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center z-[9999] p-4"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999] p-4"
             onClick={() => setSelectedCourse(null)}
           >
             <div
@@ -358,12 +358,12 @@ export default function TrainingCoursesSection() {
                 <div className="flex-1 pr-4">
                   <div className="flex gap-2 mb-3">
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 shadow-sm ${categoryStyles[selectedCourse.category].text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
                     >
                       {selectedCourse.category}
                     </span>
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 shadow-sm ${categoryStyles[selectedCourse.category].text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
                     >
                       {selectedCourse.level}
                     </span>
