@@ -64,9 +64,9 @@ export default function TrainingCoursesSection() {
       level: "체험",
       imageUrl: "/images/training/dt-robot-2.png",
       description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["꿈꾸는 아이(AI) Space 인프라 기반 교육 서비스 및 D-N-A 기반의 X+AI 서비스 실증", "Omniverse 도구에 기반한 Digital Twin 실증 교육"],
+      curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", "Digital Twin 활용 로봇 시뮬레이션" ],
       tools: ["Dream-AI Space","NVIDIA Omniverse", "Isaac Sim"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdi_Wy2AozBKv4l_tGEZtXpbYHqnF9GOclT6GGpvzZAxyfYqw/viewform?usp=publish-editor",
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
       isRegistrationOpen: true
     },
     {
@@ -77,9 +77,9 @@ export default function TrainingCoursesSection() {
       level: "집중",
       imageUrl: "/images/training/dt-robot-1.png",
       description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
-      curriculum: [ "OpenUSD + SimReady", "Virtual Facility Integration(VFI)", "Data Center Digital Twin", "MobileX Pole 시뮬레이션 구축"],
+      curriculum: [ "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdi_Wy2AozBKv4l_tGEZtXpbYHqnF9GOclT6GGpvzZAxyfYqw/viewform?usp=publish-editor",
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
       isRegistrationOpen: true
     },
     {

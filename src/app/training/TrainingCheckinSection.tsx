@@ -102,7 +102,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
           {/* 버튼 영역 */}
           <div className="flex flex-col gap-3 mt-4">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdi_Wy2AozBKv4l_tGEZtXpbYHqnF9GOclT6GGpvzZAxyfYqw/viewform?usp=publish-editor"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform"
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center px-6 py-4 rounded-xl text-sm font-semibold
