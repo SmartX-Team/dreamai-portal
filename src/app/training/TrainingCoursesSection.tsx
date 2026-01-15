@@ -255,14 +255,15 @@ export default function TrainingCoursesSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          {filteredCourses.map((course) => {
-            const style = categoryStyles[course.category];
-            return (
-              <div
-                key={course.id}
-                className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out flex flex-col group"
-              >
-                <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
+          {/* 카드 디자인 영역 */}
+  {filteredCourses.map((course) => {
+    const style = categoryStyles[course.category];
+    return (
+      <div
+        key={course.id}
+        className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-gray-200 flex flex-col group"
+      >
+        <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
                   {course.imageUrl ? (
                     <img
                       src={course.imageUrl}
@@ -288,13 +289,15 @@ export default function TrainingCoursesSection() {
                   )}
                   
                   <div className="absolute top-3 left-3 flex gap-2">
+                    {/* 카테고리 뱃지 */}
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${style.text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white ${style.text}`}
                     >
                       {course.category}
                     </span>
+                    {/* 레벨 뱃지  */}
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${style.text}`}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white ${style.text}`}
                     >
                       {course.level}
                     </span>
@@ -326,7 +329,7 @@ export default function TrainingCoursesSection() {
                   <button
                     onClick={() => setSelectedCourse(course)}
                     className={
-                      "mt-3 w-full py-2 rounded-lg font-semibold text-sm transition-all duration-300 opacity-0 group-hover:opacity-100 " +
+                      "mt-3 w-full py-2 rounded-lg font-semibold text-sm transition-all duration-300 opacity-0 group-hover:opacity-70 " +
                       style.bg + " " + style.text
                     }
                   >
@@ -448,7 +451,7 @@ export default function TrainingCoursesSection() {
                   }}
                   className={`w-full font-bold py-4 rounded-xl transition-colors duration-200 mt-8 ${
                     selectedCourse.isRegistrationOpen
-                      ? 'bg-cyan-500 hover:bg-cyan-600 text-white cursor-pointer'
+                      ? 'bg-[#1F92DF] hover:bg-cyan-600 text-white cursor-pointer'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >

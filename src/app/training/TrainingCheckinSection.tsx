@@ -106,8 +106,8 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center px-6 py-4 rounded-xl text-sm font-semibold
-                bg-[#e2664d] text-white hover:brightness-105 transition-all duration-200
-                shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                bg-[#1F92DF] text-white hover:brightness-105 transition-all duration-200
+                shadow-md  hover:bg-cyan-600"
             >
               과정 신청 바로가기
             </a>
@@ -116,7 +116,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center px-6 py-4 rounded-xl text-sm font-semibold
-                bg-white text-[#e2664d] border-2 border-[#e2664d] hover:bg-orange-50
+                bg-white text-[#1F92DF] border-2 border-[#1F92DF] hover:bg-[#E8F1F6]
                 transition-all duration-200"
             >
               훈련 교안 다운로드

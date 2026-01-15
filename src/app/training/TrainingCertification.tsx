@@ -2,6 +2,14 @@
 
 import React from 'react';
 
+interface Course {
+  title: string;
+  duration: string;
+  icon: string;
+  category: string;
+  available?: boolean;
+}
+
 export default function TrainingCertification() {
   const certifications = [
     { 
@@ -27,7 +35,7 @@ export default function TrainingCertification() {
     }
   ];
 
-  const bronzeCourses = {
+  const bronzeCourses: { [key: string]: Course[] } = {
     체험: [  
       { title: "MobileX Station 기반 AI 서비스 구현 교육", duration: "4h", icon: "/images/training/icon_core.png", category: "Core AI", available: true },
       { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
@@ -35,26 +43,26 @@ export default function TrainingCertification() {
     ]
   };
 
-  const silverCourses = {
+  const silverCourses: { [key: string]: Course[] } = {
     체험: [
       { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
       { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
     ],
     집중: [
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available:true },
+      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
       { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
       { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
       { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
     ],
   };
 
-  const goldCourses = {
+  const goldCourses: { [key: string]: Course[] } = {
     체험: [
       { title: "꿈꾸는아이(AI) Digital Twin 직무혁신", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
       { title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
     ],
     집중: [
-      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available:true },
+      { title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: true },
       { title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: true },
       { title: "", duration: "4h", icon: "/images/training/icon_DT.png", category: "DT&Robot", available: false },
       { title: "", duration: "4h", icon: "/images/training/icon_Gen.png", category: "GenAI", available: false },
@@ -69,34 +77,41 @@ export default function TrainingCertification() {
     ],
   };
 
-  const levelColors = {
-    체험: { badge: "bg-white", duration: "bg-white", border: "border-gray-200" },
-    집중: { badge: "bg-white", duration: "bg-white", border: "border-gray-200" },
-    심화: { badge: "bg-white", duration: "bg-white", border: "border-gray-200" }
-  };
-
+  // 카테고리별 색상 테두리
   const categoryColors = {
-    "Core AI": { card: "bg-[#C8A102]/10", border: "border-[#C8A102]" },
-    "GenAI": { card: "bg-[#36822C]/10", border: "border-[#36822C]" },
-    "DT&Robot": { card: "bg-[#4681DA]/10", border: "border-[#4681DA]" }
+    "Core AI": { 
+      border: "border-amber-200",
+      hoverBorder: "hover:border-amber-300",
+      iconBg: "bg-amber-50"
+    },
+    "GenAI": { 
+      border: "border-green-200",
+      hoverBorder: "hover:border-green-300",
+      iconBg: "bg-green-50"
+    },
+    "DT&Robot": { 
+      border: "border-blue-200",
+      hoverBorder: "hover:border-blue-300",
+      iconBg: "bg-blue-50"
+    }
   };
 
   return (
     <div className="mb-20 max-w-6xl mx-auto px-4">
       
-      {/* 상단 헤더 */}
-      <div className="mb-12 pb-4 border-b border-gray-200">
+      {/* Header */}
+      <div className="mb-16 pb-4 border-b border-gray-200">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
             훈련 인증
           </h2>
-          <p className="text-gray-500">
+          <p className="text-gray-600 tracking-wide">
             단계별 과정을 이수하고 공인 인증을 획득하세요.
           </p>
         </div>
       </div>
 
-      {/* 인증 뱃지 */}
+      {/* Certification Badges ) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
         {certifications.map((cert, idx) => (
           <div 
@@ -105,7 +120,7 @@ export default function TrainingCertification() {
           >
             <div className="relative mb-4">
               <div className={`absolute inset-0 ${cert.bgColor} blur-2xl opacity-20 rounded-full scale-110 group-hover:scale-125 transition-transform duration-500`}></div>
-              <div className={`${cert.bgColor} relative w-24 h-24 flex items-center justify-center rounded-full shadow-lg ring-4 ring-white z-10`}>
+              <div className={`${cert.bgColor} relative w-24 h-24 flex items-center justify-center rounded-full shadow-lg ring-2 ring-white z-10`}>
                 <img 
                   src={cert.image} 
                   alt={cert.level}
@@ -133,67 +148,73 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/* Bronze 추천 코스 + 카테고리 칩  */}
-      <div className="mb-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b-2 border-amber-100">
-          {/* 제목 */}
+      {/* Bronze 추천 코스 */}
+      <div className="mb-24">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-1.5 h-8 bg-amber-700 rounded-r-md"></div>
-            <h3 className="text-2xl font-bold text-gray-800">
-              <span className="text-amber-700">Bronze</span> 추천 코스
+            <div className="w-1 h-10 bg-gradient-to-b from-amber-600 to-amber-400 rounded-full"></div>
+            <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
+              <span className="bg-gradient-to-r from-amber-700 to-amber-500 bg-clip-text text-transparent">Bronze</span> 추천 코스
             </h3>
           </div>
-
-          {/* 카테고리 칩  */}
+          {/* 카테고리 라벨 색상 */}
           <div className="flex flex-wrap gap-2">
-            <span className="bg-[#C8A102]/10 border border-[#C8A102] text-[#C8A102] px-3 py-1.5 rounded-lg text-xs font-bold">
+            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
               Core AI
             </span>
-            <span className="bg-[#36822C]/10 border border-[#36822C] text-[#36822C] px-3 py-1.5 rounded-lg text-xs font-bold">
+            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
               GenAI AX
             </span>
-            <span className="bg-[#4681DA]/10 border border-[#4681DA] text-[#4681DA] px-3 py-1.5 rounded-lg text-xs font-bold">
+            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
               DT&Robot AX
             </span>
           </div>
         </div>
         
         {Object.entries(bronzeCourses).map(([level, courses]) => (
-          <div key={level} className="mb-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className={`${levelColors[level as keyof typeof levelColors].badge} ${levelColors[level as keyof typeof levelColors].border} border text-gray-600 px-6 py-2 rounded-full font-semibold shadow-sm`}>
-                {level}
+          <div key={level} className="mb-8">
+            <div className="flex items-center gap-4 mb-6">
+            <div className="px-5 py-2 rounded-full font-bold text-sm bg-white border border-gray-200 text-gray-800 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
+              {level}
+            </div>
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium">총 12h</span>
               </div>
-              <div className="text-gray-600 text-sm font-semibold">총 12h</div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {courses.map((course, idx) => (
                 <div
                   key={idx}
-                  className={`${categoryColors[course.category as keyof typeof categoryColors].card} border-2 ${categoryColors[course.category as keyof typeof categoryColors].border} rounded-2xl p-5 relative ${course.available !== false ? 'hover:scale-[1.02]' : 'opacity-60'} transition-transform duration-200 flex flex-col justify-between min-h-[180px]`}
+                  className={`group relative bg-white border ${categoryColors[course.category as keyof typeof categoryColors].border} ${categoryColors[course.category as keyof typeof categoryColors].hoverBorder} rounded-2xl p-6 transition-all duration-300 ${
+                    course.available !== false 
+                      ? 'hover:shadow-lg hover:-translate-y-1' 
+                      : 'opacity-50'
+                  }`}
                 >
-                  <div className={`absolute -top-3 -right-3 ${levelColors[level as keyof typeof levelColors].duration} text-gray-600 px-3 py-1 rounded-full text-xs font-bold shadow-md border border-gray-100`}>
-                    ⏱ {course.duration}
+                  <div className="absolute top-4 right-4 text-xs font-semibold text-gray-500">
+                    {course.duration}
                   </div>
+                  
                   {course.available === false && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900/80 text-white px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap z-10">
-                      수강 준비중
+                    <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
+                      <span className="bg-gray-900 text-white px-4 py-2 rounded-lg text-xs font-semibold">
+                        수강 준비중
+                      </span>
                     </div>
                   )}
-                  <div className={course.available === false ? 'blur-[2px]' : ''}>
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
-                      <img 
-                        src={course.icon} 
-                        alt="" 
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 leading-snug break-keep">
-                      {course.title}
-                    </h4>
+                  
+                  <div className={`w-14 h-14 ${categoryColors[course.category as keyof typeof categoryColors].iconBg} rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                    <img src={course.icon} alt="" className="w-8 h-8 object-contain" />
                   </div>
-                  <div className="h-2"></div>
+
+                  <h4 className="text-base font-bold text-gray-900 leading-snug mb-0">
+                    {course.title}
+                  </h4>
+                  
                 </div>
               ))}
             </div>
@@ -201,53 +222,60 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/*  Silver 추천 코스 */}
-      <div className="mb-20">
-        <div className="flex items-center gap-3 mb-8 pb-4 border-b-2 border-gray-200">
-          <div className="w-1.5 h-8 bg-gray-400 rounded-r-md"></div>
-          <h3 className="text-2xl font-bold text-gray-800">
-            <span className="text-gray-500">Silver</span> 추천 코스
+      {/* Silver 추천 코스  */}
+      <div className="mb-24">
+        <div className="flex items-center gap-3 mb-10">
+          <div className="w-1 h-10 bg-gradient-to-b from-slate-500 to-slate-300 rounded-full"></div>
+          <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <span className="bg-gradient-to-r from-slate-600 to-slate-400 bg-clip-text text-transparent">Silver</span> 추천 코스
           </h3>
         </div>
         
         {Object.entries(silverCourses).map(([level, courses]) => (
-          <div key={level} className="mb-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className={`${levelColors[level as keyof typeof levelColors].badge} text-gray-600 px-6 py-2 rounded-full font-semibold shadow-sm border border-gray-200`}>
-                {level}
-              </div>
-              <div className="text-gray-600 text-sm font-semibold">
-                {level === '체험' ? '총 8h' : '총 16h'}
+          <div key={level} className="mb-8">
+            <div className="flex items-center gap-4 mb-6">
+              {/* Silver 라벨 뱃지  */}
+            <div className="px-5 py-2 rounded-full font-bold text-sm bg-white border border-gray-200 text-gray-800 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
+              {level}
+            </div>
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium">{level === '체험' ? '총 8h' : '총 16h'}</span>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {courses.map((course, idx) => (
                 <div
                   key={idx}
-                  className={`${categoryColors[course.category as keyof typeof categoryColors].card} border-2 ${categoryColors[course.category as keyof typeof categoryColors].border} rounded-2xl p-5 relative ${course.available !== false ? 'hover:scale-[1.02]' : 'opacity-60'} transition-transform duration-200 flex flex-col justify-between min-h-[180px]`}
+                  className={`group relative bg-white border ${categoryColors[course.category as keyof typeof categoryColors].border} ${categoryColors[course.category as keyof typeof categoryColors].hoverBorder} rounded-2xl p-6 transition-all duration-300 ${
+                    course.available !== false 
+                      ? 'hover:shadow-lg hover:-translate-y-1' 
+                      : 'opacity-50'
+                  }`}
                 >
-                  <div className={`absolute -top-3 -right-3 ${levelColors[level as keyof typeof levelColors].duration} text-gray-600 px-3 py-1 rounded-full text-xs font-bold shadow-md border border-gray-100`}>
-                    ⏱ {course.duration}
+                  <div className="absolute top-4 right-4 text-xs font-semibold text-gray-500">
+                    {course.duration}
                   </div>
+                  
                   {course.available === false && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900/80 text-white px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap z-10">
-                      수강 준비중
+                    <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
+                      <span className="bg-gray-900 text-white px-4 py-2 rounded-lg text-xs font-semibold">
+                        수강 준비중
+                      </span>
                     </div>
                   )}
-                  <div className={course.available === false ? 'blur-[2px]' : ''}>
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
-                      <img 
-                        src={course.icon} 
-                        alt="" 
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 leading-snug break-keep">
-                      {course.title}
-                    </h4>
+                  
+                  <div className={`w-14 h-14 ${categoryColors[course.category as keyof typeof categoryColors].iconBg} rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                    <img src={course.icon} alt="" className="w-8 h-8 object-contain" />
                   </div>
-                  <div className="h-2"></div>
+                  
+                  <h4 className="text-base font-bold text-gray-900 leading-snug mb-0">
+                    {course.title}
+                  </h4>
+                  
                 </div>
               ))}
             </div>
@@ -255,53 +283,62 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/*  Gold 추천 코스 */}
+      {/* Gold 추천 코스 */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 mb-8 pb-4 border-b-2 border-yellow-100">
-          <div className="w-1.5 h-8 bg-yellow-500 rounded-r-md"></div>
-          <h3 className="text-2xl font-bold text-gray-800">
-            <span className="text-yellow-600">Gold</span> 추천 코스
+        <div className="flex items-center gap-3 mb-10">
+          <div className="w-1 h-10 bg-gradient-to-b from-yellow-500 to-yellow-300 rounded-full"></div>
+          <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <span className="bg-gradient-to-r from-yellow-600 to-yellow-400 bg-clip-text text-transparent">Gold</span> 추천 코스
           </h3>
         </div>
         
         {Object.entries(goldCourses).map(([level, courses]) => (
-          <div key={level} className="mb-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className={`${levelColors[level as keyof typeof levelColors].badge} text-gray-600 px-6 py-2 rounded-full font-semibold shadow-sm border border-gray-200`}>
-                {level}
-              </div>
-              <div className="text-gray-700 text-sm font-semibold">
-                {level === '체험' ? '총 8h' : level === '집중' ? '총 24h' : '총 16h'}
+          <div key={level} className="mb-8">
+            <div className="flex items-center gap-4 mb-6">
+              {/* Gold 라벨 뱃지  */}
+            <div className="px-5 py-2 rounded-full font-bold text-sm bg-white border border-gray-200 text-gray-800 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
+              {level}
+            </div>
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium">
+                  {level === '체험' ? '총 8h' : level === '집중' ? '총 24h' : '총 16h'}
+                </span>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {courses.map((course, idx) => (
                 <div
                   key={idx}
-                  className={`${categoryColors[course.category as keyof typeof categoryColors].card} border-2 ${categoryColors[course.category as keyof typeof categoryColors].border} rounded-2xl p-5 relative ${course.available !== false ? 'hover:scale-[1.02]' : 'opacity-60'} transition-transform duration-200 flex flex-col justify-between min-h-[180px]`}
+                  className={`group relative bg-white border ${categoryColors[course.category as keyof typeof categoryColors].border} ${categoryColors[course.category as keyof typeof categoryColors].hoverBorder} rounded-2xl p-6 transition-all duration-300 ${
+                    course.available !== false 
+                      ? 'hover:shadow-lg hover:-translate-y-1' 
+                      : 'opacity-50'
+                  }`}
                 >
-                  <div className={`absolute -top-3 -right-3 ${levelColors[level as keyof typeof levelColors].duration} text-gray-600 px-3 py-1 rounded-full text-xs font-bold shadow-md border border-gray-100`}>
-                    ⏱ {course.duration}
+                  <div className="absolute top-4 right-4 text-xs font-semibold text-gray-500">
+                    {course.duration}
                   </div>
+                  
                   {course.available === false && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900/80 text-white px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap z-10">
-                      수강 준비중
+                    <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
+                      <span className="bg-gray-900 text-white px-4 py-2 rounded-lg text-xs font-semibold">
+                        수강 준비중
+                      </span>
                     </div>
                   )}
-                  <div className={course.available === false ? 'blur-[2px]' : ''}>
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
-                      <img 
-                        src={course.icon} 
-                        alt="" 
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 leading-snug break-keep">
-                      {course.title}
-                    </h4>
+                  
+                  <div className={`w-14 h-14 ${categoryColors[course.category as keyof typeof categoryColors].iconBg} rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                    <img src={course.icon} alt="" className="w-8 h-8 object-contain" />
                   </div>
-                  <div className="h-2"></div>
+                  
+                  <h4 className="text-base font-bold text-gray-900 leading-snug mb-0">
+                    {course.title}
+                  </h4>
+                  
                 </div>
               ))}
             </div>
@@ -311,4 +348,3 @@ export default function TrainingCertification() {
     </div>
   );
 }
-
