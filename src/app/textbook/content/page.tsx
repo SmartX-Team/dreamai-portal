@@ -44,6 +44,19 @@ function Content() {
       </Link>
     );
   }
+ 
+  if (content["hrefLink"] !== undefined) {
+    links.push(
+      <Link key="link" href={content["hrefLink"]} target="_blank">
+        <Image
+          src="/images/textbook/symbol_zoo.png" 
+          alt="New Link"
+          width={80}
+          height={1e6}
+        />
+      </Link>
+    );
+  }
 
   return (
     <div className="grid justify-center pt-8">
