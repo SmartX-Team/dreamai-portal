@@ -2,6 +2,7 @@ import trainingData from "./dream_ai_training.json";
 import TrainingCheckinSection from "./TrainingCheckinSection";
 import TrainingCoursesSection from "./TrainingCoursesSection";
 import TrainingCertification from "./TrainingCertification";
+import Training2025 from "./Training2025";
 
 // 간단한 타입 정의
 interface Section {
@@ -68,8 +69,7 @@ const pptSection = trainingData.sections[5] as Section;
         </div>
       </div>*/}
 
-    {/* 연도별 진행 내역 */}
-      {/* border, shadow 제거*/} 
+    {/* 연도별 진행 내역 
       <div className="mb-20 bg-white rounded-3xl p-8 md:p-12 ]">
         <h2 className="text-3xl font-bold mb-10 pb-4 border-b border-gray-200 text-gray-900">
           {yearSection.title}
@@ -86,9 +86,12 @@ const pptSection = trainingData.sections[5] as Section;
             </div>
           ))}
         </div>
-      </div>
+      </div>*/}
 
-      {/* 꿈꾸는 아이 Training ~ 2025 내역 */}
+
+      <Training2025 />
+
+      {/* 꿈꾸는 아이 Training ~ 2025 내역 
       {pptSection.ppt_imageUrl && pptSection.ppt_imageUrl.length > 0 && (
         <div className="mb-20 bg-white rounded-3xl p-8 md:p-12">
           <div className="mb-10 pb-4 border-b border-gray-200">
@@ -109,7 +112,8 @@ const pptSection = trainingData.sections[5] as Section;
       ))}
     </div>
   </div>
-)} 
+)} */}
+
     </div>
   );
 }
