@@ -2,48 +2,38 @@
   "title": "꿈꾸는 아이(AI) CONTENT",
   "email": "문의 메일: kdp@dreamai.kr",
   "titleimg": "/images/contents/main_title.png",
-  "description": "‘꿈꾸는 아이(AI) 콘텐츠’에서는 GIST에서 개발한 AI 교육 콘텐츠와 다양한 실습 주제를 제공합니다.  생성형 AI, LLM, 디지털 트윈, 드론, 자율주행 등과 관련된 주제를 바탕으로, 학습자가 인공지능 기술을 접하고 응용할 수 있도록 구성된 콘텐츠와 로드맵을 확인할 수 있습니다. 실제 강의 영상과 자료는 꿈꾸는아이(AI) LMS 홈페이지에 업로드되어 있습니다.  또한 광주광역시교육청의 지원으로 개발된 ‘꿈꾸는 아이(AI) 교육자료(Textbook)’를 통해 고등학생들이 인공지능을 쉽고 흥미롭게 학습할 수 있도록 지원하고 있으며, Textbook 페이지에서 자세한 내용을 확인할 수 있습니다.",
-
+  "description": "‘꿈꾸는 아이(AI) 콘텐츠’에서는 GIST에서 개발한 AI 교육 콘텐츠와 다양한 실습 주제를 제공합니다. 생성형 AI, LLM, 디지털 트윈, 드론, 자율주행 등과 관련된 주제를 바탕으로, 학습자가 인공지능 기술을 접하고 응용할 수 있도록 구성된 콘텐츠와 로드맵을 확인할 수 있습니다. 실제 강의 영상과 자료는 꿈꾸는아이(AI) LMS 홈페이지에 업로드되어 있습니다. 또한 광주광역시교육청의 지원으로 개발된 ‘꿈꾸는 아이(AI) 교육자료(Textbook)’를 통해 고등학생들이 인공지능을 쉽고 흥미롭게 학습할 수 있도록 지원하고 있으며, Textbook 페이지에서 자세한 내용을 확인할 수 있습니다.",
+  "intro": [
+    {
+      "title": "GIST AI대학원이\n제안하는",
+      "highlight": "3 Track",
+      "description": "Digital Twin AX, GenAI AX, Core 트랙의\n전문 강의를 만나보세요.\n30분 요약부터 8시간 심화 과정까지,\n최신 트렌드를 반영한 콘텐츠가\n상시 업데이트됩니다."
+    },
+    {
+      "title": "언제 어디서나,\n나만의 강의실",
+      "highlight": "LMS",
+      "description": "현장 강의 콘텐츠를 LMS에서\n영상으로 먼저 체험해 보세요.\n언제 어디서든 가능한 예습과 복습 시스템을 통해\n나만의 학습 페이스에 맞춰\n효율적으로 역량을 쌓을 수 있습니다.",
+      "button":"강의 보러가기",
+      "url":"https://lms.dreamai.kr/"
+    },
+    {
+      "title": "이론을 넘어 \n실전으로,",
+      "highlight": "맞춤형 훈련",
+      "description": "LMS에서 미리 강의를 체험하고\n나에게 꼭 맞는 실습 기반 훈련을\n직접 신청할 수 있습니다.\nGenAI, 디지털 트윈 등 최신 기술을\nAI대학원 MobileX Station을 통해 체험해 보세요.",
+      "button":"훈련 신청하기",
+      "url":"https://dreamai.kr/training"
+    }
+  ],
   "sections": [
     {
       "id": "roadmap",
-      "title": "CONTENT 훈련 로드맵",
-      "image": "/images/contents/content_layout.png"
+      "title": "Content Landscape",
+      "image": "/images/contents/content_landscape.png"
     },
     {
-      "id": "xai",
-      "title": "CONTENT 내용",
-      "subtitle": "꿈꾸는 아이(AI): X+AI 서비스 실증",
-      "background": "/images/contents/section2_bg.png",
-      "cards": [
-        {
-          "title": "인공지능과 Docker",
-          "image": "/images/contents/docker_card_v1.png",
-          "link": "https://lms.dreamai.kr/"
-        },
-        {
-          "title": "AlphaFold3와 함께하는 꿈꾸는 아이(AI)",
-          "image": "/images/contents/alphafold_card_v1.png",
-          "link": "https://lms.dreamai.kr/"
-        },
-        {
-          "title": "나만의 첫 챗봇 만들기",
-          "image": "/images/contents/chatbot_card_v1.png",
-          "link": "https://lms.dreamai.kr/"
-        },
-        {
-          "title": "딥러닝 개념 정복 시리즈",
-          "image": "/images/contents/diseries_card_v1.png",
-          "link": "https://lms.dreamai.kr/"
-        }
-      ]
-    },
-    {
-      "id": "genai",
-      "title": "생성형 AI",
-      "background": "/images/contents/section3_bg.png",
-      "image": "/images/contents/genai_combined_v1.png",
-      "button": { "label": "강의 바로가기", "link": "https://lms.dreamai.kr/" }
+      "id": "track",
+      "title":"3 track",
+      "image":"/images/contents/track_list.png"
     }
   ]
 }
