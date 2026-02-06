@@ -125,16 +125,53 @@ export default function HomePage() {
             {dreamData.catalog.categoriesRight.map(drawItem)}
           </div>
         </div>
+      </section>
 
-        {/* 아래 아이템 */}
-        {/* <div className="flex flex-col items-center pb-4">
-          <Image
-            src="/images/footer/textbook_info.png"
-            alt="DreamAI 정보"
-            width={800}
-            height={1e6}
-          />
-        </div> */}
+      {/* AD 배너 */}
+      <section className="w-full flex justify-center mb-32 mt-12"> 
+        <div 
+          className="w-[60%] max-w-[900px] bg-[#E1EBF4] rounded-[40px] flex items-center relative shadow-sm border border-blue-50 overflow-hidden"
+          style={{ 
+            aspectRatio: '14 / 2.8',
+            containerType: 'inline-size'
+          }}
+        >
+          {/* 왼쪽: 텍스트 영역 */}
+          <div className="flex flex-col items-start justify-center h-full w-[50%] pl-[8%] whitespace-nowrap z-10">
+            <div style={{ color: '#000000', fontSize: '1.8cqw' }}>
+              {dreamData.adBanner.subTitle}
+            </div>
+            <div 
+              style={{ color: '#075F9A', fontSize: '2.8cqw', fontWeight: 'bold' }} 
+              className="my-[0.3cqw] leading-none"
+            >
+              {dreamData.adBanner.mainTitle}
+            </div>
+            <div style={{ color: '#4B5563', fontSize: '1.4cqw' }} className="mb-[1.5cqw]">
+              {dreamData.adBanner.schedule}
+            </div>
+            <Link 
+              href={dreamData.adBanner.buttonUrl} 
+              style={{ backgroundColor: '#FFFFFF', color: '#000000', fontSize: '1.1cqw' }}
+              className="px-[3cqw] py-[0.6cqw] rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all font-medium inline-block"
+            >
+              {dreamData.adBanner.buttonText}
+            </Link>
+          </div>
+
+          {/* 오른쪽: 이미지 영역 */}
+          <div className="absolute right-0 top-0 h-full w-[48%] flex items-center justify-end pr-[2%]">
+            <div className="relative w-full h-[95%]"> 
+              <Image 
+                src={dreamData.adBanner.imageUrl} 
+                alt="AD Illustration" 
+                fill 
+                className="object-contain object-right"
+                priority
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="relative bg-zinc-900 text-zinc-300 text-2xl py-8 w-full">

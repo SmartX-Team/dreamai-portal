@@ -17,6 +17,14 @@
     "imageUrl": "/images/HomeHero.png",
     "url": ""
   },
+  "adBanner":{
+    "subTitle": "훈련 모집 예정",
+    "mainTitle": "디지털트윈 환경 구축과 시뮬레이션 실습 과정",
+    "schedule": "훈련일정: 2026년 2월 23일(월)~24일(화)",
+    "imageUrl": "/images/ad_image.png",
+    "buttonText": "자세히보기",
+    "buttonUrl": "/training"
+  },
   "catalog": {
     "categoriesLeft": [
       {
