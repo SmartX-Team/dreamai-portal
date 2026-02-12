@@ -62,28 +62,67 @@ export default function TrainingCoursesSection() {
       title: "꿈꾸는아이(AI) Digital Twin 직무혁신",
       duration: "1일 4시간",
       level: "체험",
-      imageUrl: "/images/training/dt-robot-2.png",
+      imageUrl: "/images/training/dt-robot-4.png",
       description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화 ",
       curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", "Digital Twin 활용 로봇 시뮬레이션" ],
       tools: ["Dream-AI Space","NVIDIA Omniverse", "Isaac Sim"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
-      isRegistrationOpen: true
+      isRegistrationOpen: false
     },
     {
       id: 4,
       category: "DT&Robot",
-      title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정",
-      duration: "1일 4시간",
-      level: "집중",
-      imageUrl: "/images/training/dt-robot-1.png",
+      title: "Omniverse 기반 Sim2Real Digital Twin 실습",
+      duration: "2일 4시간/일 (총 8시간)",
+      level: "심화",
+      imageUrl: "/images/training/dt-robot-3.png",
       description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
-      curriculum: [ "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
-      tools: ["NVIDIA Omniverse", "MobileX Pole"],
+      curriculum: [ "특화분야 AX 대응을 위한 가상과 실제를 연계하는 Digital Twin","OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin","Omniverse (Cosmos & Issac) 개발&활용 환경 구축", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
+      tools: ["NVIDIA Omniverse", "SimReady"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
       isRegistrationOpen: true
     },
     {
-      id: 5,
+      id: 5,  
+      category: "DT&Robot",
+      title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정",
+      duration: "1일 4시간",
+      level: "집중",
+      imageUrl: "/images/training/dt-robot-2.png",
+      description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
+      curriculum: [ "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
+      tools: ["NVIDIA Omniverse", "MobileX Pole"],
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
+      isRegistrationOpen: false
+    },
+    {
+      id: 6,  
+      category: "DT&Robot",
+      title: "디지털트윈 기반 X+AI 서비스 구조 이해 및 가상 통합 개념",
+      duration: "1일 4시간",
+      level: "집중",
+      imageUrl: "/images/training/dt-robot-1.png",
+      description: "디지털트윈 기반 AI Space 인프라와 D-N-A 구조를 활용한 X+AI 교육 서비스의 운영 방식과 가상 시설 통합 개념을 이해하고, AI 교육A훈련 환경에서 디지털트윈이 수행하는 역할과 확장 가능성을 체계적으로 학습",
+      curriculum: [ "꿈꾸는 아이(AI) Space 인프라 기반 X+AI 서비스 실증", "Omniverse OpenUSD 기반 Pysital Digital Twin과 Sim2Real 환경 이해"],
+      tools: ["NVIDIA Omniverse", "OpenUSD"],
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
+      isRegistrationOpen: false
+    },
+    {
+      id: 7,  
+      category: "DT&Robot",
+      title: "Pysital Digital Twin 기반 로봇 • 자율시스템 Sim2Real 실증 실습",
+      duration: "1일 4시간",
+      level: "집중",
+      imageUrl: "/images/training/dt-robot-5.png",
+      description: "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
+      curriculum: [ "Isaac Sim 기반의 Sim2Real Digital Twin 시작을 위한 Omniverse와 OpenUSD 2", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇 및 자율차 훈련을 조율하는 Physital Digital Twin"],
+      tools: ["NVIDIA Omniverse", "MobileX Pole"],
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform",
+      isRegistrationOpen: false
+    },
+    {
+      id: 8,
       category: "Core",
       title: "Model Zoo1: Python 기반 AI 이해 및 데이터 시각화 실습",
       duration: "1일 4시간",
@@ -96,7 +135,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 6,
+      id: 9,
       category: "Core",
       title: "Model Zoo2: 초거대 AI와 클라우드 인프라 기반 X+AI 융합 서비스 이해",
       duration: "1일 4시간",
@@ -109,7 +148,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 7,
+      id: 10,
       category: "Core",
       title: "AI Playground1: 수학으로 접근하는 기계학습",
       duration: "1일 4시간",
@@ -122,7 +161,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 8,
+      id: 11,
       category: "Core",
       title: "AI Playground2: 신뢰할 수 있는 데이터 엔지니어링과 LLM 이해 및 실습",
       duration: "1일 4시간",
@@ -135,7 +174,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 9,
+      id: 12,
       category: "Core",
       title: "Impact AI Hackathon",
       duration: "1일 16시간",
@@ -148,7 +187,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 10,
+      id: 13,
       category: "Core",
       title: "DLI DAY",
       duration: "1일 4시간",
@@ -161,7 +200,7 @@ export default function TrainingCoursesSection() {
       isRegistrationOpen: false
     },
     {
-      id: 11,
+      id: 14,
       category: "GenAI",
       title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계",
       duration: "1일 4시간",

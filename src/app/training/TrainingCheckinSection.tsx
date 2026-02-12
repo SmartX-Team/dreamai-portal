@@ -71,19 +71,10 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
             <div className="text-gray-700 text-sm leading-relaxed space-y-4">
               <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
                 <p className="text-gray-900 font-bold mb-2">
-                  1. 꿈꾸는아이(AI) Digital Twin 직무 혁신
+                  1. Omniverse 기반 Sim2Real Digital Twin 실습
                 </p>
                 <p className="text-gray-600 text-sm">
-                  2026.01.19 (월) 14:00~18:00
-                </p>
-              </div>
-              
-              <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
-                <p className="text-gray-900 font-bold mb-2">
-                  2. 디지털트윈 환경 구축과 시뮬레이션 실습
-                </p>
-                <p className="text-gray-600 text-sm">
-                  2026.01.20 (화) 14:00~18:00
+                  2026.02.23~24 (월·화) 14:00~18:00
                 </p>
               </div>
 
@@ -102,7 +93,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
           {/* 버튼 영역 */}
           <div className="flex flex-col gap-3 mt-4">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSftuj2FpvS3j5b4amztjyF6VDfqtIRvzigxOIJbwJYVaVOpJA/viewform"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfEpt58Cd4ZBa6PKCqt0RF-3USePNcxkp4WsqkInaFRNxnhHg/viewform?usp=publish-editor"
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center px-6 py-4 rounded-xl text-sm font-semibold
