@@ -108,24 +108,49 @@ export default function HomePage() {
   }
 
   return (
-    <>
-      {/* 기존 레이아웃에서 children 자리에 들어갈 내용 */}
+    <>      
+      {/* 상단 중앙 HeroImage */}
+      <section className="w-full flex justify-center py-8"> 
+        <div className="w-full max-w-[500px]">
+          {dreamData.hero.imageUrl && heroElement}
+        </div>
+      </section>
+
+      {/* 메인 콘텐츠 영역 (좌측-중앙비디오-우측) */}
       <section className="bg-white pt-10">
-        <div className="grid grid-cols-1 md:grid-cols-3">
-          {/* 좌측 아이템 */}
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_4fr_1fr] gap-4">
+          
+          {/* 좌측 */}
           <div className="flex flex-col items-center">
             {dreamData.catalog.categoriesLeft.map(drawItem)}
           </div>
 
-          {/* 중앙 HERO 이미지 */}
-          {dreamData.hero.imageUrl && heroElement}
+          {/* 중앙: 비디오 제목 + 유튜브 영상 */}
+          <div className="flex flex-col items-center w-full px-4 mt-4">
+            {/* 비디오 제목 */}
+            <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+              {dreamData.video.name}
+            </h2>
+  
+            {/* 유튜브 영상 */}
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src={`https://www.youtube.com/embed/${dreamData.video.url.split('/').pop()?.split('?')[0]}`}
+                title={dreamData.video.name}
+                className="absolute top-0 left-0 w-full h-full"
+                allowFullScreen
+              />
+            </div>
+          </div>
 
-          {/* 우측 아이템 */}
+          {/* 우측 */}
           <div className="flex flex-col items-center">
             {dreamData.catalog.categoriesRight.map(drawItem)}
           </div>
         </div>
       </section>
+
+      
 
       {/* AD 배너 */}
       <section className="w-full flex justify-center mb-32 mt-12"> 
