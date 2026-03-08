@@ -1,131 +1,192 @@
 {
   "config": {
-    "minio": { "baseUrl": "https://api.minio.mobilex.kr/seoin/public" }
-  },
-  "header": {
-    "name": "dream-ai",
-    "title": "GIST 꿈꾸는 아이(AI)",
-    "description": "GIST 꿈꾸는 아이(AI)",
-    "imageUrl": "/images/GIST.png",
-    "secondary": {
-      "imageUrl": "/DREAMAI_LOGO.png",
-      "url": "https://ai.gist.ac.kr/ai/"
+    "minio": {
+      "baseUrl": "https://api.minio.mobilex.kr/seoin/public"
     }
   },
-  "hero": {
-    "name": "dream-ai",
-    "imageUrl": "/images/HomeHero_v2.png",
-    "url": ""
-  },
-  "video":{
-    "name": "2026 GIST Dream-AI [Model ZOO + AI Playground]",
-    "url":"https://youtu.be/TvjCoqm1WrM?si=LTA2369yyXYuum10"
-  },
-  "adBanner":{
-    "subTitle": "모집 예정 교육 안내",
-    "mainTitle": "GIST 꿈꾸는 아이(AI) Digital Twin & 생성형AI 훈련 과정",
-    "schedule": "상세 커리큘럼은 안내 페이지에서 확인 가능",
-    "imageUrl": "/images/ad_image.png",
-    "buttonText": "자세히보기",
-    "buttonUrl": "/training"
-  },
-  "catalog": {
-    "categoriesLeft": [
+  "header": {
+    "leftLogos": [
       {
-        "name": "Contents",
-        "title": "Contents",
-        "imageUrl": "/images/category/category_contents.png",
-        "url": "/contents",
-        "height": "md",
-        "margin": false
+        "name": "GIST",
+        "imageUrl": "/images/main/header-logo-gist.png",
+        "url": "https://www.gist.ac.kr/"
       },
-      {
-        "name": "LMS",
-        "title": "LMS",
-        "imageUrl": "/images/category/category_lms.png",
-        "url": "https://lms.dreamai.kr",
-        "height": "sm",
-        "margin": false
-      },
-      {
-        "name": "Textbook",
-        "title": "Textbook",
-        "imageUrl": "/images/category/category_textbook.png",
-        "url": "/textbook",
-        "height": "sm"
-      },
-      {
-        "name": "Platform",
-        "title": "Platform",
-        "imageUrl": "/images/category/category_platform.png",
-        "url": "/dream_ai_space",
-        "height": "md"
-      },
-      {
-        "name": "Training",
-        "title": "Training",
-        "imageUrl": "/images/category/category_training.png",
-        "url": "/training",
-        "height": "md",
-        "margin": false
-      },
-      {
-        "name": "NewSac",
-        "title": "NewSac",
-        "imageUrl": "/images/category/category_newsac.png",
-        "url": "/newsac",
-        "height": "sm"
-      }
-    ],
-    "categoriesRight": [
       {
         "name": "AIGS",
-        "title": "AIGS",
-        "imageUrl": "/images/category/category_aigs.png",
+        "imageUrl": "/images/main/header-logo-aigs.png",
         "url": "https://ai.gist.ac.kr/ai/"
-      },
-      {
-        "name": "ScaleX",
-        "title": "ScaleX",
-        "imageUrl": "/images/category/category_scalex.png",
-        "url": "https://scalex.dreamai.kr",
-        "height": "md"
-      },
-      {
-        "name": "Begginer",
-        "title": "Begginer",
-        "imageUrl": "/images/category/category_beginnerai.png",
-        "url": "/beginnerai",
-        "height": "sm",
-        "margin": false
-      },
+      }
+    ],
+    "rightLogos": [
       {
         "name": "SCENT",
-        "title": "SCENT",
-        "imageUrl": "/images/category/category_scent.png",
-        "url": "https://scent.gist.ac.kr/",
-        "height":"md",
-        "margin": false
+        "imageUrl": "/images/main/header-logo-scent.png",
+        "url": "https://scent.gist.ac.kr/"
       },
       {
-        "name": "Dream-AI",
-        "title": "Dream-AI",
-        "imageUrl": "/images/category/category_dreamai.png",
-        "url": "https://www.openhpc.kr/",
-        "height":"sm"
+        "name": "KHP",
+        "imageUrl": "/images/main/header-logo-khp.png",
+        "url": "https://www.k-hitech.or.kr/"
       }
     ]
   },
- "footer": {
-  "copyright": "© 2020~2025 GIST Dream-AI. All rights reserved.",
-  "businessInfo": "사업자등록번호: 410-82-07550 | 대표자: 임기철 | 주소: 광주광역시 북구 첨단과기로 123",
-  "trailing": [
-    {
-      "name": "Q&A",
-      "title": "Q&A",
-      "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
-    }
-  ]
-}
-
+  "hero": {
+    "name": "dream-ai",
+    "slides": [
+      {
+        "imageUrl": "/images/main/hero-slide-01.png",
+        "url": ""
+      },
+      {
+        "imageUrl": "/images/main/hero-slide-02.png",
+        "url": ""
+      },
+      {
+        "imageUrl": "/images/main/hero-slide-03.png",
+        "url": ""
+      }
+    ]
+  },
+  "videos":[
+  {
+    "name": "2026 GIST Dream-AI [Model ZOO + AI Playground]",
+    "url":"https://youtu.be/TvjCoqm1WrM"
+  },
+  {
+    "name": "Dream-AI 소개 영상",
+    "url":"https://youtu.be/-yKu7KI7mkU"
+  },
+  {
+    "name": "Dream-AI 홍보 영상",
+    "url":"https://youtu.be/ktMNV_0ph80"
+  }
+  ],
+  "adBanner": {
+    "subTitle": "훈련 모집 예정",
+    "mainTitle": "GIST 꿈꾸는 아이(AI)\nDigital Twin & 생성형AI 훈련 과정",
+    "schedule": "상세 커리큘럼은 안내 페이지에서 확인 가능",
+    "imageUrl": "/images/main/banner-training-illustration.png",
+    "buttonText": "자세히보기",
+    "buttonUrl": "/training"
+  },
+  "menuSection": {
+    "title": "MENU",
+    "topLeftCard": {
+      "sectionLabel": "Content",
+      "title": "꿈꾸는 아이(AI)\n콘텐츠",
+      "buttonText": "자세히보기",
+      "buttonUrl": "/contents",
+      "bgColor": "#4f8ac2",
+      "imageUrl": "/images/main/menu-content-card.png",
+      "features": [
+        "✓ 3개 핵심 트랙 전 강의 상시 시청 가능",
+        "✓ 훈련 과정과 연계된 맞춤형 예습·복습 콘텐츠"
+      ]
+    },
+    "topRightCards": [
+      {
+        "title": "꿈꾸는 아이(AI) LMS",
+        "buttonText": "자세히보기",
+        "buttonUrl": "https://lms.dreamai.kr",
+        "imageUrl": "/images/main/menu-lms-card.png",
+        "bgColor": "#3B75AC"
+      },
+      {
+        "title": "꿈꾸는 아이(AI) 교육자료",
+        "buttonText": "자세히보기",
+        "buttonUrl": "/textbook",
+        "imageUrl": "/images/main/menu-textbook-card.png",
+        "bgColor": "#3B75AC"
+      }
+    ],
+    "bottomLeftCard": {
+      "sectionLabel": "Training",
+      "title": "꿈꾸는 아이(AI)\n훈련",
+      "buttonText": "자세히보기",
+      "buttonUrl": "/training",
+      "bgColor": "#28448b",
+      "imageUrl": "/images/main/menu-training-card.png",
+      "features": [
+        "✓ Digital Twin & GenAI 핵심 과정 실전 신청",
+        "✓ 과정별 상세 일정 및 커리큘럼 실시간 확인",
+        "✓ 연계 학습 콘텐츠 즉시 제공"
+      ]
+    },
+    "newSac": {
+      "sectionLabel": "New Sac",
+      "titleImageUrl": "/images/main/menu-newsac-title.png",
+      "buttonText": "자세히보기",
+      "buttonUrl": "/newsac",
+      "bgImageUrl": "/images/main/menu-newsac-bg.png",
+      "features": [
+        "✓ GIST 인프라 기반 실습 중심",
+        "✓ 최신 AI 기술 이론부터 진로 탐색까지",
+        "✓ 교수진 멘토링으로 실전 역량 강화"
+      ]
+    },
+    "smallCardsColumn1": [
+      {
+        "title": "SCENT",
+        "imageUrl": "/images/main/menu-scent-logo.png",
+        "linkText": "바로가기",
+        "url": "https://scent.gist.ac.kr/"
+      },
+      {
+        "title": "Dream-AI",
+        "imageUrl": "",
+        "linkText": "바로가기",
+        "url": "https://www.openhpc.kr/"
+      },
+      {
+        "title": "Beginner-AI",
+        "imageUrl": "",
+        "linkText": "바로가기",
+        "url": "/beginnerai"
+      }
+    ],
+    "smallCardsColumn2": [
+      {
+        "title": "Platform",
+        "imageUrl": "/images/main/menu-platform-logo.png",
+        "linkText": "바로가기",
+        "url": "/dream_ai_space"
+      },
+      {
+        "title": "AISC",
+        "imageUrl": "/images/main/menu-aisc-logo.png",
+        "linkText": "바로가기",
+        "url": "https://ai.gist.ac.kr/ai/"
+      },
+      {
+        "title": "ScaleX",
+        "imageUrl": "/images/main/menu-scalex-logo.png",
+        "linkText": "바로가기",
+        "url": "https://scalex.dreamai.kr"
+      }
+    ]
+  },
+  "scheduleVideoSection": {
+    "schedule": {
+      "title": "훈련 일정표",
+      "description": "커리큘럼과 일정 확인하고\n훈련 신청하기",
+      "date": "26~27",
+      "program": "Digital Twin 직무혁신\n\n디지털트윈 환경 구축과 시뮬레이션 실습 과정",
+      "buttonText": "훈련 신청하기",
+      "buttonUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeqYk80Xa0KAWffXTYLJuxPqWuJMU4Td8K6cUcqAucUqPtXag/viewform",
+      "imageUrl": "/images/main/schedule-month.png"
+    },
+    "promoTitle": "홍보 영상",
+    "promoIndicators": [true, false, false]
+  },
+  "footer": {
+    "copyright": "© 2020~2025 GIST Dream-AI. All rights reserved.",
+    "businessInfo": "사업자등록번호: 410-82-07550 | 대표자: 임기철 | 주소: 광주광역시 북구 첨단과기로 123",
+    "trailing": [
+      {
+        "name": "Q&A",
+        "title": "Q&A",
+        "url": "https://forms.gle/MmMYYpF7DtsPSUmu8"
+      }
+    ]
+  }
 }
