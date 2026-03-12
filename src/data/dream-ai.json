@@ -18,7 +18,11 @@
     "url": ""
   },
   "video":{
+<<<<<<< Updated upstream
     "name": "2026 GIST Dream-AI [Model ZOO + AI Playground]",
+=======
+    "name": "2026 GIST Drean-AI [Model ZOO + AI Playground]",
+>>>>>>> Stashed changes
     "url":"https://youtu.be/TvjCoqm1WrM?si=LTA2369yyXYuum10"
   },
   "adBanner":{
