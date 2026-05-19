@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'; // useEffect 
 import { createPortal } from 'react-dom'; // createPortal 
 
-type Category = "All" | "Core" | "GenAI" | "DT&Robot";
+type Category = "All" | "Core" | "AgentAI" | "DT&Robot";
 
 interface Course {
   id: number;
@@ -45,7 +45,7 @@ export default function TrainingCoursesSection() {
     },
     {
       id: 2,
-      category: "GenAI",
+      category: "AgentAI",
       title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증",
       duration: "1일 4시간",
       level: "체험",
@@ -201,7 +201,7 @@ export default function TrainingCoursesSection() {
     },
     {
       id: 14,
-      category: "GenAI",
+      category: "AgentAI",
       title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계",
       duration: "1일 4시간",
       level: "집중",
@@ -214,7 +214,7 @@ export default function TrainingCoursesSection() {
     },
   ];
 
-  const categories: Category[] = ["All", "Core", "GenAI", "DT&Robot"];
+  const categories: Category[] = ["All", "Core", "AgentAI", "DT&Robot"];
 
   const categoryStyles: Record<Category, { bg: string; text: string; badge: string }> = {
     All: {
@@ -227,7 +227,7 @@ export default function TrainingCoursesSection() {
       text: "text-[#C8A102]",
       badge: "bg-[#C8A102]/10 text-[#C8A102]",
     },
-    GenAI: {
+    AgentAI: {
       bg: "bg-[#FFFFFF] hover:bg-[#F8F8F8] border border-gray-200",
       text: "text-[#36822C]",
       badge: "bg-[#36822C]/10 text-[#36822C]",

@@ -1,3 +1,4 @@
+/*
 'use client';
 
 import React from 'react';
@@ -99,7 +100,7 @@ export default function TrainingCertification() {
   return (
     <div className="mb-20 max-w-6xl mx-auto px-4">
       
-      {/* Header */}
+      {/* Header 
       <div className="mb-16 pb-4 border-b border-gray-200">
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
@@ -111,7 +112,7 @@ export default function TrainingCertification() {
         </div>
       </div>
 
-      {/* Certification Badges ) */}
+      {/* Certification Badges ) 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
         {certifications.map((cert, idx) => (
           <div 
@@ -148,7 +149,7 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/* Bronze 추천 코스 */}
+      {/* Bronze 추천 코스 
       <div className="mb-24">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
           <div className="flex items-center gap-3">
@@ -157,7 +158,7 @@ export default function TrainingCertification() {
               <span className="bg-gradient-to-r from-amber-700 to-amber-500 bg-clip-text text-transparent">Bronze</span> 추천 코스
             </h3>
           </div>
-          {/* 카테고리 라벨 색상 */}
+          {/* 카테고리 라벨 색상 
           <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
               Core AI
@@ -222,7 +223,7 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/* Silver 추천 코스  */}
+      {/* Silver 추천 코스  
       <div className="mb-24">
         <div className="flex items-center gap-3 mb-10">
           <div className="w-1 h-10 bg-gradient-to-b from-slate-500 to-slate-300 rounded-full"></div>
@@ -234,7 +235,7 @@ export default function TrainingCertification() {
         {Object.entries(silverCourses).map(([level, courses]) => (
           <div key={level} className="mb-8">
             <div className="flex items-center gap-4 mb-6">
-              {/* Silver 라벨 뱃지  */}
+              {/* Silver 라벨 뱃지  
             <div className="px-5 py-2 rounded-full font-bold text-sm bg-white border border-gray-200 text-gray-800 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
               {level}
             </div>
@@ -283,7 +284,7 @@ export default function TrainingCertification() {
         ))}
       </div>
 
-      {/* Gold 추천 코스 */}
+      {/* Gold 추천 코스 
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-10">
           <div className="w-1 h-10 bg-gradient-to-b from-yellow-500 to-yellow-300 rounded-full"></div>
@@ -295,7 +296,7 @@ export default function TrainingCertification() {
         {Object.entries(goldCourses).map(([level, courses]) => (
           <div key={level} className="mb-8">
             <div className="flex items-center gap-4 mb-6">
-              {/* Gold 라벨 뱃지  */}
+            {/* Gold 라벨 뱃지  
             <div className="px-5 py-2 rounded-full font-bold text-sm bg-white border border-gray-200 text-gray-800 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
               {level}
             </div>
@@ -348,3 +349,5 @@ export default function TrainingCertification() {
     </div>
   );
 }
+
+*/
