@@ -1,7 +1,7 @@
 import trainingData from "./dream_ai_training.json";
 import TrainingCheckinSection from "./TrainingCheckinSection";
 import TrainingCoursesSection from "./TrainingCoursesSection";
-import TrainingCertification from "./TrainingCertification";
+//import TrainingCertification from "./TrainingCertification";
 import Training2025 from "./Training2025";
 
 // 간단한 타입 정의
@@ -43,8 +43,8 @@ const pptSection = trainingData.sections[5] as Section;
       <div className="h-8"></div> {/* 여백 추가  h-16 - 64px h-24 - 96px h-32 - 128px h-40 - 160px h-48 - 192px*/}
       {/* 훈련 과정 */}
       <TrainingCoursesSection />  
-      {/* 훈련 인증 */}
-      <TrainingCertification />
+      {/* 훈련 인증  */}
+      {/* <TrainingCertification /> */}
 
       {/* 훈련 유형 섹션 
       <div className="mb-20">
