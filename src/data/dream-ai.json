@@ -21,6 +21,22 @@
     "name": "2026 GIST Dream-AI [Model ZOO + AI Playground]",
     "url":"https://youtu.be/TvjCoqm1WrM?si=LTA2369yyXYuum10"
   },
+  "reservationButtons": [
+    {
+      "name": "SPACE",
+      "title": "SPACE",
+      "titleUrl": "/dream_ai_space",
+      "buttonText": "예약하기",
+      "reservationUrl": "https://forms.gle/6Ge7HfXFA42be9Q47"
+    },
+    {
+      "name": "ANNEX",
+      "title": "ANNEX",
+      "titleUrl": "/annex",
+      "buttonText": "예약하기",
+      "reservationUrl": "/annex/reservation"
+    }
+  ],
   "adBanner":{
     "subTitle": "모집 예정 교육 안내",
     "mainTitle": "GIST 꿈꾸는 아이(AI) Digital Twin & 생성형AI 훈련 과정",
@@ -55,11 +71,19 @@
         "height": "sm"
       },
       {
-        "name": "Platform",
-        "title": "Platform",
-        "imageUrl": "/images/category/category_platform.png",
-        "url": "/dream_ai_space",
-        "height": "md"
+        "name": "Community",
+        "title": "Community",
+        "imageUrl": "/images/category/category_community.png",
+        "url": "/community",
+        "height": "md",
+        "margin": false
+      },
+      {
+        "name": "AIAmbassador",
+        "title": "AIAmbassador",
+        "imageUrl": "/images/category/category_ai_ambassador.png",
+        "url": "https://ambassador-digital-twin.vercel.app/",
+        "height": "sm"
       },
       {
         "name": "Training",
@@ -74,13 +98,14 @@
         "title": "NewSac",
         "imageUrl": "/images/category/category_newsac.png",
         "url": "/newsac",
-        "height": "sm"
+        "height": "sm",
+        "margin": false
       },
       {
-        "name": "AIAmbassador",
-        "title": "AIAmbassador",
-        "imageUrl": "/images/category/category_ai_ambassador.png",
-        "url": "https://ambassador-digital-twin.vercel.app/",
+        "name": "CrossTraining",
+        "title": "CrossTraining",
+        "imageUrl": "/images/category/category_crosstraining.png",
+        "url": "/crosstraining",
         "height": "sm"
       }
     ],
