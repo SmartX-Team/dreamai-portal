@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'; // useEffect 
 import { createPortal } from 'react-dom'; // createPortal 
 
-type Category = "All" | "Core" | "AgentAI" | "DT&Robot";
+type Category = "All" | "Core" | "AgenticAI" | "DT&Robot";
 
 interface Course {
   id: number;
@@ -32,20 +32,20 @@ export default function TrainingCoursesSection() {
   const courses: Course[] = [
     {
       id: 1,
-      category: "Core",
-      title: "MobileX Station 기반 AI 서비스 구현 교육",
+      category: "AgenticAI",
+      title: "에이전트 아키텍처 이론과 응용 설계",
       duration: "1일 4시간",
-      level: "체험",
-      imageUrl: "/images/training/core-7.png",
-      description: "AI 서비스 구현 능력 기반 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["AI대학원 꿈꾸는 아이(AI) Space 인프라 및 D-N-A 기반 X+AI 서비스 개념 및 원리", "대형 언어 모델(LLM) 기반 프롬프트 엔지니어링 이론", "Omniverse 도구 기반 디지털 트윈(Digital Twin) 개념 및 원리"],
-      tools: ["GAN", "Diffusion Models", "NVIDIA Omniverse"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc3-FS3GwN_2J73gTQAdcyXnrCoJkk-uIXQd0XYG6PahQQkpA/viewform?usp=header",
-      isRegistrationOpen: false 
+      level: "집중",
+      imageUrl: "/images/training/genai-1.png",
+      description:  "생성형 AI 모델을 설계하고, 이를 바탕으로 스스로 판단하고 행동하는 에이전트(Agent) 시스템을 구축하는 이론 및 응용 실습",
+      curriculum: [ "생성형 AI(Generative AI) 모델의 아키텍처 설계 및 원리 이해", "멀티 에이전트(Multi-Agent) 시스템의 개념과 응용", "LLM 기반의 자율형 AI 서비스 구현 및 API 연동 실습"],
+      tools: ["Agentic AI", "Multi-Agent Systems", "LLM"],
+      formUrl: "https://forms.gle/zonwWwVSNK1HDPGfA",
+      isRegistrationOpen: true
     },
     {
       id: 2,
-      category: "AgentAI",
+      category: "AgenticAI",
       title: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증",
       duration: "1일 4시간",
       level: "체험",
@@ -79,7 +79,7 @@ export default function TrainingCoursesSection() {
       description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
       curriculum: [ "특화분야 AX 대응을 위한 가상과 실제를 연계하는 Digital Twin","OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin","Omniverse (Cosmos & Issac) 개발&활용 환경 구축", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "SimReady"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe1-G2viy9_xl42UqEnmRuH2XrisXY-X2z5NpXd-yaJ2h3UBw/viewform?usp=dialog",
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIoY3iPt_X5PtMWpLaRnBF_HmFRIzcCThVcTQgQf2MpvVOcQ/viewform?usp=dialog",
       isRegistrationOpen: true
     },
     {
@@ -201,20 +201,20 @@ export default function TrainingCoursesSection() {
     },
     {
       id: 14,
-      category: "AgentAI",
-      title: "생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계",
+      category: "Core",
+      title: "MobileX Station 기반 AI 서비스 구현 교육",
       duration: "1일 4시간",
-      level: "집중",
-      imageUrl: "/images/training/genai-1.png",
-      description:  "생성형 AI 모델을 설계하고, 이를 바탕으로 스스로 판단하고 행동하는 에이전트(Agent) 시스템을 구축하는 이론 및 응용 실습",
-      curriculum: [ "생성형 AI(Generative AI) 모델의 아키텍처 설계 및 원리 이해", "멀티 에이전트(Multi-Agent) 시스템의 개념과 응용", "LLM 기반의 자율형 AI 서비스 구현 및 API 연동 실습"],
-      tools: ["Agentic AI", "Multi-Agent Systems", "LLM"],
-      formUrl: "https://forms.google.com/your-form-2",
-      isRegistrationOpen: false
+      level: "체험",
+      imageUrl: "/images/training/core-7.png",
+      description: "AI 서비스 구현 능력 기반 교육을 통해 전문성 역량 강화 ",
+      curriculum: ["AI대학원 꿈꾸는 아이(AI) Space 인프라 및 D-N-A 기반 X+AI 서비스 개념 및 원리", "대형 언어 모델(LLM) 기반 프롬프트 엔지니어링 이론", "Omniverse 도구 기반 디지털 트윈(Digital Twin) 개념 및 원리"],
+      tools: ["GAN", "Diffusion Models", "NVIDIA Omniverse"],
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc3-FS3GwN_2J73gTQAdcyXnrCoJkk-uIXQd0XYG6PahQQkpA/viewform?usp=header",
+      isRegistrationOpen: false 
     },
   ];
 
-  const categories: Category[] = ["All", "Core", "AgentAI", "DT&Robot"];
+  const categories: Category[] = ["All", "Core", "AgenticAI", "DT&Robot"];
 
   const categoryStyles: Record<Category, { bg: string; text: string; badge: string }> = {
     All: {
@@ -227,7 +227,7 @@ export default function TrainingCoursesSection() {
       text: "text-[#C8A102]",
       badge: "bg-[#C8A102]/10 text-[#C8A102]",
     },
-    AgentAI: {
+    AgenticAI: {
       bg: "bg-[#FFFFFF] hover:bg-[#F8F8F8] border border-gray-200",
       text: "text-[#36822C]",
       badge: "bg-[#36822C]/10 text-[#36822C]",

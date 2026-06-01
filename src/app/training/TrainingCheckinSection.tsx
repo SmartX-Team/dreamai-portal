@@ -56,12 +56,6 @@ function parseDetailLine(line: string): { label: string; value: string } {
   };
 }
 
-/**
- * description 문자열을 줄 패턴으로 분류:
- *  - `<...>` 로 시작·끝나는 줄 → courseCards  (과정 수 무관하게 안전)
- *  - ` : ` 를 포함하는 줄      → details
- *  - 그 외                     → notices
- */
 function parseDescription(description: string) {
   const lines = description.split('\n').filter((l) => l.trim());
 
@@ -113,7 +107,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       { label: '26일', past: true },  // 3월 — 불가
       null,                           // 4월
-      { label: '28일' },              // 5월 — 신청 가능
+      { label: '28일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
       { label: '16일', past: true },  // 7월 — 불가
       null,                           // 8월
@@ -129,7 +123,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       { label: '27일', past: true },  // 3월 — 불가
       null,                           // 4월
-      { label: '29일' },              // 5월 — 신청 가능
+      { label: '29일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
       { label: '17일', past: true },  // 7월 — 불가
       null,                           // 8월
@@ -146,7 +140,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                             // 3월
       { label: '23-24일', past: true }, // 4월 — 불가
       null,                             // 5월
-      { label: '25-26일', past: true }, // 6월 — 불가
+      { label: '25-26일',  }, // 6월 — 불가
       null,                             // 7월
       { label: '20-21일', past: true }, // 8월 — 불가
       null,                             // 9월
@@ -156,21 +150,21 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     ],
   },
   {
-    name: '생성형 AI 기반 에이전트 아키텍처 이론과 응용 설계',
+    name: '에이전트 아키텍처 이론과 응용 설계',
     target: 'agent-ai',
-    groupLabel: 'Agent AI',
+    groupLabel: 'Agentic AI',
     groupRowspan: 1,
     cells: [
       null,                             // 3월
       { label: '17일', past: true },    // 4월 — 불가(회색)
-      { label: '28일' },                // 5월 — 신청 가능(보라)
-      { label: '', pending: true },     // 6월 — 미정
-      { label: '', pending: true },     // 7월 — 미정
-      { label: '', pending: true },     // 8월 — 미정
-      { label: '', pending: true },     // 9월 — 미정
-      { label: '', pending: true },     // 10월 — 미정
-      { label: '', pending: true },     // 11월 — 미정
-      { label: '', pending: true },     // 12월 — 미정
+      { label: '28일', past: true },                // 5월 — 신청 가능(보라)
+      { label: '23일' },     // 6월 
+      { label: '', pending: true },
+      { label: '12일', pending: true },     // 8월
+      { label: '', pending: true },
+      { label: '2일', pending: true },     // 10월 
+      { label: '', pending: true },
+      { label: '4일', pending: true },     // 12월 
     ],
   },
 ];
@@ -338,8 +332,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
   const dtRaw = data.content1?.description ?? data.content ?? '';
   const dt = parseDescription(dtRaw);
   const dtApplyHref =
-    data.content1?.link ||
-    'https://docs.google.com/forms/d/e/1FAIpQLSdh0cjzUfDYtuQi7aCdaAJ27hqFbxk0rol2LoIEmT-huLBSjA/viewform?usp=header7';
+    'https://forms.gle/jNdZ3ros7TKi7hxL6';
 
   /* ── content2 파싱 (Agent AI) ─────────────────────────────────────── */
   const aaRaw = data.content2?.description ?? '';
@@ -347,7 +340,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
     ? parseDescription(aaRaw)
     : { courseCards: dt.courseCards, details: dt.details, notices: dt.notices };
   const aaApplyHref =
-    data.content2?.link || 'https://forms.gle/2nksH5AUZHiazNvQ9';
+    'https://forms.gle/uVTQitgSNyEj4P1SA';
 
   const firstImageSrc = getFirstImage(data.imageUrl);
   const secondImageSrc = getFirstImage(data.imageUrl2);
@@ -381,7 +374,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
         <ul className="space-y-1">
           <li className="text-sm text-gray-700 flex gap-2">
             <span className="text-amber-500 font-bold flex-shrink-0">•</span>
-            모든 교육 과정은 개강 3주 전 목요일부터 신청이 가능합니다.
+            모든 교육 과정은 개강 3주 전 월요일부터 신청이 가능합니다.
           </li>
           <li className="text-sm text-gray-700 flex gap-2">
             <span className="text-amber-500 font-bold flex-shrink-0">•</span>
@@ -495,10 +488,6 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
             <span className="w-8 h-1.5 rounded-full bg-blue-200 flex-shrink-0" />
             <span className="w-8 h-1.5 rounded-full bg-purple-200 flex-shrink-0" />
             신청 일정 미정
-          </div>
-          <div className="flex items-center gap-2 text-xs text-gray-600">
-            <span className="w-2.5 h-2.5 rounded-full bg-gray-100 border border-gray-200 flex-shrink-0" />
-            신청 불가 일정
           </div>
         </div>
       </div>
