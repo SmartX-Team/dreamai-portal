@@ -1,0 +1,131 @@
+{
+  "sections": [
+    {
+      "id": "faculty",
+      "title": "강사진",
+      "type": "faculty",
+      "members": [
+        {
+          "name": "김종원",
+          "role": "AI대학원장",
+          "field": "AI 융합 연구"
+        },
+        {
+          "name": "김희수",
+          "role": "AI융합학과 산학교수",
+          "field": "AI 융합 연구"
+        }
+      ]
+    },
+    {
+      "id": "ambassador",
+      "title": "AI Ambassador",
+      "type": "ambassador",
+      "teams": [
+        {
+          "id": "aa",
+          "name": "Agentic AI",
+          "tag": "AA팀",
+          "roles": [
+            {
+              "label": "멘토",
+              "members": [
+                {
+                  "name": "목진왕",
+                  "field": "Agentic AI 프로젝트 지도"
+                }
+              ]
+            },
+            {
+              "label": "앰버서더",
+              "members": [
+                {
+                  "name": "오시영",
+                  "field": "Agentic AI 콘텐츠 기획 및 운영"
+                },
+                {
+                  "name": "전지민",
+                  "field": "Agentic AI 콘텐츠 기획 및 운영"
+                }
+              ]
+            },
+            {
+              "label": "협력팀원",
+              "members": [
+                {
+                  "name": "박주민",
+                  "field": "프로젝트 개발 및 AA팀 팀장"
+                },
+                {
+                  "name": "김예원",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "오은성",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "장석우",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "홍예주",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "오승환",
+                  "field": "프로젝트 개발"
+                }                
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dt",
+          "name": "Digital Twin",
+          "tag": "DT팀",
+          "roles": [
+            {
+              "label": "앰버서더",
+              "members": [
+                {
+                  "name": "장연성",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "이호선",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "김민석",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "김승주",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "강민성",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "송동근",
+                  "field": "프로젝트 개발"
+                }
+                ,
+                {
+                  "name": "홍성윤",
+                  "field": "프로젝트 개발"
+                },
+                {
+                  "name": "김기용",
+                  "field": "프로젝트 개발"
+                } 
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

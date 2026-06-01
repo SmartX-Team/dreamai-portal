@@ -13,6 +13,14 @@ type Item = {
   margin?: boolean;
 };
 
+type ReservationButton = {
+  name: string;
+  title: string;
+  titleUrl: string;
+  buttonText: string;
+  reservationUrl: string;
+};
+
 export default function HomePage() {
   let heroElement = (
     <div>
@@ -24,6 +32,7 @@ export default function HomePage() {
       />
     </div>
   );
+
   if (dreamData.hero.url) {
     heroElement = (
       <Link
@@ -35,63 +44,69 @@ export default function HomePage() {
     );
   }
 
+  const reservationButtons =
+    ((dreamData as { reservationButtons?: ReservationButton[] })
+      .reservationButtons ?? []);
+
+  // 좌측 버튼 그룹
+  const leftGroups = [
+    dreamData.catalog.categoriesLeft.slice(0, 3), // Content, LMS, Textbook
+    dreamData.catalog.categoriesLeft.slice(3, 5), // Community, AI Ambassador
+    dreamData.catalog.categoriesLeft.slice(5, 8), // Training, NewSac, CrossTraining
+  ];
+
+  // 우측 버튼 그룹
+  const rightGroups = [
+    dreamData.catalog.categoriesRight.slice(0, 1), // AIGS
+    dreamData.catalog.categoriesRight.slice(1, 2), // ScaleX
+    dreamData.catalog.categoriesRight.slice(2, 5), // Beginner-AI, SCENT, Dream-AI
+  ];
+
+  // 좌우 메뉴 전체 높이
+  const sideColumnClass =
+    "flex h-[800px] flex-col items-center justify-between";
+
+  // 그룹 내부는 버튼끼리 붙게
+  const groupClass = "flex flex-col items-center gap-0";
+
   function drawItem(item: Item, idx: number) {
     const width = "w-40";
     let height;
+
     switch (item.height ?? "lg") {
       case "sm":
-        height = "h-15";
+        height = "h-[60px]";
         break;
       case "md":
-        height = "h-35";
+        height = "h-[140px]";
         break;
       case "lg":
       default:
-        height = "h-50";
+        height = "h-[200px]";
         break;
     }
-    let margin;
-    if (item.margin === false) {
-      margin = "mb-0";
-    } else {
-      margin = "mb-10";
-    }
 
-    {
-      /* 이미지 주소가 있으면 이미지를 그리기 */
-    }
     let element;
+
     if (item.imageUrl) {
       element = (
-        <div key={idx} className={`relative ${width} ${height} ${margin}`}>
+        <div key={idx} className={`relative ${width} ${height}`}>
           <Image src={item.imageUrl} alt={item.title ?? item.name} fill />
         </div>
       );
-
-      {
-        /* 이미지 느낌나게 카드를 그리기 */
-      }
     } else if (item.title) {
       element = (
         <div
           key={idx}
-          className={`bg-blue-100 p-4 rounded shadow text-center w-${width} h-${height}`}
+          className={`bg-blue-100 p-4 rounded shadow text-center ${width} ${height}`}
         >
-          {item.title && <div className="text-sm font-bold">{item.title}</div>}
-          <div>{item.title}</div>
+          <div className="text-sm font-bold">{item.title}</div>
         </div>
       );
-
-      {
-        /* 내용물이 없으면 빈칸으로 남기기 */
-      }
     } else {
       element = <div key={idx} />;
     }
 
-    {
-      /* 링크가 있으면 첨부하기 */
-    }
     if (item.url) {
       element = (
         <Link
@@ -107,110 +122,180 @@ export default function HomePage() {
     return element;
   }
 
+  function drawGroup(group: Item[], groupIdx: number) {
+    return (
+      <div key={groupIdx} className={groupClass}>
+        {group.map(drawItem)}
+      </div>
+    );
+  }
+
+  function drawReservationButton(item: ReservationButton, idx: number) {
+    return (
+      <div
+        key={idx}
+        className="relative h-[92px] w-full transition-transform duration-200 ease-out hover:-translate-y-1"
+      >
+        {/* 흰색 카드 전체: SPACE / ANNEX 버튼 */}
+        <Link
+          href={item.titleUrl}
+          target={item.titleUrl.startsWith("http") ? "_blank" : undefined}
+          aria-label={`${item.title} 페이지로 이동`}
+          className="absolute inset-0 rounded-[10px] border border-[#E5E7EB] bg-white shadow-[0_3px_10px_rgba(0,0,0,0.06)] transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+        />
+
+        {/* 카드 위 내용 */}
+        <div className="pointer-events-none relative z-10 flex h-full w-full items-center justify-between px-7">
+          <span className="text-[22px] font-bold tracking-wide text-[#2F3437]">
+            {item.title}
+          </span>
+
+          {/* 오른쪽 예약하기 버튼 */}
+          <Link
+            href={item.reservationUrl}
+            target={
+              item.reservationUrl.startsWith("http") ? "_blank" : undefined
+            }
+            className="pointer-events-auto flex h-[42px] items-center justify-center rounded-[8px] border border-[#D8E3F2] bg-[#EEF4FB] px-6 text-[14px] font-semibold text-[#3B3F44] transition-colors hover:bg-[#E3EDF8]"
+          >
+            {item.buttonText}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>      
+    <>
       {/* 상단 중앙 HeroImage */}
-      <section className="w-full flex justify-center py-8"> 
+      <section className="flex w-full justify-center py-8">
         <div className="w-full max-w-[500px]">
           {dreamData.hero.imageUrl && heroElement}
         </div>
       </section>
 
-      {/* 메인 콘텐츠 영역 (좌측-중앙비디오-우측) */}
+      {/* 메인 콘텐츠 영역 */}
       <section className="bg-white pt-10">
-        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_4fr_1fr] gap-4">
-          
+        <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_4fr_1fr]">
           {/* 좌측 */}
-          <div className="flex flex-col items-center">
-            {dreamData.catalog.categoriesLeft.map(drawItem)}
+          <div className={sideColumnClass}>
+            {leftGroups.map(drawGroup)}
           </div>
 
-          {/* 중앙: 비디오 제목 + 유튜브 영상 */}
-          <div className="flex flex-col items-center w-full px-4 mt-4">
+          {/* 중앙 */}
+          <div className="flex h-[800px] w-full flex-col items-center px-4 pt-4">
             {/* 비디오 제목 */}
-            <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+            <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
               {dreamData.video.name}
             </h2>
-  
+
             {/* 유튜브 영상 */}
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
               <iframe
-                src={`https://www.youtube.com/embed/${dreamData.video.url.split('/').pop()?.split('?')[0]}`}
+                src={`https://www.youtube.com/embed/${
+                  dreamData.video.url.split("/").pop()?.split("?")[0]
+                }`}
                 title={dreamData.video.name}
-                className="absolute top-0 left-0 w-full h-full"
+                className="absolute left-0 top-0 h-full w-full"
                 allowFullScreen
               />
+            </div>
+
+            {/* SPACE / ANNEX 버튼 영역 */}
+            <div className="mt-auto grid w-full grid-cols-2 gap-10">
+              {reservationButtons.map(drawReservationButton)}
             </div>
           </div>
 
           {/* 우측 */}
-          <div className="flex flex-col items-center">
-            {dreamData.catalog.categoriesRight.map(drawItem)}
+          <div className={sideColumnClass}>
+            {rightGroups.map(drawGroup)}
           </div>
         </div>
       </section>
-
-      
 
       {/* AD 배너 */}
-      <section className="w-full flex justify-center mb-32 mt-12"> 
-        <div 
-          className="w-[60%] max-w-[900px] bg-[#E1EBF4] rounded-[40px] flex items-center relative shadow-sm border border-blue-50 overflow-hidden"
-          style={{ 
-            aspectRatio: '14 / 2.8',
-            containerType: 'inline-size'
-          }}
-        >
-          {/* 왼쪽: 텍스트 영역 */}
-          <div className="flex flex-col items-start justify-center h-full w-[50%] pl-[8%] whitespace-nowrap z-10">
-            <div style={{ color: '#000000', fontSize: '1.8cqw' }}>
-              {dreamData.adBanner.subTitle}
-            </div>
-            <div 
-              style={{ color: '#075F9A', fontSize: '2.8cqw', fontWeight: 'bold' }} 
-              className="my-[0.3cqw] leading-none"
+      <section className="mb-32 mt-20 bg-white">
+        <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-4 md:grid-cols-[1fr_4fr_1fr]">
+          {/* 중앙 영상/SPACE/ANNEX 영역과 동일한 가로폭으로 맞춤 */}
+          <div className="w-full px-4 md:col-start-2">
+            <div
+              className="relative flex w-full items-center overflow-hidden rounded-[10px] border border-[#E5E7EB] bg-[#E1EBF4] shadow-[0_3px_10px_rgba(0,0,0,0.06)]"
+              style={{
+                aspectRatio: "14 / 2.6",
+                containerType: "inline-size",
+              }}
             >
-              {dreamData.adBanner.mainTitle}
-            </div>
-            <div style={{ color: '#4B5563', fontSize: '1.4cqw' }} className="mb-[1.5cqw]">
-              {dreamData.adBanner.schedule}
-            </div>
-            <Link 
-              href={dreamData.adBanner.buttonUrl} 
-              style={{ backgroundColor: '#FFFFFF', color: '#000000', fontSize: '1.1cqw' }}
-              className="px-[3cqw] py-[0.6cqw] rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all font-medium inline-block"
-            >
-              {dreamData.adBanner.buttonText}
-            </Link>
-          </div>
+              {/* 왼쪽 텍스트 영역 */}
+              <div className="z-10 flex h-full w-[58%] flex-col items-start justify-center whitespace-nowrap pl-[8%]">
+                <div style={{ color: "#000000", fontSize: "1.55cqw" }}>
+                  {dreamData.adBanner.subTitle}
+                </div>
 
-          {/* 오른쪽: 이미지 영역 */}
-          <div className="absolute right-0 top-0 h-full w-[48%] flex items-center justify-end pr-[2%]">
-            <div className="relative w-full h-[95%]"> 
-              <Image 
-                src={dreamData.adBanner.imageUrl} 
-                alt="AD Illustration" 
-                fill 
-                className="object-contain object-right"
-                priority
-              />
+                <div
+                  style={{
+                    color: "#075F9A",
+                    fontSize: "2.45cqw",
+                    fontWeight: "bold",
+                  }}
+                  className="my-[0.25cqw] leading-none"
+                >
+                  {dreamData.adBanner.mainTitle}
+                </div>
+
+                <div
+                  style={{ color: "#4B5563", fontSize: "1.25cqw" }}
+                  className="mb-[1.3cqw]"
+                >
+                  {dreamData.adBanner.schedule}
+                </div>
+
+                <Link
+                  href={dreamData.adBanner.buttonUrl}
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    color: "#000000",
+                    fontSize: "1cqw",
+                  }}
+                  className="inline-block rounded-[8px] border border-gray-200 px-[2.8cqw] py-[0.55cqw] font-medium shadow-sm transition-all hover:bg-gray-50"
+                >
+                  {dreamData.adBanner.buttonText}
+                </Link>
+              </div>
+
+              {/* 오른쪽 이미지 영역 */}
+              <div className="absolute right-0 top-0 flex h-full w-[42%] items-center justify-end pr-[4%]">
+                <div className="relative h-[88%] w-full">
+                  <Image
+                    src={dreamData.adBanner.imageUrl}
+                    alt="AD Illustration"
+                    fill
+                    className="object-contain object-right"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="relative bg-zinc-900 text-zinc-300 text-2xl py-8 w-full">
-        <div className="max-w-screen-xl mx-auto px-4 text-center">
+      <footer className="relative w-full bg-zinc-900 py-8 text-2xl text-zinc-300">
+        <div className="mx-auto max-w-screen-xl px-4 text-center">
           <div className="leading-none">{dreamData.footer.copyright}</div>
-          <div className="leading-none text-xl"><br></br>{dreamData.footer.businessInfo}</div>
+          <div className="text-xl leading-none">
+            <br />
+            {dreamData.footer.businessInfo}
+          </div>
         </div>
+
         {dreamData.footer.trailing.map((item, idx) => {
           return (
             <a
               key={idx}
               href={item.url}
               target="_blank"
-              className="leading-none absolute right-10 bottom-8 text-right underline hover:text-white transition-colors duration-200"
+              className="absolute bottom-8 right-10 text-right leading-none underline transition-colors duration-200 hover:text-white"
             >
               {item.title}
             </a>
