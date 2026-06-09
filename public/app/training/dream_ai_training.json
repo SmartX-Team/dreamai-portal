@@ -1,0 +1,71 @@
+{
+  "title": "훈련",
+  "email": "",
+  "titleimg": "/images/training/training_title.png",
+  "explain": "",
+  "sections": [
+    {
+      "title": "DT&Robot 훈련 신청",
+      "imageUrl": "/images/training/training_Poster1.png",
+      "title2": "Agentic AI 훈련 신청",
+      "imageUrl2": "/images/training/training_Poster2.png",
+      "content1": {
+        "label": "Digital Twin",
+        "link": "https://docs.google.com/forms/d/e/1FAIpQLSdh0cjzUfDYtuQi7aCdaAJ27hqFbxk0rol2LoIEmT-huLBSjA/viewform?usp=header7",
+        "description": "<Omniverse 기반 Sim2Real Digital Twin 실습1/ 2026.06.25 (목) 14:00~18:00 (4시간)>\n<Omniverse 기반 Sim2rEAL Digital Twin 실습2 / 2026.06.26 (금) 14:00~18:00 (4시간)>\n과정명 : 광주과학기술원(GIST)과 함께하는 꿈꾸는(AI) AX 교육 훈련\n연수비 : 무료\n기타사항 : 선착순 모집, 1일만 선택하여 참여 가능(신청 시 체크 필요)\n신청방법 : 하단의 신청 링크 폼 작성 및 포스터속 QR코드 촬영\n교육 과정에 관심 있는 분들의 많은 참여 부탁드립니다."
+      },
+      
+      "content2": {
+        "label": "Agentic AI",
+        "link": "https://forms.gle/2nksH5AUZHiazNvQ9",
+        "description": "<에이전틱AI: 이제 '프롬프트' 대신 '행동'으로 / 2026.06.23 (화) 14:00~18:00 (4시간)>\n과정명 : 광주과학기술원(GIST)과 함께하는 꿈꾸는(AI) AX 교육 훈련\n연수비 : 무료\n기타사항 : 선착순 모집, 1일만 선택하여 참여 가능(신청 시 체크 필요)\n신청방법 : 하단의 신청 링크 폼 작성 및 포스터속 QR코드 촬영\n교육 과정에 관심 있는 분들의 많은 참여 부탁드립니다."
+      }
+    },
+    {
+      "title": "훈련 로드맵",
+      "imageUrl": "/images/training/training_Roadmap.png"
+    },
+    {
+      "title": "훈련 인증",
+      "imageUrl": "/images/training/training_Certification.png"
+    },
+    {
+      "title": "훈련 유형",
+      "item": [
+        {
+          "main": "수준별 커리큘럼 구성",
+          "sub": "중고등학생, 일반 성인, 교사 등 대상별 맞춤 콘텐츠 설계"
+        },
+        {
+          "main": "현장 실습 기반 운영",
+          "sub": "MobileX Station, 디지털 트윈 실습, HPC 인프라 활용"
+        },
+        {
+          "main": "기술 연계 실습 프로그램",
+          "sub": "생성형 AI, LLM, 자율주행, DevOps 등 실습 항목 반영"
+        },
+        {
+          "main": "단기 집중 과정 또는 캠프형 운영",
+          "sub": "1일 또는 2일 연수, 방학 캠프 등"
+        }
+      ],
+      "imageUrl": "/images/training/training_Category.png"
+    },
+    {
+      "title": "연도별 진행 내역",
+      "imageUrl": ["/images/training/2023.png", "/images/training/2024.png"]
+    },
+    {
+      "title": "꿈꾸는아이(AI) Training ~2025",
+      "ppt_imageUrl": [
+        "/images/training/training_4.png",
+        "/images/training/training_5.png",
+        "/images/training/training_6.png",
+        "/images/training/training_7.png",
+        "/images/training/training_8.png",
+        "/images/training/training_9.png",
+        "/images/training/training_10.png"
+      ]
+    }
+  ]
+}
