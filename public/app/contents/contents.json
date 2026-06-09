@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "slides": [
+      { "id": 1, "image": "/images/contents/hero_bg_dreamai.png" },
+      { "id": 2, "image": "/images/contents/hero_bg_aiambassador_dt.png", "link": "https://ambassador-digital-twin.vercel.app/"},
+      { "id": 3, "image": "/images/contents/hero_bg_aiambassador_agentic.png", "link": "https://ambassador-digital-twin.vercel.app/"}
+    ]
+  },
+  "menu": {
+    "tabs": ["콘텐츠", "훈련"],
+    "contents": {
+      "콘텐츠": [
+        {
+          "id": "c1",
+          "category": "LEARNING MANAGEMENT SYSTEM",
+          "title": "LMS",
+          "description": "현장 강의 콘텐츠를 영상으로 먼저 만나보고,\n예습과 복습으로 나만의 학습 페이스를 완성하세요.",
+          "icon": "/images/contents/icon_lms.png",
+          "link": "https://lms.dreamai.kr/"
+        },
+        {
+          "id": "c2",
+          "category": "DREAM-AI MODEL ZOO & AI PLAYGROUND",
+          "title": "Textbook",
+          "description": "급변하는 디지털전환 시대에서 인공지능 사회를 주도적으로 준비하도록,\n글로벌 시각에서 기획된 AI 교육 콘텐츠들을 확인하세요.",
+          "icon": "/images/contents/icon_textbook.png",
+          "link": "https://dreamai.kr/textbook"
+        }
+      ],
+      "훈련": [
+        {
+          "id": "t1",
+          "category": "TRAINING CENTER",
+          "title": "Training",
+          "description": "실습 중심의 트레이닝으로 실무 역량을 강화하고, 현장에서 바로 적용 가능한 기술을 습득하세요.",
+          "icon": "/images/contents/icon_training.png",
+          "link": "https://dreamai.kr/training"
+        }
+      ]
+    }
+  },
+  "courses": {
+    "tabs": [
+      { "id": "dt",      "label": "#Digital Twin 완성" },
+      { "id": "agentic", "label": "#Agentic AI 맛보기" },
+      { "id": "ai",      "label": "#인공지능 완성" },
+      { "id": "aiTaste", "label": "#인공지능 맛보기" }
+    ],
+    "images": {
+      "dt":      "/images/contents/course_dt.png",
+      "agentic": "/images/contents/course_agentic.png",
+      "ai":      "/images/contents/course_ai.png",
+      "aiTaste": "/images/contents/course_preparing.png"
+    }
+  },
+  "roadmap": {
+    "tabs": [
+      {
+        "id": "dream",
+        "label": "꿈꾸는AI 콘텐츠 로드맵",
+        "image": "/images/contents/content_landscape.png"
+      },
+      {
+        "id": "dt",
+        "label": "DT&Robot AX Track",
+        "image": "/images/contents/dt&robot ax track.png"
+      },
+      {
+        "id": "genai",
+        "label": "Agentic AI AX Track",
+        "image": "/images/contents/agenticAI ax track.png"
+      },
+      {
+        "id": "core",
+        "label": "Core Track",
+        "image": "/images/contents/core track.png"
+      }
+    ]
+  }
+}

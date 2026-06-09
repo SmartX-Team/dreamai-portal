@@ -1,0 +1,77 @@
+{
+  "catalog": [
+    {
+      "id": "page1",
+      "items": ["prologue", "zoo", "dl", "data", "hyperai", "dna", "epilogue"]
+    },
+    {
+      "id": "page2",
+      "items": ["ml", "llm", "data_eng", "twin", "genai"]
+    },
+    {
+      "id": "page3",
+      "items": ["zoo", "ml", "dl", "twin", "data", "genai"]
+    }
+  ],
+  "contents": [
+    [
+      {
+        "id": "prologue",
+        "hrefPdf": "https://drive.google.com/file/d/16pffvBeUqg14DyTCoY7DNduQRkSPO0JW/view?usp=sharing"
+      },
+      {
+        "id": "zoo",
+        "hrefPdf": "https://drive.google.com/file/d/1XLKW6ST032U1viaJOLzjZOxEOCwLeXCb/view?usp=sharing",
+        "hrefExp": "https://jinwangmok.notion.site/Model-ZOO-ZOO-AI-17b5cf8761d780ec83d9d1a58bfc8271",
+        "hrefLink": "https://colab.research.google.com/drive/1y-sCd3juXR45N_rteTvKWCYai0yjhKrY#scrollTo=6Uom8oYEnej-"
+      },
+      {
+        "id": "dl",
+        "hrefPdf": "https://drive.google.com/file/d/1n1O96CpJyYQGDaKUYa8RoniROh3zMQR_/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/1B6cESDWQ06By5ioW8jtrKHekzujVoKp4?usp=sharing"
+      },
+      {
+        "id": "data",
+        "hrefPdf": "https://drive.google.com/file/d/19QJvHcmB7ReYfHofRjZ-fU3vpQfT6WVx/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/16L57eVsB1J5vwFRwqE2PWzOcbXfrj-sR?usp=sharing"
+      },
+      {
+        "id": "hyperai",
+        "hrefPdf": "https://drive.google.com/file/d/1wFReSmQyDe4ZQI5SSa00VxdCvlDpWn3Z/view?usp=drive_link"
+      },
+      {
+        "id": "dna",
+        "hrefPdf": "https://drive.google.com/file/d/1VMPnHgQanp77NCxqIeVx8-hMoLxQMPOo/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/12jkWdbyv7lioaCnE6OKD6j84CTwaJHzo?usp=sharing"
+      },
+      {
+        "id": "epilogue",
+        "hrefPdf": "https://drive.google.com/file/d/18lpl672vwJnpxoivtQBAx8h0MTiUoGZ1/view?usp=drive_link"
+      },
+      {
+        "id": "ml",
+        "hrefPdf": "https://drive.google.com/file/d/1Ox3YndNQaSyzgr5M9k7nF5wyIrLJFNQ0/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/1XE9fZC6--TWWZfCxmKSxv7z4W-qMsdp-?usp=sharing"
+      },
+      {
+        "id": "llm",
+        "hrefPdf": "https://drive.google.com/file/d/1joJfGKa7jyoU47xNQYx_-scUZT6mY4ya/view?usp=drive_link",
+        "hrefExp": "https://colab.research.google.com/drive/1MSF5DlvCKADAa__fDBM5Q0-KxPgXYmXU?usp=sharing"
+      },
+      {
+        "id": "data_eng",
+        "hrefPdf": "https://drive.google.com/file/d/1_kGh9crqrgiiVMAoEelaoxraYRrqqXFn/view?usp=drive_link"
+      },
+      {
+        "id": "twin",
+        "hrefPdf": "https://drive.google.com/file/d/1xoO9Z-wSbZhyk3pbITIdgc7A57N026hI/view?usp=drive_link",
+        "hrefExp": "https://youtu.be/h3D2ro5gsiY"
+      },
+      {
+        "id": "genai",
+        "hrefPdf": "https://drive.google.com/file/d/14HNeZFXvOHW8749ALBK3rjsL8crL0lPT/view?usp=drive_link",
+        "hrefExp": "https://docs.google.com/presentation/d/15HXxlFXdLiN5KJLIS8CIPBYFF-lUJmpdI4E5WGBDGO4/edit?usp=sharing"
+      }
+    ]
+  ]
+}

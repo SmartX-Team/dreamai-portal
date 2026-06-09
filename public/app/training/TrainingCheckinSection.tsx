@@ -103,7 +103,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     name: '꿈꾸는아이(AI) Digital Twin 직무혁신',
     target: 'digital-twin',
     groupLabel: 'DT & Robot',
-    groupRowspan: 6,
+    groupRowspan: 3,
     cells: [
       { label: '26일', past: true },  // 3월 — 불가
       null,                           // 4월
@@ -139,41 +139,14 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null,                             // 3월
       { label: '23-24일', past: true }, // 4월 — 불가
-      null,
-      null,                             
+      null,                             // 5월
+      { label: '25-26일',  }, // 6월 — 불가
       null,                             // 7월
       { label: '20-21일', past: true }, // 8월 — 불가
       null,                             // 9월
       { label: '22-23일', past: true }, // 10월 — 불가
       { label: '27일', past: true },    // 11월 — 불가
       null,                             // 12월
-    ],
-  },
-  {
-    name: 'Omniverse·Cosmos·Isaac Sim 통합으로 디지털트윈 시작하기',
-    target: 'digital-twin',
-    cells: [
-      null, null, null,
-      { label: '23일' }, // 6월
-      null, null, null, null, null, null,
-    ],
-  },
-  {
-    name: 'SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합',
-    target: 'digital-twin',
-    cells: [
-      null, null, null,
-      { label: '24일' }, // 6월
-      null, null, null, null, null, null,
-    ],
-  },
-  {
-    name: 'Pysital Digital Twin 기반 로봇 자율시스템 Sim2Real 실증 실습',
-    target: 'digital-twin',
-    cells: [
-      null, null, null,
-      { label: '25일' }, // 6월
-      null, null, null, null, null, null,
     ],
   },
   {
