@@ -154,7 +154,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '23일' }, // 6월
+      { label: '23일(화 )' }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -163,7 +163,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '24일' }, // 6월
+      { label: '24일(수)' }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -172,7 +172,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '25일' }, // 6월
+      { label: '25일(목)' }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -185,7 +185,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                             // 3월
       { label: '17일', past: true },    // 4월 — 불가(회색)
       { label: '28일', past: true },                // 5월 — 신청 가능(보라)
-      { label: '23일' },     // 6월 
+      { label: '23일(화)' },     // 6월 
       { label: '', pending: true },
       { label: '12일', pending: true },     // 8월
       { label: '', pending: true },
