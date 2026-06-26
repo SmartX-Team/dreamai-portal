@@ -1,5 +1,6 @@
 "use client";
 
+import { tree } from 'next/dist/build/templates/app-page';
 import React, { useState, useEffect } from 'react'; // useEffect 
 import { createPortal } from 'react-dom'; // createPortal 
 
@@ -41,7 +42,7 @@ export default function TrainingCoursesSection() {
       curriculum: [ "생성형 AI(Generative AI) 모델의 아키텍처 설계 및 원리 이해", "멀티 에이전트(Multi-Agent) 시스템의 개념과 응용", "LLM 기반의 자율형 AI 서비스 구현 및 API 연동 실습"],
       tools: ["Agentic AI", "Multi-Agent Systems", "LLM"],
       formUrl: "https://forms.gle/zonwWwVSNK1HDPGfA",
-      isRegistrationOpen: true
+      isRegistrationOpen: false
     },
     {
       id: 2,
@@ -51,10 +52,10 @@ export default function TrainingCoursesSection() {
       level: "체험",
       imageUrl: "/images/training/genai-2.png",
       description: "초거대 생성형AI 실증 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["꿈꾸는 아이(AI) Space 인프라 기반 교육 서비스 및 D-N-A 기반의 X+AI 서비스 실증", "생성형AI 창작", "초거대 AI시대를 여는 LLM 기초 및 활용: 대형 언어 모델(LLM)기반의 프롬포트 엔지니어링 서비스"],
+      curriculum: ["에이전트란 무엇인가: 프롬프트를 넘어 ‘일하는 AI’ 설계", "나만의 AI 비서 만들기: 업무·학습·일상 자동화 실습"],
       tools: ["ChatGPT API", "Tiny-Llama", "SD Turbo"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc3-FS3GwN_2J73gTQAdcyXnrCoJkk-uIXQd0XYG6PahQQkpA/viewform?usp=header",
-      isRegistrationOpen: false  
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfMkHNyc5DhZCZ0E4yv_wghSdvPJmHMusufk2bJR-gs2sCE0w/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: true  
     },
     {
       id: 3,
@@ -64,10 +65,10 @@ export default function TrainingCoursesSection() {
       level: "체험",
       imageUrl: "/images/training/dt-robot-4.png",
       description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", "Digital Twin 활용 로봇 시뮬레이션" ],
+      curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", ],
       tools: ["Dream-AI Space","NVIDIA Omniverse", "Isaac Sim"],
-      formUrl: "https://forms.gle/xhPvuFnthWBXpSaP9",
-      isRegistrationOpen: false
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: true
     },
     {
       id: 4,
@@ -79,7 +80,7 @@ export default function TrainingCoursesSection() {
       description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
       curriculum: [ "특화분야 AX 대응을 위한 가상과 실제를 연계하는 Digital Twin","OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin","Omniverse (Cosmos & Issac) 개발&활용 환경 구축", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "SimReady"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIoY3iPt_X5PtMWpLaRnBF_HmFRIzcCThVcTQgQf2MpvVOcQ/viewform?usp=dialog",
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
       isRegistrationOpen: false
     },
     {
@@ -92,8 +93,8 @@ export default function TrainingCoursesSection() {
       description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
       curriculum: [ "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
-      formUrl: "https://forms.gle/s6m6WvT4Tc27U5pP6",
-      isRegistrationOpen: false
+      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: true
     },
     {
       id: 6,  
@@ -119,7 +120,7 @@ export default function TrainingCoursesSection() {
       curriculum: [ "Isaac Sim 기반의 Sim2Real Digital Twin 시작을 위한 Omniverse와 OpenUSD "],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIoY3iPt_X5PtMWpLaRnBF_HmFRIzcCThVcTQgQf2MpvVOcQ/viewform?usp=dialog",
-      isRegistrationOpen: true
+      isRegistrationOpen: false
     },
     {
       id: 8,  
@@ -132,7 +133,7 @@ export default function TrainingCoursesSection() {
       curriculum: [ "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합"],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIoY3iPt_X5PtMWpLaRnBF_HmFRIzcCThVcTQgQf2MpvVOcQ/viewform?usp=dialog",
-      isRegistrationOpen: true
+      isRegistrationOpen: false
     },
     {
       id: 9,  
@@ -145,7 +146,7 @@ export default function TrainingCoursesSection() {
       curriculum: [ "로봇 및 자율차 훈련을 조율하는 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIoY3iPt_X5PtMWpLaRnBF_HmFRIzcCThVcTQgQf2MpvVOcQ/viewform?usp=dialog",
-      isRegistrationOpen: true
+      isRegistrationOpen: false
     },
     {
       id: 10,

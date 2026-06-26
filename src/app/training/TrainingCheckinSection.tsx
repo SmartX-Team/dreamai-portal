@@ -109,7 +109,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 4월
       { label: '28일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
-      { label: '16일', past: true },  // 7월 — 불가
+      { label: '22일(수)' },  // 7월 — 불가
       null,                           // 8월
       { label: '17일', past: true },  // 9월 — 불가
       null,                           // 10월
@@ -125,7 +125,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 4월
       { label: '29일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
-      { label: '17일', past: true },  // 7월 — 불가
+      { label: '23일(목)' },  // 7월 — 불가
       null,                           // 8월
       { label: '18일', past: true },  // 9월 — 불가
       null,                           // 10월
@@ -154,7 +154,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '23일' }, // 6월
+      { label: '23일', past: true }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -163,7 +163,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '24일' }, // 6월
+      { label: '24일', past: true }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -172,7 +172,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     target: 'digital-twin',
     cells: [
       null, null, null,
-      { label: '25일' }, // 6월
+      { label: '25일', past: true }, // 6월
       null, null, null, null, null, null,
     ],
   },
@@ -185,8 +185,8 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                             // 3월
       { label: '17일', past: true },    // 4월 — 불가(회색)
       { label: '28일', past: true },                // 5월 — 신청 가능(보라)
-      { label: '23일' },     // 6월 
-      { label: '', pending: true },
+      { label: '23일', past: true },     // 6월 
+      { label: '28일(화)' },
       { label: '12일', pending: true },     // 8월
       { label: '', pending: true },
       { label: '2일', pending: true },     // 10월 
@@ -352,22 +352,24 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
   const digitalTwinRef = useRef<HTMLDivElement | null>(null);
   const agentAiRef = useRef<HTMLDivElement | null>(null);
 
-  const DOWNLOAD_HREF =
+  const DTDOWNLOAD_HREF =
     'https://drive.google.com/drive/folders/1SuZvyfbeNI7bmXlBc0LRJhwUErZlqdg6';
+    const AADOWNLOAD_HREF =
+    'https://drive.google.com/drive/folders/1ZFf79z1MvwM9szbJK_Ej0kIFiopq2Ss_';
 
   /* ── content1 파싱 (Digital Twin) ─────────────────────────────────── */
   const dtRaw = data.content1?.description ?? data.content ?? '';
   const dt = parseDescription(dtRaw);
-  const dtApplyHref =
-    'https://forms.gle/jNdZ3ros7TKi7hxL6';
+  const dtApplyHref = data.content1?.link ??
+    '';
 
   /* ── content2 파싱 (Agent AI) ─────────────────────────────────────── */
   const aaRaw = data.content2?.description ?? '';
   const aa = aaRaw
     ? parseDescription(aaRaw)
     : { courseCards: dt.courseCards, details: dt.details, notices: dt.notices };
-  const aaApplyHref =
-    'https://forms.gle/uVTQitgSNyEj4P1SA';
+  const aaApplyHref = data.content2?.link ??
+    '';
 
   const firstImageSrc = getFirstImage(data.imageUrl);
   const secondImageSrc = getFirstImage(data.imageUrl2);
@@ -529,7 +531,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
           details={dt.details}
           notices={dt.notices}
           applyHref={dtApplyHref}
-          downloadHref={DOWNLOAD_HREF}
+          downloadHref={DTDOWNLOAD_HREF}
         />
       )}
 
@@ -543,7 +545,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
           details={aa.details}
           notices={aa.notices}
           applyHref={aaApplyHref}
-          downloadHref={DOWNLOAD_HREF}
+          downloadHref={AADOWNLOAD_HREF}
         />
       )}
     </div>
