@@ -7,8 +7,12 @@ import Training2025 from "./Training2025";
 // 간단한 타입 정의
 interface Section {
   title: string;
+  title2?: string;
   imageUrl?: string | string[];
+  imageUrl2?: string | string[];
   content?: string;
+  content1?: { label: string; link: string; description: string };
+  content2?: { label: string; link: string; description: string };
   subtitle?: string;
   item?: Array<{ main: string; sub: string }>;
   ppt_imageUrl?: string[];
