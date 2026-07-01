@@ -64,7 +64,7 @@ export default function TrainingCoursesSection() {
       duration: "1일 4시간",
       level: "체험",
       imageUrl: "/images/training/dt-robot-4.png",
-      description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화 ",
+      description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화",
       curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", ],
       tools: ["Dream-AI Space","NVIDIA Omniverse", "Isaac Sim"],
       formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
