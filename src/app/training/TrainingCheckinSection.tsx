@@ -109,7 +109,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 4월
       { label: '28일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
-      { label: '22일(수)' },  // 7월 — 불가
+      { label: '22일', past: true },  // 7월 — 불가
       null,                           // 8월
       { label: '17일', past: true },  // 9월 — 불가
       null,                           // 10월
@@ -125,7 +125,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 4월
       { label: '29일', past: true },              // 5월 — 신청 가능
       null,                           // 6월
-      { label: '23일(목)' },  // 7월 — 불가
+      { label: '23일', past: true },  // 7월 — 불가
       null,                           // 8월
       { label: '18일', past: true },  // 9월 — 불가
       null,                           // 10월
@@ -142,7 +142,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,
       null,                             
       null,                             // 7월
-      { label: '20-21일', past: true }, // 8월 — 불가
+      null,     // 8월 — 불가
       null,                             // 9월
       { label: '22-23일', past: true }, // 10월 — 불가
       { label: '27일', past: true },    // 11월 — 불가
@@ -155,7 +155,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '23일', past: true }, // 6월
-      null, null, null, null, null, null,
+      null, { label: '27일(목)', past: false }, null, null, null, null,
     ],
   },
   {
@@ -164,7 +164,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '24일', past: true }, // 6월
-      null, null, null, null, null, null,
+      null, { label: '28일(금)', past: false }, null, null, null, null,
     ],
   },
   {
@@ -173,11 +173,11 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '25일', past: true }, // 6월
-      null, null, null, null, null, null,
+      null, { label: '29일(토)', past: false }, null, null, null, null,
     ],
   },
   {
-    name: '에이전트 아키텍처 이론과 응용 설계',
+    name: '꿈꾸는아이(AI) 훈련 플랫폼을 활용한 초거대 생성형AI 실증',
     target: 'agent-ai',
     groupLabel: 'Agentic AI',
     groupRowspan: 1,
