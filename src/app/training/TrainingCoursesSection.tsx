@@ -38,9 +38,9 @@ export default function TrainingCoursesSection() {
       level: "체험",
       imageUrl: "/images/training/genai-2.png",
       description: "초거대 생성형AI 실증 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["에이전트란 무엇인가: 프롬프트를 넘어 ‘일하는 AI’ 설계", "나만의 AI 비서 만들기: 업무·학습·일상 자동화 실습"],
+      curriculum: ["Agent 개발환경 구축과 LLM 호출 및 Tool calling 기초", "스스로 판단하고 행동하는 Agent 만들기", "나만의 Agent 완성하기"],
       tools: ["ChatGPT API", "Tiny-Llama", "SD Turbo"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfMkHNyc5DhZCZ0E4yv_wghSdvPJmHMusufk2bJR-gs2sCE0w/viewform?usp=sharing&ouid=104372961309486815190",
+      formUrl: "https://docs.google.com/forms/d/1BbAEsh7KXpb73HFrSDwBup8WZkEDB7IcMuoOCWCrFfM/edit",
       isRegistrationOpen: true  
     },
         {
