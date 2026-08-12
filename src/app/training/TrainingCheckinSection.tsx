@@ -186,8 +186,8 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       { label: '17일', past: true },    // 4월 — 불가(회색)
       { label: '28일', past: true },                // 5월 — 신청 가능(보라)
       { label: '23일', past: true },     // 6월 
-      { label: '28일(화)' },
-      { label: '12일', pending: true },     // 8월
+      { label: '28일', past: true },     // 7월
+      { label: '19일(수)' },     // 8월
       { label: '', pending: true },
       { label: '2일', pending: true },     // 10월 
       { label: '', pending: true },
