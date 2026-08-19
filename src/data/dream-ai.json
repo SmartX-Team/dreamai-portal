@@ -27,14 +27,14 @@
       "title": "SPACE",
       "titleUrl": "/dream_ai_space",
       "buttonText": "예약하기",
-      "reservationUrl": "https://forms.gle/6Ge7HfXFA42be9Q47"
+      "reservationUrl": "https://ai.gist.ac.kr/prog/yeyakDetail/ai/YN_000000000833/sub04_01/monthList.do"
     },
     {
       "name": "ANNEX",
       "title": "ANNEX",
       "titleUrl": "/annex",
       "buttonText": "예약하기",
-      "reservationUrl": "/annex/reservation"
+      "reservationUrl": "https://ai.gist.ac.kr/prog/yeyakDetail/ai/YN_000000000833/sub04_01/monthList.do"
     }
   ],
   "adBanner":{
