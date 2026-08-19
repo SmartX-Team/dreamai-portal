@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react'; // useEffect 
-import { createPortal } from 'react-dom'; // createPortal 
+import React, { useState, useEffect } from "react"; // useEffect
+import { createPortal } from "react-dom"; // createPortal
 
 type Category = "All" | "Core" | "AgenticAI" | "DT&Robot";
 
@@ -15,7 +15,7 @@ interface Course {
   description?: string;
   curriculum?: string[];
   tools?: string[];
-  formUrl?: string;  
+  formUrl?: string;
   isRegistrationOpen?: boolean;
 }
 
@@ -26,6 +26,7 @@ export default function TrainingCoursesSection() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR 하이드레이션 가드로 마운트 후 1회만 실행됨
     setMounted(true);
   }, []);
 
@@ -38,49 +39,62 @@ export default function TrainingCoursesSection() {
       level: "체험",
       imageUrl: "/images/training/genai-2.png",
       description: "초거대 생성형AI 실증 교육을 통해 전문성 역량 강화 ",
-      curriculum: ["Agent 개발환경 구축과 LLM 호출 및 Tool calling 기초", "스스로 판단하고 행동하는 Agent 만들기", "나만의 Agent 완성하기"],
+      curriculum: [
+        "Agent 개발환경 구축과 LLM 호출 및 Tool calling 기초",
+        "스스로 판단하고 행동하는 Agent 만들기",
+        "나만의 Agent 완성하기",
+      ],
       tools: ["ChatGPT API", "Tiny-Llama", "SD Turbo"],
-      formUrl: "https://docs.google.com/forms/d/1BbAEsh7KXpb73HFrSDwBup8WZkEDB7IcMuoOCWCrFfM/edit",
-      isRegistrationOpen: true  
+      formUrl:
+        "https://docs.google.com/forms/d/1BbAEsh7KXpb73HFrSDwBup8WZkEDB7IcMuoOCWCrFfM/edit",
+      isRegistrationOpen: true,
     },
-        {
-      id: 2,  
+    {
+      id: 2,
       category: "DT&Robot",
       title: "Omniverse·Cosmos·Isaac Sim 통합으로 디지털트윈 시작하기",
       duration: "1일 4시간",
       level: "집중",
       imageUrl: "/images/training/dt-robot-5.png",
-      description: "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
-      curriculum: [ "Isaac Sim 기반의 Sim2Real Digital Twin 시작을 위한 Omniverse와 OpenUSD "],
+      description:
+        "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
+      curriculum: [
+        "Isaac Sim 기반의 Sim2Real Digital Twin 시작을 위한 Omniverse와 OpenUSD ",
+      ],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://forms.gle/9FtH9dtoTJ1GVdtE6",
-      isRegistrationOpen: true
+      isRegistrationOpen: true,
     },
     {
-      id: 3,  
+      id: 3,
       category: "DT&Robot",
-      title: "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합",
+      title:
+        "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합",
       duration: "1일 4시간",
       level: "집중",
       imageUrl: "/images/training/dt-robot-5.png",
-      description: "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
-      curriculum: [ "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합"],
+      description:
+        "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
+      curriculum: [
+        "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합",
+      ],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://forms.gle/9FtH9dtoTJ1GVdtE6",
-      isRegistrationOpen: true
+      isRegistrationOpen: true,
     },
     {
-      id: 4,  
+      id: 4,
       category: "DT&Robot",
       title: "Pysital Digital Twin 기반 로봇 • 자율시스템 Sim2Real 실증 실습",
       duration: "1일 4시간",
       level: "집중",
       imageUrl: "/images/training/dt-robot-5.png",
-      description: "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
-      curriculum: [ "로봇 및 자율차 훈련을 조율하는 Physital Digital Twin"],
+      description:
+        "Omniverse·OpenUSD 기반 Sim2Real Digital Twin과 SimReady 자산을 활용하여, 로봇 및 자율자동차 훈련을 위한 디지털트윈 구축과 Physital Digital Twin 기반 검증 흐름 이해",
+      curriculum: ["로봇 및 자율차 훈련을 조율하는 Physital Digital Twin"],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
       formUrl: "https://forms.gle/9FtH9dtoTJ1GVdtE6",
-      isRegistrationOpen: true
+      isRegistrationOpen: true,
     },
     {
       id: 5,
@@ -89,24 +103,36 @@ export default function TrainingCoursesSection() {
       duration: "1일 4시간",
       level: "체험",
       imageUrl: "/images/training/dt-robot-4.png",
-      description: "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화",
-      curriculum: ["꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제", "Digital Twin을 위한 현실세계 데이터의 3D 변환", "인공지능 서비스 실현을 위한 Digital Twin 소개", ],
-      tools: ["Dream-AI Space","NVIDIA Omniverse", "Isaac Sim"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
-      isRegistrationOpen: false
+      description:
+        "꿈꾸는아이(AI) 훈련 플랫폼을 활용한 Digital Twin 교육을 통해 전문성 역량 강화",
+      curriculum: [
+        "꿈꾸는아이(AI) Digital Twin을 통한 X+AI 서비스 관제",
+        "Digital Twin을 위한 현실세계 데이터의 3D 변환",
+        "인공지능 서비스 실현을 위한 Digital Twin 소개",
+      ],
+      tools: ["Dream-AI Space", "NVIDIA Omniverse", "Isaac Sim"],
+      formUrl:
+        "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: false,
     },
-     {
-      id: 6,  
+    {
+      id: 6,
       category: "DT&Robot",
       title: "디지털트윈 환경 구축과 시뮬레이션 실습 과정",
       duration: "1일 4시간",
       level: "집중",
       imageUrl: "/images/training/dt-robot-2.png",
-      description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
-      curriculum: [ "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
+      description:
+        "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
+      curriculum: [
+        "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin",
+        "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합",
+        "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin",
+      ],
       tools: ["NVIDIA Omniverse", "MobileX Pole"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
-      isRegistrationOpen: false
+      formUrl:
+        "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: false,
     },
     {
       id: 7,
@@ -115,11 +141,19 @@ export default function TrainingCoursesSection() {
       duration: "2일 4시간/일 (총 8시간)",
       level: "심화",
       imageUrl: "/images/training/dt-robot-3.png",
-      description: "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
-      curriculum: [ "특화분야 AX 대응을 위한 가상과 실제를 연계하는 Digital Twin","OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin","Omniverse (Cosmos & Issac) 개발&활용 환경 구축", "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합", "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin"],
+      description:
+        "OpenUSD–Omniverse–AI Surrogate 모델–SimReady 자산을 통합 활용하여 디지털트윈의 설계–시뮬레이션–실증(Sim-to-Real) 전 과정을 학습하는 산업 실증형 전문인재 양성 과정",
+      curriculum: [
+        "특화분야 AX 대응을 위한 가상과 실제를 연계하는 Digital Twin",
+        "OpenUSD Omniverse 기반으로 시작하는 Sim2Real Digital Twin",
+        "Omniverse (Cosmos & Issac) 개발&활용 환경 구축",
+        "SimReady Digital Twin 구축과 활용을 위한 3D Asset 생성과 가상통합",
+        "로봇과 자율자동차 훈련을 위한 가상/실제 연동 Physital Digital Twin",
+      ],
       tools: ["NVIDIA Omniverse", "SimReady"],
-      formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
-      isRegistrationOpen: false
+      formUrl:
+        "https://docs.google.com/forms/d/e/1FAIpQLSfmRoizZeST4lXxnCWVxHkjRaxOIztU_R7LXc8QB_ewZgSpaQ/viewform?usp=sharing&ouid=104372961309486815190",
+      isRegistrationOpen: false,
     },
     /*
     {
@@ -244,7 +278,10 @@ export default function TrainingCoursesSection() {
 
   const categories: Category[] = ["All", "Core", "AgenticAI", "DT&Robot"];
 
-  const categoryStyles: Record<Category, { bg: string; text: string; badge: string }> = {
+  const categoryStyles: Record<
+    Category,
+    { bg: string; text: string; badge: string }
+  > = {
     All: {
       bg: "bg-[#FFFFFF] hover:bg-[#F8F8F8] border border-gray-200",
       text: "text-gray-900",
@@ -266,7 +303,6 @@ export default function TrainingCoursesSection() {
       badge: "bg-[#4681DA]/10 text-[#4681DA]",
     },
   };
-  
 
   const filteredCourses =
     selectedCategory === "All"
@@ -284,15 +320,25 @@ export default function TrainingCoursesSection() {
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-[300px] left-1/2 -translate-x-1/2 w-[1800px] h-[200px] rounded-full opacity-20 blur-[200px]"
-          style={{ background: "radial-gradient(circle, #00C896 0%, #00A47C 30%, #E6F7F2 50%, transparent 80%)" }}
+          style={{
+            background:
+              "radial-gradient(circle, #00C896 0%, #00A47C 30%, #E6F7F2 50%, transparent 80%)",
+          }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-3" style={{ fontFamily: 'Pretendard, sans-serif' }}>2026년 훈련 과정</h2>
-          <p className="text-gray-600 text-lg mb-6">총 {courses.length}개 과정 · 3개 트랙</p>
+          <h2
+            className="text-4xl font-bold text-gray-900 mb-3"
+            style={{ fontFamily: "Pretendard, sans-serif" }}
+          >
+            2026년 훈련 과정
+          </h2>
+          <p className="text-gray-600 text-lg mb-6">
+            총 {courses.length}개 과정 · 3개 트랙
+          </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -323,14 +369,14 @@ export default function TrainingCoursesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* 카드 디자인 영역 */}
-  {filteredCourses.map((course) => {
-    const style = categoryStyles[course.category];
-    return (
-      <div
-        key={course.id}
-        className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-gray-200 flex flex-col group"
-      >
-        <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
+          {filteredCourses.map((course) => {
+            const style = categoryStyles[course.category];
+            return (
+              <div
+                key={course.id}
+                className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-gray-200 flex flex-col group"
+              >
+                <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
                   {course.imageUrl ? (
                     <img
                       src={course.imageUrl}
@@ -354,7 +400,7 @@ export default function TrainingCoursesSection() {
                       </svg>
                     </div>
                   )}
-                  
+
                   <div className="absolute top-3 left-3 flex gap-2">
                     {/* 카테고리 뱃지 */}
                     <span
@@ -397,7 +443,9 @@ export default function TrainingCoursesSection() {
                     onClick={() => setSelectedCourse(course)}
                     className={
                       "mt-3 w-full py-2 rounded-lg font-semibold text-sm transition-all duration-300 opacity-0 group-hover:opacity-70 " +
-                      style.bg + " " + style.text
+                      style.bg +
+                      " " +
+                      style.text
                     }
                   >
                     자세히 보기
@@ -410,125 +458,158 @@ export default function TrainingCoursesSection() {
 
         {filteredCourses.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">해당 카테고리의 과정이 없습니다.</p>
+            <p className="text-gray-500 text-lg">
+              해당 카테고리의 과정이 없습니다.
+            </p>
           </div>
         )}
 
-        {selectedCourse && mounted && createPortal(
-          <div
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999] p-4"
-            onClick={() => setSelectedCourse(null)}
-          >
+        {selectedCourse &&
+          mounted &&
+          createPortal(
             <div
-              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+              className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999] p-4"
+              onClick={() => setSelectedCourse(null)}
             >
-              {/* --- 모달  --- */}
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-start justify-between">
-                <div className="flex-1 pr-4">
-                  <div className="flex gap-2 mb-3">
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
+              <div
+                className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* --- 모달  --- */}
+                <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-start justify-between">
+                  <div className="flex-1 pr-4">
+                    <div className="flex gap-2 mb-3">
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
+                      >
+                        {selectedCourse.category}
+                      </span>
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
+                      >
+                        {selectedCourse.level}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      {selectedCourse.title}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setSelectedCourse(null)}
+                    className="text-gray-400 hover:text-gray-600 transition"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {selectedCourse.category}
-                    </span>
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white border border-gray-200 ${categoryStyles[selectedCourse.category].text}`}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                {/* --- 모달 끝 --- */}
+
+                <div className="px-8 py-6">
+                  <div className="flex items-center text-cyan-600 mb-6">
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {selectedCourse.level}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span className="font-semibold">
+                      {selectedCourse.duration}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    {selectedCourse.title}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setSelectedCourse(null)}
-                  className="text-gray-400 hover:text-gray-600 transition"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              {/* --- 모달 끝 --- */}
 
-              <div className="px-8 py-6">
-                <div className="flex items-center text-cyan-600 mb-6">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="font-semibold">{selectedCourse.duration}</span>
-                </div>
+                  {selectedCourse.description && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                        과정 소개
+                      </h4>
+                      <p className="text-gray-700 leading-relaxed">
+                        {selectedCourse.description}
+                      </p>
+                    </div>
+                  )}
 
-                {selectedCourse.description && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
-                      과정 소개
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed">{selectedCourse.description}</p>
-                  </div>
-                )}
-
-                {selectedCourse.curriculum && selectedCourse.curriculum.length > 0 && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
-                      커리큘럼
-                    </h4>
-                    <div className="space-y-2">
-                      {selectedCourse.curriculum.map((item, idx) => (
-                        <div key={idx} className="flex items-start">
-                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mr-3 flex-shrink-0 mt-0.5">
-                            {idx + 1}
-                          </span>
-                          <span className="text-gray-700">{item}</span>
+                  {selectedCourse.curriculum &&
+                    selectedCourse.curriculum.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                          커리큘럼
+                        </h4>
+                        <div className="space-y-2">
+                          {selectedCourse.curriculum.map((item, idx) => (
+                            <div key={idx} className="flex items-start">
+                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mr-3 flex-shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="text-gray-700">{item}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                      </div>
+                    )}
 
-                {selectedCourse.tools && selectedCourse.tools.length > 0 && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
-                      사용 기술
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedCourse.tools.map((tool, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium"
-                        >
-                          {tool}
-                        </span>
-                      ))}
+                  {selectedCourse.tools && selectedCourse.tools.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                        사용 기술
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedCourse.tools.map((tool, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                <button
-                  onClick={() => {
-                    if (!selectedCourse.isRegistrationOpen) {
-                      alert('아직 수강신청 기간이 아닙니다.\n곧 오픈 예정이니 조금만 기다려주세요!');
-                      return;
-                    }
-                    if (selectedCourse.formUrl) {
-                      window.open(selectedCourse.formUrl, '_blank');
-                    }
-                  }}
-                  className={`w-full font-bold py-4 rounded-xl transition-colors duration-200 mt-8 ${
-                    selectedCourse.isRegistrationOpen
-                      ? 'bg-[#1F92DF] hover:bg-cyan-600 text-white cursor-pointer'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  }`}
-                >
-                  {selectedCourse.isRegistrationOpen ? '수강 신청하기' : '수강 신청 준비중'}
-                </button>
+                  <button
+                    onClick={() => {
+                      if (!selectedCourse.isRegistrationOpen) {
+                        alert(
+                          "아직 수강신청 기간이 아닙니다.\n곧 오픈 예정이니 조금만 기다려주세요!",
+                        );
+                        return;
+                      }
+                      if (selectedCourse.formUrl) {
+                        window.open(selectedCourse.formUrl, "_blank");
+                      }
+                    }}
+                    className={`w-full font-bold py-4 rounded-xl transition-colors duration-200 mt-8 ${
+                      selectedCourse.isRegistrationOpen
+                        ? "bg-[#1F92DF] hover:bg-cyan-600 text-white cursor-pointer"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    }`}
+                  >
+                    {selectedCourse.isRegistrationOpen
+                      ? "수강 신청하기"
+                      : "수강 신청 준비중"}
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>,
-          document.body 
-        )}
+            </div>,
+            document.body,
+          )}
       </div>
     </section>
   );
