@@ -6,6 +6,11 @@ type SpaceData = {
     title: string;
     subtitle: string;
   };
+  video: {
+    title: string;
+    description: string;
+    url: string;
+  };
   overview: {
     title: string;
     subtitle: string;
@@ -21,8 +26,38 @@ type SpaceData = {
 
 const spaceData = data as SpaceData;
 
+function getYoutubeEmbedUrl(url: string) {
+  try {
+    const parsedUrl = new URL(url);
+
+    // https://youtu.be/VIDEO_ID
+    if (parsedUrl.hostname === "youtu.be") {
+      const videoId = parsedUrl.pathname.replace("/", "");
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // https://www.youtube.com/watch?v=VIDEO_ID
+    if (
+      parsedUrl.hostname === "www.youtube.com" ||
+      parsedUrl.hostname === "youtube.com"
+    ) {
+      const videoId = parsedUrl.searchParams.get("v");
+
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    return url;
+  } catch {
+    return url;
+  }
+}
+
 export default function DreamAiSpacePage() {
-  const { hero, overview, gallery } = spaceData;
+  const { hero, video, overview, gallery } = spaceData;
+
+  const youtubeEmbedUrl = getYoutubeEmbedUrl(video.url);
 
   return (
     <>
@@ -36,53 +71,79 @@ export default function DreamAiSpacePage() {
         }
 
         .space-hero {
-          margin-bottom: 3rem;
+          margin-bottom: 2.5rem;
         }
 
         .space-label {
           display: inline-block;
-          font-size: 12px;
-          font-weight: 600;
+          font-size: 13px;
+          font-weight: 700;
           color: #174B8A;
           background: #E6F1FB;
           border: 1px solid #B9D7F3;
           border-radius: 999px;
-          padding: 5px 12px;
+          padding: 6px 13px;
           margin-bottom: 1rem;
         }
 
         .space-title {
-          font-size: 42px;
+          font-size: 44px;
           font-weight: 700;
           color: #111;
-          margin: 0 0 0.75rem;
+          margin: 0 0 0.85rem;
           letter-spacing: -0.04em;
+          line-height: 1.2;
         }
 
         .space-subtitle {
-          font-size: 16px;
-          color: #777;
+          font-size: 18px;
+          color: #666;
           margin: 0;
-          line-height: 1.6;
+          line-height: 1.7;
         }
 
         .space-section {
-          margin-bottom: 3rem;
+          margin-bottom: 3.5rem;
         }
 
         .section-title {
-          font-size: 22px;
+          font-size: 25px;
           font-weight: 700;
           color: #111;
-          margin: 0 0 0.5rem;
+          margin: 0 0 0.65rem;
           letter-spacing: -0.03em;
+          line-height: 1.4;
         }
 
         .section-desc {
-          font-size: 14px;
-          color: #777;
-          margin: 0 0 1.25rem;
-          line-height: 1.7;
+          font-size: 16px;
+          color: #666;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+        }
+
+        .video-card {
+          width: 100%;
+          background: #000;
+          border: 1px solid #E3E5E8;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .video-wrap {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          background: #000;
+        }
+
+        .video-frame {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
         }
 
         .overview-card {
@@ -93,29 +154,31 @@ export default function DreamAiSpacePage() {
         }
 
         .overview-text {
-          padding: 1.5rem 1.75rem;
+          padding: 1.75rem 2rem;
         }
 
         .overview-title {
-          font-size: 20px;
+          font-size: 24px;
           font-weight: 700;
           color: #111;
-          margin: 0 0 0.4rem;
+          margin: 0 0 0.5rem;
           letter-spacing: -0.03em;
+          line-height: 1.4;
         }
 
         .overview-subtitle {
-          font-size: 14px;
+          font-size: 16px;
           color: #174B8A;
-          margin: 0 0 0.75rem;
+          margin: 0 0 0.85rem;
           font-weight: 600;
+          line-height: 1.6;
         }
 
         .overview-desc {
-          font-size: 14px;
-          color: #777;
+          font-size: 16px;
+          color: #666;
           margin: 0;
-          line-height: 1.7;
+          line-height: 1.8;
         }
 
         .overview-image-wrap {
@@ -155,12 +218,52 @@ export default function DreamAiSpacePage() {
             padding: 3rem 1rem 4rem;
           }
 
+          .space-hero {
+            margin-bottom: 2rem;
+          }
+
           .space-title {
-            font-size: 34px;
+            font-size: 36px;
+          }
+
+          .space-subtitle {
+            font-size: 16px;
+          }
+
+          .section-title {
+            font-size: 22px;
+          }
+
+          .section-desc {
+            font-size: 15px;
+          }
+
+          .overview-text {
+            padding: 1.5rem;
+          }
+
+          .overview-title {
+            font-size: 21px;
+          }
+
+          .overview-subtitle {
+            font-size: 15px;
+          }
+
+          .overview-desc {
+            font-size: 15px;
+          }
+
+          .space-section {
+            margin-bottom: 3rem;
           }
 
           .gallery-list {
             gap: 1rem;
+          }
+
+          .video-card {
+            border-radius: 14px;
           }
         }
       `}</style>
@@ -170,6 +273,23 @@ export default function DreamAiSpacePage() {
           <span className="space-label">{hero.label}</span>
           <h1 className="space-title">{hero.title}</h1>
           <p className="space-subtitle">{hero.subtitle}</p>
+        </section>
+
+        <section className="space-section">
+          <h2 className="section-title">{video.title}</h2>
+          <p className="section-desc">{video.description}</p>
+
+          <div className="video-card">
+            <div className="video-wrap">
+              <iframe
+                className="video-frame"
+                src={youtubeEmbedUrl}
+                title={video.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
         </section>
 
         <section className="space-section">

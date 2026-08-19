@@ -4,6 +4,13 @@
     "title": "Dream-AI SPACE",
     "subtitle": "광주과학기술원 AI대학원 AI 교육·체험 공간"
   },
+
+ "video": {
+    "title": "Dream-AI SPACE 소개 영상",
+    "description": "Dream-AI SPACE의 공간을 영상으로 만나보세요.",
+    "url": "https://youtu.be/IN5zMivVlUE?si=fhIpJHuciQZ9CFx5"
+  },
+
   "overview": {
     "title": "Dream-AI SPACE 2026",
     "subtitle": "광주과학기술원 AI대학원",
@@ -22,8 +29,7 @@
       "/images/space/슬라이드7.png",
       "/images/space/슬라이드8.png",
       "/images/space/슬라이드9.png",
-      "/images/space/슬라이드10.png",
-      "/images/space/슬라이드11.png"
+      "/images/space/슬라이드10.png"
     ]
   }
 }
