@@ -111,7 +111,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '22일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '17일', past: true },  // 9월 — 불가
+      { label: '18일', past: true },  // 9월 — 불가
       null,                           // 10월
       { label: '25일', past: true },  // 11월 — 불가
       null,                           // 12월
@@ -127,7 +127,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '23일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '18일', past: true },  // 9월 — 불가
+      { label: '19일', past: true },  // 9월 — 불가
       null,                           // 10월
       { label: '26일', past: true },  // 11월 — 불가
       null,                           // 12월
@@ -187,8 +187,8 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       { label: '28일', past: true },                // 5월 — 신청 가능(보라)
       { label: '23일', past: true },     // 6월 
       { label: '28일', past: true },     // 7월
-      { label: '19일(수)' },     // 8월
-      { label: '', pending: true },
+      { label: '19일', past: true },     // 8월
+      { label: '21일(월)',  },
       { label: '2일', pending: true },     // 10월 
       { label: '', pending: true },
       { label: '4일', pending: true },     // 12월 
