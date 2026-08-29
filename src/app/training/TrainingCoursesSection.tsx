@@ -319,7 +319,7 @@ export default function TrainingCoursesSection() {
       {/* Background Glow Effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-[300px] left-1/2 -translate-x-1/2 w-[1800px] h-[200px] rounded-full opacity-20 blur-[200px]"
+          className="absolute top-75 left-1/2 -translate-x-1/2 w-[1800px] h-50 rounded-full opacity-20 blur-[200px]"
           style={{
             background:
               "radial-gradient(circle, #00C896 0%, #00A47C 30%, #E6F7F2 50%, transparent 80%)",
@@ -376,7 +376,7 @@ export default function TrainingCoursesSection() {
                 key={course.id}
                 className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-gray-200 flex flex-col group"
               >
-                <div className="relative w-full h-40 bg-gradient-to-br from-gray-50 to-gray-100">
+                <div className="relative w-full h-40 bg-linear-to-br from-gray-50 to-gray-100">
                   {course.imageUrl ? (
                     <img
                       src={course.imageUrl}
@@ -417,8 +417,8 @@ export default function TrainingCoursesSection() {
                   </div>
                 </div>
 
-                <div className="p-4 flex flex-col flex-grow">
-                  <h3 className="text-base font-bold text-gray-900 mb-3 leading-tight flex-grow line-clamp-2">
+                <div className="p-4 flex flex-col grow">
+                  <h3 className="text-base font-bold text-gray-900 mb-3 leading-tight grow line-clamp-2">
                     {course.title}
                   </h3>
 
@@ -468,7 +468,7 @@ export default function TrainingCoursesSection() {
           mounted &&
           createPortal(
             <div
-              className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999] p-4"
+              className="fixed inset-0 bg-black/70 flex items-center justify-center z-9999 p-4"
               onClick={() => setSelectedCourse(null)}
             >
               <div
@@ -555,7 +555,7 @@ export default function TrainingCoursesSection() {
                         <div className="space-y-2">
                           {selectedCourse.curriculum.map((item, idx) => (
                             <div key={idx} className="flex items-start">
-                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mr-3 flex-shrink-0 mt-0.5">
+                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mr-3 shrink-0 mt-0.5">
                                 {idx + 1}
                               </span>
                               <span className="text-gray-700">{item}</span>

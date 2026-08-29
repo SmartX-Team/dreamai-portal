@@ -50,13 +50,13 @@ const Training2025 = () => {
 
       <div className="w-full mx-auto mb-16">
         <div className="relative bg-gray-50 rounded-xl overflow-hidden">
-          <div className="relative aspect-[16/9] overflow-hidden">
+          <div className="relative aspect-video overflow-hidden">
             <div 
               className="flex transition-transform duration-500 ease-in-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {curriculumImages.map((item) => (
-                <div key={item.id} className="min-w-full h-full flex-shrink-0">
+                <div key={item.id} className="min-w-full h-full shrink-0">
                   <img
                     src={item.image}
                     alt={item.alt}
@@ -114,12 +114,12 @@ const Training2025 = () => {
         <div className="overflow-hidden">
           <div className="animate-scroll flex gap-4">
             {duplicatedGallery.map((item, index) => (
-              <div key={`${item.id}-${index}`} className="flex-shrink-0 w-64">
+              <div key={`${item.id}-${index}`} className="shrink-0 w-64">
                 <div className="overflow-hidden rounded-lg">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full aspect-[4/3] object-cover"
+                    className="w-full aspect-4/3 object-cover"
                   />
                 </div>
                 <p className="mt-2 text-sm text-gray-700 line-clamp-2">

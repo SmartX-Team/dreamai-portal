@@ -111,7 +111,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '22일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '18일', past: true },  // 9월 — 불가
+      { label: '18일(금)' },  // 9월 — 불가
       null,                           // 10월
       { label: '25일', past: true },  // 11월 — 불가
       null,                           // 12월
@@ -127,7 +127,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '23일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '19일', past: true },  // 9월 — 불가
+      { label: '19일(토)', },  // 9월 — 불가
       null,                           // 10월
       { label: '26일', past: true },  // 11월 — 불가
       null,                           // 12월
@@ -155,7 +155,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '23일', past: true }, // 6월
-      null, { label: '27일(목)', past: false }, null, null, null, null,
+      null, { label: '27일', past: true }, null, null, null, null,
     ],
   },
   {
@@ -164,7 +164,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '24일', past: true }, // 6월
-      null, { label: '28일(금)', past: false }, null, null, null, null,
+      null, { label: '28일', past: true }, null, null, null, null,
     ],
   },
   {
@@ -173,7 +173,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '25일', past: true }, // 6월
-      null, { label: '29일(토)', past: false }, null, null, null, null,
+      null, { label: '29일', past: true }, null, null, null, null,
     ],
   },
   {
@@ -211,7 +211,7 @@ function PosterImage({ src, alt }: { src?: string; alt: string }) {
     );
   }
   return (
-    <div className="w-full max-w-lg aspect-[3/4] rounded-xl bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-2 text-gray-400 text-sm">
+    <div className="w-full max-w-lg aspect-3/4 rounded-xl bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-2 text-gray-400 text-sm">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-10 h-10 opacity-40"
@@ -273,7 +273,7 @@ function SectionPanel({
               <div className="flex flex-col gap-4">
                 {details.map((d, idx) => (
                   <div key={idx} className="flex gap-3 leading-relaxed">
-                    <div className="text-gray-700 font-semibold text-sm min-w-[110px] flex-shrink-0">
+                    <div className="text-gray-700 font-semibold text-sm min-w-27.5 shrink-0">
                       {d.label}:
                     </div>
                     <div className="text-gray-900 text-sm flex-1">{d.value}</div>
@@ -402,11 +402,11 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
         </p>
         <ul className="space-y-1">
           <li className="text-sm text-gray-700 flex gap-2">
-            <span className="text-amber-500 font-bold flex-shrink-0">•</span>
+            <span className="text-amber-500 font-bold shrink-0">•</span>
             모든 교육 과정은 개강 3주 전 월요일부터 신청이 가능합니다.
           </li>
           <li className="text-sm text-gray-700 flex gap-2">
-            <span className="text-amber-500 font-bold flex-shrink-0">•</span>
+            <span className="text-amber-500 font-bold shrink-0">•</span>
             원하시는 과정의 날짜 버튼을 클릭하시면 해당 신청 페이지로 바로 이동합니다.
           </li>
         </ul>
@@ -415,7 +415,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
       {/* ── 수강 일정표 ── */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse min-w-[800px]">
+          <table className="w-full border-collapse min-w-200">
             <thead>
               <tr className="bg-[#1E3A5F]">
                 <th className="px-3 py-3 text-sm font-semibold text-white text-center whitespace-nowrap w-24">
@@ -481,7 +481,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
                         }`} />
                       ) : cell.past ? (
                         /* 신청 불가 — 회색 pill (target 무관하게 동일) */
-                        <span className="inline-flex items-center justify-center min-w-[46px] px-2.5 py-1 rounded-full text-[12px] font-semibold cursor-default whitespace-nowrap bg-gray-100 text-gray-400">
+                        <span className="inline-flex items-center justify-center min-w-11.5 px-2.5 py-1 rounded-full text-[12px] font-semibold cursor-default whitespace-nowrap bg-gray-100 text-gray-400">
                           {cell.label}
                         </span>
                       ) : (
@@ -489,7 +489,7 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
                         <button
                           type="button"
                           onClick={() => handleBadgeClick(row.target)}
-                          className={`inline-flex items-center justify-center min-w-[46px] px-2.5 py-1 rounded-full text-[12px] font-semibold text-white whitespace-nowrap hover:-translate-y-0.5 hover:shadow-md transition-all duration-150 ${
+                          className={`inline-flex items-center justify-center min-w-11.5 px-2.5 py-1 rounded-full text-[12px] font-semibold text-white whitespace-nowrap hover:-translate-y-0.5 hover:shadow-md transition-all duration-150 ${
                             row.target === 'agent-ai'
                               ? 'bg-[#7C3AED]'   // Agent AI — 보라
                               : 'bg-[#1F92DF]'   // DT & Robot — 파랑
@@ -509,13 +509,13 @@ export default function TrainingCheckinSection({ data }: TrainingCheckinSectionP
         {/* Legend */}
         <div className="flex items-center gap-5 px-5 py-3 border-t border-gray-100 bg-gray-50 flex-wrap">
           <div className="flex items-center gap-2 text-xs text-gray-600">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1F92DF] flex-shrink-0" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#7C3AED] flex-shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1F92DF] shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#7C3AED] shrink-0" />
             신청 가능 일정
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-600">
-            <span className="w-8 h-1.5 rounded-full bg-blue-200 flex-shrink-0" />
-            <span className="w-8 h-1.5 rounded-full bg-purple-200 flex-shrink-0" />
+            <span className="w-8 h-1.5 rounded-full bg-blue-200 shrink-0" />
+            <span className="w-8 h-1.5 rounded-full bg-purple-200 shrink-0" />
             신청 일정 미정
           </div>
         </div>
