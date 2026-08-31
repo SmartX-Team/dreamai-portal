@@ -188,7 +188,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       { label: '23일', past: true },     // 6월 
       { label: '28일', past: true },     // 7월
       { label: '19일', past: true },     // 8월
-      { label: '21일(월)',  },
+      { label: '12일(월)',  },
       { label: '2일', pending: true },     // 10월 
       { label: '', pending: true },
       { label: '4일', pending: true },     // 12월 
