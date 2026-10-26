@@ -27,11 +27,11 @@ const pptSection = trainingData.sections[5] as Section;
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <div className="flex justify-center mb-[30px]">
+      <div className="flex justify-center mb-7.5">
         <img
           src={trainingData.titleimg}
           alt={trainingData.title}
-          className="w-full max-w-[200px] h-auto"
+          className="w-full max-w-50 h-auto"
           style={{ objectFit: "contain" }}
         />
       </div>
