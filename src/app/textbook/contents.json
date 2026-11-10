@@ -6,7 +6,7 @@
     },
     {
       "id": "page2",
-      "items": ["ml", "llm", "data_eng", "twin", "genai"]
+      "items": ["ml", "llm", "data_eng", "twin", "genai","agenticai"]
     },
     {
       "id": "page3",
@@ -47,6 +47,11 @@
       {
         "id": "epilogue",
         "hrefPdf": "https://drive.google.com/file/d/18lpl672vwJnpxoivtQBAx8h0MTiUoGZ1/view?usp=drive_link"
+      }
+      ,
+      {
+        "id": "agenticai",
+        "hrefPdf": "https://drive.google.com/file/d/1p8DgnFFmzGxtnzMQ3L3jBAEtS-nuDZyf/view?usp=sharing"
       },
       {
         "id": "ml",
