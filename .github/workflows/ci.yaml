@@ -3,9 +3,6 @@ name: CI/CD to Kubernetes
 on:
   push:
     branches: [codex/dreamai-visual-editor]
-    paths-ignore:
-      - '.github/workflows/editor-bootstrap.yaml'
-      - 'deployment/editor-password.enc'
   workflow_dispatch:
     inputs:
       target:

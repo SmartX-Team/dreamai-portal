@@ -9,7 +9,7 @@
 
 ## 첫 배포
 
-- 두 Deployment가 동시에 접근할 수 있는 **`dreamai-editor-content` PVC**를 준비합니다. 파일 잠금용 디렉터리 생성과 원자적 이름 변경을 지원해야 합니다. 시험판 컨테이너의 UID 1001에는 쓰기 권한이 필요합니다. 데모는 읽기 전용으로 마운트합니다.
+- 두 Deployment가 동시에 접근할 수 있는 **`dreamai-editor-content` PVC**의 정의는 `deployment/kubernetes/editor-content-claim.yaml`에 있습니다. 기존 CephFS 클래스에 1 GiB를 요청합니다. 시험판 컨테이너의 UID 1001에는 쓰기 권한이 필요합니다. 데모는 읽기 전용으로 마운트합니다.
 - `dreamai` 네임스페이스에 로컬 `password.txt`를 파일 키로 사용하는 **`dreamai-editor-password` Secret**을 만듭니다. 비밀번호 파일을 Git이나 컨테이너 이미지에 넣지 않습니다.
 - 시험판 Harbor 이미지 경로는 기존 이미지 경로 뒤에 `-trial`을 붙입니다. 다른 경로가 필요하면 GitHub 저장소의 `DREAMAI_TRIAL_IMAGE` 변수로 지정합니다. 레지스트리 접속에는 기존 Harbor 자격 증명을 사용합니다.
 - GitHub `trial`과 `demo` 환경의 전용 자격 증명은 `DREAMAI_RELEASE_K8S_CONFIG` Secret에 보관합니다. 처음 시험판을 연결할 때는 기존 GitHub Actions의 `K8S_CONFIG`를 시험판 확인과 배포에 사용할 수 있습니다. 데모 컨테이너 이름은 `frontend`입니다. 해당 자격 증명에는 각 환경에 필요한 최소 Kubernetes 권한을 부여합니다.
