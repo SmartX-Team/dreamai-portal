@@ -6,7 +6,7 @@ import { useEffect, useEffectEvent, useId, useRef, useState, type FormEvent } fr
 import { pageNames, portalPageForPath, type Field, type PortalPage } from "./registry";
 import { EditMarkers, matchFields, normalize, PencilIcon } from "./edit-markers";
 import { WidgetEditor } from "./widget-editor";
-import { defaultWidgets, isWidgetZone, widgetZones, type Widget, type WidgetLayouts, type WidgetZone } from "./widgets";
+import { defaultWidgets, isWidgetZone, moveWidget, widgetZones, type Widget, type WidgetLayouts, type WidgetZone } from "./widgets";
 import styles from "./editor.module.css";
 
 type Draft = { fields: Field[]; revision: string; published: boolean; canPublish: boolean; releaseSite: string; layouts: WidgetLayouts };
@@ -137,6 +137,7 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
   const router = useRouter();
   const [open, setOpen] = useState(workspace);
   const [pane, setPane] = useState(false);
+  const [arranging, setArranging] = useState(false);
   const [draft, setDraft] = useState<Draft>();
   const [selected, setSelected] = useState<string>();
   const [adding, setAdding] = useState(false);
@@ -206,8 +207,26 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
     setOpen(false);
   }
 
+  function moveOnCanvas(source: string, destination: number | string) {
+    if (!draft) return;
+    const [, key, id] = source.split(":");
+    if (!isWidgetZone(key) || widgetZones[key].page !== page) return;
+    let target = destination;
+    if (typeof destination === "string") {
+      const [, targetZone, targetId] = destination.split(":");
+      if (targetZone !== key) return;
+      target = targetId;
+    }
+    setError("");
+    setLayoutChanges((current) => {
+      const items = current[key] ?? draft.layouts[key] ?? defaultWidgets(key);
+      const result = moveWidget(items, id, target);
+      return result === items ? current : { ...current, [key]: result };
+    });
+  }
+
   useEffect(() => {
-    if (!open || !draft) return;
+    if (!open || !draft || arranging) return;
     const fields = draft.fields;
     function locate(event: MouseEvent) {
       if (!(event.target instanceof Element) || !event.target.closest("#portal-page")) return;
@@ -222,7 +241,7 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
     }
     document.addEventListener("click", locate, true);
     return () => document.removeEventListener("click", locate, true);
-  }, [open, draft]);
+  }, [open, draft, arranging]);
 
   async function mutate(action: "save" | "course" | "layout" | "publish" | "logout", data?: object) {
     if (pending || (!draft && action !== "logout")) return;
@@ -296,6 +315,11 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
     <button type="button" className={pane ? styles.primary : styles.publish} disabled={dirty || pending || draft.published}
       title={draft.releaseSite} onClick={() => void mutate("publish")}>배포하기</button>
   ) : null;
+  const arrangeButton = (
+    <button type="button" aria-pressed={arranging} onClick={() => setArranging((value) => !value)}>
+      화면 배치
+    </button>
+  );
 
   if (!open) return <button type="button" className={styles.launch} onClick={() => { setOpen(true); void load(); }}>
     <PencilIcon /> 페이지 편집
@@ -303,14 +327,16 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
 
   return (
     <>
-    {draft && <EditMarkers fields={draft.fields} paneVisible={pane} selected={selected} onSelect={select} />}
+    {draft && <EditMarkers fields={draft.fields} paneVisible={pane} layout={arranging}
+      selected={widget && zone ? `widget:${zone}:${widget}` : selected} onSelect={select} onMove={moveOnCanvas} />}
     {!pane && publishButton}
     {!pane && <div className={styles.toolbar} aria-label="편집 도구">
       {!draft && !error && <span role="status">편집 항목을 불러오는 중…</span>}
-      {draft && <span>화면의 연필을 눌러 수정</span>}
+      {draft && <span>{arranging ? "손잡이를 끌거나 Alt + 방향키로 이동" : "화면의 연필을 눌러 수정"}</span>}
       {error && <span role="alert">{error}</span>}
       {error && <button type="button" onClick={() => void load()}>다시 시도</button>}
       {draft && <button type="button" onClick={showList}>편집 항목</button>}
+      {draft && arrangeButton}
       {dirty && <span role="status">자동 저장 대기 중</span>}
       {notice && <span role="status" className={styles.success}>{notice}</span>}
       <button type="button" disabled={dirty || pending} onClick={showPreview}>미리보기</button>
@@ -320,6 +346,7 @@ function EditorPanel({ login, page, workspace }: { login: string; page: PortalPa
       <header className={styles.header}>
         <div><p>DreamAI 시험판</p><h2>페이지 편집</h2></div>
         {publishButton}
+        {arrangeButton}
         <button type="button" onClick={() => setPane(false)} aria-label="편집 패널 닫기">닫기</button>
       </header>
       <div className={styles.body}>

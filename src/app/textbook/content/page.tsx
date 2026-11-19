@@ -1,5 +1,6 @@
 "use client";
 
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,10 +66,10 @@ function Content() {
     <div className="grid justify-center pt-8">
       <PageWidgets zone="textbook.detail" nodes={{
         links: (
-          <div className="flex justify-end gap-4 pe-8">{links}</div>
+          <div {...widgetTarget("textbook.detail", "links")} className="flex justify-end gap-4 pe-8">{links}</div>
         ),
         cover: (
-          <div className="flex justify-center max-w-330">
+          <div {...widgetTarget("textbook.detail", "cover")} className="flex justify-center max-w-330">
         <Image
           src={`/images/textbook/contents/${content.id}.png`}
           alt={`${content.id}`}

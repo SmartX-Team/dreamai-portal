@@ -1,3 +1,4 @@
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { readPortalPage } from "@/lib/portal-content/server";
 import TrainingCheckinSection from "./TrainingCheckinSection";
@@ -31,7 +32,7 @@ const pptSection = trainingData.sections[5] as Section;
     <div className="max-w-7xl mx-auto px-6 py-12">
       <PageWidgets zone="training.page" nodes={{
         logo: (
-          <div className="flex justify-center mb-7.5">
+          <div {...widgetTarget("training.page", "logo")} className="flex justify-center mb-7.5">
         <img
           src={trainingData.titleimg}
           alt={trainingData.title}
@@ -41,15 +42,15 @@ const pptSection = trainingData.sections[5] as Section;
       </div>
         ),
         contact: (
-          <h1 className="text-[18px] text-gray-500 text-right font-medium mb-4">
+          <h1 {...widgetTarget("training.page", "contact")} className="text-[18px] text-gray-500 text-right font-medium mb-4">
   {trainingData.email}
 </h1>
         ),
         divider: (
-          <hr className="my-4 border-t border-gray-300" />
+          <hr {...widgetTarget("training.page", "divider")} className="my-4 border-t border-gray-300" />
         ),
         introduction: (
-          <p className="text-gray-700 leading-relaxed mb-8">
+          <p {...widgetTarget("training.page", "introduction")} className="text-gray-700 leading-relaxed mb-8">
   {trainingData.explain}
 </p>
         ),
@@ -58,7 +59,7 @@ const pptSection = trainingData.sections[5] as Section;
           <TrainingCheckinSection data={checkin} />
         ),
         spacer: (
-          <div className="h-8"></div>
+          <div {...widgetTarget("training.page", "spacer")} className="h-8"></div>
         ),
         /* 여백 추가  h-16 - 64px h-24 - 96px h-32 - 128px h-40 - 160px h-48 - 192px*/
         /* 훈련 과정 */

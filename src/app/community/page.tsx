@@ -1,5 +1,6 @@
 "use client";
 
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { useState } from "react";
 import { usePortalPage } from "@/lib/portal-content/provider";
@@ -105,13 +106,13 @@ function FacultySectionBlock({
     <section className="section">
       <PageWidgets zone="community.faculty" nodes={{
         title: (
-          <div className="section-header section-header-blue">
+          <div {...widgetTarget("community.faculty", "title")} className="section-header section-header-blue">
             <h2 className="section-title">{editableCopy["FacultySectionBlock 문구 1"]}</h2>
             <span className="section-count">{totalCount}명</span>
           </div>
         ),
         groups: (
-          <div className="faculty-groups">
+          <div {...widgetTarget("community.faculty", "groups")} className="faculty-groups">
             {section.groups.map((group) => (
               <div className="faculty-group" key={group.id}>
                 <div className="group-heading">
@@ -176,7 +177,7 @@ function AmbassadorSectionBlock({
     <section className="section">
       <PageWidgets zone="community.ambassador" nodes={{
         title: (
-          <div className="section-header section-header-green">
+          <div {...widgetTarget("community.ambassador", "title")} className="section-header section-header-green">
             <h2 className="section-title">{editableCopy["AmbassadorSectionBlock 문구 1"]}</h2>
 
             <span className="section-count">
@@ -185,7 +186,7 @@ function AmbassadorSectionBlock({
           </div>
         ),
         cohorts: (
-          <div className="cohort-toolbar">
+          <div {...widgetTarget("community.ambassador", "cohorts")} className="cohort-toolbar">
             <div
               className="cohort-tabs"
               role="tablist"
@@ -222,7 +223,7 @@ function AmbassadorSectionBlock({
           </div>
         ),
         teams: (
-          <div className="cohort-content">
+          <div {...widgetTarget("community.ambassador", "teams")} className="cohort-content">
             {activeCohort.teams.map(
               (team, teamIdx) => {
                 const teamCount = team.roles.reduce(
@@ -666,10 +667,10 @@ export default function CommunityPage() {
       <main className="community-page">
         <PageWidgets zone="community.page" nodes={{
           title: (
-            <h1 className="page-title">{editableCopy["CommunityPage 문구 1"]}</h1>
+            <h1 {...widgetTarget("community.page", "title")} className="page-title">{editableCopy["CommunityPage 문구 1"]}</h1>
           ),
           description: (
-            <p className="page-subtitle">
+            <p {...widgetTarget("community.page", "description")} className="page-subtitle">
           {editableCopy["CommunityPage 문구 2"]}</p>
           ),
           teams: (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Field } from "./registry";
 import styles from "./editor.module.css";
 
@@ -62,17 +62,20 @@ export function matchFields(target: Element, fields: Field[]) {
   return [];
 }
 
-function getMarkers(root: HTMLElement, fields: Field[], panel: HTMLElement | null) {
+function getMarkers(root: HTMLElement, fields: Field[], panel: HTMLElement | null, layout: boolean) {
   const index = fieldIndex(fields);
   const panelBounds = panel?.getBoundingClientRect();
   const width = document.documentElement.clientWidth;
   const height = document.documentElement.clientHeight;
-  const candidates = new Set(root.querySelectorAll("[data-portal-field], [data-portal-widget], img, [style*='background-image'], h1, h2, h3, h4, p, figcaption"));
-  const textNodes = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  while (textNodes.nextNode()) {
-    const node = textNodes.currentNode;
-    if (node.parentElement && node.nodeValue?.trim() && !node.parentElement.closest("script,style,template")) {
-      candidates.add(node.parentElement);
+  const candidates = new Set(root.querySelectorAll(layout ? "[data-portal-widget]" :
+    "[data-portal-field], [data-portal-widget], img, [style*='background-image'], h1, h2, h3, h4, p, figcaption"));
+  if (!layout) {
+    const textNodes = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    while (textNodes.nextNode()) {
+      const node = textNodes.currentNode;
+      if (node.parentElement && node.nodeValue?.trim() && !node.parentElement.closest("script,style,template")) {
+        candidates.add(node.parentElement);
+      }
     }
   }
 
@@ -81,8 +84,8 @@ function getMarkers(root: HTMLElement, fields: Field[], panel: HTMLElement | nul
   for (const element of candidates) {
     const widget = element.getAttribute("data-portal-widget");
     const matches = elementFields(element, index);
-    if (!widget && matches.length !== 1) continue;
-    const { id, label } = widget
+    if (layout ? !widget : !widget && matches.length !== 1) continue;
+    const { id, label } = widget && (layout || matches.length !== 1)
       ? { id: widget, label: element.getAttribute("data-portal-widget-name") ?? "위젯" }
       : matches[0];
     if (handled.has(id)) continue;
@@ -111,13 +114,16 @@ function getMarkers(root: HTMLElement, fields: Field[], panel: HTMLElement | nul
   return markers;
 }
 
-export function EditMarkers({ fields, paneVisible, selected, onSelect }: {
+export function EditMarkers({ fields, paneVisible, selected, onSelect, layout, onMove }: {
   fields: Field[];
   paneVisible: boolean;
   selected?: string;
   onSelect: (id: string) => void;
+  layout: boolean;
+  onMove: (id: string, destination: number | string) => void;
 }) {
   const [markers, setMarkers] = useState<Marker[]>([]);
+  const dragged = useRef<string>(null);
   useEffect(() => {
     const root = document.getElementById("portal-page");
     if (!root) return;
@@ -125,7 +131,7 @@ export function EditMarkers({ fields, paneVisible, selected, onSelect }: {
     let frame = 0;
     const refresh = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setMarkers(getMarkers(root, fields, panel)));
+      frame = requestAnimationFrame(() => setMarkers(getMarkers(root, fields, panel, layout)));
     };
     const mutations = new MutationObserver(refresh);
     mutations.observe(root, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["src", "style", "class"] });
@@ -142,12 +148,29 @@ export function EditMarkers({ fields, paneVisible, selected, onSelect }: {
       window.removeEventListener("resize", refresh);
       window.removeEventListener("scroll", refresh, true);
     };
-  }, [fields, paneVisible]);
+  }, [fields, paneVisible, layout]);
 
   return markers.map(({ id, label, x, y }) => (
-    <button key={id} type="button" className={styles.marker} aria-label={`${label} 수정`} title={`${label} 수정`}
-      aria-pressed={selected === id} style={{ left: x, top: y }} onClick={() => onSelect(id)}>
-      <PencilIcon />
+    <button key={id} type="button" className={styles.marker} aria-label={`${label} ${layout ? "배치" : "수정"}`}
+      title={layout ? `${label} 이동 · 끌어놓기 또는 Alt + 방향키` : `${label} 수정`}
+      draggable={layout} aria-pressed={selected === id} style={{ left: x, top: y }} onClick={() => onSelect(id)}
+      onDragStart={(event) => { dragged.current = id; event.dataTransfer.setData("text/plain", id); }}
+      onDragEnd={() => { dragged.current = null; }}
+      onDragOver={(event) => {
+        if (dragged.current?.split(":")[1] === id.split(":")[1]) event.preventDefault();
+      }}
+      onDrop={(event) => {
+        if (!dragged.current || !layout) return;
+        event.preventDefault();
+        onMove(dragged.current, id);
+        dragged.current = null;
+      }}
+      onKeyDown={(event) => {
+        if (!layout || !event.altKey || !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
+        event.preventDefault();
+        onMove(id, ["ArrowUp", "ArrowLeft"].includes(event.key) ? -1 : 1);
+      }}>
+      {layout ? <span aria-hidden="true">⠿</span> : <PencilIcon />}
     </button>
   ));
 }

@@ -1,3 +1,4 @@
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import Link from "next/link";
 import Image from "next/image";
@@ -36,7 +37,7 @@ export default async function RootLayout({
             <div className="flex flex-1 items-center space-x-4">
               <PageWidgets zone="header.left" nodes={{
                 gist: (
-                  <Link href={editableCopy["RootLayout 링크 1"]}>
+                  <Link {...widgetTarget("header.left", "gist")} href={editableCopy["RootLayout 링크 1"]}>
                 <Image
                   src={editableCopy["RootLayout 이미지 1"]}
                   alt="GIST 로고"
@@ -46,7 +47,7 @@ export default async function RootLayout({
               </Link>
                 ),
                 aigs: (
-                  <Link href={editableCopy["RootLayout 링크 2"]} target="_blank">
+                  <Link {...widgetTarget("header.left", "aigs")} href={editableCopy["RootLayout 링크 2"]} target="_blank">
                 <Image
                   src={editableCopy["RootLayout 이미지 2"]}
                   alt="AIGS"
@@ -60,7 +61,7 @@ export default async function RootLayout({
             <div className="flex items-center space-x-4">
               <PageWidgets zone="header.right" nodes={{
                 scent: (
-                  <Link href={editableCopy["RootLayout 링크 3"]} target="_blank">
+                  <Link {...widgetTarget("header.right", "scent")} href={editableCopy["RootLayout 링크 3"]} target="_blank">
                 <Image
                   src={editableCopy["RootLayout 이미지 3"]}
                   alt="슈퍼컴퓨팅센터"
@@ -70,7 +71,7 @@ export default async function RootLayout({
               </Link>
                 ),
                 khp: (
-                  <Link href={editableCopy["RootLayout 링크 4"]} target="_blank">
+                  <Link {...widgetTarget("header.right", "khp")} href={editableCopy["RootLayout 링크 4"]} target="_blank">
                 <Image
                   src={editableCopy["RootLayout 이미지 4"]}
                   alt="KHP"

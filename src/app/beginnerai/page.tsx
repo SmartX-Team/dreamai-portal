@@ -1,3 +1,4 @@
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import Image from "next/image";
 import { readPortalPage } from "@/lib/portal-content/server";
@@ -12,7 +13,7 @@ export default async function BeginnerAIPage() {
         {/* Header */}
         <PageWidgets zone="beginner.page" nodes={{
           hero: (
-            <header className="mb-8">
+            <header {...widgetTarget("beginner.page", "hero")} className="mb-8">
           <h1 className="text-5xl font-bold text-gray-900 text-center">
             {data.title}
           </h1>
@@ -27,7 +28,7 @@ export default async function BeginnerAIPage() {
           ),
           /* 구조도 이미지 */
           diagram: (
-            <div className="flex justify-center mb-3">
+            <div {...widgetTarget("beginner.page", "diagram")} className="flex justify-center mb-3">
           <Image
             src={data.image.src}
             alt={data.image.alt}
@@ -40,13 +41,13 @@ export default async function BeginnerAIPage() {
           ),
           /* 중앙 정렬된 Beginner-AI 문단 */
           intro: (
-            <div className="text-sm text-gray-800 leading-relaxed text-center mb-10">
+            <div {...widgetTarget("beginner.page", "intro")} className="text-sm text-gray-800 leading-relaxed text-center mb-10">
           <p>{data.info.detail}</p>
         </div>
           ),
           /* 카드 */
           pod: (
-            <div className="flex justify-center">
+            <div {...widgetTarget("beginner.page", "pod")} className="flex justify-center">
           <div className="max-w-sm w-full bg-white rounded-xl shadow-md border-t-4 border-blue-500 p-6 text-center">
             {/* 아이콘 + 제목 + 버튼 */}
             <div className="flex flex-wrap items-center justify-center gap-2 mb-2">

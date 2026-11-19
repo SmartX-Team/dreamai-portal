@@ -1,5 +1,6 @@
 "use client";
 
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { usePortalPage } from "@/lib/portal-content/provider";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import React, { useState, useEffect } from "react"; // useEffect
@@ -75,7 +76,7 @@ export default function TrainingCoursesSection({ courses }: { courses: Course[] 
         {/* Header */}
         <PageWidgets zone="training.catalog" nodes={{
           title: (
-            <div className="mb-12 text-center">
+            <div {...widgetTarget("training.catalog", "title")} className="mb-12 text-center">
               <h2
                 className="text-4xl font-bold text-gray-900 mb-3"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
@@ -87,7 +88,7 @@ export default function TrainingCoursesSection({ courses }: { courses: Course[] 
             </div>
           ),
           filters: (
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <div {...widgetTarget("training.catalog", "filters")} className="flex flex-wrap justify-center gap-3 mb-12">
               {categories.map((cat) => {
                 const isSelected = selectedCategory === cat;
                 const style = categoryStyles[cat];
@@ -114,7 +115,7 @@ export default function TrainingCoursesSection({ courses }: { courses: Course[] 
             </div>
           ),
           cards: (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div {...widgetTarget("training.catalog", "cards")} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {/* 카드 디자인 영역 */}
               {filteredCourses.map((course) => {
                 const style = categoryStyles[course.category];

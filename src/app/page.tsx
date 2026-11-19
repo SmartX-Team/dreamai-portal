@@ -1,4 +1,5 @@
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
+import { getZoneItems, widgetTarget, type WidgetZone } from "@/lib/portal-content/widgets";
 import { readPortalPage } from "@/lib/portal-content/server";
 import { portalFieldId } from "@/lib/portal-content/registry";
 import Link from "next/link";
@@ -51,19 +52,8 @@ export default async function HomePage() {
     ((dreamData as { reservationButtons?: ReservationButton[] })
       .reservationButtons ?? []);
 
-  // 좌측 버튼 그룹
-  const leftGroups = [
-    dreamData.catalog.categoriesLeft.slice(5),
-    dreamData.catalog.categoriesLeft.slice(0, 3),
-    dreamData.catalog.categoriesLeft.slice(3, 5),
-  ];
-
-  // 우측 버튼 그룹
-  const rightGroups = [
-    dreamData.catalog.categoriesRight.slice(0, 1), // AIGS
-    dreamData.catalog.categoriesRight.slice(1, 2), // ScaleX
-    dreamData.catalog.categoriesRight.slice(2, 5), // Beginner-AI, SCENT, Dream-AI
-  ];
+  const left = dreamData.catalog.categoriesLeft;
+  const right = dreamData.catalog.categoriesRight;
 
   // 좌우 메뉴 전체 높이
   const sideColumnClass =
@@ -72,7 +62,8 @@ export default async function HomePage() {
   // 그룹 내부는 버튼끼리 붙게
   const groupClass = "flex flex-col items-center gap-0";
 
-  function drawItem(item: Item, idx: number) {
+  function drawItem(item: Item, zone: WidgetZone, slot: string) {
+    const target = widgetTarget(zone, slot);
     const width = "w-40";
     let height;
 
@@ -93,27 +84,27 @@ export default async function HomePage() {
 
     if (item.imageUrl) {
       element = (
-        <div key={idx} className={`relative ${width} ${height}`}>
+        <div {...target} className={`relative ${width} ${height}`}>
           <Image src={item.imageUrl} alt={item.title ?? item.name} fill />
         </div>
       );
     } else if (item.title) {
       element = (
         <div
-          key={idx}
+          {...target}
           className={`bg-blue-100 p-4 rounded shadow text-center ${width} ${height}`}
         >
           <div className="text-sm font-bold">{item.title}</div>
         </div>
       );
     } else {
-      element = <div key={idx} />;
+      element = <div {...target} />;
     }
 
     if (item.url) {
       element = (
         <Link
-          key={idx}
+          {...target}
           href={item.url}
           target={item.url.startsWith("http") ? "_blank" : undefined}
         >
@@ -125,19 +116,20 @@ export default async function HomePage() {
     return element;
   }
 
-  function drawGroup(group: Item[], groupIdx: number) {
+  function drawGroup(zone: WidgetZone, items: Item[], target?: ReturnType<typeof widgetTarget>) {
     return (
-      <div key={groupIdx} className={groupClass}>
-        {group.map(drawItem)}
+      <div {...target} className={groupClass}>
+        <PageWidgets zone={zone} nodes={Object.fromEntries(getZoneItems(zone).map(([key], index) =>
+          [key, drawItem(items[index], zone, key)]))} />
       </div>
     );
   }
 
-  function drawReservationButton(item: ReservationButton, index: number) {
+  function drawReservationButton(item: ReservationButton, index: number, slot: string) {
     const centerLast = reservationButtons.length % 2 === 1 && index === reservationButtons.length - 1;
     const cardClasses = "relative h-[92px] w-full transition-transform duration-200 ease-out hover:-translate-y-1";
     return (
-      <div key={item.name} className={cardClasses + (centerLast ? " sm:col-span-2 sm:mx-auto sm:w-1/2" : "")}>
+      <div {...widgetTarget("home.reservations", slot)} className={cardClasses + (centerLast ? " sm:col-span-2 sm:mx-auto sm:w-1/2" : "")}>
         <Link href={item.titleUrl} aria-label={item.title + " 페이지로 이동"}
           className="absolute inset-0 rounded-[10px] border border-[#E5E7EB] bg-white shadow-[0_3px_10px_rgba(0,0,0,0.06)] transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]" />
         <div className="pointer-events-none relative z-10 flex h-full w-full items-center justify-between gap-3 px-5 sm:px-7">
@@ -159,7 +151,7 @@ export default async function HomePage() {
       {/* 상단 중앙 HeroImage */}
       <PageWidgets zone="home.page" nodes={{
         hero: (
-          <section className="flex w-full justify-center py-8">
+          <section {...widgetTarget("home.page", "hero")} className="flex w-full justify-center py-8">
         <div className="w-full max-w-[500px]">
           {dreamData.hero.imageUrl && heroElement}
         </div>
@@ -167,28 +159,32 @@ export default async function HomePage() {
         ),
         /* 메인 콘텐츠 영역 */
         directory: (
-          <section className="bg-white pt-10">
+          <section {...widgetTarget("home.page", "directory")} className="bg-white pt-10">
         <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_4fr_1fr]">
           {/* 좌측 */}
           <PageWidgets zone="home.directory" nodes={{
             left: (
-              <div className={sideColumnClass}>
-            {leftGroups.map(drawGroup)}
+              <div {...widgetTarget("home.directory", "left")} className={sideColumnClass}>
+            <PageWidgets zone="home.left" nodes={{
+              training: drawGroup("home.left.training", left.slice(5), widgetTarget("home.left", "training")),
+              resources: drawGroup("home.left.resources", left.slice(0, 3), widgetTarget("home.left", "resources")),
+              community: drawGroup("home.left.community", left.slice(3, 5), widgetTarget("home.left", "community")),
+            }} />
           </div>
             ),
             /* 중앙 */
             center: (
-              <div className="flex h-[800px] w-full flex-col items-center px-4 pt-4">
+              <div {...widgetTarget("home.directory", "center")} className="flex h-[800px] w-full flex-col items-center px-4 pt-4">
             {/* 비디오 제목 */}
             <PageWidgets zone="home.center" nodes={{
               title: (
-                <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
+                <h2 {...widgetTarget("home.center", "title")} className="mb-6 text-center text-2xl font-bold text-gray-800">
                   {dreamData.video.name}
                 </h2>
               ),
               /* 유튜브 영상 */
               video: (
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
+                <div {...widgetTarget("home.center", "video")} className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
                   <iframe
                     src={`https://www.youtube.com/embed/${
                       dreamData.video.url.split("/").pop()?.split("?")[0]
@@ -201,8 +197,9 @@ export default async function HomePage() {
               ),
               /* SPACE / ANNEX 버튼 영역 */
               reservations: (
-                <div className="mt-auto grid w-full grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
-                  {reservationButtons.map(drawReservationButton)}
+                <div {...widgetTarget("home.center", "reservations")} className="mt-auto grid w-full grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
+                  <PageWidgets zone="home.reservations" nodes={Object.fromEntries(getZoneItems("home.reservations").map(([slot], index) =>
+                    [slot, drawReservationButton(reservationButtons[index], index, slot)]))} />
                 </div>
               ),
             }} />
@@ -210,8 +207,12 @@ export default async function HomePage() {
             ),
             /* 우측 */
             right: (
-              <div className={sideColumnClass}>
-            {rightGroups.map(drawGroup)}
+              <div {...widgetTarget("home.directory", "right")} className={sideColumnClass}>
+            <PageWidgets zone="home.right" nodes={{
+              aigs: <div {...widgetTarget("home.right", "aigs")} className={groupClass}>{drawItem(right[0], "home.right", "aigs")}</div>,
+              scalex: <div {...widgetTarget("home.right", "scalex")} className={groupClass}>{drawItem(right[1], "home.right", "scalex")}</div>,
+              projects: drawGroup("home.right.projects", right.slice(2), widgetTarget("home.right", "projects")),
+            }} />
           </div>
             ),
           }} />
@@ -220,7 +221,7 @@ export default async function HomePage() {
         ),
         /* AD 배너 */
         promotion: (
-          <section className="mb-32 mt-20 bg-white">
+          <section {...widgetTarget("home.page", "promotion")} className="mb-32 mt-20 bg-white">
         <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-4 md:grid-cols-[1fr_4fr_1fr]">
           {/* 중앙 영상/SPACE/ANNEX 영역과 동일한 가로폭으로 맞춤 */}
           <div className="w-full px-4 md:col-start-2">
@@ -234,15 +235,15 @@ export default async function HomePage() {
               {/* 왼쪽 텍스트 영역 */}
               <PageWidgets zone="home.promotion" nodes={{
                 text: (
-                  <div className="z-10 flex h-full w-[58%] flex-col items-start justify-center whitespace-nowrap pl-[8%]">
+                  <div {...widgetTarget("home.promotion", "text")} className="z-10 flex h-full w-[58%] flex-col items-start justify-center whitespace-nowrap pl-[8%]">
                 <PageWidgets zone="home.promotion.copy" nodes={{
                   subheading: (
-                    <div data-portal-field={portalFieldId("adBanner", "subTitle")} style={{ color: "#000000", fontSize: "1.55cqw" }}>
+                    <div {...widgetTarget("home.promotion.copy", "subheading")} data-portal-field={portalFieldId("adBanner", "subTitle")} style={{ color: "#000000", fontSize: "1.55cqw" }}>
                       {dreamData.adBanner.subTitle}
                     </div>
                   ),
                   heading: (
-                    <div
+                    <div {...widgetTarget("home.promotion.copy", "heading")}
                       data-portal-field={portalFieldId("adBanner", "mainTitle")}
                       style={{
                         color: "#075F9A",
@@ -255,7 +256,7 @@ export default async function HomePage() {
                     </div>
                   ),
                   schedule: (
-                    <div
+                    <div {...widgetTarget("home.promotion.copy", "schedule")}
                       data-portal-field={portalFieldId("adBanner", "schedule")}
                       style={{ color: "#4B5563", fontSize: "1.25cqw" }}
                       className="mb-[1.3cqw]"
@@ -264,7 +265,7 @@ export default async function HomePage() {
                     </div>
                   ),
                   button: (
-                    <Link
+                    <Link {...widgetTarget("home.promotion.copy", "button")}
                       data-portal-field={portalFieldId("adBanner", "buttonText")}
                       href={dreamData.adBanner.buttonUrl}
                       style={{
@@ -282,7 +283,7 @@ export default async function HomePage() {
                 ),
                 /* 오른쪽 이미지 영역 */
                 image: (
-                  <div className="absolute right-0 top-0 flex h-full w-[42%] items-center justify-end pr-[4%]">
+                  <div {...widgetTarget("home.promotion", "image")} className="absolute right-0 top-0 flex h-full w-[42%] items-center justify-end pr-[4%]">
                 <div className="relative h-[88%] w-full">
                   <Image
                     data-portal-field={portalFieldId("adBanner", "imageUrl")}
@@ -302,10 +303,10 @@ export default async function HomePage() {
       </section>
         ),
         footer: (
-          <footer className="relative w-full bg-zinc-900 py-8 text-2xl text-zinc-300">
+          <footer {...widgetTarget("home.page", "footer")} className="relative w-full bg-zinc-900 py-8 text-2xl text-zinc-300">
         <PageWidgets zone="home.footer" nodes={{
           info: (
-            <div className="mx-auto max-w-screen-xl px-4 text-center">
+            <div {...widgetTarget("home.footer", "info")} className="mx-auto max-w-screen-xl px-4 text-center">
               <div className="leading-none">{dreamData.footer.copyright}</div>
               <div className="text-xl leading-none">
                 <br />

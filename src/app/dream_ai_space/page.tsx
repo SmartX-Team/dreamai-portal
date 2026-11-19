@@ -1,3 +1,4 @@
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { readPortalPage } from "@/lib/portal-content/server";
 
@@ -273,14 +274,14 @@ export default async function DreamAiSpacePage() {
       <main className="space-page">
         <PageWidgets zone="space.page" nodes={{
           hero: (
-            <section className="space-hero">
+            <section {...widgetTarget("space.page", "hero")} className="space-hero">
           <span className="space-label">{hero.label}</span>
           <h1 className="space-title">{hero.title}</h1>
           <p className="space-subtitle">{hero.subtitle}</p>
         </section>
           ),
           video: (
-            <section className="space-section">
+            <section {...widgetTarget("space.page", "video")} className="space-section">
           <h2 className="section-title">{video.title}</h2>
           <p className="section-desc">{video.description}</p>
 
@@ -298,7 +299,7 @@ export default async function DreamAiSpacePage() {
         </section>
           ),
           overview: (
-            <section className="space-section">
+            <section {...widgetTarget("space.page", "overview")} className="space-section">
           <div className="overview-card">
             <div className="overview-text">
               <h2 className="overview-title">{overview.title}</h2>
@@ -317,7 +318,7 @@ export default async function DreamAiSpacePage() {
         </section>
           ),
           gallery: (
-            <section className="space-section">
+            <section {...widgetTarget("space.page", "gallery")} className="space-section">
           <h2 className="section-title">{gallery.title}</h2>
           <p className="section-desc">{gallery.description}</p>
 

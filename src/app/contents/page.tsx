@@ -1,5 +1,6 @@
 "use client";
 
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { useState, useEffect, useCallback } from "react";
 import { usePortalPage } from "@/lib/portal-content/provider";
@@ -60,12 +61,12 @@ function HeroSection() {
     <section style={s.heroWrapper}>
       <PageWidgets zone="content.hero" nodes={{
         previous: (
-          <button onClick={prev} style={s.heroArrow}>
+          <button {...widgetTarget("content.hero", "previous")} onClick={prev} style={s.heroArrow}>
             ‹
           </button>
         ),
         card: (
-          <div style={s.heroCard}>
+          <div {...widgetTarget("content.hero", "card")} style={s.heroCard}>
             <img
               src={slides[cur].image}
               alt={`slide-${slides[cur].id}`}
@@ -89,7 +90,7 @@ function HeroSection() {
           </div>
         ),
         next: (
-          <button onClick={next} style={s.heroArrow}>
+          <button {...widgetTarget("content.hero", "next")} onClick={next} style={s.heroArrow}>
             ›
           </button>
         ),
@@ -162,10 +163,10 @@ function CoursesSection() {
     <section style={s.section}>
       <PageWidgets zone="content.courses" nodes={{
         title: (
-          <h2 style={s.sectionTitle}>{editableCopy["CoursesSection 문구 1"]}</h2>
+          <h2 {...widgetTarget("content.courses", "title")} style={s.sectionTitle}>{editableCopy["CoursesSection 문구 1"]}</h2>
         ),
         tabs: (
-          <div style={s.pillRow}>
+          <div {...widgetTarget("content.courses", "tabs")} style={s.pillRow}>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -178,7 +179,7 @@ function CoursesSection() {
           </div>
         ),
         screenshot: (
-          <div style={s.imgWrap}>
+          <div {...widgetTarget("content.courses", "screenshot")} style={s.imgWrap}>
             <img key={active} src={images[active]} alt={active} style={s.fullImg} />
           </div>
         ),

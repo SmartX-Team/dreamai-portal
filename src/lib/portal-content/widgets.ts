@@ -3,7 +3,14 @@ export const widgetZones = {
   "header.right": { page: "/", name: "공통 머리글 오른쪽", slots: { scent: "SCENT 로고 링크", khp: "한국산업인력공단 로고 링크" } },
   "home.page": { page: "/", name: "홈 화면", slots: { hero: "대표 포스터", directory: "포털 메뉴와 동영상", promotion: "홍보 배너", footer: "공통 안내와 링크" } },
   "home.directory": { page: "/", name: "홈 포털 메뉴", slots: { left: "왼쪽 메뉴", center: "소개 영상과 예약", right: "오른쪽 메뉴" } },
+  "home.left": { page: "/", name: "왼쪽 메뉴 묶음", slots: { training: "훈련·행사", resources: "학습 자료", community: "커뮤니티" } },
+  "home.left.training": { page: "/", name: "훈련·행사 링크", slots: { training: "훈련", newsac: "디지털새싹", events: "행사", npu: "NPU Training" } },
+  "home.left.resources": { page: "/", name: "학습 자료 링크", slots: { contents: "콘텐츠", lms: "LMS", textbook: "교재" } },
+  "home.left.community": { page: "/", name: "커뮤니티 링크", slots: { community: "커뮤니티", ambassador: "AI Ambassador" } },
+  "home.right": { page: "/", name: "오른쪽 메뉴 묶음", slots: { aigs: "AIGS", scalex: "ScaleX", projects: "프로젝트 링크" } },
+  "home.right.projects": { page: "/", name: "오른쪽 프로젝트 링크", slots: { beginner: "Beginner AI", scent: "SCENT", dream: "Dream AI" } },
   "home.center": { page: "/", name: "홈 중앙 안내", slots: { title: "소개 영상 제목", video: "소개 동영상", reservations: "시설 예약 버튼" } },
+  "home.reservations": { page: "/", name: "시설별 예약 카드", slots: { space: "SPACE 예약", annex: "ANNEX 예약", livingLab: "Living Lab 예약" } },
   "home.promotion": { page: "/", name: "홍보 배너", slots: { text: "홍보 문구와 신청 링크", image: "홍보 이미지" } },
   "home.promotion.copy": { page: "/", name: "홍보 배너 문구", slots: { subheading: "부제", heading: "제목", schedule: "일정", button: "신청 버튼" } },
   "home.footer": { page: "/", name: "홈 하단 안내", slots: { info: "저작권과 사업자 정보", links: "하단 링크" } },
@@ -62,6 +69,23 @@ export function getZoneItems(zone: WidgetZone) {
 
 export function defaultWidgets(zone: WidgetZone): Widget[] {
   return getZoneItems(zone).map(([slot]) => ({ id: slot, type: "existing", slot }));
+}
+
+export function widgetTarget(zone: WidgetZone, slot: string) {
+  return {
+    "data-portal-widget": `widget:${zone}:${slot}`,
+    "data-portal-widget-name": widgetLabel(zone, { id: slot, type: "existing", slot }),
+  };
+}
+
+export function moveWidget(items: Widget[], id: string, destination: number | string): Widget[] {
+  const from = items.findIndex((item) => item.id === id);
+  const to = typeof destination === "number" ? from + destination : items.findIndex((item) => item.id === destination);
+  if (from < 0 || to < 0 || to >= items.length || from === to) return items;
+  const result = [...items];
+  const [item] = result.splice(from, 1);
+  result.splice(to, 0, item);
+  return result;
 }
 
 export function widgetLabel(zone: WidgetZone, widget: Widget) {

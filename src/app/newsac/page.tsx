@@ -1,3 +1,4 @@
+import { widgetTarget } from "@/lib/portal-content/widgets";
 import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { readPortalPage } from "@/lib/portal-content/server";
 
@@ -26,7 +27,7 @@ export default async function NewSacPage() {
       {/*상단 로고 */}
       <PageWidgets zone="newsac.page" nodes={{
         logo: (
-          <div className="flex flex-col items-center mb-8">
+          <div {...widgetTarget("newsac.page", "logo")} className="flex flex-col items-center mb-8">
         <div className="flex items-center justify-center gap-4 mb-6">
           <img
             src={content.logoImage}
@@ -38,7 +39,7 @@ export default async function NewSacPage() {
         ),
         /* {content.introductionTitle} */
         intro: (
-          <section className="mb-16">
+          <section {...widgetTarget("newsac.page", "intro")} className="mb-16">
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-1">
             <span className="text-2xl">🌱</span>
@@ -115,7 +116,7 @@ export default async function NewSacPage() {
       </section> */
         /* 🔸 캠프 추억 영상 (유튜브 + mp4) */
         memories: (
-          <section className="mb-16">
+          <section {...widgetTarget("newsac.page", "memories")} className="mb-16">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl">🎞️</span>
           <h2 className="text-xl font-bold text-gray-700">
@@ -153,7 +154,7 @@ export default async function NewSacPage() {
       </section>
         ),
         space: (
-          <section className="mb-16">
+          <section {...widgetTarget("newsac.page", "space")} className="mb-16">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl">🎞️</span>
           <h2 className="text-xl font-bold text-gray-700">
@@ -181,20 +182,20 @@ export default async function NewSacPage() {
         ),
         /* 캠프 안내 및 신청 */
         registration: (
-          <section className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+          <section {...widgetTarget("newsac.page", "registration")} className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
         <PageWidgets zone="newsac.registration" nodes={{
           title: (
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <h2 {...widgetTarget("newsac.registration", "title")} className="text-2xl font-bold text-gray-800 mb-4">
               {content.registrationTitle}
             </h2>
           ),
           introduction: (
-            <p className="text-lg text-gray-700 mb-6">
+            <p {...widgetTarget("newsac.registration", "introduction")} className="text-lg text-gray-700 mb-6">
               {content.registration}
             </p>
           ),
           details: (
-            <ul className="text-gray-700 text-base mb-6">
+            <ul {...widgetTarget("newsac.registration", "details")} className="text-gray-700 text-base mb-6">
               <h2>
                 <li className="font-semibold">{content.period}</li>
                 <li>{content.firstDate}</li>
@@ -205,7 +206,7 @@ export default async function NewSacPage() {
             </ul>
           ),
           button: (
-            <a
+            <a {...widgetTarget("newsac.registration", "button")}
               href={content.buttonUrl}
               target="_blank"
               className="inline-block bg-blue-600 text-white text-lg font-semibold px-6 py-3 rounded-lg hover:bg-blue-700"

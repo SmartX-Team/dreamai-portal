@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { defaultWidgets, getZoneItems, widgetLabel, type Widget, type WidgetType, type WidgetZone } from "./widgets";
+import { defaultWidgets, getZoneItems, moveWidget, widgetLabel, type Widget, type WidgetType, type WidgetZone } from "./widgets";
 import styles from "./editor.module.css";
 
 type Upload = (kind: "image" | "video", receive: (url: string, filename: string) => void) => ReactNode;
@@ -29,13 +29,9 @@ export function WidgetEditor({ zone, items, selected, select, update, upload }: 
     select(item.id);
   }
 
-  function reorder(id: string, target: number) {
-    const previous = items.findIndex((item) => item.id === id);
-    if (previous < 0 || target < 0 || target >= items.length || target === previous) return;
-    const next = [...items];
-    const [moved] = next.splice(previous, 1);
-    next.splice(target, 0, moved);
-    update(next);
+  function reorder(id: string, target: string | number) {
+    const next = moveWidget(items, id, target);
+    if (next !== items) update(next);
   }
 
   function change(fields: Partial<Widget>) {
@@ -59,15 +55,15 @@ export function WidgetEditor({ zone, items, selected, select, update, upload }: 
               onDrop={(event) => {
                 if (!dragged.current) return;
                 event.preventDefault();
-                reorder(dragged.current, index);
+                reorder(dragged.current, item.id);
                 dragged.current = null;
               }}>
               <button type="button" draggable aria-label={`${name} 위치 이동`} className={styles.handle}
                 onDragStart={(event) => { dragged.current = item.id; event.dataTransfer.setData("text/plain", item.id); }}
                 onDragEnd={() => { dragged.current = null; }}>⠿</button>
               <button type="button" aria-pressed={selected === item.id} onClick={() => select(item.id)}>{name}</button>
-              <button type="button" aria-label={`${name} 위로 이동`} disabled={index === 0} onClick={() => reorder(item.id, index - 1)}>↑</button>
-              <button type="button" aria-label={`${name} 아래로 이동`} disabled={index === items.length - 1} onClick={() => reorder(item.id, index + 1)}>↓</button>
+              <button type="button" aria-label={`${name} 위로 이동`} disabled={index === 0} onClick={() => reorder(item.id, -1)}>↑</button>
+              <button type="button" aria-label={`${name} 아래로 이동`} disabled={index === items.length - 1} onClick={() => reorder(item.id, 1)}>↓</button>
             </li>
           );
         })}
