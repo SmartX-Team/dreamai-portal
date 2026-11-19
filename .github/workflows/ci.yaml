@@ -117,6 +117,8 @@ jobs:
           password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
       - name: Use the trial deployment's existing registry access
+        id: trial_registry_access
+        continue-on-error: true
         if: env.TARGET == 'trial' && steps.harbor.outcome == 'failure'
         run: |
           registry="${TRIAL_IMAGE%%/*}"
@@ -146,6 +148,10 @@ jobs:
           done
           echo "::error::Harbor rejected the configured credentials and the trial deployment has no usable registry credential."
           exit 1
+
+      - name: Start the authenticated trial registry
+        if: env.TARGET == 'trial' && steps.harbor.outcome == 'failure' && steps.trial_registry_access.outcome == 'failure'
+        run: bash deployment/prepare-trial-registry.sh
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -188,8 +194,8 @@ jobs:
           esac
           reference="$IMAGE:latest@$DIGEST"
           if [[ "$TARGET" == "trial" ]]; then
-            patch=$(jq -n --arg container "$CONTAINER" --arg image "$reference" '{
-              spec: { template: { spec: {
+            patch=$(jq -n --arg container "$CONTAINER" --arg image "$reference" --arg pull "${TRIAL_PULL_SECRET:-}" '{
+              spec: { template: { spec: ({
                 securityContext: {fsGroup: 1001, fsGroupChangePolicy: "OnRootMismatch"},
                 containers: [{
                   name: $container, image: $image,
@@ -209,7 +215,7 @@ jobs:
                   {name: "portal-editor-content", persistentVolumeClaim: {claimName: "dreamai-editor-content"}},
                   {name: "portal-editor-password", secret: {secretName: "dreamai-editor-password"}}
                 ]
-              } } }
+              } + (if $pull == "" then {} else {imagePullSecrets:[{name:$pull}]} end)) } }
             }')
             kubectl -n dreamai patch "deployment/$DEPLOYMENT" --type strategic -p "$patch"
           elif [[ "$TARGET" == "demo" ]]; then
@@ -256,3 +262,5 @@ jobs:
         run: |
           rm -f "$RUNNER_TEMP/dreamai-kubeconfig" "$RUNNER_TEMP/dreamai-trial.html" "$RUNNER_TEMP/dreamai-registry-config/config.json"
           if [[ -d "$RUNNER_TEMP/dreamai-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-registry-config"; fi
+          rm -f "$RUNNER_TEMP/dreamai-trial-registry-config/config.json"
+          if [[ -d "$RUNNER_TEMP/dreamai-trial-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-trial-registry-config"; fi

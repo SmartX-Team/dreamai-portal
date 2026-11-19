@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dreamai-editor-registry
+  namespace: dreamai
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      level: warn
+    storage:
+      filesystem:
+        rootdirectory: /var/lib/registry
+      maintenance:
+        uploadpurging:
+          enabled: true
+          age: 1h
+          interval: 15m
+    http:
+      addr: :5000
+      relativeurls: true
+    auth:
+      htpasswd:
+        realm: DreamAI trial containers
+        path: /run/registry-auth/htpasswd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamai-editor-registry
+  namespace: dreamai
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: dreamai-editor-registry
+  template:
+    metadata:
+      labels:
+        app: dreamai-editor-registry
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: registry
+          image: docker.io/library/registry:latest
+          args: ["serve", "/etc/distribution/config.yml"]
+          env:
+            - name: REGISTRY_HTTP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: dreamai-editor-registry-auth
+                  key: http-secret
+          ports:
+            - name: registry
+              containerPort: 5000
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: "1"
+              memory: 256Mi
+          readinessProbe:
+            tcpSocket:
+              port: registry
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: config
+              mountPath: /etc/distribution/config.yml
+              subPath: config.yml
+              readOnly: true
+            - name: auth
+              mountPath: /run/registry-auth
+              readOnly: true
+            - name: content
+              mountPath: /var/lib/registry
+              subPath: container-registry
+      volumes:
+        - name: config
+          configMap:
+            name: dreamai-editor-registry
+        - name: auth
+          secret:
+            secretName: dreamai-editor-registry-auth
+            items:
+              - key: htpasswd
+                path: htpasswd
+        - name: content
+          persistentVolumeClaim:
+            claimName: dreamai-editor-content
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dreamai-editor-registry
+  namespace: dreamai
+spec:
+  selector:
+    app: dreamai-editor-registry
+  ports:
+    - port: 5000
+      targetPort: registry
