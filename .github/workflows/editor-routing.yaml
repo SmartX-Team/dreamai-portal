@@ -1,63 +1,59 @@
-name: Inspect and reconcile the trial editor route
+name: Activate the trial editor and demo
 on:
   push:
     branches: [codex/dreamai-visual-editor]
     paths: ['.github/workflows/editor-routing.yaml']
 permissions:
   contents: read
+concurrency:
+  group: dreamai-container-release
+  cancel-in-progress: false
 jobs:
-  inspect:
+  activate:
     runs-on: ubuntu-latest
     environment: trial
     steps:
+      - uses: actions/checkout@v4
       - uses: azure/setup-kubectl@v3
-      - name: Compare the trial workload and its public route
+      - name: Start the deployed container entry point
         env:
           CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG || secrets.K8S_CONFIG }}
         run: |
           umask 077
           directory=$(mktemp -d)
-          tunnel=
-          trap 'if [[ -n "$tunnel" ]]; then kill "$tunnel" 2>/dev/null || true; fi; rm -f "$directory/kubeconfig" "$directory/tunnel" "$directory/preview"; rmdir "$directory"' EXIT
+          trap 'rm -f "$directory/kubeconfig" "$directory/trial.html"; rmdir "$directory"' EXIT
           export KUBECONFIG="$directory/kubeconfig"
           printf '%s\n' "$CONFIG" > "$KUBECONFIG"
-          kubectl -n dreamai get deployment dreamai-test -o json | jq '{
-            status: {ready: .status.readyReplicas, replicas: .status.replicas},
-            labels: .spec.selector,
-            containers: [.spec.template.spec.containers[] | {name,image,ports,editorConfig: [.env[]? | select(.name | startswith("DREAMAI_")) | .name]}]}'
-          kubectl -n dreamai get ingress -o json | jq --arg host dreamai.mobilex.kr '
-            .items[] | select(any(.spec.rules[]?; .host == $host)) | {
-              name:.metadata.name, routes:[.spec.rules[] | select(.host==$host) | .http.paths[] | {path,pathType,backend}]}'
-          kubectl -n dreamai get httproutes -o json 2>/dev/null | jq --arg host dreamai.mobilex.kr '
-            .items[] | select(any(.spec.hostnames[]?; .==$host)) | {name:.metadata.name, routes:.spec.rules}' || true
-          kubectl -n dreamai get services -o json | jq '.items[] | {name:.metadata.name, selector:.spec.selector, ports:.spec.ports}'
-          kubectl -n dreamai get pods -l app=dreamai-test -o json | jq '{
-            pods: [.items[] | {name:.metadata.name,owner:.metadata.ownerReferences[0].name,
-              containers:[.spec.containers[] | {name,image,workingDir,
-                commandCount:(.command // [] | length), argsCount:(.args // [] | length),volumeMounts}],
-              status:[.status.containerStatuses[]? | {name,imageID,ready}]}]}'
-          kubectl -n dreamai get endpointslices -l kubernetes.io/service-name=dreamai-test -o json |
-            jq '[.items[].endpoints[]? | {pod:.targetRef.name,ready:.conditions.ready}]'
-          kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
-            const fs=require("node:fs");
-            const configured=process.env.DREAMAI_EDITOR_PASSWORD_FILE;
-            const proc=fs.readFileSync("/proc/1/cmdline","utf8");
-            console.log(JSON.stringify({cwd:process.cwd(),mode:process.env.DREAMAI_CONTENT_MODE,
-              configuredLoginFile:!!configured,loginFilePresent:!!configured&&fs.existsSync(configured),
-              entrypointLooksStandalone:proc.includes("server.js")||proc.includes("next-server"),
-              editorRouteBuilt:fs.existsSync(".next/server/app/api/portal-content") }));'
-          kubectl -n dreamai port-forward deployment/dreamai-test 9311:3000 > "$directory/tunnel" 2>&1 &
-          tunnel=$!
+          trial=$(kubectl -n dreamai get deployment dreamai-test -o json)
+          reference=$(jq -er '.spec.template.spec.containers[] | select(.name=="frontend") | .image' <<< "$trial")
+          expected="dreamai.mobilex.kr/dreamai-portal-trial:latest@sha256:19860d95458b31a481f131f8eb58161f1eccd216f8e5bb46b0554c8703527ba5"
+          test "$reference" = "$expected"
+          kubectl -n dreamai patch deployment/dreamai-test --type strategic -p \
+            '{"spec":{"template":{"spec":{"containers":[{"name":"frontend","workingDir":"/usr/src/app","command":["node","/usr/src/app/server.js"],"args":[]}]}}}}'
+          kubectl -n dreamai rollout status deployment/dreamai-test --timeout=5m
           for attempt in {1..12}; do
-            if curl -fsS --max-time 5 http://127.0.0.1:9311/ -o "$directory/preview" 2>/dev/null; then
-              if grep -Fq 'dreamai-workspace-login' "$directory/preview"; then
-                echo 'Internal deployment renders the editor login.'
-              else
-                echo 'Internal deployment does not render the editor login.'
-              fi
-              exit 0
+            if curl -fsS --max-time 12 "https://dreamai.mobilex.kr/?editor-release=$attempt" -o "$directory/trial.html" &&
+              grep -Fq 'dreamai-workspace-login' "$directory/trial.html"; then
+              break
             fi
-            sleep 1
+            if [[ "$attempt" == 12 ]]; then
+              echo "::error::The deployed trial login did not appear at the public address."
+              exit 1
+            fi
+            sleep 3
           done
-          cat "$directory/tunnel"
-          exit 1
+          existing=$(kubectl -n dreamai get ingress -o json | jq -r '
+            .items[] | select(any(.spec.rules[]?; .host == "demo.dreamai.kr")) | .metadata.name')
+          if [[ -n "$existing" && "$existing" != dreamai-demo ]]; then
+            echo "::error::The demo address already has a different Ingress."
+            exit 1
+          fi
+          python3 -c 'import sys; print(sys.stdin.read().replace("registry.invalid/dreamai-trial:latest", sys.argv[1]), end="")' \
+            "$reference" < deployment/kubernetes/editor-demo.yaml | kubectl -n dreamai apply -f -
+          image_secrets=$(jq -c '.spec.template.spec.imagePullSecrets // []' <<< "$trial")
+          if [[ "$image_secrets" != '[]' ]]; then
+            kubectl -n dreamai patch deployment dreamai-demo --type merge -p \
+              "$(jq -n --argjson secrets "$image_secrets" '{spec:{template:{spec:{imagePullSecrets:$secrets}}}}')"
+          fi
+          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=5m
+          printf 'Trial and demo use %s\n' "$reference" >> "$GITHUB_STEP_SUMMARY"

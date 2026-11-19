@@ -202,6 +202,9 @@ jobs:
                 securityContext: {fsGroup: 1001, fsGroupChangePolicy: "OnRootMismatch"},
                 containers: [{
                   name: $container, image: $image,
+                  workingDir: "/usr/src/app",
+                  command: ["node", "/usr/src/app/server.js"],
+                  args: [],
                   env: [
                     {name: "DREAMAI_CONTENT_MODE", value: "draft"},
                     {name: "DREAMAI_CONTENT_DIR", value: "/var/lib/dreamai"},
