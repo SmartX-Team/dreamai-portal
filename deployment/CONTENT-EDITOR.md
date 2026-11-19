@@ -11,8 +11,8 @@
 
 - 두 Deployment가 동시에 접근할 수 있는 **`dreamai-editor-content` PVC**를 준비합니다. 파일 잠금용 디렉터리 생성과 원자적 이름 변경을 지원해야 합니다. 시험판 컨테이너의 UID 1001에는 쓰기 권한이 필요합니다. 데모는 읽기 전용으로 마운트합니다.
 - `dreamai` 네임스페이스에 로컬 `password.txt`를 파일 키로 사용하는 **`dreamai-editor-password` Secret**을 만듭니다. 비밀번호 파일을 Git이나 컨테이너 이미지에 넣지 않습니다.
-- GitHub 저장소의 `DREAMAI_TRIAL_IMAGE` 변수에는 시험판용 Harbor 이미지 경로를 태그 없이 입력합니다. 레지스트리 접속에는 기존 Harbor 자격 증명을 사용합니다.
-- GitHub `trial`과 `demo` 환경에 각각 `DREAMAI_RELEASE_K8S_CONFIG` Secret과 `K8S_CONTAINER_NAME` 변수를 설정합니다. 데모 컨테이너 이름은 `frontend`입니다. 해당 자격 증명에는 각 환경에 필요한 최소 Kubernetes 권한을 부여합니다.
+- 시험판 Harbor 이미지 경로는 기존 이미지 경로 뒤에 `-trial`을 붙입니다. 다른 경로가 필요하면 GitHub 저장소의 `DREAMAI_TRIAL_IMAGE` 변수로 지정합니다. 레지스트리 접속에는 기존 Harbor 자격 증명을 사용합니다.
+- GitHub `trial`과 `demo` 환경의 전용 자격 증명은 `DREAMAI_RELEASE_K8S_CONFIG` Secret에 보관합니다. 처음 시험판을 연결할 때는 기존 GitHub Actions의 `K8S_CONFIG`를 시험판 확인과 배포에 사용할 수 있습니다. 데모 컨테이너 이름은 `frontend`입니다. 해당 자격 증명에는 각 환경에 필요한 최소 Kubernetes 권한을 부여합니다.
 - `codex/dreamai-visual-editor` 브랜치의 변경은 시험판 배포를 시작합니다. 시험판 배포는 기존 `dreamai-test`에 저장소 마운트와 로그인 설정을 적용합니다. Release job 요약에서 올라간 다이제스트를 확인합니다.
 - `demo` 배포는 시험판과 같은 다이제스트로 별도 Deployment, Service 및 `demo.dreamai.kr` Ingress를 준비합니다. 시험판 Ingress의 업로드 한도는 이미지 8 MiB와 동영상 40 MiB를 수용해야 합니다.
 

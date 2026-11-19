@@ -47,9 +47,13 @@ jobs:
       CONTAINER: ${{ vars.K8S_CONTAINER_NAME }}
     steps:
       - name: Check release configuration
+        env:
+          LEGACY_IMAGE: ${{ secrets.IMAGE_NAME }}
         run: |
-          test -n "$TRIAL_IMAGE"
-          test -n "$CONTAINER"
+          if [[ -z "$TRIAL_IMAGE" ]]; then
+            TRIAL_IMAGE="${LEGACY_IMAGE:-harbor.mobilex.kr/seoin/dreamai}-trial"
+          fi
+          echo "TRIAL_IMAGE=$TRIAL_IMAGE" >> "$GITHUB_ENV"
           if [[ -n "$PRODUCTION_IMAGE" ]]; then
             test "$TRIAL_IMAGE" != "$PRODUCTION_IMAGE"
           fi
@@ -57,7 +61,6 @@ jobs:
             test -n "$PRODUCTION_IMAGE"
           fi
           if [[ "$TARGET" != "trial" ]]; then
-            test -n "$TRIAL_CONTAINER"
             [[ "$APPROVED_DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]]
           fi
 
@@ -66,6 +69,43 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: ${{ env.TARGET == 'trial' }}
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Set up kubeconfig
+        env:
+          KUBE_CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG }}
+          LEGACY_TRIAL_CONFIG: ${{ env.TARGET == 'trial' && secrets.K8S_CONFIG || '' }}
+        run: |
+          KUBE_CONFIG="${KUBE_CONFIG:-$LEGACY_TRIAL_CONFIG}"
+          if [[ -z "$KUBE_CONFIG" ]]; then
+            echo "::error::Kubernetes credentials are missing for the selected environment."
+            exit 1
+          fi
+          umask 077
+          printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/dreamai-kubeconfig"
+          echo "KUBECONFIG=$RUNNER_TEMP/dreamai-kubeconfig" >> "$GITHUB_ENV"
+
+      - name: Check trial deployment prerequisites
+        if: env.TARGET == 'trial'
+        env:
+          LEGACY_CONTAINER: ${{ secrets.K8S_DEPLOYMENT_CONTAINER_NAME }}
+        run: |
+          running=$(kubectl -n dreamai --request-timeout=15s get deployment dreamai-test -o json)
+          CONTAINER="${CONTAINER:-$LEGACY_CONTAINER}"
+          if [[ -z "$CONTAINER" ]] || ! jq -e --arg container "$CONTAINER" 'any(.spec.template.spec.containers[]; .name == $container)' <<< "$running" >/dev/null; then
+            CONTAINER=$(jq -er '[.spec.template.spec.containers[] | select(any(.ports[]?; .containerPort == 3000))] |
+              if length == 1 then .[0].name else error("Set the trial container name.") end' <<< "$running")
+          fi
+          jq -e --arg container "$CONTAINER" 'any(.spec.template.spec.containers[]; .name == $container)' <<< "$running" >/dev/null
+          echo "CONTAINER=$CONTAINER" >> "$GITHUB_ENV"
+          kubectl -n dreamai --request-timeout=15s get secret dreamai-editor-password -o name >/dev/null
+          status=$(kubectl -n dreamai --request-timeout=15s get pvc dreamai-editor-content -o jsonpath='{.status.phase}')
+          if [[ "$status" != Bound ]]; then
+            echo "::error::The dreamai-editor-content claim must be bound before deploying the editor."
+            exit 1
+          fi
 
       - name: Log in to Harbor
         uses: docker/login-action@v3
@@ -76,18 +116,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Set up kubeconfig
-        env:
-          KUBE_CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG }}
-        run: |
-          test -n "$KUBE_CONFIG"
-          umask 077
-          printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/dreamai-kubeconfig"
-          echo "KUBECONFIG=$RUNNER_TEMP/dreamai-kubeconfig" >> "$GITHUB_ENV"
 
       - name: Build and push trial latest
         id: trial
@@ -103,8 +131,10 @@ jobs:
         if: env.TARGET != 'trial'
         run: |
           kubectl -n dreamai rollout status deployment/dreamai-test --timeout=2m
-          running_image=$(kubectl -n dreamai get deployment dreamai-test -o json | jq -er \
-            --arg container "$TRIAL_CONTAINER" '.spec.template.spec.containers[] | select(.name == $container) | .image')
+          running=$(kubectl -n dreamai get deployment dreamai-test -o json)
+          running_image=$(jq -er --arg container "$TRIAL_CONTAINER" --arg image "$TRIAL_IMAGE" \
+            '.spec.template.spec.containers[] |
+              select(if $container != "" then .name == $container else (.image | startswith($image + ":latest@")) end) | .image' <<< "$running")
           test "$running_image" = "$TRIAL_IMAGE:latest@$APPROVED_DIGEST"
           if [[ "$TARGET" == "production" ]]; then
             docker buildx imagetools create --prefer-index=false --tag "$PRODUCTION_IMAGE:latest" "$TRIAL_IMAGE@$APPROVED_DIGEST"
@@ -125,9 +155,6 @@ jobs:
           esac
           reference="$IMAGE:latest@$DIGEST"
           if [[ "$TARGET" == "trial" ]]; then
-            kubectl -n dreamai get secret dreamai-editor-password -o name >/dev/null
-            status=$(kubectl -n dreamai get pvc dreamai-editor-content -o jsonpath='{.status.phase}')
-            test "$status" = Bound
             patch=$(jq -n --arg container "$CONTAINER" --arg image "$reference" '{
               spec: { template: { spec: {
                 containers: [{
@@ -156,6 +183,7 @@ jobs:
               "$reference" < deployment/kubernetes/editor-demo.yaml |
               kubectl -n dreamai apply -f -
           else
+            test -n "$CONTAINER"
             kubectl -n dreamai set image "deployment/$DEPLOYMENT" "$CONTAINER=$reference"
           fi
           kubectl -n dreamai rollout status "deployment/$DEPLOYMENT" --timeout=5m
