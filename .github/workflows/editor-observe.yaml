@@ -33,4 +33,5 @@ jobs:
               containers: [.status.containerStatuses[]? | {ready,state}] }'
           kubectl -n dreamai get events --field-selector involvedObject.kind=Pod --sort-by=.lastTimestamp |
             grep -F dreamai-editor-registry | tail -n 10 || true
-          kubectl -n dreamai logs deployment/dreamai-editor-registry --tail=10 || true
+          kubectl -n dreamai logs deployment/dreamai-editor-registry --previous --tail=80 ||
+            kubectl -n dreamai logs deployment/dreamai-editor-registry --tail=80 || true

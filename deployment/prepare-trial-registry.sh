@@ -57,7 +57,8 @@ if ! kubectl -n dreamai rollout status deployment/"$name" --timeout=2m; then
   kubectl -n dreamai get pods -l "app=$name" -o wide
   kubectl -n dreamai get events --field-selector "involvedObject.kind=Pod" --sort-by=.lastTimestamp |
     grep -F "$name" | tail -n 15 || true
-  kubectl -n dreamai logs deployment/"$name" --tail=12 || true
+  kubectl -n dreamai logs deployment/"$name" --previous --tail=65 ||
+    kubectl -n dreamai logs deployment/"$name" --tail=65 || true
   exit 1
 fi
 
