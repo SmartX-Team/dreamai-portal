@@ -108,11 +108,44 @@ jobs:
           fi
 
       - name: Log in to Harbor
+        id: harbor
+        continue-on-error: ${{ env.TARGET == 'trial' }}
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.IMAGE_REGISTRY_URL }}
           username: ${{ secrets.IMAGE_REGISTRY_USERNAME }}
           password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+
+      - name: Use the trial deployment's existing registry access
+        if: env.TARGET == 'trial' && steps.harbor.outcome == 'failure'
+        run: |
+          registry="${TRIAL_IMAGE%%/*}"
+          deployment=$(kubectl -n dreamai get deployment dreamai-test -o json)
+          running=$(jq -er --arg container "$CONTAINER" '.spec.template.spec.containers[] | select(.name == $container) | .image' <<< "$deployment")
+          if [[ "$running" != "$registry/"* ]]; then
+            echo "::error::The trial deployment uses a different registry and Harbor refused the configured credentials."
+            exit 1
+          fi
+          account=$(jq -r '.spec.template.spec.serviceAccountName // "default"' <<< "$deployment")
+          service_account=$(kubectl -n dreamai get serviceaccount "$account" -o json 2>/dev/null || printf '{}')
+          mapfile -t names < <(jq -r '.spec.template.spec.imagePullSecrets[]?.name' <<< "$deployment"
+            jq -r '.imagePullSecrets[]?.name' <<< "$service_account")
+          config="$RUNNER_TEMP/dreamai-registry-config"
+          mkdir -m 700 "$config"
+          umask 077
+          for name in "${names[@]}"; do
+            encoded=$(kubectl -n dreamai get secret "$name" -o jsonpath='{.data.\.dockerconfigjson}')
+            [[ -n "$encoded" ]] || continue
+            printf '%s' "$encoded" | base64 -d | jq -ec --arg host "$registry" \
+              '{auths: (.auths | with_entries(select((.key | sub("^https?://";"") | split("/")[0]) == $host)))} |
+                select(.auths | length > 0)' > "$config/config.json" || continue
+            if docker --config "$config" manifest inspect "$running" >/dev/null 2>&1; then
+              echo "DOCKER_CONFIG=$config" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          echo "::error::Harbor rejected the configured credentials and the trial deployment has no usable registry credential."
+          exit 1
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -220,4 +253,6 @@ jobs:
 
       - name: Remove the temporary kubeconfig
         if: always()
-        run: rm -f "$RUNNER_TEMP/dreamai-kubeconfig" "$RUNNER_TEMP/dreamai-trial.html"
+        run: |
+          rm -f "$RUNNER_TEMP/dreamai-kubeconfig" "$RUNNER_TEMP/dreamai-trial.html" "$RUNNER_TEMP/dreamai-registry-config/config.json"
+          if [[ -d "$RUNNER_TEMP/dreamai-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-registry-config"; fi
