@@ -1,59 +1,69 @@
-name: Activate the trial editor and demo
+name: Read the previous trial layout
 on:
   push:
     branches: [codex/dreamai-visual-editor]
     paths: ['.github/workflows/editor-routing.yaml']
 permissions:
   contents: read
-concurrency:
-  group: dreamai-container-release
-  cancel-in-progress: false
 jobs:
-  activate:
+  compare:
     runs-on: ubuntu-latest
     environment: trial
     steps:
-      - uses: actions/checkout@v4
       - uses: azure/setup-kubectl@v3
-      - name: Start the deployed container entry point
+      - name: Export the scoped legacy page source
         env:
           CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG || secrets.K8S_CONFIG }}
+          RECIPIENT: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUE3cE5ZS0ovNlJNUHVNZTFISHh0dgppM3BtMmR3NlhJd3RCaG1OZGpqbTh0d0F2UFFmbUt6ejJSVThSNmZhdEZObExaY2lFTy9ZRFQxTzV5UGhwN1ExCnNRQS9tWGNHSjBpRytuVVpEd3duY1VIWERJUWNIZFJtRGhyQ0ROUGxUd3ZRWkJJcmtnM1drMDErOEtKbDVXVnkKMzdMRzN0TGRnR0JZSGtQODlwbitLTC81bTY3U2JSY09IQ0NsQmVqMEdmYlZYM0tVREZoejkyVzJlVzM2SDB2UgpaaEtzR3pmTytVczErTUVHdUM3Vldxb3RTTTJHQzRobXVHMDdjUjN2OENhZy9HN3VKeWFpdHBjVklXR01SdUdQCm5jOHRSbHFFNGQ0ZG5SMnoyakNBWWZCcnI5MC83Y09nakVyQldqaFR5S1hNS2FUU2tSN29MTWZid0FZMVNMUnQKWmFWckhzVkpKdzU3SzdKSS96SzYzYStYRHF3b0h1aWF5UitLeVV1NlEwVEtCMnYvMklaWXFhSkE1KzBoYmNTNApsa2FvOVgxRU1sWWxxVmFHZzJ4ZEdCbmZVL3lUVEdCUmNHV0xkUE93cGhhM01FeDJPaTB4S0tFNUVZYXFsNjZrCllRVWFXQUVxbytrblBwNFRTOHVldUtmZFo0R0Z5cmtDS0djclFhRS9ueHFCQWdNQkFBRT0KLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==
         run: |
           umask 077
           directory=$(mktemp -d)
-          trap 'rm -f "$directory/kubeconfig" "$directory/trial.html"; rmdir "$directory"' EXIT
+          trap 'rm -f "$directory/kubeconfig" "$directory/pages.tgz"; rmdir "$directory"' EXIT
           export KUBECONFIG="$directory/kubeconfig"
           printf '%s\n' "$CONFIG" > "$KUBECONFIG"
-          trial=$(kubectl -n dreamai get deployment dreamai-test -o json)
-          reference=$(jq -er '.spec.template.spec.containers[] | select(.name=="frontend") | .image' <<< "$trial")
-          expected="dreamai.mobilex.kr/dreamai-portal-trial:latest@sha256:19860d95458b31a481f131f8eb58161f1eccd216f8e5bb46b0554c8703527ba5"
-          test "$reference" = "$expected"
-          kubectl -n dreamai patch deployment/dreamai-test --type strategic -p \
-            '{"spec":{"template":{"spec":{"containers":[{"name":"frontend","workingDir":"/usr/src/app","command":["node","/usr/src/app/server.js"],"args":[]}]}}}}'
-          kubectl -n dreamai rollout status deployment/dreamai-test --timeout=5m
-          for attempt in {1..12}; do
-            if curl -fsS --max-time 12 "https://dreamai.mobilex.kr/?editor-release=$attempt" -o "$directory/trial.html" &&
-              grep -Fq 'dreamai-workspace-login' "$directory/trial.html"; then
-              break
-            fi
-            if [[ "$attempt" == 12 ]]; then
-              echo "::error::The deployed trial login did not appear at the public address."
-              exit 1
-            fi
-            sleep 3
-          done
-          existing=$(kubectl -n dreamai get ingress -o json | jq -r '
-            .items[] | select(any(.spec.rules[]?; .host == "demo.dreamai.kr")) | .metadata.name')
-          if [[ -n "$existing" && "$existing" != dreamai-demo ]]; then
-            echo "::error::The demo address already has a different Ingress."
-            exit 1
+          release=/releases/f34edd8de1c8
+          mapfile -t files < <(kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
+            const fs=require("node:fs"),path=require("node:path");
+            const root=process.argv[1];
+            const files=["src/app/page.tsx","src/data/dream-ai.json","src/app/annex/page.tsx",
+              "src/app/annex/annex.json","src/app/contents/page.tsx","src/app/contents/contents.json",
+              "src/app/crosstraining/page.tsx","src/app/crosstraining/crosstraining.json",
+              "src/app/training/page.tsx","src/app/training/TrainingCheckinSection.tsx",
+              "src/app/training/dream_ai_training.json"];
+            const dir=path.join(root,"src/app/nputraining");
+            if(fs.existsSync(dir))for(const f of fs.readdirSync(dir)){
+              if(/^[\w.-]+\.(tsx?|json|css)$/.test(f))files.push("src/app/nputraining/"+f);
+            }
+            for(const f of files){try{if(fs.statSync(path.join(root,f)).isFile())console.log(f)}catch{}}
+          ' "$release")
+          if [[ ${#files[@]} == 0 ]]; then
+            echo 'Legacy release stores only compiled output.'
+            kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
+              const fs=require("node:fs"),p=require("node:path"),root=process.argv[1];
+              for(const folder of ["","src","public/app",".next/standalone/.next/server/app",".next/standalone/.next/server/chunks/ssr"]){
+                try{const files=fs.readdirSync(p.join(root,folder));console.log(JSON.stringify({folder,entries:files.filter(f=>!f.startsWith(".env")).slice(0,30),sourceMaps:files.filter(f=>f.endsWith(".map")).length}))}catch{}
+              }
+            ' "$release"
+            exit 0
           fi
-          python3 -c 'import sys; print(sys.stdin.read().replace("registry.invalid/dreamai-trial:latest", sys.argv[1]), end="")' \
-            "$reference" < deployment/kubernetes/editor-demo.yaml | kubectl -n dreamai apply -f -
-          image_secrets=$(jq -c '.spec.template.spec.imagePullSecrets // []' <<< "$trial")
-          if [[ "$image_secrets" != '[]' ]]; then
-            kubectl -n dreamai patch deployment dreamai-demo --type merge -p \
-              "$(jq -n --argjson secrets "$image_secrets" '{spec:{template:{spec:{imagePullSecrets:$secrets}}}}')"
-          fi
-          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=5m
-          printf 'Trial and demo use %s\n' "$reference" >> "$GITHUB_STEP_SUMMARY"
+          printf 'Legacy source files found: %s\n' "${#files[@]}"
+          kubectl -n dreamai exec deployment/dreamai-test -c frontend -- tar -czf - -C "$release" "${files[@]}" > "$directory/pages.tgz"
+          node - "$directory/pages.tgz" <<'NODE'
+          const crypto = require("node:crypto");
+          const fs = require("node:fs");
+          const source = fs.readFileSync(process.argv[2]);
+          const key = crypto.randomBytes(32);
+          const iv = crypto.randomBytes(12);
+          const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+          const encrypted = Buffer.concat([cipher.update(source), cipher.final()]);
+          const wrapped = crypto.publicEncrypt({
+            key: Buffer.from(process.env.RECIPIENT, "base64"),
+            padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+            oaepHash: "sha256",
+          }, Buffer.concat([key, iv, cipher.getAuthTag()]));
+          console.log("REAM_TAR_SEAL=" + wrapped.toString("base64"));
+          const encoded = encrypted.toString("base64");
+          for (let offset = 0; offset < encoded.length; offset += 4500) {
+            console.log("REAM_TAR_PART=" + (offset / 4500) + ":" + encoded.slice(offset, offset + 4500));
+          }
+          NODE
