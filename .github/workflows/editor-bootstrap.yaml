@@ -1,0 +1,60 @@
+name: Provision trial editor
+
+on:
+  push:
+    branches: [codex/dreamai-visual-editor]
+    paths:
+      - '.github/workflows/editor-bootstrap.yaml'
+      - 'deployment/editor-password.enc'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dreamai-editor-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    environment: trial
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v3
+      - name: Provision the trial editor credential
+        env:
+          CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG || secrets.K8S_CONFIG }}
+        run: |
+          umask 077
+          directory=$(mktemp -d)
+          trap 'rm -f "$directory/config" "$directory/private.pem" "$directory/public.pem" "$directory/password.txt"; rmdir "$directory"' EXIT
+          export KUBECONFIG="$directory/config"
+          printf '%s\n' "$CONFIG" > "$KUBECONFIG"
+          kubectl -n dreamai auth can-i create secrets
+          kubectl -n dreamai auth can-i create persistentvolumeclaims
+          kubectl -n dreamai get pvc -o custom-columns='NAME:.metadata.name,ACCESS:.spec.accessModes,CLASS:.spec.storageClassName,STATUS:.status.phase'
+          kubectl get storageclasses -o custom-columns='NAME:.metadata.name,PROVISIONER:.provisioner' || true
+          ready=$(kubectl -n dreamai get secret dreamai-editor-password --ignore-not-found -o name)
+          if [[ -n "$ready" ]]; then
+            echo "The trial password Secret is ready."
+            exit 0
+          fi
+          key=dreamai-editor-bootstrap
+          existing=$(kubectl -n dreamai get secret "$key" --ignore-not-found -o name)
+          if [[ -z "$existing" ]]; then
+            openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out "$directory/private.pem"
+            openssl pkey -in "$directory/private.pem" -pubout -out "$directory/public.pem"
+            kubectl -n dreamai create secret generic "$key" \
+              --from-file=private.pem="$directory/private.pem" --from-file=public.pem="$directory/public.pem"
+          fi
+          if [[ ! -f deployment/editor-password.enc ]]; then
+            printf 'DREAMAI_BOOTSTRAP_PUBLIC_KEY='
+            kubectl -n dreamai get secret "$key" -o jsonpath='{.data.public\.pem}'
+            printf '\n'
+            exit 0
+          fi
+          kubectl -n dreamai get secret "$key" -o jsonpath='{.data.private\.pem}' | base64 -d > "$directory/private.pem"
+          base64 -d deployment/editor-password.enc | openssl pkeyutl -decrypt -inkey "$directory/private.pem" \
+            -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -out "$directory/password.txt"
+          kubectl -n dreamai create secret generic dreamai-editor-password --from-file="$directory/password.txt"
+          kubectl -n dreamai delete secret "$key"
