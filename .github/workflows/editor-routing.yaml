@@ -21,32 +21,14 @@ jobs:
           trap 'rm -f "$directory/kubeconfig" "$directory/pages.tgz"; rmdir "$directory"' EXIT
           export KUBECONFIG="$directory/kubeconfig"
           printf '%s\n' "$CONFIG" > "$KUBECONFIG"
-          release=/releases/f34edd8de1c8
+          release=/releases/f34edd8de1c8/.next/standalone/.next/server/app
           mapfile -t files < <(kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
-            const fs=require("node:fs"),path=require("node:path");
-            const root=process.argv[1];
-            const files=["src/app/page.tsx","src/data/dream-ai.json","src/app/annex/page.tsx",
-              "src/app/annex/annex.json","src/app/contents/page.tsx","src/app/contents/contents.json",
-              "src/app/crosstraining/page.tsx","src/app/crosstraining/crosstraining.json",
-              "src/app/training/page.tsx","src/app/training/TrainingCheckinSection.tsx",
-              "src/app/training/dream_ai_training.json"];
-            const dir=path.join(root,"src/app/nputraining");
-            if(fs.existsSync(dir))for(const f of fs.readdirSync(dir)){
-              if(/^[\w.-]+\.(tsx?|json|css)$/.test(f))files.push("src/app/nputraining/"+f);
-            }
-            for(const f of files){try{if(fs.statSync(path.join(root,f)).isFile())console.log(f)}catch{}}
+            const fs=require("node:fs"),path=require("node:path"),root=process.argv[1];
+            const names=["index.html","page.html","annex.html","contents.html","crosstraining.html","training.html","nputraining.html"];
+            for(const name of names){try{if(fs.statSync(path.join(root,name)).isFile())console.log(name)}catch{}}
           ' "$release")
-          if [[ ${#files[@]} == 0 ]]; then
-            echo 'Legacy release stores only compiled output.'
-            kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
-              const fs=require("node:fs"),p=require("node:path"),root=process.argv[1];
-              for(const folder of ["","src","public/app",".next/standalone/.next/server/app",".next/standalone/.next/server/chunks/ssr"]){
-                try{const files=fs.readdirSync(p.join(root,folder));console.log(JSON.stringify({folder,entries:files.filter(f=>!f.startsWith(".env")).slice(0,30),sourceMaps:files.filter(f=>f.endsWith(".map")).length}))}catch{}
-              }
-            ' "$release"
-            exit 0
-          fi
-          printf 'Legacy source files found: %s\n' "${#files[@]}"
+          test "${#files[@]}" -gt 0
+          printf "Legacy pages found: %s\n" "${files[*]}"
           kubectl -n dreamai exec deployment/dreamai-test -c frontend -- tar -czf - -C "$release" "${files[@]}" > "$directory/pages.tgz"
           node - "$directory/pages.tgz" <<'NODE'
           const crypto = require("node:crypto");
