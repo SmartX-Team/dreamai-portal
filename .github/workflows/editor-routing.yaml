@@ -1,0 +1,48 @@
+name: Inspect and reconcile the trial editor route
+on:
+  push:
+    branches: [codex/dreamai-visual-editor]
+    paths: ['.github/workflows/editor-routing.yaml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    environment: trial
+    steps:
+      - uses: azure/setup-kubectl@v3
+      - name: Compare the trial workload and its public route
+        env:
+          CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG || secrets.K8S_CONFIG }}
+        run: |
+          umask 077
+          directory=$(mktemp -d)
+          tunnel=
+          trap 'if [[ -n "$tunnel" ]]; then kill "$tunnel" 2>/dev/null || true; fi; rm -f "$directory/kubeconfig" "$directory/tunnel" "$directory/preview"; rmdir "$directory"' EXIT
+          export KUBECONFIG="$directory/kubeconfig"
+          printf '%s\n' "$CONFIG" > "$KUBECONFIG"
+          kubectl -n dreamai get deployment dreamai-test -o json | jq '{
+            status: {ready: .status.readyReplicas, replicas: .status.replicas},
+            labels: .spec.selector,
+            containers: [.spec.template.spec.containers[] | {name,image,ports,editorConfig: [.env[]? | select(.name | startswith("DREAMAI_")) | .name]}]}'
+          kubectl -n dreamai get ingress -o json | jq --arg host dreamai.mobilex.kr '
+            .items[] | select(any(.spec.rules[]?; .host == $host)) | {
+              name:.metadata.name, routes:[.spec.rules[] | select(.host==$host) | .http.paths[] | {path,pathType,backend}]}'
+          kubectl -n dreamai get httproutes -o json 2>/dev/null | jq --arg host dreamai.mobilex.kr '
+            .items[] | select(any(.spec.hostnames[]?; .==$host)) | {name:.metadata.name, routes:.spec.rules}' || true
+          kubectl -n dreamai get services -o json | jq '.items[] | {name:.metadata.name, selector:.spec.selector, ports:.spec.ports}'
+          kubectl -n dreamai port-forward deployment/dreamai-test 9311:3000 > "$directory/tunnel" 2>&1 &
+          tunnel=$!
+          for attempt in {1..12}; do
+            if curl -fsS --max-time 5 http://127.0.0.1:9311/ -o "$directory/preview" 2>/dev/null; then
+              if grep -Fq 'dreamai-workspace-login' "$directory/preview"; then
+                echo 'Internal deployment renders the editor login.'
+              else
+                echo 'Internal deployment does not render the editor login.'
+              fi
+              exit 0
+            fi
+            sleep 1
+          done
+          cat "$directory/tunnel"
+          exit 1

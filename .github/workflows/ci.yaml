@@ -3,6 +3,8 @@ name: CI/CD to Kubernetes
 on:
   push:
     branches: [codex/dreamai-visual-editor]
+    paths-ignore:
+      - '.github/workflows/editor-routing.yaml'
   workflow_dispatch:
     inputs:
       target:
@@ -31,7 +33,8 @@ env:
 jobs:
   release:
     if: >-
-      github.event_name == 'push' || inputs.target == 'trial' || inputs.target == 'demo' ||
+      (github.event_name == 'push' && !contains(github.event.head_commit.message, '[routing-only]')) ||
+      inputs.target == 'trial' || inputs.target == 'demo' ||
       (inputs.target == 'production' && github.ref == 'refs/heads/main' &&
       vars.DREAMAI_PRODUCTION_RELEASE_ENABLED == 'true' &&
       vars.DREAMAI_PUBLISHER_GITHUB_ID != '' &&
@@ -261,6 +264,6 @@ jobs:
         if: always()
         run: |
           rm -f "$RUNNER_TEMP/dreamai-kubeconfig" "$RUNNER_TEMP/dreamai-trial.html" "$RUNNER_TEMP/dreamai-registry-config/config.json"
-          if [[ -d "$RUNNER_TEMP/dreamai-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-registry-config"; fi
+          if [[ -d "$RUNNER_TEMP/dreamai-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-registry-config" 2>/dev/null || true; fi
           rm -f "$RUNNER_TEMP/dreamai-trial-registry-config/config.json"
-          if [[ -d "$RUNNER_TEMP/dreamai-trial-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-trial-registry-config"; fi
+          if [[ -d "$RUNNER_TEMP/dreamai-trial-registry-config" ]]; then rmdir "$RUNNER_TEMP/dreamai-trial-registry-config" 2>/dev/null || true; fi
