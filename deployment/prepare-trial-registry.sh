@@ -41,6 +41,8 @@ if [[ -z "$(kubectl -n dreamai get secret "$pull_secret" --ignore-not-found -o n
 fi
 
 kubectl -n dreamai apply -f deployment/kubernetes/editor-registry.yaml
+revision=$(sha256sum deployment/kubernetes/editor-registry.yaml | cut -d ' ' -f 1)
+kubectl -n dreamai patch deployment "$name" --type merge -p +  "$(jq -n --arg revision "$revision" '{spec:{template:{metadata:{annotations:{"dreamai.kr/registry-config":$revision}}}}}')"
 jq -n --arg name "$name" --arg host "$host" --arg class "$ingress_class" --arg tls "$tls" '{
   apiVersion:"networking.k8s.io/v1",kind:"Ingress",
   metadata:{name:$name,namespace:"dreamai",annotations:{

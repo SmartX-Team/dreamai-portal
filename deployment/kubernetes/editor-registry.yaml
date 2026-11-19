@@ -16,6 +16,7 @@ data:
           enabled: true
           age: 1h
           interval: 15m
+          dryrun: false
     http:
       addr: :5000
       relativeurls: true
