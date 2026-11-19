@@ -31,6 +31,21 @@ jobs:
           kubectl -n dreamai get httproutes -o json 2>/dev/null | jq --arg host dreamai.mobilex.kr '
             .items[] | select(any(.spec.hostnames[]?; .==$host)) | {name:.metadata.name, routes:.spec.rules}' || true
           kubectl -n dreamai get services -o json | jq '.items[] | {name:.metadata.name, selector:.spec.selector, ports:.spec.ports}'
+          kubectl -n dreamai get pods -l app=dreamai-test -o json | jq '{
+            pods: [.items[] | {name:.metadata.name,owner:.metadata.ownerReferences[0].name,
+              containers:[.spec.containers[] | {name,image,workingDir,
+                commandCount:(.command // [] | length), argsCount:(.args // [] | length),volumeMounts}],
+              status:[.status.containerStatuses[]? | {name,imageID,ready}]}]}'
+          kubectl -n dreamai get endpointslices -l kubernetes.io/service-name=dreamai-test -o json |
+            jq '[.items[].endpoints[]? | {pod:.targetRef.name,ready:.conditions.ready}]'
+          kubectl -n dreamai exec deployment/dreamai-test -c frontend -- node -e '
+            const fs=require("node:fs");
+            const configured=process.env.DREAMAI_EDITOR_PASSWORD_FILE;
+            const proc=fs.readFileSync("/proc/1/cmdline","utf8");
+            console.log(JSON.stringify({cwd:process.cwd(),mode:process.env.DREAMAI_CONTENT_MODE,
+              configuredLoginFile:!!configured,loginFilePresent:!!configured&&fs.existsSync(configured),
+              entrypointLooksStandalone:proc.includes("server.js")||proc.includes("next-server"),
+              editorRouteBuilt:fs.existsSync(".next/server/app/api/portal-content") }));'
           kubectl -n dreamai port-forward deployment/dreamai-test 9311:3000 > "$directory/tunnel" 2>&1 &
           tunnel=$!
           for attempt in {1..12}; do
