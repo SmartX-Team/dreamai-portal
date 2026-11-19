@@ -1,7 +1,8 @@
 "use client";
 
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { useState } from "react";
-import data from "./community.json";
+import { usePortalPage } from "@/lib/portal-content/provider";
 
 type FacultyMember = {
   name: string;
@@ -58,7 +59,6 @@ type CommunityData = {
   sections: SectionData[];
 };
 
-const communityData = data as CommunityData;
 
 function FacultyCard({ member }: { member: FacultyMember }) {
   return (
@@ -95,6 +95,7 @@ function FacultySectionBlock({
 }: {
   section: FacultySectionData;
 }) {
+  const editableCopy = usePortalPage("/community").display;
   const totalCount = section.groups.reduce(
     (acc, group) => acc + group.members.length,
     0
@@ -102,32 +103,37 @@ function FacultySectionBlock({
 
   return (
     <section className="section">
-      <div className="section-header section-header-blue">
-        <h2 className="section-title">Dream-AI 운영진</h2>
-        <span className="section-count">{totalCount}명</span>
-      </div>
-
-      <div className="faculty-groups">
-        {section.groups.map((group) => (
-          <div className="faculty-group" key={group.id}>
-            <div className="group-heading">
-              <h3 className="group-title">{group.label}</h3>
-              <span className="group-count">
-                {group.members.length}명
-              </span>
-            </div>
-
-            <div className="card-grid">
-              {group.members.map((member) => (
-                <FacultyCard
-                  key={`${group.id}-${member.name}`}
-                  member={member}
-                />
-              ))}
-            </div>
+      <PageWidgets zone="community.faculty" nodes={{
+        title: (
+          <div className="section-header section-header-blue">
+            <h2 className="section-title">{editableCopy["FacultySectionBlock 문구 1"]}</h2>
+            <span className="section-count">{totalCount}명</span>
           </div>
-        ))}
-      </div>
+        ),
+        groups: (
+          <div className="faculty-groups">
+            {section.groups.map((group) => (
+              <div className="faculty-group" key={group.id}>
+                <div className="group-heading">
+                  <h3 className="group-title">{group.label}</h3>
+                  <span className="group-count">
+                    {group.members.length}명
+                  </span>
+                </div>
+
+                <div className="card-grid">
+                  {group.members.map((member) => (
+                    <FacultyCard
+                      key={`${group.id}-${member.name}`}
+                      member={member}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ),
+      }} />
     </section>
   );
 }
@@ -137,6 +143,7 @@ function AmbassadorSectionBlock({
 }: {
   section: AmbassadorSectionData;
 }) {
+  const editableCopy = usePortalPage("/community").display;
   const latestCohortId =
     section.cohorts[section.cohorts.length - 1]?.id ?? "";
 
@@ -167,126 +174,134 @@ function AmbassadorSectionBlock({
 
   return (
     <section className="section">
-      <div className="section-header section-header-green">
-        <h2 className="section-title">AI Ambassador</h2>
+      <PageWidgets zone="community.ambassador" nodes={{
+        title: (
+          <div className="section-header section-header-green">
+            <h2 className="section-title">{editableCopy["AmbassadorSectionBlock 문구 1"]}</h2>
 
-        <span className="section-count">
-          {section.cohorts.length}개 기수
-        </span>
-      </div>
+            <span className="section-count">
+              {section.cohorts.length}개 기수
+            </span>
+          </div>
+        ),
+        cohorts: (
+          <div className="cohort-toolbar">
+            <div
+              className="cohort-tabs"
+              role="tablist"
+              aria-label="AI Ambassador 기수 선택"
+            >
+              {section.cohorts.map((cohort) => {
+                const isActive =
+                  cohort.id === activeCohort.id;
 
-      <div className="cohort-toolbar">
-        <div
-          className="cohort-tabs"
-          role="tablist"
-          aria-label="AI Ambassador 기수 선택"
-        >
-          {section.cohorts.map((cohort) => {
-            const isActive =
-              cohort.id === activeCohort.id;
+                return (
+                  <button
+                    key={cohort.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`cohort-tab${
+                      isActive
+                        ? " cohort-tab--active"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      setActiveCohortId(cohort.id)
+                    }
+                  >
+                    {cohort.label}
+                  </button>
+                );
+              })}
+            </div>
 
-            return (
-              <button
-                key={cohort.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                className={`cohort-tab${
-                  isActive
-                    ? " cohort-tab--active"
-                    : ""
-                }`}
-                onClick={() =>
-                  setActiveCohortId(cohort.id)
-                }
-              >
-                {cohort.label}
-              </button>
-            );
-          })}
-        </div>
+            <p className="cohort-summary">
+              {activeCohort.teams.length}팀 · {totalCount}명
+            </p>
+          </div>
+        ),
+        teams: (
+          <div className="cohort-content">
+            {activeCohort.teams.map(
+              (team, teamIdx) => {
+                const teamCount = team.roles.reduce(
+                  (acc, role) =>
+                    acc + role.members.length,
+                  0
+                );
 
-        <p className="cohort-summary">
-          {activeCohort.teams.length}팀 · {totalCount}명
-        </p>
-      </div>
+                return (
+                  <div
+                    key={`${activeCohort.id}-${team.id}`}
+                    className={`team-block team-block--${team.id}${
+                      teamIdx <
+                      activeCohort.teams.length - 1
+                        ? " team-block--bordered"
+                        : ""
+                    }`}
+                  >
+                    <div className="team-heading">
+                      <p className="team-label">
+                        {team.name}
 
-      <div className="cohort-content">
-        {activeCohort.teams.map(
-          (team, teamIdx) => {
-            const teamCount = team.roles.reduce(
-              (acc, role) =>
-                acc + role.members.length,
-              0
-            );
-
-            return (
-              <div
-                key={`${activeCohort.id}-${team.id}`}
-                className={`team-block team-block--${team.id}${
-                  teamIdx <
-                  activeCohort.teams.length - 1
-                    ? " team-block--bordered"
-                    : ""
-                }`}
-              >
-                <div className="team-heading">
-                  <p className="team-label">
-                    {team.name}
-
-                    <span className="team-tag">
-                      {team.tag}
-                    </span>
-                  </p>
-
-                  <span className="team-count">
-                    {teamCount}명
-                  </span>
-                </div>
-
-                <hr className="team-divider" />
-
-                {team.roles.map(
-                  (roleGroup) => (
-                    <div
-                      key={`${activeCohort.id}-${team.id}-${roleGroup.label}`}
-                      className="role-group"
-                    >
-                      <div className="role-heading">
-                        <p className="role-label">
-                          {getRoleLabel(
-                            roleGroup.label
-                          )}
-                        </p>
-
-                        <span className="role-count">
-                          {roleGroup.members.length}명
+                        <span className="team-tag">
+                          {team.tag}
                         </span>
-                      </div>
+                      </p>
 
-                      <div className="card-grid">
-                        {roleGroup.members.map(
-                          (member) => (
-                            <AmbassadorCard
-                              key={`${activeCohort.id}-${team.id}-${roleGroup.label}-${member.name}`}
-                              member={member}
-                            />
-                          )
-                        )}
-                      </div>
+                      <span className="team-count">
+                        {teamCount}명
+                      </span>
                     </div>
-                  )
-                )}
-              </div>
-            );
-          }
-        )}
-      </div>
+
+                    <hr className="team-divider" />
+
+                    {team.roles.map(
+                      (roleGroup) => (
+                        <div
+                          key={`${activeCohort.id}-${team.id}-${roleGroup.label}`}
+                          className="role-group"
+                        >
+                          <div className="role-heading">
+                            <p className="role-label">
+                              {getRoleLabel(
+                                roleGroup.label
+                              )}
+                            </p>
+
+                            <span className="role-count">
+                              {roleGroup.members.length}명
+                            </span>
+                          </div>
+
+                          <div className="card-grid">
+                            {roleGroup.members.map(
+                              (member) => (
+                                <AmbassadorCard
+                                  key={`${activeCohort.id}-${team.id}-${roleGroup.label}-${member.name}`}
+                                  member={member}
+                                />
+                              )
+                            )}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
+                );
+              }
+            )}
+          </div>
+        ),
+      }} />
     </section>
   );
 }
 
 export default function CommunityPage() {
+  const editableCopy = usePortalPage("/community").display;
+  const communityData = usePortalPage("/community") as CommunityData;
   return (
     <>
       <style>{`
@@ -649,13 +664,16 @@ export default function CommunityPage() {
       `}</style>
 
       <main className="community-page">
-        <h1 className="page-title">Community</h1>
-
-        <p className="page-subtitle">
-          Dream-AI 운영진과 AI Ambassador를 소개합니다.
-        </p>
-
-        {communityData.sections.map((section) => {
+        <PageWidgets zone="community.page" nodes={{
+          title: (
+            <h1 className="page-title">{editableCopy["CommunityPage 문구 1"]}</h1>
+          ),
+          description: (
+            <p className="page-subtitle">
+          {editableCopy["CommunityPage 문구 2"]}</p>
+          ),
+          teams: (
+            communityData.sections.map((section) => {
           if (section.type === "faculty") {
             return (
               <FacultySectionBlock
@@ -671,7 +689,9 @@ export default function CommunityPage() {
               section={section}
             />
           );
-        })}
+        })
+          ),
+        }} />
       </main>
     </>
   );

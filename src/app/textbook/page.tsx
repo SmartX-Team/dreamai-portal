@@ -1,7 +1,9 @@
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import Image from "next/image";
 import Link from "next/link";
 
-import data from "./contents.json";
+import type defaults from "./contents.json";
+import { readPortalPage } from "@/lib/portal-content/server";
 
 function drawCard(item: string) {
   return (
@@ -26,7 +28,7 @@ function drawCard(item: string) {
   );
 }
 
-function drawPage1() {
+function drawPage1(data: typeof defaults) {
   return (
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-row">
@@ -70,7 +72,7 @@ function drawPage1() {
   );
 }
 
-function drawPage2() {
+function drawPage2(data: typeof defaults) {
   return (
     <div className="max-w-7xl mx-auto px-6 pt-6">
       <div className="flex flex-row justify-stretch gap-2">
@@ -97,7 +99,7 @@ function drawPage2() {
 }
 
 /*
-function drawPage3() {
+function drawPage3(data: typeof defaults) {
   return (
     <div className="max-w-7xl mx-auto px-6">
       <Image
@@ -116,12 +118,19 @@ function drawPage3() {
 }
 */
 
-export default function TextbookPage() {
+export default async function TextbookPage() {
+  const { content: data } = await readPortalPage("/textbook");
   return (
     <div className="pt-6">
-      {drawPage1()}
-      {drawPage2()}
-      {/* {drawPage3()} */}
+      <PageWidgets zone="textbook.page" nodes={{
+        primary: (
+          drawPage1(data)
+        ),
+        secondary: (
+          drawPage2(data)
+        ),
+      }} />
+      {/* {drawPage3(data)} */}
     </div>
   );
 }

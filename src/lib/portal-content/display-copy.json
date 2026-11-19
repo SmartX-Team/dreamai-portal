@@ -1,0 +1,52 @@
+{
+  "/": {
+    "RootLayout 링크 1": "/",
+    "RootLayout 이미지 1": "/images/GIST.png",
+    "RootLayout 링크 2": "https://ai.gist.ac.kr/ai/",
+    "RootLayout 이미지 2": "/images/AIGS.png",
+    "RootLayout 링크 3": "https://scent.gist.ac.kr/",
+    "RootLayout 이미지 3": "/images/SCENT.png",
+    "RootLayout 링크 4": "https://www.hrd4u.or.kr/hrd4u",
+    "RootLayout 이미지 4": "/images/KHP.png"
+  },
+  "/annex": {
+    "AnnexPage 문구 1": "ANNEX",
+    "AnnexPage 문구 2": "Opening"
+  },
+  "/beginnerai": {
+    "BeginnerAIPage 문구 1": "Beginner-AI 메뉴얼",
+    "BeginnerAIPage 문구 2": "Beginner-AI 접속하기",
+    "BeginnerAIPage 문구 3": "※ GIST 내부망을 통해서만 접속 가능합니다."
+  },
+  "/community": {
+    "FacultySectionBlock 문구 1": "Dream-AI 운영진",
+    "AmbassadorSectionBlock 문구 1": "AI Ambassador",
+    "CommunityPage 문구 1": "Community",
+    "CommunityPage 문구 2": "Dream-AI 운영진과 AI Ambassador를 소개합니다."
+  },
+  "/contents": {
+    "HeroSection 문구 1": "바로가기 ›",
+    "CardItem 문구 1": "바로가기 ›",
+    "CoursesSection 문구 1": "성장을 위한 필수 코스"
+  },
+  "/crosstraining": {
+    "CrossTrainingPage 문구 1": "Cross Training",
+    "CrossTrainingPage 문구 2": "GIST AI 융합학과의 교육 협력 프로그램 이력입니다."
+  },
+  "/dream_ai_space": {},
+  "/newsac": {
+    "NewSacPage 문구 1": "프로그램 소개"
+  },
+  "/textbook": {
+    "Content 이미지 1": "/images/textbook/symbol_download_pdf.png",
+    "Content 이미지 2": "/images/textbook/symbol_exp.png",
+    "Content 이미지 3": "/images/textbook/symbol_zoo.png"
+  },
+  "/training": {
+    "TrainingCoursesSection 문구 1": "2026년 훈련 과정",
+    "TrainingCoursesSection 문구 2": "해당 카테고리의 과정이 없습니다.",
+    "TrainingCoursesSection 문구 3": "과정 소개",
+    "TrainingCoursesSection 문구 4": "커리큘럼",
+    "TrainingCoursesSection 문구 5": "사용 기술"
+  }
+}

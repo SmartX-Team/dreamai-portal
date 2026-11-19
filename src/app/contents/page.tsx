@@ -1,7 +1,8 @@
 "use client";
 
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import { useState, useEffect, useCallback } from "react";
-import siteData from "./contents.json";
+import { usePortalPage } from "@/lib/portal-content/provider";
 
 /* ────────────────────────────────────────────
    TYPES
@@ -38,6 +39,8 @@ interface RoadmapTab {
    HERO — 이미지만, 텍스트 없음
 ──────────────────────────────────────────── */
 function HeroSection() {
+  const editableCopy = usePortalPage("/contents").display;
+  const siteData = usePortalPage("/contents");
   const slides: HeroSlide[] = siteData.hero.slides;
   const [cur, setCur] = useState(0);
   const prev = useCallback(
@@ -55,35 +58,42 @@ function HeroSection() {
 
   return (
     <section style={s.heroWrapper}>
-      <button onClick={prev} style={s.heroArrow}>
-        ‹
-      </button>
-      <div style={s.heroCard}>
-        <img
-          src={slides[cur].image}
-          alt={`slide-${slides[cur].id}`}
-          style={s.heroImg}
-        />
-
-        {slides[cur].link && (
-          <a href={slides[cur].link} style={s.heroCta}>
-            바로가기 ›
-          </a>
-        )}
-
-        <div style={s.heroDots}>
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCur(i)}
-              style={{ ...s.heroDot, ...(i === cur ? s.heroDotActive : {}) }}
+      <PageWidgets zone="content.hero" nodes={{
+        previous: (
+          <button onClick={prev} style={s.heroArrow}>
+            ‹
+          </button>
+        ),
+        card: (
+          <div style={s.heroCard}>
+            <img
+              src={slides[cur].image}
+              alt={`slide-${slides[cur].id}`}
+              style={s.heroImg}
             />
-          ))}
-        </div>
-      </div>
-      <button onClick={next} style={s.heroArrow}>
-        ›
-      </button>
+
+            {slides[cur].link && (
+              <a href={slides[cur].link} style={s.heroCta}>
+                {editableCopy["HeroSection 문구 1"]}</a>
+            )}
+
+            <div style={s.heroDots}>
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCur(i)}
+                  style={{ ...s.heroDot, ...(i === cur ? s.heroDotActive : {}) }}
+                />
+              ))}
+            </div>
+          </div>
+        ),
+        next: (
+          <button onClick={next} style={s.heroArrow}>
+            ›
+          </button>
+        ),
+      }} />
     </section>
   );
 }
@@ -92,6 +102,7 @@ function HeroSection() {
    MENU
 ──────────────────────────────────────────── */
 function MenuSection() {
+  const siteData = usePortalPage("/contents");
   const tabs = siteData.menu.tabs;
   const allCards = siteData.menu.contents as Record<string, MenuCard[]>;
   const [idx, setIdx] = useState(0);
@@ -101,52 +112,61 @@ function MenuSection() {
 
   return (
     <section style={s.section}>
-      <div style={s.menuHeading}>
-        {tabs.map((tab, i) => (
-          <span key={tab} style={{ display: "flex", alignItems: "center" }}>
-            {i > 0 && <span style={s.menuDot}>&nbsp;·&nbsp;</span>}
+      <PageWidgets zone="content.menu" nodes={{
+        tabs: (
+          <div style={s.menuHeading}>
+            {tabs.map((tab, i) => (
+              <span key={tab} style={{ display: "flex", alignItems: "center" }}>
+                {i > 0 && <span style={s.menuDot}>&nbsp;·&nbsp;</span>}
+                <button
+                  onClick={() => setIdx(i)}
+                  style={{
+                    ...s.menuTabLabel,
+                    ...(i === idx ? s.menuTabLabelActive : {}),
+                  }}
+                >
+                  {tab}
+                </button>
+              </span>
+            ))}
+          </div>
+        ),
+        cards: (
+          <div style={s.cardGrid}>
+            {cards.map((card) => (
+              <CardItem key={card.id} card={card} />
+            ))}
+          </div>
+        ),
+        navigation: (
+          <div style={s.menuNav}>
             <button
-              onClick={() => setIdx(i)}
               style={{
-                ...s.menuTabLabel,
-                ...(i === idx ? s.menuTabLabelActive : {}),
+                ...s.navBtn,
+                ...(isFirst ? s.navBtnInactive : s.navBtnActive),
               }}
+              onClick={() => !isFirst && setIdx((p) => p - 1)}
             >
-              {tab}
+              ‹ 이전
             </button>
-          </span>
-        ))}
-      </div>
-      <div style={s.cardGrid}>
-        {cards.map((card) => (
-          <CardItem key={card.id} card={card} />
-        ))}
-      </div>
-      <div style={s.menuNav}>
-        <button
-          style={{
-            ...s.navBtn,
-            ...(isFirst ? s.navBtnInactive : s.navBtnActive),
-          }}
-          onClick={() => !isFirst && setIdx((p) => p - 1)}
-        >
-          ‹ 이전
-        </button>
-        <button
-          style={{
-            ...s.navBtn,
-            ...(isLast ? s.navBtnInactive : s.navBtnActive),
-          }}
-          onClick={() => !isLast && setIdx((p) => p + 1)}
-        >
-          다음 ›
-        </button>
-      </div>
+            <button
+              style={{
+                ...s.navBtn,
+                ...(isLast ? s.navBtnInactive : s.navBtnActive),
+              }}
+              onClick={() => !isLast && setIdx((p) => p + 1)}
+            >
+              다음 ›
+            </button>
+          </div>
+        ),
+      }} />
     </section>
   );
 }
 
 function CardItem({ card }: { card: MenuCard }) {
+  const editableCopy = usePortalPage("/contents").display;
   const [hov, setHov] = useState(false);
   return (
     <div
@@ -163,8 +183,7 @@ function CardItem({ card }: { card: MenuCard }) {
       <h3 style={s.cardTitle}>{card.title}</h3>
       <p style={s.cardDesc}>{card.description}</p>
       <a href={card.link} style={s.cardBtn}>
-        바로가기 ›
-      </a>
+        {editableCopy["CardItem 문구 1"]}</a>
     </div>
   );
 }
@@ -173,27 +192,37 @@ function CardItem({ card }: { card: MenuCard }) {
    COURSES — 이미지 하나
 ──────────────────────────────────────────── */
 function CoursesSection() {
+  const editableCopy = usePortalPage("/contents").display;
+  const siteData = usePortalPage("/contents");
   const tabs = siteData.courses.tabs;
   const images = siteData.courses.images as Record<string, string>;
   const [active, setActive] = useState("dt");
 
   return (
     <section style={s.section}>
-      <h2 style={s.sectionTitle}>성장을 위한 필수 코스</h2>
-      <div style={s.pillRow}>
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActive(tab.id)}
-            style={{ ...s.pill, ...(active === tab.id ? s.pillActive : {}) }}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-      <div style={s.imgWrap}>
-        <img key={active} src={images[active]} alt={active} style={s.fullImg} />
-      </div>
+      <PageWidgets zone="content.courses" nodes={{
+        title: (
+          <h2 style={s.sectionTitle}>{editableCopy["CoursesSection 문구 1"]}</h2>
+        ),
+        tabs: (
+          <div style={s.pillRow}>
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActive(tab.id)}
+                style={{ ...s.pill, ...(active === tab.id ? s.pillActive : {}) }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        ),
+        screenshot: (
+          <div style={s.imgWrap}>
+            <img key={active} src={images[active]} alt={active} style={s.fullImg} />
+          </div>
+        ),
+      }} />
     </section>
   );
 }
@@ -208,6 +237,7 @@ function CoursesSection() {
    └──────────────────────────────────────┘
 ──────────────────────────────────────────── */
 function RoadmapSection() {
+  const siteData = usePortalPage("/contents");
   const tabs = siteData.roadmap.tabs as RoadmapTab[];
   const [activeId, setActiveId] = useState(tabs[0].id);
   const activeTab = tabs.find((t) => t.id === activeId)!;
@@ -295,10 +325,20 @@ function RoadmapDetail({ tab }: { tab: RoadmapTab }) {
 export default function App() {
   return (
     <div style={s.root}>
-      <HeroSection />
-      <MenuSection />
-      <CoursesSection />
-      <RoadmapSection />
+      <PageWidgets zone="content.page" nodes={{
+        hero: (
+          <HeroSection />
+        ),
+        cards: (
+          <MenuSection />
+        ),
+        courses: (
+          <CoursesSection />
+        ),
+        roadmap: (
+          <RoadmapSection />
+        ),
+      }} />
     </div>
   );
 }

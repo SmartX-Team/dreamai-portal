@@ -1,0 +1,18 @@
+{
+  "introductionTitle": "프로그램 소개",
+  "introduction": "광주과학기술원(GIST)의 AI 인프라와 전문가 인력을 활용하여 AI·데이터 기술을 실습과 프로젝트 중심으로 학습하는 고도화 체험형 프로그램입니다. 디지털 트윈, 생성형 AI, 강화학습 등 최신 기술을 기반으로 이론부터 실습, 프로젝트, 진로탐색까지 경험할 수 있도록 구성되었습니다. GIST AI 인프라 체험, 교수진 멘토링, 스마트시티 설계 활동 등을 통해 실전 중심의 교육을 제공합니다.",
+  "memoriesTitle": "GIST 꿈꾸는 아이(AI) 중·고등학생 AI 캠프 추억 영상",
+  "memories": "본 영상은 GIST에서 진행된 중·고등학생 AI 캠프의 현장 모습을 담은 자료입니다.",
+  "spaceTitle": "GIST 꿈꾸는 아이(AI) SPACE 설명 영상",
+  "space": "본 영상은 GIST의 꿈꾸는 아이(AI) SPACE에 대한 설명 영상 입니다.",
+  "registrationTitle": "디지털 새싹 캠프 참가 및 안내사항",
+  "registration": "디지털 새싹 캠프에 참여를 희망하는 학생은 아래 신청하기 버튼을 눌러 디지털 새싹 사이트에서 신청 바랍니다.",
+  "period": "🌱 운영 기간 🌱",
+  "firstDate": "📅 1차: 2025년 8월 4일(월) ~ 8월 5일(화)",
+  "secondDate": "📅 2차: 2025년 8월 9일(토) ~ 8월 10일(일)",
+  "firstNotice": "※ 중학생은 보호자 동의 후 신청 바랍니다.",
+  "secondNotice": "※ 프로그램 내용은 변경될 수 있습니다.",
+  "buttonText": "📥 신청하기",
+  "logoImage": "/images/newsac/디지털새싹로고.png",
+  "buttonUrl": "https://newsac.kosac.re.kr/public/program/thumb/890?keyword=%EA%BF%88%EA%BE%B8%EB%8A%94"
+}

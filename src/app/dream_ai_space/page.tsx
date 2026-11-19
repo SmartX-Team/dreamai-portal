@@ -1,4 +1,5 @@
-import data from "./dream_ai_space.json";
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
+import { readPortalPage } from "@/lib/portal-content/server";
 
 type SpaceData = {
   hero: {
@@ -24,7 +25,6 @@ type SpaceData = {
   };
 };
 
-const spaceData = data as SpaceData;
 
 function getYoutubeEmbedUrl(url: string) {
   try {
@@ -54,7 +54,9 @@ function getYoutubeEmbedUrl(url: string) {
   }
 }
 
-export default function DreamAiSpacePage() {
+export default async function DreamAiSpacePage() {
+  const { content } = await readPortalPage("/dream_ai_space");
+  const spaceData = content as SpaceData;
   const { hero, video, overview, gallery } = spaceData;
 
   const youtubeEmbedUrl = getYoutubeEmbedUrl(video.url);
@@ -269,13 +271,16 @@ export default function DreamAiSpacePage() {
       `}</style>
 
       <main className="space-page">
-        <section className="space-hero">
+        <PageWidgets zone="space.page" nodes={{
+          hero: (
+            <section className="space-hero">
           <span className="space-label">{hero.label}</span>
           <h1 className="space-title">{hero.title}</h1>
           <p className="space-subtitle">{hero.subtitle}</p>
         </section>
-
-        <section className="space-section">
+          ),
+          video: (
+            <section className="space-section">
           <h2 className="section-title">{video.title}</h2>
           <p className="section-desc">{video.description}</p>
 
@@ -291,8 +296,9 @@ export default function DreamAiSpacePage() {
             </div>
           </div>
         </section>
-
-        <section className="space-section">
+          ),
+          overview: (
+            <section className="space-section">
           <div className="overview-card">
             <div className="overview-text">
               <h2 className="overview-title">{overview.title}</h2>
@@ -309,8 +315,9 @@ export default function DreamAiSpacePage() {
             </div>
           </div>
         </section>
-
-        <section className="space-section">
+          ),
+          gallery: (
+            <section className="space-section">
           <h2 className="section-title">{gallery.title}</h2>
           <p className="section-desc">{gallery.description}</p>
 
@@ -326,6 +333,8 @@ export default function DreamAiSpacePage() {
             ))}
           </div>
         </section>
+          ),
+        }} />
       </main>
     </>
   );

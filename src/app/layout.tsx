@@ -1,62 +1,94 @@
-"use client";
-
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
 import Link from "next/link";
 import Image from "next/image";
+import { PortalContentProvider } from "@/lib/portal-content/provider";
+import { PortalEditor } from "@/lib/portal-content/editor";
+import { editorAvailable, getEditorIdentity } from "@/lib/portal-content/auth";
+import { readPortalContent, readState } from "@/lib/portal-content/server";
+import { isWorkspaceSession, workspaceProtected, workspaceToken } from "@/lib/portal-content/workspace-session";
+import { SessionMonitor, WorkspaceLogin } from "@/lib/portal-content/workspace-login";
 import "./globals.css";
 import "../styles/styles.css";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const protectedWorkspace = workspaceProtected();
+  if (protectedWorkspace) {
+    const token = await workspaceToken();
+    if (!isWorkspaceSession(await readState(), token)) {
+      return <html lang="ko"><body><WorkspaceLogin displaced={Boolean(token)} /></body></html>;
+    }
+  }
+  const { content, layouts } = await readPortalContent();
+  const editableCopy = content["/"].display;
+  const showEditor = editorAvailable();
+  const editor = showEditor ? await getEditorIdentity() : undefined;
   return (
     <html lang="ko">
       <body className="bg-gray-50 min-h-screen">
+        <PortalContentProvider content={content} layouts={layouts}>
+        <div id="portal-page">
         <header className="bg-white border-b px-6 py-4 shadow-sm">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex flex-1 items-center space-x-4">
-              <Link href="/">
+              <PageWidgets zone="header.left" nodes={{
+                gist: (
+                  <Link href={editableCopy["RootLayout 링크 1"]}>
                 <Image
-                  src="/images/GIST.png"
+                  src={editableCopy["RootLayout 이미지 1"]}
                   alt="GIST 로고"
                   width={100}
                   height={50}
                 />
               </Link>
-
-              <Link href="https://ai.gist.ac.kr/ai/" target="_blank">
+                ),
+                aigs: (
+                  <Link href={editableCopy["RootLayout 링크 2"]} target="_blank">
                 <Image
-                  src="/images/AIGS.png"
+                  src={editableCopy["RootLayout 이미지 2"]}
                   alt="AIGS"
                   width={140}
                   height={40}
                 />
               </Link>
+                ),
+              }} />
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="https://scent.gist.ac.kr/" target="_blank">
+              <PageWidgets zone="header.right" nodes={{
+                scent: (
+                  <Link href={editableCopy["RootLayout 링크 3"]} target="_blank">
                 <Image
-                  src="/images/SCENT.png"
+                  src={editableCopy["RootLayout 이미지 3"]}
                   alt="슈퍼컴퓨팅센터"
                   width={140}
                   height={40}
                 />
               </Link>
-
-              <Link href="https://www.hrd4u.or.kr/hrd4u" target="_blank">
+                ),
+                khp: (
+                  <Link href={editableCopy["RootLayout 링크 4"]} target="_blank">
                 <Image
-                  src="/images/KHP.png"
+                  src={editableCopy["RootLayout 이미지 4"]}
                   alt="KHP"
                   width={160}
                   height={40}
                 />
               </Link>
+                ),
+              }} />
             </div>
           </div>
         </header>
 
-        <main>{children}</main>
+          <main>{children}</main>
+        </div>
+        </PortalContentProvider>
+        {showEditor && <PortalEditor login={editor?.login} workspace={protectedWorkspace} />}
+        {protectedWorkspace && <SessionMonitor />}
       </body>
     </html>
   );

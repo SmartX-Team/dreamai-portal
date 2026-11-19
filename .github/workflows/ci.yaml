@@ -1,25 +1,71 @@
----
 name: CI/CD to Kubernetes
 
 on:
   push:
-    branches: [main]
+    branches: [codex/dreamai-visual-editor]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Deployment environment
+        required: true
+        type: choice
+        options:
+          - trial
+          - demo
+          - production
+        default: trial
+      approved_digest:
+        description: Verified trial image digest for production
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dreamai-container-release
+  cancel-in-progress: false
+
+env:
+  TARGET: ${{ inputs.target || 'trial' }}
 
 jobs:
-  deploy:
+  release:
+    if: >-
+      github.event_name == 'push' || inputs.target == 'trial' || inputs.target == 'demo' ||
+      (inputs.target == 'production' && github.ref == 'refs/heads/main' &&
+      vars.DREAMAI_PRODUCTION_RELEASE_ENABLED == 'true' &&
+      vars.DREAMAI_PUBLISHER_GITHUB_ID != '' &&
+      format('{0}', github.actor_id) == vars.DREAMAI_PUBLISHER_GITHUB_ID)
     runs-on: ubuntu-latest
-
+    environment: ${{ inputs.target || 'trial' }}
     env:
-      IMAGE_TAG: ${{ github.sha }}
-
+      TRIAL_IMAGE: ${{ vars.DREAMAI_TRIAL_IMAGE }}
+      PRODUCTION_IMAGE: ${{ vars.DREAMAI_PRODUCTION_IMAGE }}
+      TRIAL_CONTAINER: ${{ vars.DREAMAI_TRIAL_CONTAINER_NAME }}
+      APPROVED_DIGEST: ${{ inputs.approved_digest }}
+      DEPLOYMENT: ${{ inputs.target == 'production' && 'portal' || inputs.target == 'demo' && 'dreamai-demo' || 'dreamai-test' }}
+      CONTAINER: ${{ vars.K8S_CONTAINER_NAME }}
     steps:
-      - name: Checkout source
+      - name: Check release configuration
+        run: |
+          test -n "$TRIAL_IMAGE"
+          test -n "$CONTAINER"
+          if [[ -n "$PRODUCTION_IMAGE" ]]; then
+            test "$TRIAL_IMAGE" != "$PRODUCTION_IMAGE"
+          fi
+          if [[ "$TARGET" == "production" ]]; then
+            test -n "$PRODUCTION_IMAGE"
+          fi
+          if [[ "$TARGET" != "trial" ]]; then
+            test -n "$TRIAL_CONTAINER"
+            [[ "$APPROVED_DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]]
+          fi
+
+      - name: Check out release files
+        if: env.TARGET != 'production'
         uses: actions/checkout@v4
         with:
-          lfs: true
-
-      - name: Checkout LFS objects
-        run: git lfs checkout
+          lfs: ${{ env.TARGET == 'trial' }}
 
       - name: Log in to Harbor
         uses: docker/login-action@v3
@@ -28,25 +74,100 @@ jobs:
           username: ${{ secrets.IMAGE_REGISTRY_USERNAME }}
           password: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
 
-      - name: Setup kubeconfig
+      - name: Set up kubeconfig
+        env:
+          KUBE_CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG }}
         run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.K8S_CONFIG }}" > ~/.kube/config
-          chmod 700 ~/.kube
-          chmod 400 ~/.kube/config
+          test -n "$KUBE_CONFIG"
+          umask 077
+          printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/dreamai-kubeconfig"
+          echo "KUBECONFIG=$RUNNER_TEMP/dreamai-kubeconfig" >> "$GITHUB_ENV"
 
-      - name: Deploy to Kubernetes
-        run: >
-          kubectl set image deployment/${{ secrets.K8S_DEPLOYMENT_NAME }}
-          ${{ secrets.K8S_DEPLOYMENT_CONTAINER_NAME }}=${{ secrets.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          --namespace=${{ secrets.K8S_NAMESPACE }}
+      - name: Build and push trial latest
+        id: trial
+        if: env.TARGET == 'trial'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ env.TRIAL_IMAGE }}:latest
+
+      - name: Select the verified trial image
+        id: promotion
+        if: env.TARGET != 'trial'
+        run: |
+          kubectl -n dreamai rollout status deployment/dreamai-test --timeout=2m
+          running_image=$(kubectl -n dreamai get deployment dreamai-test -o json | jq -er \
+            --arg container "$TRIAL_CONTAINER" '.spec.template.spec.containers[] | select(.name == $container) | .image')
+          test "$running_image" = "$TRIAL_IMAGE:latest@$APPROVED_DIGEST"
+          if [[ "$TARGET" == "production" ]]; then
+            docker buildx imagetools create --prefer-index=false --tag "$PRODUCTION_IMAGE:latest" "$TRIAL_IMAGE@$APPROVED_DIGEST"
+            promoted=$(docker buildx imagetools inspect "$PRODUCTION_IMAGE:latest" --format '{{json .Manifest}}' | jq -er '.digest')
+            test "$promoted" = "$APPROVED_DIGEST"
+          fi
+          echo "digest=$APPROVED_DIGEST" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy and wait for rollout
+        env:
+          DIGEST: ${{ steps.trial.outputs.digest || steps.promotion.outputs.digest }}
+        run: |
+          [[ "$DIGEST" =~ ^sha256:[a-f0-9]{64}$ ]]
+          case "$TARGET" in
+            trial) IMAGE="$TRIAL_IMAGE"; SITE="https://dreamai.mobilex.kr" ;;
+            demo) IMAGE="$TRIAL_IMAGE"; SITE="https://demo.dreamai.kr" ;;
+            production) IMAGE="$PRODUCTION_IMAGE"; SITE="https://dreamai.kr" ;;
+          esac
+          reference="$IMAGE:latest@$DIGEST"
+          if [[ "$TARGET" == "trial" ]]; then
+            kubectl -n dreamai get secret dreamai-editor-password -o name >/dev/null
+            status=$(kubectl -n dreamai get pvc dreamai-editor-content -o jsonpath='{.status.phase}')
+            test "$status" = Bound
+            patch=$(jq -n --arg container "$CONTAINER" --arg image "$reference" '{
+              spec: { template: { spec: {
+                containers: [{
+                  name: $container, image: $image,
+                  env: [
+                    {name: "DREAMAI_CONTENT_MODE", value: "draft"},
+                    {name: "DREAMAI_CONTENT_DIR", value: "/var/lib/dreamai"},
+                    {name: "DREAMAI_EDITOR_ORIGIN", value: "https://dreamai.mobilex.kr"},
+                    {name: "DREAMAI_EDITOR_PASSWORD_FILE", value: "/var/run/dreamai-editor/password.txt"},
+                    {name: "DREAMAI_EDITOR_RELEASE_TARGET", value: "demo"}
+                  ],
+                  volumeMounts: [
+                    {name: "portal-editor-content", mountPath: "/var/lib/dreamai"},
+                    {name: "portal-editor-password", mountPath: "/var/run/dreamai-editor", readOnly: true}
+                  ]
+                }],
+                volumes: [
+                  {name: "portal-editor-content", persistentVolumeClaim: {claimName: "dreamai-editor-content"}},
+                  {name: "portal-editor-password", secret: {secretName: "dreamai-editor-password"}}
+                ]
+              } } }
+            }')
+            kubectl -n dreamai patch "deployment/$DEPLOYMENT" --type strategic -p "$patch"
+          elif [[ "$TARGET" == "demo" ]]; then
+            python3 -c 'import sys; print(sys.stdin.read().replace("registry.invalid/dreamai-trial:latest", sys.argv[1]), end="")' \
+              "$reference" < deployment/kubernetes/editor-demo.yaml |
+              kubectl -n dreamai apply -f -
+          else
+            kubectl -n dreamai set image "deployment/$DEPLOYMENT" "$CONTAINER=$reference"
+          fi
+          kubectl -n dreamai rollout status "deployment/$DEPLOYMENT" --timeout=5m
+          if [[ "$TARGET" == "trial" ]]; then
+            curl --fail --silent --show-error --location --retry 3 --max-time 20 "$SITE/" -o "$RUNNER_TEMP/dreamai-trial.html"
+            grep -Fq 'dreamai-workspace-login' "$RUNNER_TEMP/dreamai-trial.html"
+          fi
+          {
+            printf 'Site: %s\n\n' "$SITE"
+            printf 'Container: %s:latest@%s\n' "$IMAGE" "$DIGEST"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove the temporary kubeconfig
+        if: always()
+        run: rm -f "$RUNNER_TEMP/dreamai-kubeconfig" "$RUNNER_TEMP/dreamai-trial.html"

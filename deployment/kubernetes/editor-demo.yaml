@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamai-demo
+  namespace: dreamai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dreamai-demo
+  template:
+    metadata:
+      labels:
+        app: dreamai-demo
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: frontend
+          image: registry.invalid/dreamai-trial:latest
+          imagePullPolicy: Always
+          env:
+            - name: DREAMAI_CONTENT_MODE
+              value: demo
+            - name: DREAMAI_CONTENT_DIR
+              value: /var/lib/dreamai
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: content
+              mountPath: /var/lib/dreamai
+              readOnly: true
+      volumes:
+        - name: content
+          persistentVolumeClaim:
+            claimName: dreamai-editor-content
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dreamai-demo
+  namespace: dreamai
+spec:
+  selector:
+    app: dreamai-demo
+  ports:
+    - port: 80
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dreamai-demo
+  namespace: dreamai
+  annotations:
+    cert-manager.io/cluster-issuer: mobilex.kr
+spec:
+  ingressClassName: mobilex.kr
+  rules:
+    - host: demo.dreamai.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dreamai-demo
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - demo.dreamai.kr
+      secretName: demo.dreamai.kr-cert

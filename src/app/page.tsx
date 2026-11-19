@@ -1,6 +1,6 @@
-"use client";
-
-import dreamData from "@/data/dream-ai.json";
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
+import { readPortalPage } from "@/lib/portal-content/server";
+import { portalFieldId } from "@/lib/portal-content/registry";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -21,10 +21,12 @@ type ReservationButton = {
   reservationUrl: string;
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { content: dreamData } = await readPortalPage("/");
   let heroElement = (
     <div>
       <Image
+        data-portal-field={portalFieldId("hero", "imageUrl")}
         src={dreamData.hero.imageUrl}
         alt={dreamData.hero.name}
         width={1e6}
@@ -168,54 +170,70 @@ export default function HomePage() {
   return (
     <>
       {/* 상단 중앙 HeroImage */}
-      <section className="flex w-full justify-center py-8">
+      <PageWidgets zone="home.page" nodes={{
+        hero: (
+          <section className="flex w-full justify-center py-8">
         <div className="w-full max-w-[500px]">
           {dreamData.hero.imageUrl && heroElement}
         </div>
       </section>
-
-      {/* 메인 콘텐츠 영역 */}
-      <section className="bg-white pt-10">
+        ),
+        /* 메인 콘텐츠 영역 */
+        directory: (
+          <section className="bg-white pt-10">
         <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_4fr_1fr]">
           {/* 좌측 */}
-          <div className={sideColumnClass}>
+          <PageWidgets zone="home.directory" nodes={{
+            left: (
+              <div className={sideColumnClass}>
             {leftGroups.map(drawGroup)}
           </div>
-
-          {/* 중앙 */}
-          <div className="flex h-[800px] w-full flex-col items-center px-4 pt-4">
+            ),
+            /* 중앙 */
+            center: (
+              <div className="flex h-[800px] w-full flex-col items-center px-4 pt-4">
             {/* 비디오 제목 */}
-            <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
-              {dreamData.video.name}
-            </h2>
-
-            {/* 유튜브 영상 */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
-              <iframe
-                src={`https://www.youtube.com/embed/${
-                  dreamData.video.url.split("/").pop()?.split("?")[0]
-                }`}
-                title={dreamData.video.name}
-                className="absolute left-0 top-0 h-full w-full"
-                allowFullScreen
-              />
-            </div>
-
-            {/* SPACE / ANNEX 버튼 영역 */}
-            <div className="mt-auto grid w-full grid-cols-2 gap-10">
-              {reservationButtons.map(drawReservationButton)}
-            </div>
+            <PageWidgets zone="home.center" nodes={{
+              title: (
+                <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
+                  {dreamData.video.name}
+                </h2>
+              ),
+              /* 유튜브 영상 */
+              video: (
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${
+                      dreamData.video.url.split("/").pop()?.split("?")[0]
+                    }`}
+                    title={dreamData.video.name}
+                    className="absolute left-0 top-0 h-full w-full"
+                    allowFullScreen
+                  />
+                </div>
+              ),
+              /* SPACE / ANNEX 버튼 영역 */
+              reservations: (
+                <div className="mt-auto grid w-full grid-cols-2 gap-10">
+                  {reservationButtons.map(drawReservationButton)}
+                </div>
+              ),
+            }} />
           </div>
-
-          {/* 우측 */}
-          <div className={sideColumnClass}>
+            ),
+            /* 우측 */
+            right: (
+              <div className={sideColumnClass}>
             {rightGroups.map(drawGroup)}
           </div>
+            ),
+          }} />
         </div>
       </section>
-
-      {/* AD 배너 */}
-      <section className="mb-32 mt-20 bg-white">
+        ),
+        /* AD 배너 */
+        promotion: (
+          <section className="mb-32 mt-20 bg-white">
         <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-4 md:grid-cols-[1fr_4fr_1fr]">
           {/* 중앙 영상/SPACE/ANNEX 영역과 동일한 가로폭으로 맞춤 */}
           <div className="w-full px-4 md:col-start-2">
@@ -227,46 +245,60 @@ export default function HomePage() {
               }}
             >
               {/* 왼쪽 텍스트 영역 */}
-              <div className="z-10 flex h-full w-[58%] flex-col items-start justify-center whitespace-nowrap pl-[8%]">
-                <div style={{ color: "#000000", fontSize: "1.55cqw" }}>
-                  {dreamData.adBanner.subTitle}
-                </div>
-
-                <div
-                  style={{
-                    color: "#075F9A",
-                    fontSize: "2.45cqw",
-                    fontWeight: "bold",
-                  }}
-                  className="my-[0.25cqw] leading-none"
-                >
-                  {dreamData.adBanner.mainTitle}
-                </div>
-
-                <div
-                  style={{ color: "#4B5563", fontSize: "1.25cqw" }}
-                  className="mb-[1.3cqw]"
-                >
-                  {dreamData.adBanner.schedule}
-                </div>
-
-                <Link
-                  href={dreamData.adBanner.buttonUrl}
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    color: "#000000",
-                    fontSize: "1cqw",
-                  }}
-                  className="inline-block rounded-[8px] border border-gray-200 px-[2.8cqw] py-[0.55cqw] font-medium shadow-sm transition-all hover:bg-gray-50"
-                >
-                  {dreamData.adBanner.buttonText}
-                </Link>
+              <PageWidgets zone="home.promotion" nodes={{
+                text: (
+                  <div className="z-10 flex h-full w-[58%] flex-col items-start justify-center whitespace-nowrap pl-[8%]">
+                <PageWidgets zone="home.promotion.copy" nodes={{
+                  subheading: (
+                    <div data-portal-field={portalFieldId("adBanner", "subTitle")} style={{ color: "#000000", fontSize: "1.55cqw" }}>
+                      {dreamData.adBanner.subTitle}
+                    </div>
+                  ),
+                  heading: (
+                    <div
+                      data-portal-field={portalFieldId("adBanner", "mainTitle")}
+                      style={{
+                        color: "#075F9A",
+                        fontSize: "2.45cqw",
+                        fontWeight: "bold",
+                      }}
+                      className="my-[0.25cqw] leading-none"
+                    >
+                      {dreamData.adBanner.mainTitle}
+                    </div>
+                  ),
+                  schedule: (
+                    <div
+                      data-portal-field={portalFieldId("adBanner", "schedule")}
+                      style={{ color: "#4B5563", fontSize: "1.25cqw" }}
+                      className="mb-[1.3cqw]"
+                    >
+                      {dreamData.adBanner.schedule}
+                    </div>
+                  ),
+                  button: (
+                    <Link
+                      data-portal-field={portalFieldId("adBanner", "buttonText")}
+                      href={dreamData.adBanner.buttonUrl}
+                      style={{
+                        backgroundColor: "#FFFFFF",
+                        color: "#000000",
+                        fontSize: "1cqw",
+                      }}
+                      className="inline-block rounded-[8px] border border-gray-200 px-[2.8cqw] py-[0.55cqw] font-medium shadow-sm transition-all hover:bg-gray-50"
+                    >
+                      {dreamData.adBanner.buttonText}
+                    </Link>
+                  ),
+                }} />
               </div>
-
-              {/* 오른쪽 이미지 영역 */}
-              <div className="absolute right-0 top-0 flex h-full w-[42%] items-center justify-end pr-[4%]">
+                ),
+                /* 오른쪽 이미지 영역 */
+                image: (
+                  <div className="absolute right-0 top-0 flex h-full w-[42%] items-center justify-end pr-[4%]">
                 <div className="relative h-[88%] w-full">
                   <Image
+                    data-portal-field={portalFieldId("adBanner", "imageUrl")}
                     src={dreamData.adBanner.imageUrl}
                     alt="AD Illustration"
                     fill
@@ -275,33 +307,43 @@ export default function HomePage() {
                   />
                 </div>
               </div>
+                ),
+              }} />
             </div>
           </div>
         </div>
       </section>
-
-      <footer className="relative w-full bg-zinc-900 py-8 text-2xl text-zinc-300">
-        <div className="mx-auto max-w-screen-xl px-4 text-center">
-          <div className="leading-none">{dreamData.footer.copyright}</div>
-          <div className="text-xl leading-none">
-            <br />
-            {dreamData.footer.businessInfo}
-          </div>
-        </div>
-
-        {dreamData.footer.trailing.map((item, idx) => {
-          return (
-            <a
-              key={idx}
-              href={item.url}
-              target="_blank"
-              className="absolute bottom-8 right-10 text-right leading-none underline transition-colors duration-200 hover:text-white"
-            >
-              {item.title}
-            </a>
-          );
-        })}
+        ),
+        footer: (
+          <footer className="relative w-full bg-zinc-900 py-8 text-2xl text-zinc-300">
+        <PageWidgets zone="home.footer" nodes={{
+          info: (
+            <div className="mx-auto max-w-screen-xl px-4 text-center">
+              <div className="leading-none">{dreamData.footer.copyright}</div>
+              <div className="text-xl leading-none">
+                <br />
+                {dreamData.footer.businessInfo}
+              </div>
+            </div>
+          ),
+          links: (
+            dreamData.footer.trailing.map((item, idx) => {
+              return (
+                <a
+                  key={idx}
+                  href={item.url}
+                  target="_blank"
+                  className="absolute bottom-8 right-10 text-right leading-none underline transition-colors duration-200 hover:text-white"
+                >
+                  {item.title}
+                </a>
+              );
+            })
+          ),
+        }} />
       </footer>
+        ),
+      }} />
     </>
   );
 }

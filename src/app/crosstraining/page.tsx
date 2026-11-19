@@ -1,4 +1,5 @@
-import data from "./crosstraining.json";
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
+import { readPortalPage } from "@/lib/portal-content/server";
 
 type Status = "완료" | "진행중" | "예정";
 
@@ -91,7 +92,10 @@ function YearBlock({ group }: { group: YearGroup }) {
   );
 }
 
-export default function CrossTrainingPage() {
+export default async function CrossTrainingPage() {
+  const editableCopy = (await readPortalPage("/crosstraining")).content.display;
+  const { content } = await readPortalPage("/crosstraining");
+  const data = content;
   const years: YearGroup[] = (data.years as RawYearGroup[])
     .map((group) => ({
       year: group.year,
@@ -314,14 +318,20 @@ export default function CrossTrainingPage() {
       `}</style>
 
       <div className="cross-training-page">
-        <h1 className="page-title">Cross Training</h1>
-        <p className="page-subtitle">
-          GIST AI 융합학과의 교육 협력 프로그램 이력입니다.
-        </p>
-
-        {years.map((group) => (
+        <PageWidgets zone="cross.page" nodes={{
+          title: (
+            <h1 className="page-title">{editableCopy["CrossTrainingPage 문구 1"]}</h1>
+          ),
+          description: (
+            <p className="page-subtitle">
+          {editableCopy["CrossTrainingPage 문구 2"]}</p>
+          ),
+          catalog: (
+            years.map((group) => (
           <YearBlock key={group.year} group={group} />
-        ))}
+        ))
+          ),
+        }} />
       </div>
     </>
   );

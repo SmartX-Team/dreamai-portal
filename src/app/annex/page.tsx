@@ -1,4 +1,5 @@
-import data from "./annex.json";
+import { PageWidgets } from "@/lib/portal-content/page-widgets";
+import { readPortalPage } from "@/lib/portal-content/server";
 
 type OpeningStatus = "예정" | "진행 중" | "완료";
 
@@ -21,7 +22,6 @@ type AnnexData = {
   };
 };
 
-const annexData = data as AnnexData;
 
 const statusClass: Record<OpeningStatus, string> = {
   예정: "badge-upcoming",
@@ -29,7 +29,10 @@ const statusClass: Record<OpeningStatus, string> = {
   완료: "badge-done",
 };
 
-export default function AnnexPage() {
+export default async function AnnexPage() {
+  const editableCopy = (await readPortalPage("/annex")).content.display;
+  const { content } = await readPortalPage("/annex");
+  const annexData = content as AnnexData;
   const { hero, opening, space } = annexData;
 
   return (
@@ -197,14 +200,17 @@ export default function AnnexPage() {
       `}</style>
 
       <main className="annex-page">
-        <section className="annex-hero">
-          <span className="annex-label">ANNEX</span>
+        <PageWidgets zone="annex.page" nodes={{
+          hero: (
+            <section className="annex-hero">
+          <span className="annex-label">{editableCopy["AnnexPage 문구 1"]}</span>
           <h1 className="annex-title">{hero.title}</h1>
           <p className="annex-subtitle">{hero.subtitle}</p>
         </section>
-
-        <section className="annex-section">
-          <h2 className="section-title">Opening</h2>
+          ),
+          opening: (
+            <section className="annex-section">
+          <h2 className="section-title">{editableCopy["AnnexPage 문구 2"]}</h2>
 
           <div className="opening-card">
             <div>
@@ -223,14 +229,17 @@ export default function AnnexPage() {
             </div>
           </div>
         </section>
-
-        <section className="annex-section">
+          ),
+          space: (
+            <section className="annex-section">
           <h2 className="section-title">{space.title}</h2>
 
           <div className="space-card">
             <p className="space-desc">{space.description}</p>
           </div>
         </section>
+          ),
+        }} />
       </main>
     </>
   );
