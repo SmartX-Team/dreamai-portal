@@ -1,0 +1,1021 @@
+{
+  "rootClass": "mx-auto max-w-7xl px-5 py-12 md:px-8",
+  "slots": {
+    "hero": {
+      "tag": "header",
+      "props": {
+        "className": "mb-10"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "mb-7 text-center"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "mb-3 inline-block rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold tracking-wide text-blue-800"
+              },
+              "children": [
+                {
+                  "field": "NPU Training 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "h1",
+              "props": {
+                "className": "text-3xl font-bold tracking-tight text-gray-900 md:text-4xl"
+              },
+              "children": [
+                {
+                  "field": "NPU Training 문구 2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "hr",
+          "props": {
+            "className": "my-5 border-t border-gray-300"
+          }
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "mb-8 whitespace-pre-line text-sm leading-7 text-gray-700 md:text-base"
+          },
+          "children": [
+            {
+              "field": "NPU Training 문구 3"
+            }
+          ]
+        }
+      ]
+    },
+    "programs": {
+      "tag": "section",
+      "zone": "npu.courses",
+      "slots": {
+        "heading": {
+          "tag": "h2",
+          "props": {
+            "className": "mb-6 border-b border-gray-200 pb-4 text-2xl font-bold text-gray-900 md:text-3xl"
+          },
+          "children": [
+            {
+              "field": "NPU 교육 프로그램 문구 1"
+            }
+          ]
+        },
+        "followup": {
+          "tag": "section",
+          "props": {
+            "className": "mb-8 rounded-3xl bg-white p-6 shadow-sm md:p-10"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "mb-8 flex flex-wrap items-center gap-3 border-b border-gray-200 pb-5"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "props": {
+                    "className": "rounded-full px-3 py-1.5 text-sm font-semibold bg-green-50 text-green-700"
+                  },
+                  "children": [
+                    {
+                      "field": "NPU 평가·검증 실무 교육(2차) 문구 1"
+                    }
+                  ]
+                },
+                {
+                  "tag": "h2",
+                  "props": {
+                    "className": "text-2xl font-bold tracking-tight text-gray-900 md:text-3xl"
+                  },
+                  "children": [
+                    {
+                      "field": "NPU 평가·검증 실무 교육(2차) 문구 2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "grid grid-cols-1 gap-10 lg:grid-cols-2"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "flex flex-col gap-8"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "NPU 평가·검증 실무 교육(2차) 문구 3"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "props": {
+                            "className": "whitespace-pre-line text-sm leading-7 text-gray-700 md:text-base"
+                          },
+                          "children": [
+                            {
+                              "field": "NPU 평가·검증 실무 교육(2차) 문구 4"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "NPU 평가·검증 실무 교육(2차) 문구 5"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "dl",
+                          "props": {
+                            "className": "flex flex-col gap-4"
+                          },
+                          "children": [
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 6"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 7"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 8"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 9"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 10"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 11"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 12"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 13"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 14"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 15"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 16"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "NPU 평가·검증 실무 교육(2차) 문구 17"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "NPU 평가·검증 실무 교육(2차) 문구 18"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "ol",
+                          "props": {
+                            "className": "flex list-decimal flex-col gap-2 pl-5 text-sm leading-7 text-gray-700 md:text-base"
+                          },
+                          "children": [
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 19"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 20"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 21"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 22"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 23"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 24"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 25"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "NPU 평가·검증 실무 교육(2차) 문구 26"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "flex items-start justify-center lg:justify-end"
+                  },
+                  "children": [
+                    {
+                      "tag": "a",
+                      "props": {
+                        "href": {
+                          "field": "NPU 평가·검증 실무 교육(2차) 링크 1"
+                        },
+                        "target": "_blank",
+                        "rel": "noreferrer",
+                        "className": "relative block aspect-[3/4] w-full max-w-lg overflow-hidden rounded-xl border border-gray-100 bg-gray-50",
+                        "aria-label": {
+                          "field": "NPU 평가·검증 실무 교육(2차) 설명 1"
+                        }
+                      },
+                      "children": [
+                        {
+                          "tag": "img",
+                          "props": {
+                            "alt": {
+                              "field": "NPU 평가·검증 실무 교육(2차) 설명 2"
+                            },
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "className": "object-contain",
+                            "src": {
+                              "field": "NPU 평가·검증 실무 교육(2차) 이미지 1"
+                            }
+                          },
+                          "style": {
+                            "position": "absolute",
+                            "height": "100%",
+                            "width": "100%",
+                            "left": "0",
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "color": "transparent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "furiosa": {
+          "tag": "section",
+          "props": {
+            "className": "mb-8 rounded-3xl bg-white p-6 shadow-sm md:p-10"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "mb-8 flex flex-wrap items-center gap-3 border-b border-gray-200 pb-5"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "props": {
+                    "className": "rounded-full px-3 py-1.5 text-sm font-semibold bg-gray-100 text-gray-600"
+                  },
+                  "children": [
+                    {
+                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 1"
+                    }
+                  ]
+                },
+                {
+                  "tag": "h2",
+                  "props": {
+                    "className": "text-2xl font-bold tracking-tight text-gray-900 md:text-3xl"
+                  },
+                  "children": [
+                    {
+                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "grid grid-cols-1 gap-10 lg:grid-cols-2"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "flex flex-col gap-8"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 3"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "props": {
+                            "className": "whitespace-pre-line text-sm leading-7 text-gray-700 md:text-base"
+                          },
+                          "children": [
+                            {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 4"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 5"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "dl",
+                          "props": {
+                            "className": "flex flex-col gap-4"
+                          },
+                          "children": [
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 6"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 7"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 8"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 9"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 10"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 11"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 12"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 13"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 14"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 15"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "div",
+                              "props": {
+                                "className": "grid grid-cols-[76px_minmax(0,1fr)] gap-3 leading-relaxed md:grid-cols-[100px_minmax(0,1fr)]"
+                              },
+                              "children": [
+                                {
+                                  "tag": "dt",
+                                  "props": {
+                                    "className": "text-sm font-semibold text-gray-600 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 16"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "dd",
+                                  "props": {
+                                    "className": "m-0 break-keep text-sm text-gray-900 md:text-base"
+                                  },
+                                  "children": [
+                                    {
+                                      "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 17"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "children": [
+                        {
+                          "tag": "h3",
+                          "props": {
+                            "className": "mb-4 inline-block border-b-2 border-blue-500 pb-2 text-lg font-bold text-gray-900"
+                          },
+                          "children": [
+                            {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 18"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "ol",
+                          "props": {
+                            "className": "flex list-decimal flex-col gap-2 pl-5 text-sm leading-7 text-gray-700 md:text-base"
+                          },
+                          "children": [
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 19"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 20"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 21"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 22"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 23"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 24"
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "li",
+                              "props": {
+                                "className": "break-keep pl-1"
+                              },
+                              "children": [
+                                {
+                                  "field": "FuriosaAI와 함께하는 NPU 실증 교육 문구 25"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "flex items-start justify-center lg:justify-end"
+                  },
+                  "children": [
+                    {
+                      "tag": "a",
+                      "props": {
+                        "href": {
+                          "field": "FuriosaAI와 함께하는 NPU 실증 교육 링크 1"
+                        },
+                        "target": "_blank",
+                        "rel": "noreferrer",
+                        "className": "relative block aspect-[3/4] w-full max-w-lg overflow-hidden rounded-xl border border-gray-100 bg-gray-50",
+                        "aria-label": {
+                          "field": "FuriosaAI와 함께하는 NPU 실증 교육 설명 1"
+                        }
+                      },
+                      "children": [
+                        {
+                          "tag": "img",
+                          "props": {
+                            "alt": {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 설명 2"
+                            },
+                            "loading": "lazy",
+                            "decoding": "async",
+                            "className": "object-contain",
+                            "src": {
+                              "field": "FuriosaAI와 함께하는 NPU 실증 교육 이미지 1"
+                            }
+                          },
+                          "style": {
+                            "position": "absolute",
+                            "height": "100%",
+                            "width": "100%",
+                            "left": "0",
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "color": "transparent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "display": {
+    "NPU Training 문구 1": "NPU TRAINING",
+    "NPU Training 문구 2": "NPU Training",
+    "NPU Training 문구 3": "FuriosaAI NPU를 활용한 실증 교육과 후속 교육 소식을 안내합니다.",
+    "NPU 교육 프로그램 문구 1": "NPU 교육 프로그램",
+    "NPU 평가·검증 실무 교육(2차) 문구 1": "예정",
+    "NPU 평가·검증 실무 교육(2차) 문구 2": "NPU 평가·검증 실무 교육(2차)",
+    "NPU 평가·검증 실무 교육(2차) 문구 3": "교육 과정 안내",
+    "NPU 평가·검증 실무 교육(2차) 문구 4": "AI 기업 샘플 프로젝트를 활용해 NPU 기반 PoC를 수행. 성능·전력·정확도 평가와 결과 검증, 보고서 작성까지 진행하는 실무 중심 교육.",
+    "NPU 평가·검증 실무 교육(2차) 문구 5": "교육 정보",
+    "NPU 평가·검증 실무 교육(2차) 문구 6": "일정",
+    "NPU 평가·검증 실무 교육(2차) 문구 7": "2026.11.05(목)–11.06(금) · 10:00–17:00",
+    "NPU 평가·검증 실무 교육(2차) 문구 8": "장소",
+    "NPU 평가·검증 실무 교육(2차) 문구 9": "GIST AI대학원 1층 실습강의실 (광주과학기술원)",
+    "NPU 평가·검증 실무 교육(2차) 문구 10": "대상",
+    "NPU 평가·검증 실무 교육(2차) 문구 11": "GIST 학부생·대학원생·연구원, 전남대학교 학부생·대학원생·교직원, AICA 관계자",
+    "NPU 평가·검증 실무 교육(2차) 문구 12": "강사",
+    "NPU 평가·검증 실무 교육(2차) 문구 13": "권석민 박사 (Seokmin Kwon, Ph.D.) · FuriosaAI, Inc.",
+    "NPU 평가·검증 실무 교육(2차) 문구 14": "교육비",
+    "NPU 평가·검증 실무 교육(2차) 문구 15": "무료",
+    "NPU 평가·검증 실무 교육(2차) 문구 16": "인원",
+    "NPU 평가·검증 실무 교육(2차) 문구 17": "50명 내외",
+    "NPU 평가·검증 실무 교육(2차) 문구 18": "주요 교육 내용",
+    "NPU 평가·검증 실무 교육(2차) 문구 19": "평가·검증 절차와 시험 설계 및 NPU 실행 환경·모델 세팅",
+    "NPU 평가·검증 실무 교육(2차) 문구 20": "LLM 처리량(TPS)·첫 토큰 지연(TTFT) 측정과 결과 분석",
+    "NPU 평가·검증 실무 교육(2차) 문구 21": "전력효율(TPS/W) 측정, 부하 조건 비교, 반복 측정과 성능 증빙 관리",
+    "NPU 평가·검증 실무 교육(2차) 문구 22": "정확도 평가 설계와 데이터셋 구성",
+    "NPU 평가·검증 실무 교육(2차) 문구 23": "평가 실행과 문항별 채점 및 결과 분석",
+    "NPU 평가·검증 실무 교육(2차) 문구 24": "정확도 집계와 결과 재현성 검증",
+    "NPU 평가·검증 실무 교육(2차) 문구 25": "동시 요청 설정과 성능·정확도 비교",
+    "NPU 평가·검증 실무 교육(2차) 문구 26": "검증 보고서 작성과 실증사업 적용 계획 수립",
+    "NPU 평가·검증 실무 교육(2차) 링크 1": "/images/nputraining/nputraining_poster2.png",
+    "NPU 평가·검증 실무 교육(2차) 설명 1": "NPU 평가·검증 실무 교육(2차) 포스터 크게 보기",
+    "NPU 평가·검증 실무 교육(2차) 설명 2": "NPU 평가·검증 실무 교육(2차) 포스터",
+    "NPU 평가·검증 실무 교육(2차) 이미지 1": "/images/nputraining/nputraining_poster2.png",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 1": "완료",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 2": "FuriosaAI와 함께하는 NPU 실증 교육",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 3": "교육 과정 안내",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 4": "국산 NPU(FuriosaAI RNGD)로 AI 모델을 직접 실행하고 성능을 측정하는 실습 중심 교육. NPU 아키텍처 이해부터 개발 환경 구축, 모델 최적화, LLM 서빙, 성능 분석까지 이론과 실습.",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 5": "교육 정보",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 6": "일정",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 7": "2026.09.17(목)–09.18(금) · 10:00–17:00",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 8": "장소",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 9": "Dream-AI Annex 201호 (금호관)",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 10": "대상",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 11": "GIST 대학원생·연구원·슈퍼컴퓨팅센터, AICA 국산 반도체 및 실증 관련 부서, 관련 연구자·교직원 등",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 12": "강사",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 13": "권석민 박사 (Blaire (Seokmin) Kwon, Ph.D.) · FuriosaAI Solution Architect",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 14": "교육비",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 15": "무료",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 16": "인원",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 17": "20명 내외",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 18": "주요 교육 내용",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 19": "NPU 아키텍처 및 생태계 이해",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 20": "개발 환경 구축 및 도구 사용법",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 21": "모델 최적화 및 포팅 실습",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 22": "NPU 기반 LLM 서빙 실습",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 23": "성능 평가 및 모니터링",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 24": "멀티 NPU 구성 및 확장 실습",
+    "FuriosaAI와 함께하는 NPU 실증 교육 문구 25": "Agentic AI·RAG 실증",
+    "FuriosaAI와 함께하는 NPU 실증 교육 링크 1": "/images/nputraining/nputraining_poster.png",
+    "FuriosaAI와 함께하는 NPU 실증 교육 설명 1": "FuriosaAI와 함께하는 NPU 실증 교육 포스터 크게 보기",
+    "FuriosaAI와 함께하는 NPU 실증 교육 설명 2": "FuriosaAI와 함께하는 NPU 실증 교육 포스터",
+    "FuriosaAI와 함께하는 NPU 실증 교육 이미지 1": "/images/nputraining/nputraining_poster.png"
+  }
+}

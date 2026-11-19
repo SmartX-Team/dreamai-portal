@@ -103,63 +103,23 @@ function HeroSection() {
 ──────────────────────────────────────────── */
 function MenuSection() {
   const siteData = usePortalPage("/contents");
-  const tabs = siteData.menu.tabs;
-  const allCards = siteData.menu.contents as Record<string, MenuCard[]>;
-  const [idx, setIdx] = useState(0);
-  const cards = allCards[tabs[idx]] ?? [];
-  const isFirst = idx === 0,
-    isLast = idx === tabs.length - 1;
+  const cards = siteData.menu.contents as Record<string, MenuCard[]>;
+  function group(title: string, items: MenuCard[]) {
+    return (
+      <section style={s.section}>
+        <h2 style={{ ...s.sectionTitle, color: "#7c3aed" }}>{title}</h2>
+        <div style={s.cardGrid}>
+          {items.map((card) => <CardItem key={card.id} card={card} />)}
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section style={s.section}>
+    <section style={{ display: "flex", flexDirection: "column", gap: 36 }}>
       <PageWidgets zone="content.menu" nodes={{
-        tabs: (
-          <div style={s.menuHeading}>
-            {tabs.map((tab, i) => (
-              <span key={tab} style={{ display: "flex", alignItems: "center" }}>
-                {i > 0 && <span style={s.menuDot}>&nbsp;·&nbsp;</span>}
-                <button
-                  onClick={() => setIdx(i)}
-                  style={{
-                    ...s.menuTabLabel,
-                    ...(i === idx ? s.menuTabLabelActive : {}),
-                  }}
-                >
-                  {tab}
-                </button>
-              </span>
-            ))}
-          </div>
-        ),
-        cards: (
-          <div style={s.cardGrid}>
-            {cards.map((card) => (
-              <CardItem key={card.id} card={card} />
-            ))}
-          </div>
-        ),
-        navigation: (
-          <div style={s.menuNav}>
-            <button
-              style={{
-                ...s.navBtn,
-                ...(isFirst ? s.navBtnInactive : s.navBtnActive),
-              }}
-              onClick={() => !isFirst && setIdx((p) => p - 1)}
-            >
-              ‹ 이전
-            </button>
-            <button
-              style={{
-                ...s.navBtn,
-                ...(isLast ? s.navBtnInactive : s.navBtnActive),
-              }}
-              onClick={() => !isLast && setIdx((p) => p + 1)}
-            >
-              다음 ›
-            </button>
-          </div>
-        ),
+        content: group(siteData.display["콘텐츠 메뉴 제목"], cards["콘텐츠"] ?? []),
+        training: group(siteData.display["훈련 메뉴 제목"], cards["훈련"] ?? []),
       }} />
     </section>
   );
@@ -438,27 +398,6 @@ const s: Record<string, React.CSSProperties> = {
   section: { display: "flex", flexDirection: "column", gap: 20 },
   sectionTitle: { fontSize: 22, fontWeight: 800, margin: 0 },
 
-  /* ── MENU ── */
-  menuHeading: {
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap" as const,
-    marginBottom: 4,
-  },
-  menuDot: { color: "#9ca3af", fontSize: 22, fontWeight: 400 },
-  menuTabLabel: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    fontSize: 22,
-    fontWeight: 700,
-    color: "#9ca3af",
-    padding: 0,
-    transition: "color 0.2s",
-    userSelect: "none" as const,
-  },
-  menuTabLabelActive: { color: "#7c3aed" },
-
   /* ── CARDS ── */
   cardGrid: { display: "flex", gap: 20, flexWrap: "wrap" as const },
   card: {
@@ -524,29 +463,6 @@ const s: Record<string, React.CSSProperties> = {
     background: "#060606",
     textDecoration: "none",
     width: "fit-content",
-  },
-
-  /* ── NAV ── */
-  menuNav: { display: "flex", justifyContent: "space-between", marginTop: 4 },
-  navBtn: {
-    border: "1.5px solid",
-    borderRadius: 8,
-    padding: "9px 20px",
-    fontSize: 13,
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "all 0.2s",
-  },
-  navBtnActive: {
-    borderColor: "#1a1a2e",
-    background: "#1a1a2e",
-    color: "#fff",
-  },
-  navBtnInactive: {
-    borderColor: "#e5e7eb",
-    background: "#fff",
-    color: "#9ca3af",
-    cursor: "default",
   },
 
   /* ── PILLS ── */

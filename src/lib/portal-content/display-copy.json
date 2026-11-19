@@ -9,10 +9,6 @@
     "RootLayout 링크 4": "https://www.hrd4u.or.kr/hrd4u",
     "RootLayout 이미지 4": "/images/KHP.png"
   },
-  "/annex": {
-    "AnnexPage 문구 1": "ANNEX",
-    "AnnexPage 문구 2": "Opening"
-  },
   "/beginnerai": {
     "BeginnerAIPage 문구 1": "Beginner-AI 메뉴얼",
     "BeginnerAIPage 문구 2": "Beginner-AI 접속하기",
@@ -25,13 +21,11 @@
     "CommunityPage 문구 2": "Dream-AI 운영진과 AI Ambassador를 소개합니다."
   },
   "/contents": {
+    "콘텐츠 메뉴 제목": "콘텐츠",
+    "훈련 메뉴 제목": "훈련",
     "HeroSection 문구 1": "바로가기 ›",
     "CardItem 문구 1": "바로가기 ›",
     "CoursesSection 문구 1": "성장을 위한 필수 코스"
-  },
-  "/crosstraining": {
-    "CrossTrainingPage 문구 1": "Cross Training",
-    "CrossTrainingPage 문구 2": "GIST AI 융합학과의 교육 협력 프로그램 이력입니다."
   },
   "/dream_ai_space": {},
   "/newsac": {

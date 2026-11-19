@@ -2,6 +2,9 @@
 const nextConfig = {
   basePath: "",
   output: "standalone",
+  async rewrites() {
+    return { fallback: [{ source: "/images/:path*", destination: "/api/portal-content/legacy/images/:path*" }] };
+  },
   images: {
     remotePatterns: [
       {

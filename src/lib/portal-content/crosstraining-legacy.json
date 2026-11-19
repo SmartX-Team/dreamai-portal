@@ -1,0 +1,2022 @@
+{
+  "rootClass": "cross-training-page",
+  "css": "\n        .cross-training-page {\n          max-width: 1120px;\n          margin: 0 auto;\n          padding: 4rem 2rem 5rem;\n          font-family: inherit;\n          background: #fff;\n        }\n\n        .page-hero {\n          margin-bottom: 3rem;\n        }\n\n        .page-label {\n          display: inline-block;\n          margin-bottom: 1rem;\n          padding: 5px 12px;\n          border: 1px solid #B9D7F3;\n          border-radius: 999px;\n          background: #E6F1FB;\n          color: #174B8A;\n          font-size: 12px;\n          font-weight: 600;\n          letter-spacing: 0.03em;\n        }\n\n        .page-title {\n          margin: 0 0 0.75rem;\n          color: #111;\n          font-size: 42px;\n          font-weight: 700;\n          letter-spacing: -0.04em;\n          line-height: 1.2;\n        }\n\n        .page-subtitle {\n          margin: 0;\n          color: #777;\n          font-size: 16px;\n          line-height: 1.6;\n        }\n\n        .year-block {\n          margin-bottom: 2.75rem;\n        }\n\n        .year-block.current-year {\n          margin-bottom: 3rem;\n          padding: 1.5rem 1.5rem 1.75rem;\n          border: 1px solid #E1E8F5;\n          border-radius: 22px;\n          background: linear-gradient(180deg, #F5F8FF 0%, #FFFFFF 100%);\n        }\n\n        .year-header {\n          display: flex;\n          align-items: center;\n          gap: 14px;\n          margin-bottom: 1.5rem;\n        }\n\n        .year-label {\n          color: #111;\n          font-size: 28px;\n          font-weight: 500;\n          line-height: 1;\n        }\n\n        .current-year .year-label {\n          color: #174B8A;\n          font-weight: 700;\n          letter-spacing: 0.08em;\n        }\n\n        .year-count {\n          padding: 2px 10px;\n          border: 0.5px solid #e5e5e5;\n          border-radius: 99px;\n          background: #f5f5f5;\n          color: #aaa;\n          font-size: 12px;\n        }\n\n        .current-year .year-count {\n          border-color: #C9D9EE;\n          background: #fff;\n          color: #174B8A;\n        }\n\n        .year-line {\n          flex: 1;\n          border-top: 0.5px solid #e0e0e0;\n        }\n\n        .current-year .year-line {\n          border-top-color: #C9D9EE;\n        }\n\n        .items {\n          display: flex;\n          flex-direction: column;\n          gap: 10px;\n        }\n\n        .item {\n          display: grid;\n          grid-template-columns: minmax(0, 1fr) 170px;\n          align-items: start;\n          gap: 20px;\n          padding: 1.25rem 1.5rem;\n          border: 1px solid #E3E5E8;\n          border-radius: 13px;\n          background: #FAFBFC;\n        }\n\n        .item-current {\n          border-color: #D8E2F0;\n          background: #fff;\n          box-shadow: 0 8px 20px rgba(23, 75, 138, 0.06);\n        }\n\n        .item-title {\n          margin: 0 0 8px;\n          color: #111;\n          font-size: 16px;\n          font-weight: 600;\n          letter-spacing: -0.02em;\n          line-height: 1.45;\n        }\n\n        .current-year .item-title {\n          color: #0F2340;\n        }\n\n        .item-desc {\n          margin: 0;\n          color: #818892;\n          font-size: 14px;\n          line-height: 1.6;\n          word-break: keep-all;\n        }\n\n        .item-meta {\n          display: flex;\n          min-width: 0;\n          flex-direction: column;\n          align-items: flex-end;\n          gap: 7px;\n          text-align: right;\n        }\n\n        .item-org {\n          margin: 0;\n          color: #707783;\n          font-size: 13px;\n          line-height: 1.4;\n          white-space: nowrap;\n        }\n\n        .item-date {\n          margin: 0;\n          color: #9299A3;\n          font-size: 13px;\n          line-height: 1.4;\n          white-space: nowrap;\n        }\n\n        .badge {\n          display: inline-block;\n          padding: 4px 10px;\n          border-radius: 99px;\n          font-size: 12px;\n          line-height: 1;\n          white-space: nowrap;\n        }\n\n        .badge-done {\n          border: 0.5px solid #dcdcdc;\n          background: #f5f5f5;\n          color: #777;\n        }\n\n        .badge-ongoing {\n          border: 0.5px solid #B5D4F4;\n          background: #E6F1FB;\n          color: #185FA5;\n        }\n\n        .badge-upcoming {\n          border: 0.5px solid #C0DD97;\n          background: #EAF3DE;\n          color: #3B6D11;\n        }\n\n        @media (max-width: 768px) {\n          .cross-training-page {\n            padding: 3rem 1rem 4rem;\n          }\n\n          .page-title {\n            font-size: 34px;\n          }\n\n          .year-block.current-year {\n            padding: 1.25rem 1rem;\n            border-radius: 18px;\n          }\n\n          .year-header {\n            gap: 10px;\n          }\n\n          .year-label {\n            font-size: 24px;\n          }\n\n          .item {\n            grid-template-columns: 1fr;\n            padding: 1.1rem 1.2rem;\n          }\n\n          .item-meta {\n            align-items: flex-start;\n            text-align: left;\n          }\n\n          .item-org,\n          .item-date {\n            white-space: normal;\n          }\n        }\n      ",
+  "slots": {
+    "title": {
+      "tag": "header",
+      "props": {
+        "className": "page-hero"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "props": {
+            "className": "page-label"
+          },
+          "children": [
+            {
+              "field": "Event 문구 1"
+            }
+          ]
+        },
+        {
+          "tag": "h1",
+          "props": {
+            "className": "page-title"
+          },
+          "children": [
+            {
+              "field": "Event 문구 2"
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "page-subtitle"
+          },
+          "children": [
+            {
+              "field": "Event 문구 3"
+            }
+          ]
+        }
+      ]
+    },
+    "description": {
+      "tag": "section",
+      "props": {
+        "className": "year-block current-year"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "year-header"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-label"
+              },
+              "children": [
+                {
+                  "field": "description 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-count"
+              },
+              "children": [
+                {
+                  "field": "description 문구 2"
+                },
+                {
+                  "field": "description 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "year-line"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "props": {
+            "className": "items"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "item item-current"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 4"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 6"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 7"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 8"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item item-current"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 9"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 10"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 11"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 12"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 13"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item item-current"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 14"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 15"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 16"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 17"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-ongoing"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 18"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item item-current"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 19"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 20"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 21"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 22"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 23"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item item-current"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 24"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 25"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 26"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 27"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "description 문구 28"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "catalog": {
+      "tag": "section",
+      "props": {
+        "className": "year-block "
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "year-header"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-label"
+              },
+              "children": [
+                {
+                  "field": "catalog 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-count"
+              },
+              "children": [
+                {
+                  "field": "catalog 문구 2"
+                },
+                {
+                  "field": "catalog 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "year-line"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "props": {
+            "className": "items"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 4"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 6"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 7"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 8"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 9"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 10"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 11"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 12"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 13"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 14"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 15"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 16"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 17"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "catalog 문구 18"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "year2024": {
+      "tag": "section",
+      "props": {
+        "className": "year-block "
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "year-header"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-label"
+              },
+              "children": [
+                {
+                  "field": "year2024 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-count"
+              },
+              "children": [
+                {
+                  "field": "year2024 문구 2"
+                },
+                {
+                  "field": "year2024 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "year-line"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "props": {
+            "className": "items"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 4"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 6"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 7"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 8"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 9"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 10"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 11"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 12"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 13"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 14"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 15"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 16"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 17"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 18"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 19"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 20"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 21"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 22"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 23"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 24"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 25"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 26"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 27"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2024 문구 28"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "year2023": {
+      "tag": "section",
+      "props": {
+        "className": "year-block "
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "year-header"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-label"
+              },
+              "children": [
+                {
+                  "field": "year2023 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-count"
+              },
+              "children": [
+                {
+                  "field": "year2023 문구 2"
+                },
+                {
+                  "field": "year2023 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "year-line"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "props": {
+            "className": "items"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 4"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 6"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 7"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 8"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 9"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 10"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 11"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 12"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 13"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 14"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 15"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 16"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 17"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 18"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 19"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 20"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 21"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 22"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2023 문구 23"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "year2022": {
+      "tag": "section",
+      "props": {
+        "className": "year-block "
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "year-header"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-label"
+              },
+              "children": [
+                {
+                  "field": "year2022 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "props": {
+                "className": "year-count"
+              },
+              "children": [
+                {
+                  "field": "year2022 문구 2"
+                },
+                {
+                  "field": "year2022 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "year-line"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "props": {
+            "className": "items"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 4"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 6"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 7"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 8"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 9"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 10"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 11"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 12"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 13"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "props": {
+                "className": "item "
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-content"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-title"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 14"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-desc"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 15"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "item-meta"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-org"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 16"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "item-date"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 17"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "span",
+                      "props": {
+                        "className": "badge badge-done"
+                      },
+                      "children": [
+                        {
+                          "field": "year2022 문구 18"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "display": {
+    "Event 문구 1": "EVENT",
+    "Event 문구 2": "Event",
+    "Event 문구 3": "GIST AI학과의 교육 협력 프로그램 이력입니다.",
+    "description 문구 1": "2026",
+    "description 문구 2": "5",
+    "description 문구 3": "건",
+    "description 문구 4": "2026년 2~3기 광주형 AI·디지털교육 교수학습 자료 「꿈꾸는 AI」 활용 역량 강화 교원연수",
+    "description 문구 5": "교원을 대상으로 광주형 AI·디지털교육 교수학습 자료 「꿈꾸는 AI」의 활용 방법을 안내하고, 학교 현장 적용 역량을 강화하는 교원 연수",
+    "description 문구 6": "광주광역시 교육청",
+    "description 문구 7": "2026.01-2026.02",
+    "description 문구 8": "완료",
+    "description 문구 9": "소프트웨어마이스터고 디지털 트윈 강의",
+    "description 문구 10": "소프트웨어마이스터고 학생을 대상으로 디지털 트윈 개념과 활용 사례를 소개하고 AI 융합 기술 이해도 제고",
+    "description 문구 11": "소프트웨어마이스터고",
+    "description 문구 12": "2026.04-2026.06",
+    "description 문구 13": "완료",
+    "description 문구 14": "나주매성고 AI 창의융합 해커톤 및 오프라인 공동교육과정",
+    "description 문구 15": "AI 창의융합 해커톤과 오프라인 공동교육과정을 연계 운영하여 학생들의 AI 문제해결 및 프로젝트 수행 역량 강화",
+    "description 문구 16": "나주매성고등학교",
+    "description 문구 17": "2026.05–2027.01",
+    "description 문구 18": "진행중",
+    "description 문구 19": "해남군교육재단-GIST 대학연계 아카데미 「Dream-AI」",
+    "description 문구 20": "해남군 학생을 대상으로 GIST의 AI 교육 인프라를 활용한 대학연계형 AI 체험·진로탐색 프로그램 운영",
+    "description 문구 21": "해남군교육재단",
+    "description 문구 22": "2026.07",
+    "description 문구 23": "완료",
+    "description 문구 24": "부산영재교육원 AI 캠프",
+    "description 문구 25": "부산영재교육원 학생을 대상으로 AI와 디지털 트윈 기반 체험형 교육을 운영하여 미래 융합역량 강화",
+    "description 문구 26": "부산영재교육원",
+    "description 문구 27": "2026.08.07-2026.08.08",
+    "description 문구 28": "완료",
+    "catalog 문구 1": "2025",
+    "catalog 문구 2": "3",
+    "catalog 문구 3": "건",
+    "catalog 문구 4": "AI·디지털교육 교수학습모델 및 교육자료 개발 정책연구",
+    "catalog 문구 5": "AI·디지털 교육 현장 적용을 위한 교수학습모델을 연구하고, 학교 교육과정에 활용 가능한 교육자료를 개발",
+    "catalog 문구 6": "광주광역시 교육청",
+    "catalog 문구 7": "2024.11–2025.06",
+    "catalog 문구 8": "완료",
+    "catalog 문구 9": "2025 AI 정보영재교육원 중등영재캠프",
+    "catalog 문구 10": "중등 정보영재 학생을 대상으로 AI 프로젝트 기반 학습과 결과 공유를 통해 창의적 문제해결 역량 강화",
+    "catalog 문구 11": "AI 정보영재교육원",
+    "catalog 문구 12": "2025.07.19–07.20",
+    "catalog 문구 13": "완료",
+    "catalog 문구 14": "2025 디지털 새싹 사업",
+    "catalog 문구 15": "호남·제주권 학생을 대상으로 AI·SW 체험형 캠프를 운영하여 디지털 기초소양과 AI 활용 역량 함양",
+    "catalog 문구 16": "한국과학창의재단",
+    "catalog 문구 17": "2025.07–2026.01",
+    "catalog 문구 18": "완료",
+    "year2024 문구 1": "2024",
+    "year2024 문구 2": "5",
+    "year2024 문구 3": "건",
+    "year2024 문구 4": "인재양성 프로젝트 (AI+X 체험 캠프)",
+    "year2024 문구 5": "고등학생들의 미래 핵심 역량을 갖춘 AI·SW 인재 양성",
+    "year2024 문구 6": "전라남도 교육청",
+    "year2024 문구 7": "2024.07.26–07.27",
+    "year2024 문구 8": "완료",
+    "year2024 문구 9": "AI 정보영재교육원 중등영재캠프",
+    "year2024 문구 10": "중등영재 대상의 AI 프로젝트 수행 및 공유를 통한 창의적 인재 양성",
+    "year2024 문구 11": "광주광역시 교육청 교육정보연구원",
+    "year2024 문구 12": "2024.07.20–07.21",
+    "year2024 문구 13": "완료",
+    "year2024 문구 14": "인공지능 교육 전문가 과정 연수",
+    "year2024 문구 15": "교원의 인공지능 교육 분야 전문성 강화",
+    "year2024 문구 16": "광주광역시 교육청 교육정보연구원",
+    "year2024 문구 17": "2024.07.24–07.26",
+    "year2024 문구 18": "완료",
+    "year2024 문구 19": "고등학생 미니 해커톤",
+    "year2024 문구 20": "고등학생 대상의 AI 지식 확산 및 창의적 인재 양성",
+    "year2024 문구 21": "광주광역시 교육청 교육정보연구원",
+    "year2024 문구 22": "2024.09.07",
+    "year2024 문구 23": "완료",
+    "year2024 문구 24": "2024 한국 코드페어 Pre-Codefair",
+    "year2024 문구 25": "초·중·고등학생 대상 인공지능 체험을 통해 인공지능 도시 광주의 인식 제고",
+    "year2024 문구 26": "광주광역시 관광공사",
+    "year2024 문구 27": "2024.10.25",
+    "year2024 문구 28": "완료",
+    "year2023 문구 1": "2023",
+    "year2023 문구 2": "4",
+    "year2023 문구 3": "건",
+    "year2023 문구 4": "디지털 새싹 사업",
+    "year2023 문구 5": "호남·제주권 일반고 및 특성화고 대상 AI 집합형 상반기 캠프 운영",
+    "year2023 문구 6": "한국과학창의재단",
+    "year2023 문구 7": "2023.04.06–06.30",
+    "year2023 문구 8": "완료",
+    "year2023 문구 9": "인재양성 프로젝트 (AI+X 체험 캠프)",
+    "year2023 문구 10": "고등학생들의 미래 핵심 역량을 갖춘 AI·SW 인재 양성",
+    "year2023 문구 11": "전라남도 교육청",
+    "year2023 문구 12": "2023.07.21",
+    "year2023 문구 13": "완료",
+    "year2023 문구 14": "인공지능 교육 전문가 과정 연수",
+    "year2023 문구 15": "교원의 인공지능 교육 분야 전문성 강화",
+    "year2023 문구 16": "광주광역시 교육청 교육정보연구원",
+    "year2023 문구 17": "2023.07.24–07.27",
+    "year2023 문구 18": "완료",
+    "year2023 문구 19": "고등학생 미니 해커톤",
+    "year2023 문구 20": "고등학생 대상의 AI 지식 확산 및 창의적 인재 양성",
+    "year2023 문구 21": "광주광역시 교육청 교육정보연구원",
+    "year2023 문구 22": "2023.08.26",
+    "year2023 문구 23": "완료",
+    "year2022 문구 1": "2022",
+    "year2022 문구 2": "3",
+    "year2022 문구 3": "건",
+    "year2022 문구 4": "인재양성 프로젝트 (AI+X 체험 캠프)",
+    "year2022 문구 5": "고등학생들의 미래 핵심 역량을 갖춘 AI·SW 인재 양성",
+    "year2022 문구 6": "전라남도 교육청",
+    "year2022 문구 7": "2022.07.29–07.30",
+    "year2022 문구 8": "완료",
+    "year2022 문구 9": "인공지능 교육 전문가 과정 연수",
+    "year2022 문구 10": "교원의 인공지능 교육 분야 전문성 강화",
+    "year2022 문구 11": "광주광역시 교육청 교육정보연구원",
+    "year2022 문구 12": "2022.08.08–08.12",
+    "year2022 문구 13": "완료",
+    "year2022 문구 14": "고등학생 미니 해커톤",
+    "year2022 문구 15": "고등학생 대상의 AI 지식 확산 및 창의적 인재 양성",
+    "year2022 문구 16": "광주광역시 교육청 교육정보연구원",
+    "year2022 문구 17": "2022.09.03",
+    "year2022 문구 18": "완료"
+  }
+}

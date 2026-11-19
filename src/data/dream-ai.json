@@ -25,6 +25,7 @@
     {
       "name": "SPACE",
       "title": "SPACE",
+      "subtitle": "광주과학기술원 AI대학원 AI 교육·체험 공간",
       "titleUrl": "/dream_ai_space",
       "buttonText": "예약하기",
       "reservationUrl": "https://ai.gist.ac.kr/prog/yeyakDetail/ai/YN_000000000833/sub04_01/monthList.do"
@@ -32,7 +33,16 @@
     {
       "name": "ANNEX",
       "title": "ANNEX",
+      "subtitle": "AI와 기술을 직접 설계하고 실험하는 교육·연구 공간",
       "titleUrl": "/annex",
+      "buttonText": "예약하기",
+      "reservationUrl": "https://ai.gist.ac.kr/prog/yeyakDetail/ai/YN_000000000833/sub04_01/monthList.do"
+    },
+    {
+      "name": "LIVING LAB",
+      "title": "LIVING LAB",
+      "subtitle": "실증적 창의자율 연구 및 커뮤니케이션이 가능한 공간",
+      "titleUrl": "/annex#livinglab",
       "buttonText": "예약하기",
       "reservationUrl": "https://ai.gist.ac.kr/prog/yeyakDetail/ai/YN_000000000833/sub04_01/monthList.do"
     }
@@ -102,10 +112,17 @@
         "margin": false
       },
       {
-        "name": "CrossTraining",
-        "title": "CrossTraining",
-        "imageUrl": "/images/category/category_crosstraining.png",
+        "name": "Event",
+        "title": "Event",
+        "imageUrl": "/images/category/category_event.png",
         "url": "/crosstraining",
+        "height": "sm"
+      },
+      {
+        "name": "NPUTraining",
+        "title": "NPUTraining",
+        "imageUrl": "/images/category/category_nputraining.png",
+        "url": "/nputraining",
         "height": "sm"
       }
     ],

@@ -16,6 +16,7 @@ type Item = {
 type ReservationButton = {
   name: string;
   title: string;
+  subtitle: string;
   titleUrl: string;
   buttonText: string;
   reservationUrl: string;
@@ -52,9 +53,9 @@ export default async function HomePage() {
 
   // 좌측 버튼 그룹
   const leftGroups = [
-    dreamData.catalog.categoriesLeft.slice(0, 3), // Content, LMS, Textbook
-    dreamData.catalog.categoriesLeft.slice(3, 5), // Community, AI Ambassador
-    dreamData.catalog.categoriesLeft.slice(5, 8), // Training, NewSac, CrossTraining
+    dreamData.catalog.categoriesLeft.slice(5),
+    dreamData.catalog.categoriesLeft.slice(0, 3),
+    dreamData.catalog.categoriesLeft.slice(3, 5),
   ];
 
   // 우측 버튼 그룹
@@ -132,34 +133,20 @@ export default async function HomePage() {
     );
   }
 
-  function drawReservationButton(item: ReservationButton, idx: number) {
+  function drawReservationButton(item: ReservationButton, index: number) {
+    const centerLast = reservationButtons.length % 2 === 1 && index === reservationButtons.length - 1;
+    const cardClasses = "relative h-[92px] w-full transition-transform duration-200 ease-out hover:-translate-y-1";
     return (
-      <div
-        key={idx}
-        className="relative h-[92px] w-full transition-transform duration-200 ease-out hover:-translate-y-1"
-      >
-        {/* 흰색 카드 전체: SPACE / ANNEX 버튼 */}
-        <Link
-          href={item.titleUrl}
-          target={item.titleUrl.startsWith("http") ? "_blank" : undefined}
-          aria-label={`${item.title} 페이지로 이동`}
-          className="absolute inset-0 rounded-[10px] border border-[#E5E7EB] bg-white shadow-[0_3px_10px_rgba(0,0,0,0.06)] transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
-        />
-
-        {/* 카드 위 내용 */}
-        <div className="pointer-events-none relative z-10 flex h-full w-full items-center justify-between px-7">
-          <span className="text-[22px] font-bold tracking-wide text-[#2F3437]">
-            {item.title}
-          </span>
-
-          {/* 오른쪽 예약하기 버튼 */}
-          <Link
-            href={item.reservationUrl}
-            target={
-              item.reservationUrl.startsWith("http") ? "_blank" : undefined
-            }
-            className="pointer-events-auto flex h-[42px] items-center justify-center rounded-[8px] border border-[#D8E3F2] bg-[#EEF4FB] px-6 text-[14px] font-semibold text-[#3B3F44] transition-colors hover:bg-[#E3EDF8]"
-          >
+      <div key={item.name} className={cardClasses + (centerLast ? " sm:col-span-2 sm:mx-auto sm:w-1/2" : "")}>
+        <Link href={item.titleUrl} aria-label={item.title + " 페이지로 이동"}
+          className="absolute inset-0 rounded-[10px] border border-[#E5E7EB] bg-white shadow-[0_3px_10px_rgba(0,0,0,0.06)] transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]" />
+        <div className="pointer-events-none relative z-10 flex h-full w-full items-center justify-between gap-3 px-5 sm:px-7">
+          <div className="min-w-0">
+            <span className="block text-[20px] font-bold tracking-wide text-[#2F3437] sm:text-[22px]">{item.title}</span>
+            <span className="mt-1 block truncate text-[12px] text-[#77818C] sm:text-[13px]">{item.subtitle}</span>
+          </div>
+          <Link href={item.reservationUrl} target="_blank"
+            className="pointer-events-auto flex h-[42px] shrink-0 items-center justify-center rounded-[8px] border border-[#D8E3F2] bg-[#EEF4FB] px-4 text-[13px] font-semibold text-[#3B3F44] transition-colors hover:bg-[#E3EDF8] sm:px-6 sm:text-[14px]">
             {item.buttonText}
           </Link>
         </div>
@@ -214,7 +201,7 @@ export default async function HomePage() {
               ),
               /* SPACE / ANNEX 버튼 영역 */
               reservations: (
-                <div className="mt-auto grid w-full grid-cols-2 gap-10">
+                <div className="mt-auto grid w-full grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
                   {reservationButtons.map(drawReservationButton)}
                 </div>
               ),

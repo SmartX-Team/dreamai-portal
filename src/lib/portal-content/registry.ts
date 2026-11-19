@@ -1,8 +1,6 @@
 import home from "@/data/dream-ai.json";
-import annex from "@/app/annex/annex.json";
 import community from "@/app/community/community.json";
 import contents from "@/app/contents/contents.json";
-import crossTraining from "@/app/crosstraining/crosstraining.json";
 import space from "@/app/dream_ai_space/dream_ai_space.json";
 import textbook from "@/app/textbook/contents.json";
 import training from "@/app/training/dream_ai_training.json";
@@ -10,17 +8,21 @@ import { beginnerContent } from "./beginner";
 import { defaultCourses, type Course } from "./courses";
 import newsac from "./newsac.json";
 import displayCopy from "./display-copy.json";
+import annexLegacy from "./annex-legacy.json";
+import eventLegacy from "./crosstraining-legacy.json";
+import npuLegacy from "./nputraining-legacy.json";
 import type { WidgetLayouts } from "./widgets";
 
 export const portalDefaults = {
   "/": { ...home, display: displayCopy["/"] },
-  "/annex": { ...annex, display: displayCopy["/annex"] },
+  "/annex": { display: annexLegacy.display },
   "/beginnerai": { ...beginnerContent, display: displayCopy["/beginnerai"] },
   "/community": { ...community, display: displayCopy["/community"] },
   "/contents": { ...contents, display: displayCopy["/contents"] },
-  "/crosstraining": { ...crossTraining, display: displayCopy["/crosstraining"] },
+  "/crosstraining": { display: eventLegacy.display },
   "/dream_ai_space": { ...space, display: displayCopy["/dream_ai_space"] },
   "/newsac": { ...newsac, display: displayCopy["/newsac"] },
+  "/nputraining": { display: npuLegacy.display },
   "/textbook": { ...textbook, display: displayCopy["/textbook"] },
   "/training": { ...training, courses: defaultCourses, display: displayCopy["/training"] },
 };
@@ -50,6 +52,7 @@ export const pageNames: Record<PortalPage, string> = {
   "/crosstraining": "공동 교육",
   "/dream_ai_space": "Dream AI Space",
   "/newsac": "디지털새싹",
+  "/nputraining": "NPU Training",
   "/textbook": "교재",
   "/training": "교육·훈련",
 };

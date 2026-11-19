@@ -1,0 +1,904 @@
+{
+  "rootClass": "annex-page",
+  "css": "\n        .annex-page {\n          max-width: 1120px;\n          margin: 0 auto;\n          padding: 4rem 2rem 6rem;\n          color: #18212b;\n        }\n\n        .annex-hero {\n          margin-bottom: 3rem;\n        }\n\n        .annex-label {\n          display: inline-block;\n          margin-bottom: 1rem;\n          padding: 9px 18px;\n          border: 1px solid #c8dced;\n          border-radius: 999px;\n          background: #f1f7fb;\n          color: #205b88;\n          font-size: 14px;\n          font-weight: 700;\n          letter-spacing: 0.04em;\n        }\n\n        .annex-title {\n          margin: 0 0 0.65rem;\n          color: #18212b;\n          font-size: 42px;\n          font-weight: 700;\n          letter-spacing: -0.04em;\n          line-height: 1.2;\n        }\n\n        .annex-subtitle {\n          margin: 0;\n          color: #77818c;\n          font-size: 18px;\n          line-height: 1.6;\n        }\n\n        .annex-main-image {\n          margin: 0 0 4rem;\n          overflow: hidden;\n          border-radius: 12px;\n          background: #f7f8fa;\n        }\n\n        .annex-main-image img {\n          display: block;\n          width: 100%;\n          height: auto;\n        }\n\n        .annex-intro {\n          max-width: 900px;\n          margin: 0 0 4.5rem;\n        }\n\n        .annex-intro-title {\n          margin: 0 0 0.8rem;\n          color: #18212b;\n          font-size: 22px;\n          font-weight: 700;\n          letter-spacing: -0.03em;\n        }\n\n        .annex-intro-text {\n          margin: 0;\n          color: #56616c;\n          font-size: 16px;\n          line-height: 1.9;\n          word-break: keep-all;\n        }\n\n        .annex-goals {\n          display: grid;\n          gap: 0.65rem;\n          margin: 1.5rem 0 0;\n          padding: 0;\n          list-style: none;\n        }\n\n        .annex-goals li {\n          position: relative;\n          padding-left: 1.1rem;\n          color: #68737e;\n          font-size: 15px;\n          line-height: 1.7;\n          word-break: keep-all;\n        }\n\n        .annex-goals li::before {\n          position: absolute;\n          left: 0;\n          color: #6b9bc0;\n          content: \"•\";\n        }\n\n        .annex-floor {\n          margin-top: 4.5rem;\n        }\n\n        .annex-floor-heading {\n          display: flex;\n          align-items: baseline;\n          gap: 1rem;\n          margin-bottom: 1.5rem;\n          padding-bottom: 0.8rem;\n          border-bottom: 1px solid #e4e8ec;\n        }\n\n        .annex-floor-heading h2 {\n          margin: 0;\n          color: #17212b;\n          font-size: 32px;\n          font-weight: 750;\n          letter-spacing: -0.04em;\n        }\n\n        .annex-floor-heading span {\n          color: #68737e;\n          font-size: 16px;\n        }\n\n        .annex-room {\n          display: grid;\n          grid-template-columns: 240px minmax(0, 1fr);\n          gap: 2rem;\n          align-items: center;\n          padding: 1.5rem 0;\n          border-bottom: 1px solid #edf0f2;\n        }\n\n        .annex-room-image {\n          position: relative;\n          width: 100%;\n          aspect-ratio: 16 / 10;\n          overflow: hidden;\n          border-radius: 8px;\n          background: #f2f4f6;\n        }\n\n        .annex-room-image img {\n          object-fit: cover;\n        }\n\n        .annex-room-number {\n          margin: 0 0 0.45rem;\n          color: #71808d;\n          font-size: 13px;\n          font-weight: 600;\n        }\n\n        .annex-room-title {\n          margin: 0 0 0.5rem;\n          color: #18212b;\n          font-size: 22px;\n          font-weight: 700;\n          letter-spacing: -0.035em;\n        }\n\n        .annex-room-description {\n          margin: 0;\n          color: #68737e;\n          font-size: 15px;\n          line-height: 1.7;\n          word-break: keep-all;\n        }\n\n        .annex-room-features {\n          margin: 0.75rem 0 0;\n          color: #8a949e;\n          font-size: 13px;\n          line-height: 1.8;\n          word-break: keep-all;\n        }\n\n        .annex-livinglab {\n          margin-top: 6rem;\n          padding-top: 3rem;\n          border-top: 1px solid #e4e8ec;\n          scroll-margin-top: 2rem;\n        }\n\n        .annex-livinglab-status {\n          margin: 0 0 1rem;\n          color: #71808d;\n          font-size: 15px;\n          font-weight: 600;\n        }\n\n        .annex-livinglab-description {\n          max-width: 900px;\n          margin: 0;\n          color: #68737e;\n          font-size: 15px;\n          line-height: 1.8;\n          word-break: keep-all;\n        }\n\n        .annex-livinglab-image {\n          position: relative;\n          width: 100%;\n          aspect-ratio: 16 / 9;\n          margin: 1.75rem 0 0;\n          overflow: hidden;\n          border-radius: 10px;\n          background: #f2f4f6;\n        }\n\n        .annex-livinglab-image img {\n          object-fit: contain;\n        }\n\n        @media (max-width: 700px) {\n          .annex-page {\n            padding: 3rem 1.25rem 4rem;\n          }\n\n          .annex-hero {\n            margin-bottom: 2rem;\n          }\n\n          .annex-title {\n            font-size: 34px;\n          }\n\n          .annex-subtitle {\n            font-size: 16px;\n          }\n\n          .annex-main-image {\n            margin-bottom: 3rem;\n            border-radius: 8px;\n          }\n\n          .annex-intro {\n            margin-bottom: 3.5rem;\n          }\n\n          .annex-intro-title {\n            font-size: 20px;\n          }\n\n          .annex-intro-text {\n            font-size: 15px;\n          }\n\n          .annex-goals {\n            gap: 0.55rem;\n            margin-top: 1.25rem;\n          }\n\n          .annex-goals li {\n            font-size: 14px;\n          }\n\n          .annex-floor {\n            margin-top: 3.5rem;\n          }\n\n          .annex-floor-heading {\n            align-items: flex-start;\n            flex-direction: column;\n            gap: 0.25rem;\n          }\n\n          .annex-floor-heading h2 {\n            font-size: 28px;\n          }\n\n          .annex-room {\n            grid-template-columns: 1fr;\n            gap: 1rem;\n            padding: 1.25rem 0;\n          }\n\n          .annex-room-image {\n            aspect-ratio: 16 / 9;\n          }\n\n          .annex-room-title {\n            font-size: 20px;\n          }\n\n          .annex-livinglab {\n            margin-top: 4.5rem;\n            padding-top: 2.5rem;\n          }\n\n          .annex-livinglab-image {\n            aspect-ratio: 16 / 10;\n            margin-top: 1.25rem;\n          }\n        }\n      ",
+  "slots": {
+    "hero": {
+      "tag": "header",
+      "props": {
+        "className": "annex-hero"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "props": {
+            "className": "annex-label"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Annex 문구 1"
+            }
+          ]
+        },
+        {
+          "tag": "h1",
+          "props": {
+            "className": "annex-title"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Annex 문구 2"
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "annex-subtitle"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Annex 문구 3"
+            }
+          ]
+        }
+      ]
+    },
+    "overview": {
+      "tag": "figure",
+      "props": {
+        "className": "annex-main-image"
+      },
+      "children": [
+        {
+          "tag": "img",
+          "props": {
+            "alt": {
+              "field": "overview 설명 1"
+            },
+            "width": "2008",
+            "height": "1264",
+            "decoding": "async",
+            "src": {
+              "field": "overview 이미지 1"
+            }
+          },
+          "style": {
+            "color": "transparent"
+          }
+        }
+      ]
+    },
+    "opening": {
+      "tag": "section",
+      "props": {
+        "className": "annex-intro"
+      },
+      "children": [
+        {
+          "tag": "h2",
+          "props": {
+            "className": "annex-intro-title"
+          },
+          "children": [
+            {
+              "field": "공간 소개 문구 1"
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "annex-intro-text"
+          },
+          "children": [
+            {
+              "field": "공간 소개 문구 2"
+            }
+          ]
+        },
+        {
+          "tag": "ul",
+          "props": {
+            "className": "annex-goals"
+          },
+          "children": [
+            {
+              "tag": "li",
+              "children": [
+                {
+                  "field": "공간 소개 문구 3"
+                }
+              ]
+            },
+            {
+              "tag": "li",
+              "children": [
+                {
+                  "field": "공간 소개 문구 4"
+                }
+              ]
+            },
+            {
+              "tag": "li",
+              "children": [
+                {
+                  "field": "공간 소개 문구 5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "space": {
+      "tag": "section",
+      "props": {
+        "className": "annex-floor"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "annex-floor-heading"
+          },
+          "children": [
+            {
+              "tag": "h2",
+              "children": [
+                {
+                  "field": "2F 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "children": [
+                {
+                  "field": "2F 문구 2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "zone": "annex.second",
+          "slots": {
+            "first": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "SW Lab #1 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "SW Lab #1 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #1 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #1 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #1 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #1 문구 4"
+                        },
+                        {
+                          "field": "SW Lab #1 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "second": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "SW Lab #2 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "SW Lab #2 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #2 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #2 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #2 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "SW Lab #2 문구 4"
+                        },
+                        {
+                          "field": "SW Lab #2 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "thirdFloor": {
+      "tag": "section",
+      "props": {
+        "className": "annex-floor"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "props": {
+            "className": "annex-floor-heading"
+          },
+          "children": [
+            {
+              "tag": "h2",
+              "children": [
+                {
+                  "field": "3F 문구 1"
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "children": [
+                {
+                  "field": "3F 문구 2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "zone": "annex.third",
+          "slots": {
+            "first": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "AI-Instructor Room 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "AI-Instructor Room 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "AI-Instructor Room 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "AI-Instructor Room 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "AI-Instructor Room 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "AI-Instructor Room 문구 4"
+                        },
+                        {
+                          "field": "AI-Instructor Room 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "second": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "Dream-AI Room 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "Dream-AI Room 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "Dream-AI Room 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "Dream-AI Room 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "Dream-AI Room 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "Dream-AI Room 문구 4"
+                        },
+                        {
+                          "field": "Dream-AI Room 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "third": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "Physical-AI Room 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "Physical-AI Room 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "Physical-AI Room 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "Physical-AI Room 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "Physical-AI Room 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "Physical-AI Room 문구 4"
+                        },
+                        {
+                          "field": "Physical-AI Room 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "fourth": {
+              "tag": "article",
+              "props": {
+                "className": "annex-room"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "props": {
+                    "className": "annex-room-image"
+                  },
+                  "children": [
+                    {
+                      "tag": "img",
+                      "props": {
+                        "alt": {
+                          "field": "Agentic-AI Room 설명 1"
+                        },
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "src": {
+                          "field": "Agentic-AI Room 이미지 1"
+                        }
+                      },
+                      "style": {
+                        "position": "absolute",
+                        "height": "100%",
+                        "width": "100%",
+                        "left": "0",
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "color": "transparent"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "children": [
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-number"
+                      },
+                      "children": [
+                        {
+                          "field": "Agentic-AI Room 문구 1"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "props": {
+                        "className": "annex-room-title"
+                      },
+                      "children": [
+                        {
+                          "field": "Agentic-AI Room 문구 2"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-description"
+                      },
+                      "children": [
+                        {
+                          "field": "Agentic-AI Room 문구 3"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "props": {
+                        "className": "annex-room-features"
+                      },
+                      "children": [
+                        {
+                          "field": "Agentic-AI Room 문구 4"
+                        },
+                        {
+                          "field": "Agentic-AI Room 문구 5"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "livingLab": {
+      "tag": "section",
+      "props": {
+        "className": "annex-livinglab",
+        "id": "livinglab"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "props": {
+            "className": "annex-label"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Living Lab 문구 1"
+            }
+          ]
+        },
+        {
+          "tag": "h2",
+          "props": {
+            "className": "annex-title"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Living Lab 문구 2"
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "annex-livinglab-status"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Living Lab 문구 3"
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "props": {
+            "className": "annex-livinglab-description"
+          },
+          "children": [
+            {
+              "field": "Dream-AI Living Lab 문구 4"
+            }
+          ]
+        },
+        {
+          "tag": "figure",
+          "props": {
+            "className": "annex-livinglab-image"
+          },
+          "children": [
+            {
+              "tag": "img",
+              "props": {
+                "alt": {
+                  "field": "Dream-AI Living Lab 설명 1"
+                },
+                "loading": "lazy",
+                "decoding": "async",
+                "src": {
+                  "field": "Dream-AI Living Lab 이미지 1"
+                }
+              },
+              "style": {
+                "position": "absolute",
+                "height": "100%",
+                "width": "100%",
+                "left": "0",
+                "top": "0",
+                "right": "0",
+                "bottom": "0",
+                "color": "transparent"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "display": {
+    "Dream-AI Annex 문구 1": "DREAM-AI SPACE",
+    "Dream-AI Annex 문구 2": "Dream-AI Annex",
+    "Dream-AI Annex 문구 3": "AI와 기술을 직접 설계하고 실험하는 교육·연구 공간",
+    "overview 설명 1": "Dream-AI Annex 층별 공간 안내도",
+    "overview 이미지 1": "/images/annex/annex.png",
+    "공간 소개 문구 1": "공간 소개",
+    "공간 소개 문구 2": "AI학과의 실험·실습 교육을 강화하고, 학생들의 실전 문제해결력과 다학제적 융합 설계 역량을 키우기 위한 공간입니다.",
+    "공간 소개 문구 3": "이론과 실무를 겸비한 AI융합 인재 양성",
+    "공간 소개 문구 4": "실전 문제 해결 및 다학제적 융합 설계 역량 강화",
+    "공간 소개 문구 5": "현장 중심의 교육과 산학협력 지원",
+    "2F 문구 1": "2F",
+    "2F 문구 2": "기초·응용 교육 및 연구 실습실",
+    "SW Lab #1 설명 1": "SW Lab #1 공간 사진",
+    "SW Lab #1 이미지 1": "/images/annex/sw-lab-1.png",
+    "SW Lab #1 문구 1": "201호",
+    "SW Lab #1 문구 2": "SW Lab #1",
+    "SW Lab #1 문구 3": "I-MAC 기반의 교육 및 Agentic-AI 연구 공간입니다.",
+    "SW Lab #1 문구 4": "주요 활용 · ",
+    "SW Lab #1 문구 5": "기초 프로그래밍 실습 · Agentic AI 기초 과정",
+    "SW Lab #2 설명 1": "SW Lab #2 공간 사진",
+    "SW Lab #2 이미지 1": "/images/annex/sw-lab-2.png",
+    "SW Lab #2 문구 1": "202호",
+    "SW Lab #2 문구 2": "SW Lab #2",
+    "SW Lab #2 문구 3": "Digital Twin Box를 활용한 훈련과 Physical-AI 연구 공간입니다.",
+    "SW Lab #2 문구 4": "주요 활용 · ",
+    "SW Lab #2 문구 5": "기초 프로그래밍 실습 · Digital Twin 기초 과정 · Physical AI 기초 과정",
+    "3F 문구 1": "3F",
+    "3F 문구 2": "AI 융합 창의·실험 공간",
+    "AI-Instructor Room 설명 1": "AI-Instructor Room 공간 사진",
+    "AI-Instructor Room 이미지 1": "/images/annex/ai-instructor-room.png",
+    "AI-Instructor Room 문구 1": "303호",
+    "AI-Instructor Room 문구 2": "AI-Instructor Room",
+    "AI-Instructor Room 문구 3": "실습 설계와 학생 맞춤형 피드백을 지원하는 교수·학습 공간입니다.",
+    "AI-Instructor Room 문구 4": "주요 활용 · ",
+    "AI-Instructor Room 문구 5": "신규 실험 교과과정 설계 · 학생 맞춤형 피드백 및 교육 지원 · 실험 강사 업무 공간",
+    "Dream-AI Room 설명 1": "Dream-AI Room 공간 사진",
+    "Dream-AI Room 이미지 1": "/images/annex/dream-ai-room.png",
+    "Dream-AI Room 문구 1": "304호",
+    "Dream-AI Room 문구 2": "Dream-AI Room",
+    "Dream-AI Room 문구 3": "상상력과 AI를 융합해 새로운 콘텐츠와 가치를 구현하는 창의·설계 공간입니다.",
+    "Dream-AI Room 문구 4": "주요 활용 · ",
+    "Dream-AI Room 문구 5": "학생 창의 설계 · 전자계측 및 제작·공구 · 3D 프린팅",
+    "Physical-AI Room 설명 1": "Physical-AI Room 공간 사진",
+    "Physical-AI Room 이미지 1": "/images/annex/physical-ai-room.png",
+    "Physical-AI Room 문구 1": "305·306호",
+    "Physical-AI Room 문구 2": "Physical-AI Room",
+    "Physical-AI Room 문구 3": "AI와 로봇을 결합해 현실 세계와 실시간으로 상호작용하는 기술을 구현하고 실험하는 공간입니다.",
+    "Physical-AI Room 문구 4": "주요 활용 · ",
+    "Physical-AI Room 문구 5": "센서·데이터 실습 · 임베디드 제어 · 로봇 제어",
+    "Agentic-AI Room 설명 1": "Agentic-AI Room 공간 사진",
+    "Agentic-AI Room 이미지 1": "/images/annex/agentic-ai-room.png",
+    "Agentic-AI Room 문구 1": "307호",
+    "Agentic-AI Room 문구 2": "Agentic-AI Room",
+    "Agentic-AI Room 문구 3": "자율적인 AI 에이전트를 설계하고 구축하며 실험하는 실습 공간입니다.",
+    "Agentic-AI Room 문구 4": "주요 활용 · ",
+    "Agentic-AI Room 문구 5": "AI 에이전트 설계·구축·실험 · 다학제적 융합 설계 · 공동 연구",
+    "Dream-AI Living Lab 문구 1": "LIVINGLAB",
+    "Dream-AI Living Lab 문구 2": "Dream-AI Living Lab",
+    "Dream-AI Living Lab 문구 3": "2027년 공사 예정",
+    "Dream-AI Living Lab 문구 4": "X+AI 융합 교육·훈련과 공동 활용·협업을 위한 공간입니다. AI 지식·기술·경험을 나누며 창의적 아이디어를 현실화하고, 실증 연구와 소통을 바탕으로 교육·연구·창업의 선순환 생태계를 만들어갑니다.",
+    "Dream-AI Living Lab 설명 1": "Dream-AI Space 리빙랩의 물리·가상 융합 제조 환경",
+    "Dream-AI Living Lab 이미지 1": "/images/space/livinglab_1.png"
+  }
+}

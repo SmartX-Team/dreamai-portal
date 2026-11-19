@@ -139,10 +139,30 @@ async function getAsset(name: string, range: string | null) {
   }
 }
 
+async function getLegacyMedia(parts: string[]) {
+  const directory = contentDirectory();
+  if (!directory || parts.length < 2 || parts[0] !== "images" || !parts.every((part) => /^[\w.-]+$/.test(part) && part !== "..")) {
+    return new Response(null, { status: 404 });
+  }
+  const folder = path.join(directory, "legacy-media");
+  try {
+    const images = JSON.parse(await readFile(path.join(folder, "images.json"), "utf8")) as Record<string, string>;
+    const file = images[parts.join("/")];
+    if (!file || !/^[a-f0-9]{64}\.png$/.test(file)) return new Response(null, { status: 404 });
+    return new Response(new Uint8Array(await readFile(path.join(folder, file))), {
+      headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=3600", "X-Content-Type-Options": "nosniff" },
+    });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return new Response(null, { status: 404 });
+    throw error;
+  }
+}
+
 export async function GET(request: Request, context: Route) {
   try {
     const { action: [action, name, ...extra] } = await context.params;
     if (action === "assets" && name && !extra.length) return await getAsset(name, request.headers.get("range"));
+    if (action === "legacy" && name) return await getLegacyMedia([name, ...extra]);
     if (!editorAvailable() || name) return new Response(null, { status: 404 });
     if (action === "session" && workspaceProtected()) {
       await requireWorkspace();
