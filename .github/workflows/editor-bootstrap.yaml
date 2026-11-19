@@ -34,6 +34,9 @@ jobs:
           kubectl -n dreamai auth can-i create persistentvolumeclaims
           kubectl -n dreamai get pvc -o custom-columns='NAME:.metadata.name,ACCESS:.spec.accessModes,CLASS:.spec.storageClassName,STATUS:.status.phase'
           kubectl get storageclasses -o custom-columns='NAME:.metadata.name,PROVISIONER:.provisioner' || true
+          if [[ -f deployment/editor-password.enc ]]; then
+            kubectl -n dreamai apply -f deployment/kubernetes/editor-content-claim.yaml
+          fi
           ready=$(kubectl -n dreamai get secret dreamai-editor-password --ignore-not-found -o name)
           if [[ -n "$ready" ]]; then
             echo "The trial password Secret is ready."
@@ -58,3 +61,4 @@ jobs:
             -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -out "$directory/password.txt"
           kubectl -n dreamai create secret generic dreamai-editor-password --from-file="$directory/password.txt"
           kubectl -n dreamai delete secret "$key"
+          kubectl -n dreamai wait pvc/dreamai-editor-content --for=jsonpath='{.status.phase}'=Bound --timeout=90s

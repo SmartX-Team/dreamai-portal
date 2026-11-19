@@ -160,6 +160,7 @@ jobs:
           if [[ "$TARGET" == "trial" ]]; then
             patch=$(jq -n --arg container "$CONTAINER" --arg image "$reference" '{
               spec: { template: { spec: {
+                securityContext: {fsGroup: 1001, fsGroupChangePolicy: "OnRootMismatch"},
                 containers: [{
                   name: $container, image: $image,
                   env: [
@@ -198,6 +199,27 @@ jobs:
             printf 'Site: %s\n\n' "$SITE"
             printf 'Container: %s:latest@%s\n' "$IMAGE" "$DIGEST"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Start the isolated demo with the same trial image
+        if: env.TARGET == 'trial'
+        env:
+          DIGEST: ${{ steps.trial.outputs.digest }}
+        run: |
+          existing=$(kubectl -n dreamai get ingress -o json | jq -r '
+            .items[] | select(any(.spec.rules[]?; .host == "demo.dreamai.kr")) | .metadata.name')
+          if [[ -n "$existing" && "$existing" != dreamai-demo ]]; then
+            echo "::error::demo.dreamai.kr is already routed by another Ingress."
+            exit 1
+          fi
+          reference="$TRIAL_IMAGE:latest@$DIGEST"
+          python3 -c 'import sys; print(sys.stdin.read().replace("registry.invalid/dreamai-trial:latest", sys.argv[1]), end="")' \
+            "$reference" < deployment/kubernetes/editor-demo.yaml | kubectl -n dreamai apply -f -
+          image_secrets=$(kubectl -n dreamai get deployment dreamai-test -o json | jq -c '.spec.template.spec.imagePullSecrets // []')
+          if [[ "$image_secrets" != '[]' ]]; then
+            kubectl -n dreamai patch deployment dreamai-demo --type merge -p \
+              "$(jq -n --argjson secrets "$image_secrets" '{spec:{template:{spec:{imagePullSecrets:$secrets}}}}')"
+          fi
+          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=5m
 
       - name: Remove the temporary kubeconfig
         if: always()
