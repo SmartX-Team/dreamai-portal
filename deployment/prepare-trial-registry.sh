@@ -53,7 +53,13 @@ jq -n --arg name "$name" --arg host "$host" --arg class "$ingress_class" --arg t
     path:"/v2",pathType:"Prefix",backend:{service:{name:$name,port:{number:5000}}}
   }]}}]} + (if $tls == "" then {} else {tls:[{hosts:[$host],secretName:$tls}]} end))
 }' | kubectl -n dreamai apply -f -
-kubectl -n dreamai rollout status deployment/"$name" --timeout=3m
+if ! kubectl -n dreamai rollout status deployment/"$name" --timeout=2m; then
+  kubectl -n dreamai get pods -l "app=$name" -o wide
+  kubectl -n dreamai get events --field-selector "involvedObject.kind=Pod" --sort-by=.lastTimestamp |
+    grep -F "$name" | tail -n 15 || true
+  kubectl -n dreamai logs deployment/"$name" --tail=12 || true
+  exit 1
+fi
 
 for attempt in {1..15}; do
   result=$(curl -sS --max-time 5 -D - -o /dev/null "https://$host/v2/" 2>/dev/null || true)
