@@ -1,107 +1,33 @@
-name: Reclaim unused trial image layers
+name: Confirm the retained latest release
 on:
   push:
     branches: [codex/dreamai-visual-editor]
     paths: ['.github/workflows/editor-routing.yaml']
 permissions:
   contents: read
-concurrency:
-  group: dreamai-container-release
-  cancel-in-progress: false
 jobs:
-  cleanup:
+  confirm:
     runs-on: ubuntu-latest
     environment: trial
     steps:
       - uses: azure/setup-kubectl@v3
-      - name: Reclaim images after both deployments have rolled out
+      - name: Confirm the live image is still pullable after cleanup
         env:
           CONFIG: ${{ secrets.DREAMAI_RELEASE_K8S_CONFIG || secrets.K8S_CONFIG }}
         run: |
           umask 077
           directory=$(mktemp -d)
-          readonly=0
-          original_configuration=
-          cleanup() {
-            if [[ "$readonly" == 1 ]]; then
-              kubectl -n dreamai patch configmap/dreamai-editor-registry --type merge \
-                -p "$(jq -n --arg source "$original_configuration" '{data:{"config.yml":$source}}')" || true
-              kubectl -n dreamai rollout restart deployment/dreamai-editor-registry || true
-              kubectl -n dreamai rollout status deployment/dreamai-editor-registry --timeout=2m || true
-            fi
-            rm -f "$directory/kubeconfig" "$directory/protected" "$directory/dryrun"
-            rmdir "$directory"
-          }
-          trap cleanup EXIT
-          export KUBECONFIG="$directory/kubeconfig"
+          trap 'rm -f "$directory/config" "$directory/page"; rmdir "$directory"' EXIT
+          export KUBECONFIG="$directory/config"
           printf '%s\n' "$CONFIG" > "$KUBECONFIG"
-          repository=dreamai.mobilex.kr/dreamai-portal-trial
-          kubectl -n dreamai rollout status deployment/dreamai-test --timeout=1m
-          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=1m
-          expected=$(kubectl -n dreamai get deployment dreamai-test -o json |
-            jq -er --arg repo "$repository" '.spec.template.spec.containers[].image | select(startswith($repo+":latest@sha256:"))')
-          real_demo=$(kubectl -n dreamai get deployment dreamai-demo -o json |
-            jq -er --arg repo "$repository" '.spec.template.spec.containers[].image | select(startswith($repo+":latest@sha256:"))')
-          test "$expected" = "$real_demo"
-          alternate=$(kubectl -n dreamai get deployments,statefulsets,daemonsets,jobs,cronjobs,pods -o json |
-            jq -r --arg repo "$repository" --arg expected "$expected" '
-              .items[] | select(.kind != "Pod" or (.status.phase != "Succeeded" and .status.phase != "Failed")) |
-              .. | objects | .image? // empty |
-              select(startswith($repo+":") or startswith($repo+"@")) |
-              select(. != $expected and . != ($repo+":latest") and . != ($expected | sub(":latest@"; "@")))')
-          if [[ -n "$alternate" ]]; then
-            echo 'Older image digests are still referenced. They were retained.'
-            exit 0
-          fi
           password=$(kubectl -n dreamai get secret dreamai-editor-registry-auth -o jsonpath='{.data.password}' | base64 -d)
           echo "::add-mask::$password"
-          export REGISTRY_AUTH_VALUE="$password"
-          export EXPECTED_DIGEST="${expected##*@}"
-          node - > "$directory/protected" <<'NODE'
-          const accept = [
-            "application/vnd.oci.image.index.v1+json", "application/vnd.oci.image.manifest.v1+json",
-            "application/vnd.docker.distribution.manifest.list.v2+json", "application/vnd.docker.distribution.manifest.v2+json",
-          ].join(",");
-          const base = "https://dreamai.mobilex.kr/v2/dreamai-portal-trial/manifests/";
-          const auth = "Basic " + Buffer.from("trial-release:" + process.env.REGISTRY_AUTH_VALUE).toString("base64");
-          const protectedDigests = new Set();
-          async function fetchManifest(key) {
-            const response = await fetch(base + key, { headers: { Authorization: auth, Accept: accept }, signal: AbortSignal.timeout(8000) });
-            if (!response.ok) throw Error("Registry returned " + response.status);
-            if (key === "latest" && response.headers.get("docker-content-digest") !== process.env.EXPECTED_DIGEST) {
-              throw Error("The latest tag is changing.");
-            }
-            protectedDigests.add(response.headers.get("docker-content-digest"));
-            const manifest = await response.json();
-            for (const child of manifest.manifests ?? []) if (!protectedDigests.has(child.digest)) await fetchManifest(child.digest);
-            if (manifest.config?.digest) protectedDigests.add(manifest.config.digest);
-            for (const layer of manifest.layers ?? []) protectedDigests.add(layer.digest);
-          }
-          fetchManifest("latest").then(() => { for (const digest of protectedDigests) if (digest) console.log(digest); })
-            .catch(error => { console.error(error.message); process.exitCode = 1; });
-          NODE
-          unset REGISTRY_AUTH_VALUE
-          original_configuration=$(kubectl -n dreamai get configmap dreamai-editor-registry -o 'jsonpath={.data.config\.yml}')
-          grep -q "^  maintenance:" <<< "$original_configuration"
-          readonly_configuration=$(sed '/^  maintenance:$/a\    readonly:\n      enabled: true' <<< "$original_configuration")
-          readonly=1
-          kubectl -n dreamai patch configmap/dreamai-editor-registry --type merge \
-            -p "$(jq -n --arg source "$readonly_configuration" '{data:{"config.yml":$source}}')"
-          kubectl -n dreamai rollout restart deployment/dreamai-editor-registry
-          if ! kubectl -n dreamai rollout status deployment/dreamai-editor-registry --timeout=80s; then
-            kubectl -n dreamai logs deployment/dreamai-editor-registry --previous --tail=45 || true
-            exit 1
-          fi
-          kubectl -n dreamai exec deployment/dreamai-editor-registry -c registry -- \
-            registry garbage-collect --dry-run --delete-untagged /etc/distribution/config.yml > "$directory/dryrun"
-          candidates=$(grep -Ei 'eligible for deletion|eligible for .* deletion' "$directory/dryrun" | grep -Eo 'sha256:[a-f0-9]{64}' | sort -u || true)
-          if [[ -z "$candidates" ]]; then
-            echo 'No unreferenced layers or manifests remained.'
-            exit 0
-          fi
-          if grep -Fxf "$directory/protected" <<< "$candidates"; then
-            echo "::error::Garbage collection would touch the current release."
-            exit 1
-          fi
-          kubectl -n dreamai exec deployment/dreamai-editor-registry -c registry -- \
-            registry garbage-collect --delete-untagged /etc/distribution/config.yml
+          head=$(curl -fsSI --max-time 8 --user "trial-release:$password" \
+            -H 'Accept: application/vnd.oci.image.index.v1+json' \
+            'https://dreamai.mobilex.kr/v2/dreamai-portal-trial/manifests/latest')
+          digest=$(awk 'tolower($1)=="docker-content-digest:" {gsub(/\r/,"",$2); print $2}' <<< "$head")
+          test "$digest" = 'sha256:ee958358d9a3b614828b0ba3f5bbfe44762a235a3622ff071f92a2eacc43bb66'
+          echo "The latest tag still resolves to $digest."
+          curl -fsS --max-time 8 'https://dreamai.mobilex.kr/' -o "$directory/page"
+          grep -Fq 'dreamai-workspace-login' "$directory/page"
+          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=1m
