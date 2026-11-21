@@ -25,6 +25,7 @@ jobs:
           umask 077
           printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/kubeconfig"
           echo "KUBECONFIG=$RUNNER_TEMP/kubeconfig" >> "$GITHUB_ENV"
+          export KUBECONFIG="$RUNNER_TEMP/kubeconfig"
           kubectl -n dreamai get deployment dreamai-demo -o name
           password=$(kubectl -n dreamai get secret dreamai-editor-registry-auth -o jsonpath='{.data.password}' | base64 -d)
           echo "::add-mask::$password"
