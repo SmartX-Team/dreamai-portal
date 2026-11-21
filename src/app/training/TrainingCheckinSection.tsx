@@ -111,9 +111,9 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '22일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '18일(금)' },  // 9월 — 불가
+      { label: '18일', past: true },  // 9월 — 불가
       null,                           // 10월
-      { label: '25일', past: true },  // 11월 — 불가
+    { label: '23일(월)', },  // 11월 — 불가
       null,                           // 12월
     ],
   },
@@ -127,9 +127,9 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                           // 6월
       { label: '23일', past: true },  // 7월 — 불가
       null,                           // 8월
-      { label: '19일(토)', },  // 9월 — 불가
+      { label: '19일',  past: true },  // 9월 — 불가
       null,                           // 10월
-      { label: '26일', past: true },  // 11월 — 불가
+      { label: '24일(화)', },  // 11월 — 불가
       null,                           // 12월
     ],
   },
@@ -144,8 +144,8 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       null,                             // 7월
       null,     // 8월 — 불가
       null,                             // 9월
-      { label: '22-23일', past: true }, // 10월 — 불가
-      { label: '27일', past: true },    // 11월 — 불가
+      null, // 10월 — 불가
+      null,   // 11월 — 불가
       null,                             // 12월
     ],
   },
@@ -155,7 +155,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '23일', past: true }, // 6월
-      null, { label: '27일', past: true }, null, null, null, null,
+      null, { label: '27일', past: true },null, { label: '21일', past: true}, null, { label: '3일', past: true},
     ],
   },
   {
@@ -164,7 +164,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '24일', past: true }, // 6월
-      null, { label: '28일', past: true }, null, null, null, null,
+      null, { label: '28일', past: true }, null, { label: '22일', past: true }, null, { label: '4일', past: true},
     ],
   },
   {
@@ -173,7 +173,7 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
     cells: [
       null, null, null,
       { label: '25일', past: true }, // 6월
-      null, { label: '29일', past: true }, null, null, null, null,
+      null, { label: '29일', past: true }, null, { label: '23일', past: true }, null, { label: '11일', past: true },
     ],
   },
   {
@@ -188,9 +188,9 @@ const SCHEDULE_ROWS: ScheduleRow[] = [
       { label: '23일', past: true },     // 6월 
       { label: '28일', past: true },     // 7월
       { label: '19일', past: true },     // 8월
-      { label: '12일(월)',  },
-      { label: '2일', pending: true },     // 10월 
-      { label: '', pending: true },
+      { label: '12일', past: true  },
+      { label: '30일', past: true },     // 10월 
+      { label: '20일(금)',  },
       { label: '4일', pending: true },     // 12월 
     ],
   },
