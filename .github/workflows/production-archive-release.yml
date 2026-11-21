@@ -1,0 +1,40 @@
+name: Promote verified demo to production
+on:
+  push:
+    branches: [codex/production-archive-release]
+permissions:
+  contents: read
+concurrency:
+  group: dreamai-container-release
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/setup-kubectl@v3
+      - name: Promote the verified demo image
+        env:
+          KUBE_CONFIG: ${{ secrets.K8S_CONFIG }}
+          NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+          DEPLOYMENT: ${{ secrets.K8S_DEPLOYMENT_NAME }}
+          CONTAINER: ${{ secrets.K8S_DEPLOYMENT_CONTAINER_NAME }}
+        run: |
+          set -euo pipefail
+          test -n "$KUBE_CONFIG"
+          test "$NAMESPACE" = dreamai
+          test "$DEPLOYMENT" = portal
+          test -n "$CONTAINER"
+          umask 077
+          printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/kubeconfig"
+          export KUBECONFIG="$RUNNER_TEMP/kubeconfig"
+          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=2m
+          image=$(kubectl -n dreamai get deployment dreamai-demo -o jsonpath='{.spec.template.spec.containers[?(@.name=="frontend")].image}')
+          test "$image" = "dreamai.mobilex.kr/dreamai-portal-demo:b17cf8e2d10847c711c233c3f0299b227d931433"
+          current=$(kubectl -n dreamai get deployment "$DEPLOYMENT" -o json)
+          echo "Previous image: $(jq -r --arg name "$CONTAINER" '.spec.template.spec.containers[] | select(.name == $name) | .image' <<< "$current")"
+          pull_secrets=$(jq -c '(.spec.template.spec.imagePullSecrets // []) + [{"name":"dreamai-editor-registry-pull"}] | unique_by(.name)' <<< "$current")
+          patch=$(jq -cn --argjson secrets "$pull_secrets" '{spec:{template:{spec:{imagePullSecrets:$secrets}}}}')
+          kubectl -n dreamai patch deployment "$DEPLOYMENT" --type=merge -p "$patch"
+          kubectl -n dreamai set image deployment/"$DEPLOYMENT" "$CONTAINER=$image"
+          kubectl -n dreamai rollout status deployment/"$DEPLOYMENT" --timeout=5m
+          echo "Production image: $image" >> "$GITHUB_STEP_SUMMARY"
