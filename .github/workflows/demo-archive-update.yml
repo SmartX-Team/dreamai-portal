@@ -1,0 +1,43 @@
+name: Deploy requested demo
+on:
+  push:
+    branches: [codex/demo-archive-update]
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Apply updated poster images
+        run: |
+          base64 -d .demo-assets/poster1.b64 > public/images/training/training_Poster1.png
+          base64 -d .demo-assets/poster2.b64 > public/images/training/training_Poster2.png
+      - uses: azure/setup-kubectl@v3
+      - name: Configure cluster and existing demo registry
+        env:
+          KUBE_CONFIG: ${{ secrets.K8S_CONFIG }}
+        run: |
+          set -eu
+          test -n "$KUBE_CONFIG"
+          umask 077
+          printf '%s\n' "$KUBE_CONFIG" > "$RUNNER_TEMP/kubeconfig"
+          echo "KUBECONFIG=$RUNNER_TEMP/kubeconfig" >> "$GITHUB_ENV"
+          kubectl -n dreamai get deployment dreamai-demo -o name
+          password=$(kubectl -n dreamai get secret dreamai-editor-registry-auth -o jsonpath='{.data.password}' | base64 -d)
+          echo "::add-mask::$password"
+          printf '%s' "$password" | docker login dreamai.mobilex.kr --username trial-release --password-stdin
+      - name: Build demo image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: dreamai.mobilex.kr/dreamai-portal-demo:${{ github.sha }}
+      - name: Update demo only
+        run: |
+          set -eu
+          kubectl -n dreamai set image deployment/dreamai-demo frontend=dreamai.mobilex.kr/dreamai-portal-demo:${{ github.sha }}
+          kubectl -n dreamai rollout status deployment/dreamai-demo --timeout=5m
+
